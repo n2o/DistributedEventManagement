@@ -34,7 +34,7 @@ class Controller {
 				$innerView->setTemplate('default');
 				$innerView->assign('entries', $entries);
 		}
-		$this->view->setTemplate('theblog');
+		$this->view->setTemplate('main');
 		$this->view->assign('blog_title', 'First Steps with Model View Controller!');
 		$this->view->assign('blog_footer', '... this could be a footer!');
 		$this->view->assign('blog_content', $innerView->loadTemplate());

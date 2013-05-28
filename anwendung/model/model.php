@@ -1,31 +1,30 @@
 <?php
 /**
- * Klasse für den Datenzugriff
+ * Get access to all the data
  */
 class Model{
 
-	//Einträge eines Blogs als zweidimensionales Array
+	// store the entries in a 2 dimensional array
 	private static $entries = array(
-		array("id"=>0, "title"=>"Eintrag 1", "content"=>"Ich bin der erste Eintrag."),
-		array("id"=>1, "title"=>"Eintrag 2", "content"=>"Ich bin der ewige Zweite!"),
-		array("id"=>2, "title"=>"Eintrag 3", "content"=>"Na dann bin ich die Nummer drei.")
+		array("id"=>0, "title"=>"Eintrag 1", "content"=>"First one..."),
+		array("id"=>1, "title"=>"Eintrag 2", "content"=>"Second entry..."),
+		array("id"=>2, "title"=>"Eintrag 3", "content"=>"Last one")
 	);
 
 	/**
-	 * Gibt alle Einträge des Blogs zurück.
+	 * Return all entries
 	 *
-	 * @return Array Array von Blogeinträgen.
+	 * @return array of blog entries
 	 */
 	public static function getEntries(){
 		return self::$entries;
 	}
 
 	/**
-	 * Gibt einen bestimmten Eintrag zurück.
+	 * Return an entry by id
 	 *
-	 * @param int $id Id des gesuchten Eintrags
-	 * @return Array Array, dass einen Eintrag repräsentiert, bzw. 
-	 * 					wenn dieser nicht vorhanden ist, null.
+	 * @param int $id id of the entry
+	 * @return Array returns array with the entry
 	 */
 	public static function getEntry($id){
 		if(array_key_exists($id, self::$entries)){

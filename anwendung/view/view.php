@@ -1,19 +1,17 @@
 <?php
 class View{
 
-	// Pfad zum Template
 	private $path = 'templates';
-	// Name des Templates, in dem Fall das Standardtemplate.
+	// setting default as current template
 	private $template = 'default';
 
 	/**
-	 * Enthält die Variablen, die in das Template eingebetet
-	 * werden sollen.
+	 * Contains all the data in one array, ready to publish
 	 */
 	private $_ = array();
 
 	/**
-	 * Ordnet eine Variable einem bestimmten Schl&uuml;ssel zu.
+	 * Simple map to assign some values
 	 *
 	 * @param String $key Schlüssel
 	 * @param String $value Variable
@@ -24,7 +22,7 @@ class View{
 
 
 	/**
-	 * Setzt den Namen des Templates.
+	 * Choose which template is needed
 	 *
 	 * @param String $template Name des Templates.
 	 */
@@ -34,11 +32,9 @@ class View{
 
 
 	/**
-	 * Das Template-File laden und zurückgeben
+	 * Load the template and return it
 	 *
-	 * @param string $tpl Der Name des Template-Files (falls es nicht vorher 
-	 * 						über steTemplate() zugewiesen wurde).
-	 * @return string Der Output des Templates.
+	 * @return string returns output of template
 	 */
 	public function loadTemplate(){
 		$tpl = $this->template;
@@ -47,21 +43,17 @@ class View{
 		$exists = file_exists($file);
 
 		if ($exists){
-			// Der Output des Scripts wird n einen Buffer gespeichert, d.h.
-			// nicht gleich ausgegeben.
+			// Store the output in a buffer and wait
 			ob_start();
 
-			// Das Template-File wird eingebunden und dessen Ausgabe in
-			// $output gespeichert.
+			// Include template file and store its output to $output
 			include $file;
 			$output = ob_get_contents();
 			ob_end_clean();
 				
-			// Output zurückgeben.
 			return $output;
 		}
 		else {
-			// Template-File existiert nicht-> Fehlermeldung.
 			return 'could not find template';
 		}
 	}

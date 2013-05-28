@@ -1,9 +1,9 @@
 <?php
 
 // include the MVC
-include('mvc/controller.php');
-include('mvc/model.php');
-include('mvc/view.php');
+include('controller/controller.php');
+include('model/model.php');
+include('view/view.php');
 
 $request = array_merge($_GET, $_POST);
 

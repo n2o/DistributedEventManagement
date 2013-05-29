@@ -2,7 +2,7 @@
 /**
  * Get access to all the data
  */
-class Model{
+class Model {
 
 	// store the entries in a 2 dimensional array
 	private static $entries = array(

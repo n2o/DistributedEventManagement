@@ -35,9 +35,9 @@ class Controller {
 				$innerView->assign('entries', $entries);
 		}
 		$this->view->setTemplate('main');
-		$this->view->assign('blog_title', 'First Steps with Model View Controller!');
-		$this->view->assign('blog_footer', '... this could be a footer!');
-		$this->view->assign('blog_content', $innerView->loadTemplate());
+		$this->view->assign('page_title', 'First Steps with Model View Controller!');
+		$this->view->assign('page_footer', '... this could be a footer!');
+		$this->view->assign('page_content', $innerView->loadTemplate());
 		return $this->view->loadTemplate();
 	}
 }

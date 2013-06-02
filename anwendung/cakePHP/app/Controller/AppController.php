@@ -32,4 +32,18 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	# Specify here were to go to after login / logout
+	public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+        )
+    );
+
+	# Specify which pages can be accessed without being logged in
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+    }
 }

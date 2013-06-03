@@ -43,9 +43,19 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			<div id="header">
 				<nav>
 					<ul>
-						<li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login')); ?></li>
-						<li><?php echo $this->Html->link('Users', array('controller' => 'posts', 'action' => 'index')); ?></li>
-						<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+						<li><?php 
+
+							# If user is logged in, show logout, else show login
+							if (!$this->Session->read('Auth.User')) {
+								echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login')); 
+							} else {
+								echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); 
+							}
+							?>
+
+						</li>
+						<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'index')); ?></li>
+						<li><?php #echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
 					</ul>
 				</nav>
 			</div>

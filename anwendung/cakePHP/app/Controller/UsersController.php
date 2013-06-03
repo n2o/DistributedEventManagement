@@ -10,6 +10,7 @@ class UsersController extends AppController {
 	public function login() {
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
+                $this->Session->setFlash(__('Login was successful.'));
 	            $this->redirect($this->Auth->redirect());
 	        } else {
 	            $this->Session->setFlash(__('Invalid username or password, try again'));
@@ -18,6 +19,7 @@ class UsersController extends AppController {
 	}
 
 	public function logout() {
+        $this->Session->setFlash(__('Logout was successful.'));
 		$this->redirect($this->Auth->logout());
 	}
 

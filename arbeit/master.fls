@@ -1,4 +1,4 @@
-PWD /Users/cmeter/Dropbox/Studium/Bachelorarbeit/arbeit
+PWD /Applications/XAMPP/xamppfiles/htdocs/arbeit
 INPUT /usr/local/texlive/2012/texmf.cnf
 INPUT /usr/local/texlive/2012/texmf/web2c/texmf.cnf
 INPUT /usr/local/texlive/2012/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -155,9 +155,15 @@ OUTPUT master.out
 OUTPUT titlepage.aux
 INPUT titlepage.tex
 INPUT titlepage.tex
-INPUT fig/unilogo.pdf
-INPUT ./fig/unilogo.pdf
-INPUT ./fig/unilogo.pdf
+INPUT fig/unilogo.eps
+INPUT ./fig/unilogo.eps
+INPUT ./fig/unilogo.eps
+INPUT ./fig/unilogo-eps-converted-to.pdf
+INPUT ./fig/unilogo-eps-converted-to.pdf
+INPUT ./fig/unilogo.eps
+INPUT ./fig/unilogo-eps-converted-to.pdf
+INPUT ./fig/unilogo-eps-converted-to.pdf
+INPUT ./fig/unilogo-eps-converted-to.pdf
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm

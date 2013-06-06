@@ -44,6 +44,11 @@ class AppController extends Controller {
 
 	# Specify which pages can be accessed without being logged in
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view');
+        $this->Auth->allow('login', 'logout');
+
+        # Give admin access to everything
+        if ($this->Auth->user('roles') == 'admin') {
+            $this->Auth->allow('*');   
+        }
     }
 }

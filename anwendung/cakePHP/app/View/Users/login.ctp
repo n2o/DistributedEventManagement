@@ -2,12 +2,12 @@
 	<?php echo $this->Session->flash('auth'); ?>
 	<?php echo $this->Form->create('User'); ?>
 		<h1>Login</h1>
-	    <fieldset>
-	        <legend><?php echo __('Please enter your username and password'); ?></legend>
-	        <?php echo $this->Form->input('username');
-	        echo $this->Form->input('password');
-	    ?>
-	    </fieldset>
+		<p>
+	        <?php echo __('Please enter your username and password'); ?>
+	        <?php 
+				echo $this->Form->input('username');
+	        	echo $this->Form->input('password');
+	        ?>
+	    </p>
 	<?php echo $this->Form->end(__('Login')); ?>
-	</div>
 </article>

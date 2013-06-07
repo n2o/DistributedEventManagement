@@ -1,7 +1,7 @@
 <nav>
 	<ul>
 		<li>
-			<?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'index')); ?>
+			<?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'index')); ?>
 		</li>
 		<li>
 			<?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index')); ?>

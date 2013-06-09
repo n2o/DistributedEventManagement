@@ -32,6 +32,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    var $isMobile = false;  # preparing for mobile view 
 
 	# Specify here were to go to after login / logout
 	public $components = array(
@@ -58,5 +59,25 @@ class AppController extends Controller {
         parent::beforeFilter();
         # Guest can login and logout
         $this->Auth->allow('login', 'logout');
+
+        if($this->request->isMobile()||isset($this->params['url']['mobile'])) {
+            $this->layout = 'mobile';
+            $this->isMobile = true;
+        }
+        $this->set('is_mobile', $this->isMobile);
+    }
+
+    # Prepare mobile view for all controllers
+    public function beforeRender() {
+        if ($this->request->is('mobile')||isset($this->request->query['mobile'])) {
+            $this->viewClass = 'Theme';
+            $this->theme = 'Mobile';
+            $this->layout = 'mobile';
+        }
+        parent::beforeRender();
+
+#        if ($this->isMobile) {
+ #           $this->action = 'mobile/' . $this->action;
+  #      }
     }
 }

@@ -33,6 +33,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('default');			# include default.css
 
+		echo $this->Html->script('http://code.jquery.com/jquery-1.10.0.min.js'); # include jquery lib from Google
+		http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');

@@ -6,7 +6,7 @@
 	?>
 	<p>
 		<?php 
-			echo $this->Html->link('Add User', array('controller' => 'users', 'action' => 'add'));
+			echo $this->Html->link('Add User', array('controller' => 'users', 'action' => 'add'), array('data-role' => 'button'));
 		?><br/>
 		<br/>
 		<table>

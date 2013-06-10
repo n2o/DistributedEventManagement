@@ -6,7 +6,7 @@
 	?>
 	<p>
 		<?php 
-			echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'));
+			echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('data-role' => 'button'));
 		?><br/>
 		<br/>
 		<table>
@@ -14,7 +14,7 @@
 		        <th>Id</th>
 		        <th>Title</th>
 		        <th>Description</th>
-		        <th>Do some magic</th>
+		        <th>Details</th>
 		        <th>Created</th>
 		    </tr>
 		    <!-- Here is where we loop through our $events array, printing out post info -->

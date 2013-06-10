@@ -1,6 +1,10 @@
 <article>
-	<?php echo $this->Form->create('User'); ?>
-	<h1>Add User</h1>
+	<?php 
+		echo $this->Form->create('User');
+		if (!$is_mobile) {
+			echo "<h1>".$articleHeading."</h1>";
+		}
+	?>
 	<p>
 		<?php 
 	        echo $this->Form->input('username');

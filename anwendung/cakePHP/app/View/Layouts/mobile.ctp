@@ -10,7 +10,7 @@
 	<head>
 		<?php echo $this->Html->charset(); ?>
 		<title>
-			<?php echo $cakeDescription ?>:
+			<?php echo $cakeDescription; ?>
 			<?php echo $title_for_layout; ?>
 		</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +23,13 @@
 				);
 			echo $this->Html->script($jsimport);
 
-			echo $this->Html->css('http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css');
-
+			$cssimport = array(
+					'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css',
+					'main',
+					'mobile'
+				);
+			echo $this->Html->css($cssimport);
+			
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
 			echo $this->fetch('script');
@@ -32,12 +37,25 @@
 	</head>
 	<body>
 		<div data-role="page">
-			<?php echo $this->Session->flash(); ?>
 			<div data-role="header">
-				<?php include('nav.ctp'); ?>
+				<h1>
+					<?php 
+						if (isset($articleHeading)) {
+							echo $articleHeading; 		
+						} else {
+							echo "Set heading in Controller";
+						}
+					?>
+				</h1>
 			</div>
+			<?php echo $this->Session->flash(); ?>
 			<div data-role="content">
 				<?php echo $this->fetch('content'); ?>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<?php include('nav.ctp'); ?>
+				</div>
 			</div>
 		</div>
 	</body>

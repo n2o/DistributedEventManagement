@@ -1,5 +1,9 @@
 <article>
-	<h1>Add Event</h1>
+	<?php
+		if (!$is_mobile) {
+			echo "<h1>".$articleHeading."</h1>";
+		}
+	?>
 	<p>
 		<?php 
 			echo $this->Form->create('Event');	# creates HTML code for the <form>-Tag

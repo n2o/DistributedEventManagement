@@ -1,5 +1,4 @@
 <article>
-	<h1>Edit Post</h1>
 	<p>
 		<?php 
 			echo $this->Form->create('Post');

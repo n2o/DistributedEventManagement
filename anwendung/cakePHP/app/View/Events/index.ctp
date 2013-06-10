@@ -1,5 +1,9 @@
 <article>
-	<h1>Show events</h1>
+	<?php
+		if (!$is_mobile) {
+			echo "<h1>".$articleHeading."</h1>";
+		}
+	?>
 	<p>
 		<?php 
 			echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'));

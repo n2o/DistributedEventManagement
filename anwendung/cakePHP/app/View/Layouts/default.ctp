@@ -30,11 +30,16 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-		echo $this->Html->css('default');			# include default.css
+		$jsimport = array(
+					'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'
+				);
+		echo $this->Html->script($jsimport);
 
-		echo $this->Html->script('http://code.jquery.com/jquery-1.10.0.min.js'); # include jquery lib from Google
-		http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js
+		$cssimport = array(
+					'main',
+					'default'
+				);
+		echo $this->Html->css($cssimport);
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

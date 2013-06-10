@@ -1,5 +1,4 @@
 <article>
-	<h1>Add Post</h1>
 	<p>
 		<?php 
 			echo $this->Form->create('Post');	# creates HTML code for the <form>-Tag

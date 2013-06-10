@@ -8,6 +8,7 @@ class UsersController extends AppController {
 	}
 
 	public function login() {
+        $this->set('articleHeading', 'Login');
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
                 $this->Session->setFlash(__('Login was successful.'));
@@ -19,18 +20,21 @@ class UsersController extends AppController {
 	}
 
 	public function logout() {
+        $this->set('articleHeading', 'Logout');
         $this->Session->setFlash(__('Logout was successful.'));
 		$this->redirect($this->Auth->logout());
 	}
 
 	# Show login form
 	public function index() {
+        $this->set('articleHeading', 'Show users');
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
     }
 
 	# Same code as it was in creating a post...
 	public function view($id = null) {
+        $this->set('articleHeading', 'View user');
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -40,6 +44,7 @@ class UsersController extends AppController {
 
 	# Add a new user to the database
 	public function add() {
+        $this->set('articleHeading', 'Add user');
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
@@ -53,6 +58,7 @@ class UsersController extends AppController {
 
 	# Edit an user
 	public function edit($id = null) {
+        $this->set('articleHeading', 'Edit user');
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -72,6 +78,7 @@ class UsersController extends AppController {
 
 	# Delete an user
 	public function delete($id = null) {
+        $this->set('articleHeading', 'Delete user');
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }

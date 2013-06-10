@@ -1,28 +1,3 @@
-header, footer, article, section, hgroup, nav, figure {
-	display:block;
-}
-
-* {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-html {
-	background: #f7f7f7 url('../img/bg.jpg');
-	height: 100%;
-}
-
-body {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 12pt;
-	color: #474747;
-	font-weight: 300;
-	background-size: 100% 100%;
-}
-
 /******************************************************
  * Styles for html5 sections
  *****************************************************/

@@ -1,5 +1,6 @@
 <?php
 class EventsController extends AppController {
+	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Session');
 
 	# Show all the events 
@@ -19,12 +20,15 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event.'));
 		}
 		$this->set('event', $event);
+
+		# Take an event, look up the column types and return their names
+		$this->set('columns', array_keys($this->Event->getColumnTypes()));
 	}
 
 	# Add a new event to the sql table
 	public function add() {
 		$this->set('articleHeading', 'Add event');
-		if ($this->request->is('post')) {  # Check if it is a valid HTTP POST requst
+		if ($this->request->is('post')) {  # Check if it is a valid HTTP POST request
 			$this->Event->create();
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {

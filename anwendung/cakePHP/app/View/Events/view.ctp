@@ -5,5 +5,11 @@
 		}
 	?>
 	<p><small>Created: <?php echo $event['Event']['created']; ?></small></p>
-	<p><?php echo h($event['Event']['description']); ?></p>
+	
+	<?php 
+		foreach($columns as $column) {
+			echo "<strong>".ucfirst($column)."</strong><br />";
+			echo $event['Event'][$column]."<br /><br />";
+		}
+	 ?>
 </article>

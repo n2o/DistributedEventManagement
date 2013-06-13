@@ -22,7 +22,12 @@ class EventsController extends AppController {
 		$this->set('event', $event);
 
 		# Take an event, look up the column types and return their names
-		$this->set('columns', array_keys($this->Event->getColumnTypes()));
+		$this->set('columns_event', array_keys($this->Event->getColumnTypes()));
+
+		# Load the Model User to get access to the sql entries
+        $this->loadModel('User');
+        $this->set('users', $this->User->find('all'));
+        $this->set('columns_user', array_keys($this->User->getColumnTypes()));
 	}
 
 	# Add a new event to the sql table

@@ -1,0 +1,19 @@
+######################
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+##############################
+# Some other stuff to ignore #
+##############################
+favicon.ico
+index.php
+webalizer/
+xampp/

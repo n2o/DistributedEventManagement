@@ -14,6 +14,10 @@
 					array('admin' => 'Admin', 
 						  'member' => 'Member', 
 						  'user' => 'User')));
+
+			$elements = $this->User->getAllEvents($events);
+			echo $this->Form->input('event_id', array('options' => $elements));
+
 			echo $this->Form->input('id', array('type' => 'hidden'));
 			echo $this->Form->end('Save User');
 		?>

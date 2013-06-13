@@ -32,6 +32,8 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
+
     var $isMobile = false;  # preparing for mobile view 
 
 	# Specify here were to go to after login / logout
@@ -45,12 +47,12 @@ class AppController extends Controller {
     );
 
     public function isAuthorized($user) {
-    // Admin can access every action
+    # Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
 
-        // Default deny
+        # Default deny
         return false;
     }
 
@@ -76,8 +78,8 @@ class AppController extends Controller {
         }
         parent::beforeRender();
 
-#        if ($this->isMobile) {
- #           $this->action = 'mobile/' . $this->action;
-  #      }
+        if ($this->isMobile) {
+            $this->action = 'mobile/' . $this->action;
+       }
     }
 }

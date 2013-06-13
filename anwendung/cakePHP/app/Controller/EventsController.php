@@ -1,19 +1,19 @@
 <?php
 class EventsController extends AppController {
-	public $helpers = array('Html', 'Form', 'Session');
 	public $components = array('Session');
 
+	# Show all the events 
 	public function index() {
 		$this->set('events', $this->Event->find('all'));
 		$this->set('articleHeading', 'Show events');
 	}
 
+	# View one specific element by id
 	public function view($id = null) {
 		$this->set('articleHeading', 'Detailed event');
 		if (!$id) {
 			throw new NotFoundException(__('Invalid event.'));
 		}
-
 		$event = $this->Event->findById($id);
 		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
@@ -21,6 +21,7 @@ class EventsController extends AppController {
 		$this->set('event', $event);
 	}
 
+	# Add a new event to the sql table
 	public function add() {
 		$this->set('articleHeading', 'Add event');
 		if ($this->request->is('post')) {  # Check if it is a valid HTTP POST requst
@@ -45,7 +46,6 @@ class EventsController extends AppController {
 		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
 		}
-
 		if ($this->request->is('post')||$this->request->is('put')) {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
@@ -64,12 +64,12 @@ class EventsController extends AppController {
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-
 		if ($this->Post->delete($id)) {
 			$this->Session->setFlash('The post with id: '.$id.'has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}
+
 }
 
 

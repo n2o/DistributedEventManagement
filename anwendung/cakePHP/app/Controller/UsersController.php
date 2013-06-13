@@ -1,5 +1,6 @@
 <?php
 class UsersController extends AppController {
+    public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 
 	# Execute in AppController the beforeFilter() function
 	public function beforeFilter() {
@@ -7,14 +8,19 @@ class UsersController extends AppController {
 		$this->Auth->allow('add'); // Letting users register themselves
 	}
 
+    # Function to handle the login
 	public function login() {
         $this->set('articleHeading', 'Login');
 	    if ($this->request->is('post')) {
-	        if ($this->Auth->login()) {
-                $this->Session->setFlash(__('Login was successful.'));
-	            $this->redirect($this->Auth->redirect());
+	        if ($this->Auth->login()) { # If login was successful
+                if ($this->Session->read('Auth.User.has_login')) { # Check if has_login is set
+                    $this->Session->setFlash(__('Login was successful.'));
+                    $this->redirect($this->Auth->redirect());
+                } else {
+                    $this->Session->setFlash(__('Your account has no permission to log in'));
+                }
 	        } else {
-	            $this->Session->setFlash(__('Invalid username or password, try again'));
+	            $this->Session->setFlash(__('Invalid username or password, try again.'));
 	        }
 	    }
 	}
@@ -45,6 +51,11 @@ class UsersController extends AppController {
 	# Add a new user to the database
 	public function add() {
         $this->set('articleHeading', 'Add user');
+
+        # Load the Model Event to get access to the sql entries
+        $this->loadModel('Event');
+        $this->set('events', $this->Event->find('all'));
+
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
@@ -59,6 +70,11 @@ class UsersController extends AppController {
 	# Edit an user
 	public function edit($id = null) {
         $this->set('articleHeading', 'Edit user');
+
+        # Load the Model Event to get access to the sql entries
+        $this->loadModel('Event');
+        $this->set('events', $this->Event->find('all'));
+
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -93,4 +109,5 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
+
 }

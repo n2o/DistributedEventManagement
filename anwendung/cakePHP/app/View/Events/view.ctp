@@ -1,8 +1,6 @@
 <article>
 	<?php
-		if (!$is_mobile) {
-			echo "<h1>".$articleHeading."</h1>";
-		}
+		echo "<h1>".$articleHeading."</h1>";
 	?>
 	<p>
 		<?php 

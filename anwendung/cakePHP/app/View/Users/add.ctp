@@ -1,9 +1,6 @@
 <article>
-	<?php 
-		echo $this->Form->create('User');
-		if (!$is_mobile) {
-			echo "<h1>".$articleHeading."</h1>";
-		}
+	<?php
+		echo "<h1>".$articleHeading."</h1>";
 	?>
 	<p>
 		<?php 

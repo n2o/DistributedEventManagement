@@ -47,11 +47,10 @@ class AppController extends Controller {
     );
 
     public function isAuthorized($user) {
-    # Admin can access every action
+        # Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
-
         # Default deny
         return false;
     }
@@ -62,24 +61,44 @@ class AppController extends Controller {
         # Guest can login and logout
         $this->Auth->allow('login', 'logout');
 
-        if($this->request->isMobile()||isset($this->params['url']['mobile'])) {
+        // if($this->request->isMobile()||isset($this->params['url']['mobile'])) {
+        //     $this->layout = 'mobile';
+        //     $this->isMobile = True;
+        // }
+
+        if ($this->request->isMobile()) {
+            # if device is mobile, change layout to mobile
             $this->layout = 'mobile';
-            $this->isMobile = true;
+            # and if a mobile view file has been created for the action, serve it instead of the default view file
+            $mobileViewFile = strtolower($this->params['controller']) . '/mobile/' . $this->params['action'] . '.ctp';
+            if (file_exists($mobileViewFile)) {
+                $mobileView = strtolower($this->params['controller']) . '/mobile/';
+                $this->viewPath = $mobileView;
+            }
         }
+
+
         $this->set('is_mobile', $this->isMobile);
     }
 
     # Prepare mobile view for all controllers
     public function beforeRender() {
-        if ($this->request->is('mobile')||isset($this->request->query['mobile'])) {
+        parent::beforeRender();
+        if ($this->request->isMobile()||isset($this->request->query['mobile'])) {
             $this->viewClass = 'Theme';
-            $this->theme = 'Mobile';
+            $this->theme = 'Mobile';    # Switch current theme to Mobile
             $this->layout = 'mobile';
         }
-        parent::beforeRender();
+    }
 
-        if ($this->isMobile) {
-            $this->action = 'mobile/' . $this->action;
-       }
+    public function afterFilter() {
+    // if in mobile mode, check for a valid view and use it
+        if (isset($this->is_mobile) && $this->is_mobile) {
+            $view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
+            $layout_file = file_exists( 'Layouts' . 'mobile/' . $this->layout . '.ctp' );
+            if($view_file || $layout_file){
+                $this->render($this->action, ($layout_file?'mobile/':'').$this->layout, ($view_file?'mobile/':'').$this->action);
+            }
+        }
     }
 }

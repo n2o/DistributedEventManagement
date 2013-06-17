@@ -13,6 +13,7 @@
 
 			$elements = $this->User->getAllEvents($events);
 			echo $this->Form->input('event_id', array('options' => $elements));
+			echo "<label for=\"UserHasLogin\">Is able to login</label> ".$this->Form->checkbox('has_login');
 
 			echo $this->Form->input('id', array('type' => 'hidden'));
 			echo $this->Form->end('Save User');

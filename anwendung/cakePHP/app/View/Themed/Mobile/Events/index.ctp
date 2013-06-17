@@ -5,7 +5,7 @@
 		<article>
 		<p>
 			<?php 
-				echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('data-role' => 'button'));
+				echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('data-role' => 'button', 'data-icon' => 'plus'));
 			?><br/>
 			<br/>
 			<table>
@@ -14,7 +14,6 @@
 			        <th>Title</th>
 			        <th>Description</th>
 			        <th>Details</th>
-			        <th>Created</th>
 			    </tr>
 			    <!-- Here is where we loop through our $events array, printing out post info -->
 				<?php foreach ($events as $event): ?> 
@@ -35,9 +34,6 @@
 							array('action' => 'delete', $event['Event']['id']),
 							array('confirm' => 'Are you sure?')); 
 						?>
-					</td>
-					<td>
-						<?php echo $event['Event']['created']; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

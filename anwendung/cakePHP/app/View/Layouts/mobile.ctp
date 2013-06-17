@@ -37,21 +37,8 @@
 	</head>
 	<body>
 		<div data-role="page">
-			<div data-role="header">
-				<h1>
-					<?php 
-						if (isset($articleHeading)) {
-							echo $articleHeading; 		
-						} else {
-							echo "Set heading in Controller";
-						}
-					?>
-				</h1>
-			</div>
+			<?php echo $this->fetch('content'); ?> <!-- Include contents -->
 			<?php echo $this->Session->flash(); ?>
-			<div data-role="content">
-				<?php echo $this->fetch('content'); ?>
-			</div>
 			<div data-role="footer" data-position="fixed">
 				<div data-role="navbar">
 					<?php include('nav.ctp'); ?>

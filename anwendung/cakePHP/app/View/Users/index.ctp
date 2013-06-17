@@ -1,7 +1,5 @@
 <article>
-	<?php
-		echo "<h1>".$articleHeading."</h1>";
-	?>
+	<h1>Overview of Users</h1>
 	<p>
 		<?php 
 			echo $this->Html->link('Add User', array('controller' => 'users', 'action' => 'add'), array('data-role' => 'button'));

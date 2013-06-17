@@ -6,12 +6,10 @@ class EventsController extends AppController {
 	# Show all the events 
 	public function index() {
 		$this->set('events', $this->Event->find('all'));
-		$this->set('articleHeading', 'Show events');
 	}
 
 	# View one specific element by id
 	public function view($id = null) {
-		$this->set('articleHeading', 'Detailed event');
 		if (!$id) {
 			throw new NotFoundException(__('Invalid event.'));
 		}
@@ -36,7 +34,6 @@ class EventsController extends AppController {
 
 	# Add a new event to the sql table
 	public function add() {
-		$this->set('articleHeading', 'Add event');
 		if ($this->request->is('post')) {  # Check if it is a valid HTTP POST request
 			$this->Event->create();
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
@@ -50,7 +47,6 @@ class EventsController extends AppController {
 	}
 
 	public function edit($id = null) {
-		$this->set('articleHeading', $event['Event']['title']);
 		if (!$id) {
 			throw new NotFoundException(__('Invalid event.'));
 		}

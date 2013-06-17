@@ -1,7 +1,5 @@
 <article>
-	<?php
-		echo "<h1>".$articleHeading."</h1>";
-	?>
+	<h1>Add new user</h1>
 	<p>
 		<?php 
 	        echo $this->Form->input('username');

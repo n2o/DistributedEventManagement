@@ -1,7 +1,5 @@
 <article>
-	<?php
-		echo "<h1>".$articleHeading."</h1>";
-	?>
+	<h1>Details for event</h1>
 	<p>
 		<?php 
 			foreach($columns_event as $column) {

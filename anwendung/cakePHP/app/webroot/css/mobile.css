@@ -6,7 +6,7 @@ article {
 	background: #fff;
 	margin-bottom: 1em;
 	overflow: hidden;
-	padding: 20px 20px 20px 20px;
+	padding: 2px 2px 2px 2px;
 
 	box-shadow: 3px 2px 5px #aaa;
 	-webkit-box-shadow: 3px 2px 5px #aaa;
@@ -75,12 +75,12 @@ h4 {
 #content{
 	clear: both;
 	color: #333;
-	padding: 10px 20px 40px 20px;
+	padding: 0px 0px 0px 0px;
 	overflow: auto;
 }
 #page {
- 	width: 960px;
- 	margin: 0 auto;
+ 	width: auto;
+ 	margin: 0 0;
  	position: relative;
 }
 /******************************************************

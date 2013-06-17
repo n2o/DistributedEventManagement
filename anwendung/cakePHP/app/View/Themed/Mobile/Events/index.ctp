@@ -10,7 +10,6 @@
 			<br/>
 			<table>
 			    <tr>
-			        <th>Id</th>
 			        <th>Title</th>
 			        <th>Description</th>
 			        <th>Details</th>
@@ -18,9 +17,6 @@
 			    <!-- Here is where we loop through our $events array, printing out post info -->
 				<?php foreach ($events as $event): ?> 
 				<tr>
-					<td>
-						<?php echo $event['Event']['id']; ?>
-					</td> 
 					<td>
 						<?php echo $this->Html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id'])); ?>
 					</td>

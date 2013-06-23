@@ -1,5 +1,4 @@
 <div data-role="header">
-	<a href="#" data-rel="back" data-role="button" data-inline="true" data-icon="arrow-l">Back</a>
 	<h1>Login</h1>
 </div>
 <div data-role="content">

@@ -30,7 +30,7 @@ class EventsController extends AppController {
 
         # SQL query 
         $users_new = $this->Event->query('SELECT * FROM event_user WHERE event_id = '.$id);
-        file_put_contents('pippEvents.txt', "Users: ".$users_new[0]['id']."\n\n");
+        file_put_contents('pippEvents.txt', "Users: ".print_r(array_values($users_new), true)."\n\n");
 
         # Save all columns for user in an array
         $this->set('columns_user', array_keys($this->User->getColumnTypes()));

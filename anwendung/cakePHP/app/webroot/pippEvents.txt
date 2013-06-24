@@ -1,2 +1,18 @@
-Users: 
+Users: Array
+(
+    [0] => Array
+        (
+            [event_user] => Array
+                (
+                    [id] => 4
+                    [event_id] => 1
+                    [user_id] => 29
+                    [created] => 
+                    [modified] => 
+                )
+
+        )
+
+)
+
 

@@ -1,4 +1,5 @@
 <div data-role="header">
+	<a href="#nav" data-role="button" data-inline="true" data-icon="bars">Menu</a>
 	<h1>Login</h1>
 </div>
 <div data-role="content">

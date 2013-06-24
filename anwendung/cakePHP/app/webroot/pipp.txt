@@ -1,0 +1,123 @@
+Array
+(
+    [User] => Array
+        (
+            [username] => dumdidumi
+            [password] => 123
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 2
+                )
+
+        )
+
+)
+Array
+(
+    [User] => Array
+        (
+            [username] => dumdidumasdlkasd
+            [password] => 1
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 2
+                )
+
+        )
+
+)
+Array
+(
+    [User] => Array
+        (
+            [username] => Testing...
+            [password] => har
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 3
+                )
+
+        )
+
+)
+Array
+(
+    [User] => Array
+        (
+            [username] => boooring
+            [password] => hasrase
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 3
+                )
+
+        )
+
+)
+
+
+Array
+(
+    [0] => 1
+    [1] => 3
+)
+Array
+(
+    [User] => Array
+        (
+            [username] => dumdidumasdlk
+            [password] => brabbel
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 3
+                )
+
+        )
+
+)
+
+
+Array
+(
+    [0] => 1
+    [1] => 3
+)
+Array
+(
+    [User] => Array
+        (
+            [username] => dumdidum123123123123
+            [password] => aa
+            [role] => user
+            [has_login] => 0
+            [selected_events] => Array
+                (
+                    [0] => 1
+                    [1] => 3
+                )
+
+        )
+
+)
+
+
+Array
+(
+    [0] => 1
+    [1] => 3
+)

@@ -25,8 +25,12 @@ class EventsController extends AppController {
 		# Load the Model User to get access to the sql entries
         $this->loadModel('User');
 
-        # SQL query to get all users which are attached to this event
+        # DEPRECATED - SQL query to get all users which are attached to this event
         $this->set('users', $this->User->query('SELECT * FROM users WHERE event_id = '.$id));
+
+        # SQL query 
+        $users_new = $this->Event->query('SELECT * FROM event_user WHERE event_id = '.$id);
+        file_put_contents('pippEvents.txt', "Users: ".$users_new[0]['id']."\n\n");
 
         # Save all columns for user in an array
         $this->set('columns_user', array_keys($this->User->getColumnTypes()));

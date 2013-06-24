@@ -2,7 +2,7 @@
 /**
  * Create mobile layout with JQuery Mobile
  */
-	$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+	$cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 ?>
 
 <!DOCTYPE HTML>

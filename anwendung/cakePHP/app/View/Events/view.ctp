@@ -32,17 +32,12 @@
 					$j = 0;
 					for ($i = 0; $i < count($users); $i = $i + 1) {
 						echo "<tr>";
-
 						foreach ($columns as $column)
 							echo "<td>".$users[$i]['users'][$column]."</td>";
 
 						echo "</tr>";
 					}
-
-
 				?>
-
-
 		</table>
 	</p>
 </article>

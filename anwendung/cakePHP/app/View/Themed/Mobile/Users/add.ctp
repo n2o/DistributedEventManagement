@@ -16,7 +16,7 @@
 
 			# Menu to choose one of the events
 			$elements = $this->User->getAllEvents($events);
-			echo "<label for=\"selected_events\">Select Events</label> ".$this->Form->input('selected_events', array('label' => false, 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements));
+			echo $this->Form->input('selected_events', array('label' => false, 'div' => 'data-role=\"controlgroup\"', 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements));
 			unset($elements);
 		?>
 		</p>

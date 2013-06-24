@@ -2,6 +2,24 @@
 class EventsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Session');
+	public $usersFromEvents = array(
+		'User' =>
+			array(
+				'className'              => 'User',
+				'joinTable'              => 'event_user',
+				'foreignKey'             => 'event_id',
+				'associationForeignKey'  => 'user_id',
+				'unique'                 => true,
+				'conditions'             => '',
+				'fields'                 => '',
+				'order'                  => '',
+				'limit'                  => '',
+				'offset'                 => '',
+				'finderQuery'            => '',
+				'deleteQuery'            => '',
+				'insertQuery'            => ''
+			)
+	);
 
 	# Show all the events 
 	public function index() {
@@ -27,6 +45,8 @@ class EventsController extends AppController {
 
         # DEPRECATED - SQL query to get all users which are attached to this event
         $this->set('users', $this->User->query('SELECT * FROM users WHERE event_id = '.$id));
+
+        echo $usersFromEvents;
 
         # SQL query 
         $users_new = $this->Event->query('SELECT * FROM event_user WHERE event_id = '.$id);

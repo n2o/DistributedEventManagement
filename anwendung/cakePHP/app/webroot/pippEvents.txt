@@ -2,13 +2,384 @@ Users: Array
 (
     [0] => Array
         (
-            [event_user] => Array
+            [User] => Array
                 (
-                    [id] => 4
+                    [id] => 1
+                    [username] => Admin
+                    [password] => 9add20116b397ab3e586addcaa1fe95779d7f3b0
+                    [has_login] => 1
+                    [role] => admin
                     [event_id] => 1
-                    [user_id] => 29
-                    [created] => 
-                    [modified] => 
+                    [created] => 2013-06-02 19:03:36
+                    [modified] => 2013-06-15 20:26:53
+                )
+
+        )
+
+    [1] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 2
+                    [username] => Member
+                    [password] => 444b859fd35f0fad8cb098e1b4cf86f3aef202a1
+                    [has_login] => 1
+                    [role] => member
+                    [event_id] => 2
+                    [created] => 2013-06-06 14:16:41
+                    [modified] => 2013-06-13 14:29:29
+                )
+
+        )
+
+    [2] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 5
+                    [username] => test
+                    [password] => 784ce3d78acb63322ce20bfbe681455cafbb59eb
+                    [has_login] => 
+                    [role] => member
+                    [event_id] => 1
+                    [created] => 2013-06-13 13:48:23
+                    [modified] => 2013-06-15 21:59:09
+                )
+
+        )
+
+    [3] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 6
+                    [username] => Dummy
+                    [password] => 8902f57ef75be48fa4de343e26f9e92f2123ac4f
+                    [has_login] => 
+                    [role] => member
+                    [event_id] => 3
+                    [created] => 2013-06-15 21:58:26
+                    [modified] => 2013-06-17 14:34:54
+                )
+
+        )
+
+    [4] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 7
+                    [username] => Eraseme
+                    [password] => dbdc9a4ac32c5c18fb3205e245897a724ee25962
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 1
+                    [created] => 2013-06-15 21:58:42
+                    [modified] => 2013-06-15 21:58:42
+                )
+
+        )
+
+    [5] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 8
+                    [username] => harhar
+                    [password] => fb213a7f3b30a02e97e996702d01a60f123358a1
+                    [has_login] => 
+                    [role] => admin
+                    [event_id] => 3
+                    [created] => 2013-06-17 15:04:06
+                    [modified] => 2013-06-17 15:04:06
+                )
+
+        )
+
+    [6] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 9
+                    [username] => dumdidum
+                    [password] => 39c67517aab38f3fc52421068b05450650bbf3ff
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 2
+                    [created] => 2013-06-17 15:11:52
+                    [modified] => 2013-06-17 15:21:35
+                )
+
+        )
+
+    [7] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 10
+                    [username] => Foo
+                    [password] => b682fb5a0a0898ed34abb9a386c561ac029a934c
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 1
+                    [created] => 2013-06-18 13:45:20
+                    [modified] => 2013-06-18 13:45:20
+                )
+
+        )
+
+    [8] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 11
+                    [username] => justanother
+                    [password] => 62bac44e4c153a8b3f30bb064c0d310bec1e0b78
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 0
+                    [created] => 2013-06-24 13:26:34
+                    [modified] => 2013-06-24 13:26:34
+                )
+
+        )
+
+    [9] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 13
+                    [username] => tralallala
+                    [password] => 784ce3d78acb63322ce20bfbe681455cafbb59eb
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 0
+                    [created] => 2013-06-24 13:31:11
+                    [modified] => 2013-06-24 13:31:11
+                )
+
+        )
+
+    [10] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 14
+                    [username] => tralallalalala
+                    [password] => 22d93a5ed6e447f8be47bc65829ce5fb74c59220
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 2
+                    [created] => 2013-06-24 13:31:36
+                    [modified] => 2013-06-24 13:31:36
+                )
+
+        )
+
+    [11] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 15
+                    [username] => dumdidumiii
+                    [password] => e60b81bad1c183254b427b0f50e3d692294b0015
+                    [has_login] => 
+                    [role] => admin
+                    [event_id] => 1
+                    [created] => 2013-06-24 13:33:06
+                    [modified] => 2013-06-24 13:33:06
+                )
+
+        )
+
+    [12] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 17
+                    [username] => Need to test
+                    [password] => 01b1750a604290c1bab5b787d764f9f121e8426c
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 1
+                    [created] => 2013-06-24 13:35:48
+                    [modified] => 2013-06-24 13:35:48
+                )
+
+        )
+
+    [13] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 18
+                    [username] => dumdidum2
+                    [password] => f8098c908bfe8a63a933734815efbe32f79f200b
+                    [has_login] => 
+                    [role] => admin
+                    [event_id] => 1
+                    [created] => 2013-06-24 13:37:32
+                    [modified] => 2013-06-24 13:37:32
+                )
+
+        )
+
+    [14] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 19
+                    [username] => dumdidum213123
+                    [password] => fb213a7f3b30a02e97e996702d01a60f123358a1
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:00:53
+                    [modified] => 2013-06-24 14:00:53
+                )
+
+        )
+
+    [15] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 20
+                    [username] => dumdidumi
+                    [password] => c88e200c2ab682482dc249207ab15f4f62cb0a4c
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:03:50
+                    [modified] => 2013-06-24 14:03:50
+                )
+
+        )
+
+    [16] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 22
+                    [username] => Testing...
+                    [password] => a596dc68f39a59c45cde770b63b75fe8a505cb74
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:07:13
+                    [modified] => 2013-06-24 14:07:13
+                )
+
+        )
+
+    [17] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 23
+                    [username] => boooring
+                    [password] => a77bf511e6e0190cd4bc7b1abb063cc3706e2424
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:08:53
+                    [modified] => 2013-06-24 14:08:53
+                )
+
+        )
+
+    [18] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 24
+                    [username] => dumdidumasdlk
+                    [password] => 1337fd1da3edc76c21a7c2381e81d1bfe9ac2ac6
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:43:11
+                    [modified] => 2013-06-24 14:43:11
+                )
+
+        )
+
+    [19] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 25
+                    [username] => dumdidumasdlk
+                    [password] => 1337fd1da3edc76c21a7c2381e81d1bfe9ac2ac6
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:43:27
+                    [modified] => 2013-06-24 14:43:27
+                )
+
+        )
+
+    [20] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 26
+                    [username] => dumdidum123123123123
+                    [password] => b87361f4085be699b73aaf6b0b582f6ae5cb8b55
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:48:19
+                    [modified] => 2013-06-24 14:48:19
+                )
+
+        )
+
+    [21] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 27
+                    [username] => dumdidum123123123123
+                    [password] => b87361f4085be699b73aaf6b0b582f6ae5cb8b55
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:48:26
+                    [modified] => 2013-06-24 14:48:26
+                )
+
+        )
+
+    [22] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 28
+                    [username] => dumdidumasdasd
+                    [password] => c88e200c2ab682482dc249207ab15f4f62cb0a4c
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:54:50
+                    [modified] => 2013-06-24 14:54:50
+                )
+
+        )
+
+    [23] => Array
+        (
+            [User] => Array
+                (
+                    [id] => 29
+                    [username] => dumdidumasdasd
+                    [password] => c88e200c2ab682482dc249207ab15f4f62cb0a4c
+                    [has_login] => 
+                    [role] => user
+                    [event_id] => 
+                    [created] => 2013-06-24 14:55:21
+                    [modified] => 2013-06-24 14:55:21
                 )
 
         )

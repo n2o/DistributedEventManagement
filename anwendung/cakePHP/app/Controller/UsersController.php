@@ -61,7 +61,7 @@ class UsersController extends AppController {
 				$user_id = $this->User->getLastInsertID();
 				$selected = $this->request->data['User']['selected_events'];
 				for ($i = 0; $i < count($selected); $i++) {
-					$this->User->query("INSERT INTO event_user (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE modified=NOW()");					
+					$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE modified=NOW()");					
 				}
 			# /REVISE
 

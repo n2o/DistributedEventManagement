@@ -26,7 +26,7 @@ class EventsController extends AppController {
         $this->loadModel('User');
 
         # DEPRECATED - SQL query to get all users which are attached to this event
-        $this->set('users', $this->User->query('SELECT * FROM users WHERE event_id = '.$id));
+        #$this->set('users', $this->User->query('SELECT * FROM users WHERE event_id = '.$id));
 
         # SQL query 
         $users_new = $this->Event->User->find('all');
@@ -35,7 +35,7 @@ class EventsController extends AppController {
 			// 'conditions' => array('User.id' => )
 			// )
    //      );
-        file_put_contents('pippEvents.txt', "Users: ".print_r(array_values($users_new), true)."\n\n");
+        file_put_contents('logs/logs.txt', "Users: ".print_r(array_values($users_new), true)."\n\n");
 
         # Save all columns for user in an array
         $this->set('columns_user', array_keys($this->User->getColumnTypes()));

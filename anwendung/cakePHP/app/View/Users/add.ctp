@@ -10,9 +10,11 @@
 			#echo $this->Form->input('event_id', array('options' => $elements));
 			echo "<label for=\"UserHasLogin\">Is able to login</label> ".$this->Form->checkbox('has_login')."<br /><br />";
 
+			#echo $form->input('Event.title');
+
 			# Menu to choose one of the events
 			$elements = $this->User->getAllEvents($events);
-			echo "<label for=\"selected_events\">Select Events</label> ".$this->Form->input('selected_events', array('label' => false, 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements));
+			echo $this->Form->input('selected_events', array('label' => 'selected_events', 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements));
 			unset($elements);
 		?>
 	</p>

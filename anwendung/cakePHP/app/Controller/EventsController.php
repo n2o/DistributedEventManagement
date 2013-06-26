@@ -23,7 +23,7 @@ class EventsController extends AppController {
 		$this->set('columns_event', array_keys($this->Event->getColumnTypes()));
 
 		# Load the Model User to get access to the sql entries
-        $this->loadModel('User');
+        #$this->loadModel('User');
 
         # DEPRECATED - SQL query to get all users which are attached to this event
         #$this->set('users', $this->User->query('SELECT * FROM users WHERE event_id = '.$id));
@@ -31,14 +31,10 @@ class EventsController extends AppController {
         # SQL query 
         $users_new = $this->Event->User->find('all');
 	
-   //      $foo = $this->User->find('all', array(
-			// 'conditions' => array('User.id' => )
-			// )
-   //      );
         file_put_contents('logs/logs.txt', "Users: ".print_r(array_values($users_new), true)."\n\n");
 
         # Save all columns for user in an array
-        $this->set('columns_user', array_keys($this->User->getColumnTypes()));
+        #$this->set('columns_user', array_keys($this->User->getColumnTypes()));
 	}
 
 	# Add a new event to the sql table

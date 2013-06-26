@@ -21,4 +21,6 @@ class Event extends AppModel {
 		)
 	);
 	// public $hasMany = 'User';
+
+	var $name = 'Event';
 }

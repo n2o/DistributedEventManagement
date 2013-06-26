@@ -16,11 +16,22 @@ class User extends AppModel {
         ),
         'role' => array(
             'valid' => array(
-                'rule' => array('inList', array('admin', 'member', 'user')),
+                'rule' => array('inList', array('user', 'member', 'admin')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
         )
+    );
+
+    var $name = 'User';
+    var $hasAndBelongsToMany = array(
+        'Event' => array(
+            'className' => 'Event',
+            'joinTable' => 'events_users',
+            'foreignKey' => 'user_id',
+            'associationForeignKey' => 'event_id',
+            'with' => 'EventsUsers'
+            )
     );
 
 	public function beforeSave($options = array()) {

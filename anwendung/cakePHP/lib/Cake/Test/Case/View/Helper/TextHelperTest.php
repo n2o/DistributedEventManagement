@@ -15,12 +15,17 @@
  * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.View.Helper
  * @since         CakePHP(tm) v 1.2.0.4206
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('View', 'View');
 App::uses('TextHelper', 'View/Helper');
 
+/**
+ * Class TextHelperTestObject
+ *
+ * @package       Cake.Test.Case.View.Helper
+ */
 class TextHelperTestObject extends TextHelper {
 
 	public function attach(StringMock $string) {
@@ -35,6 +40,8 @@ class TextHelperTestObject extends TextHelper {
 
 /**
  * StringMock class
+ *
+ * @package       Cake.Test.Case.View.Helper
  */
 class StringMock {
 }
@@ -162,6 +169,17 @@ class TextHelperTest extends CakeTestCase {
 
 		$text = 'This is a <b>test</b> text with URL http://www.cakephp.org';
 		$expected = 'This is a <b>test</b> text with URL <a href="http://www.cakephp.org">http://www.cakephp.org</a>';
+		$result = $this->Text->autoLink($text, array('escape' => false));
+		$this->assertEquals($expected, $result);
+
+		$text = 'test <ul>
+		<li>lorem: http://example.org?some</li>
+		<li>ipsum: http://othersite.com/abc</li>
+		</ul> test';
+		$expected = 'test <ul>
+		<li>lorem: <a href="http://example.org?some">http://example.org?some</a></li>
+		<li>ipsum: <a href="http://othersite.com/abc">http://othersite.com/abc</a></li>
+		</ul> test';
 		$result = $this->Text->autoLink($text, array('escape' => false));
 		$this->assertEquals($expected, $result);
 	}

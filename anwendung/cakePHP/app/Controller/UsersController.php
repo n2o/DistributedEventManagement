@@ -56,15 +56,12 @@ class UsersController extends AppController {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'));
 
-			# REVISE
 				# Write all events in event_user
 				$user_id = $this->User->getLastInsertID();
 				$selected = $this->request->data['User']['selected_events'];
-				for ($i = 0; $i < count($selected); $i++) {
-					$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE modified=NOW()");					
-				}
-			# /REVISE
-
+				if ($selected != "")
+					for ($i = 0; $i < count($selected); $i++)
+						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE user_id=".$user_id);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -86,6 +83,12 @@ class UsersController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'));
+				# Write all events in event_user
+				$user_id = $id;
+				$selected = $this->request->data['User']['selected_events'];
+				if ($selected != "")
+					for ($i = 0; $i < count($selected); $i++)
+						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE user_id=".$user_id);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -106,6 +109,7 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->User->delete()) {
+
 			$this->Session->setFlash(__('User deleted'));
 			$this->redirect(array('action' => 'index'));
 		}

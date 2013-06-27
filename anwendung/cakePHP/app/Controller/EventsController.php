@@ -17,6 +17,7 @@ class EventsController extends AppController {
 		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
 		}
+		# Make current event available for the View
 		$this->set('event', $event);
 
 		# Take an event, look up the column types and return their names
@@ -27,8 +28,6 @@ class EventsController extends AppController {
 
 		# SQL query to get all users which are attached to this event
 		$this->set('users', $this->User->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
-		$result = $this->User->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id);
-		file_put_contents('logs/logs.txt', print_r(array_values($result), true)."\n\n");
 
 		# Save all columns for user in an array
 		$this->set('columns_user', array_keys($this->User->getColumnTypes()));

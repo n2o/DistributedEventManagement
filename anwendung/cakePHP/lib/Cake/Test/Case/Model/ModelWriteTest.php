@@ -15,20 +15,32 @@
  * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Model
  * @since         CakePHP(tm) v 1.2.0.4206
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('MockTransactionDboSource', 'Model/Datasource');
 App::uses('MockTransactionAssociatedDboSource', 'Model/Datasource');
 App::uses('MockManyTransactionDboSource', 'Model/Datasource');
 App::uses('MockAssociatedTransactionDboSource', 'Model/Datasource');
 
 require_once dirname(__FILE__) . DS . 'ModelTestBase.php';
+
 /**
  * ModelWriteTest
  *
  * @package       Cake.Test.Case.Model
  */
 class ModelWriteTest extends BaseModelTest {
+
+/**
+ * override locale to the default (eng).
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+		Configure::write('Config.language', 'eng');
+	}
 
 /**
  * Test save() failing when there is no data.
@@ -396,7 +408,7 @@ class ModelWriteTest extends BaseModelTest {
 		$data[$Post->alias]['user_id'] = 301;
 		$Post->save($data);
 
-		$users = $User->find('all',array('order' => 'User.id'));
+		$users = $User->find('all', array('order' => 'User.id'));
 		$this->assertEquals(1, $users[0]['User']['post_count']);
 		$this->assertEquals(2, $users[1]['User']['post_count']);
 	}
@@ -423,7 +435,7 @@ class ModelWriteTest extends BaseModelTest {
 		$data[$Post->alias]['uid'] = 301;
 		$Post->save($data);
 
-		$users = $User->find('all',array('order' => 'User.uid'));
+		$users = $User->find('all', array('order' => 'User.uid'));
 		$this->assertEquals(1, $users[0]['User']['post_count']);
 		$this->assertEquals(2, $users[1]['User']['post_count']);
 	}
@@ -551,7 +563,7 @@ class ModelWriteTest extends BaseModelTest {
 		));
 		$data[$Post->alias]['user_id'] = 301;
 		$Post->save($data);
-		$result = $User->find('all',array('order' => 'User.id'));
+		$result = $User->find('all', array('order' => 'User.id'));
 		$this->assertEquals(2, $result[0]['User']['post_count']);
 		$this->assertEquals(1, $result[1]['User']['posts_published']);
 	}
@@ -2067,7 +2079,7 @@ class ModelWriteTest extends BaseModelTest {
 		$Comment = new Comment();
 
 		$articles = $Article->find('all', array(
-			'fields' => array('id','title'),
+			'fields' => array('id', 'title'),
 			'recursive' => -1,
 			'order' => array('Article.id' => 'ASC')
 		));
@@ -2087,7 +2099,7 @@ class ModelWriteTest extends BaseModelTest {
 		$this->assertEquals($expected, $articles);
 
 		$comments = $Comment->find('all', array(
-			'fields' => array('id','article_id','user_id','comment','published'),
+			'fields' => array('id', 'article_id', 'user_id', 'comment', 'published'),
 			'recursive' => -1,
 			'order' => array('Comment.id' => 'ASC')
 		));
@@ -2154,7 +2166,7 @@ class ModelWriteTest extends BaseModelTest {
 		$this->assertFalse(empty($result));
 
 		$articles = $Article->find('all', array(
-			'fields' => array('id','title'),
+			'fields' => array('id', 'title'),
 			'recursive' => -1,
 			'order' => array('Article.id' => 'ASC')
 		));
@@ -2174,7 +2186,7 @@ class ModelWriteTest extends BaseModelTest {
 		$this->assertEquals($expected, $articles);
 
 		$comments = $Comment->find('all', array(
-			'fields' => array('id','article_id','user_id','comment','published'),
+			'fields' => array('id', 'article_id', 'user_id', 'comment', 'published'),
 			'recursive' => -1,
 			'order' => array('Comment.id' => 'ASC')
 		));
@@ -2265,7 +2277,7 @@ class ModelWriteTest extends BaseModelTest {
 		$this->assertEquals('First Article', $result);
 
 		$articles = $Article->find('all', array(
-			'fields' => array('id','title'),
+			'fields' => array('id', 'title'),
 			'recursive' => -1,
 			'order' => array('Article.id' => 'ASC')
 		));
@@ -4256,7 +4268,7 @@ class ModelWriteTest extends BaseModelTest {
 
 		$result = $TestModel->find('all', array(
 			'recursive' => -1,
-			'fields' => array('author_id', 'title','body','published'),
+			'fields' => array('author_id', 'title', 'body', 'published'),
 			'order' => array('Post.created' => 'ASC')
 		));
 
@@ -4790,7 +4802,7 @@ class ModelWriteTest extends BaseModelTest {
 /**
  * test that saveAll behaves like plain save() when supplied empty data
  *
- * @link http://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
+ * @link https://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
  * @return void
  */
 	public function testSaveAllEmptyData() {
@@ -5688,7 +5700,7 @@ class ModelWriteTest extends BaseModelTest {
 
 		$result = $TestModel->find('all', array(
 			'recursive' => -1,
-			'fields' => array('author_id', 'title','body','published'),
+			'fields' => array('author_id', 'title', 'body', 'published'),
 			'order' => array('Post.created' => 'ASC')
 		));
 
@@ -6178,7 +6190,7 @@ class ModelWriteTest extends BaseModelTest {
 /**
  * test that saveMany behaves like plain save() when suplied empty data
  *
- * @link http://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
+ * @link https://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
  * @return void
  */
 	public function testSaveManyEmptyData() {
@@ -6197,7 +6209,7 @@ class ModelWriteTest extends BaseModelTest {
 /**
  * test that saveAssociated behaves like plain save() when supplied empty data
  *
- * @link http://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
+ * @link https://cakephp.lighthouseapp.com/projects/42648/tickets/277-test-saveall-with-validation-returns-incorrect-boolean-when-saving-empty-data
  * @return void
  */
 	public function testSaveAssociatedEmptyData() {
@@ -6521,7 +6533,9 @@ class ModelWriteTest extends BaseModelTest {
 		));
 		$TestModel->saveAll($data, array('fieldList' => $fieldList));
 
-		$result = $TestModel->find('all');
+		$result = $TestModel->find('all', array(
+			'order' => 'Post.id ASC',
+		));
 		$expected = array(
 			'Post' => array (
 				'id' => '4',

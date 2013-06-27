@@ -17,7 +17,7 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
@@ -320,11 +320,6 @@ if (!function_exists('env')) {
 		}
 
 		switch ($key) {
-			case 'SCRIPT_FILENAME':
-				if (defined('SERVER_IIS') && SERVER_IIS === true) {
-					return str_replace('\\\\', '\\', env('PATH_TRANSLATED'));
-				}
-				break;
 			case 'DOCUMENT_ROOT':
 				$name = env('SCRIPT_NAME');
 				$filename = env('SCRIPT_FILENAME');

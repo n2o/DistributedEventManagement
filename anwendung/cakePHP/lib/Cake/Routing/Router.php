@@ -15,7 +15,7 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Routing
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('CakeRequest', 'Network');
@@ -128,12 +128,12 @@ class Router {
  * @var array
  */
 	protected static $_resourceMap = array(
-		array('action' => 'index',	'method' => 'GET',		'id' => false),
-		array('action' => 'view',	'method' => 'GET',		'id' => true),
-		array('action' => 'add',	'method' => 'POST',		'id' => false),
-		array('action' => 'edit',	'method' => 'PUT',		'id' => true),
-		array('action' => 'delete',	'method' => 'DELETE',	'id' => true),
-		array('action' => 'edit',	'method' => 'POST',		'id' => true)
+		array('action' => 'index', 'method' => 'GET', 'id' => false),
+		array('action' => 'view', 'method' => 'GET', 'id' => true),
+		array('action' => 'add', 'method' => 'POST', 'id' => false),
+		array('action' => 'edit', 'method' => 'PUT', 'id' => true),
+		array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
+		array('action' => 'edit', 'method' => 'POST', 'id' => true)
 	);
 
 /**

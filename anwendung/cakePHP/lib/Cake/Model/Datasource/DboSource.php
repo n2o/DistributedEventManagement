@@ -15,7 +15,7 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Model.Datasource
  * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('DataSource', 'Model/Datasource');
@@ -641,7 +641,6 @@ class DboSource extends DataSource {
  * Returns an array of all result rows for a given SQL query.
  * Returns false if no rows matched.
  *
- *
  * ### Options
  *
  * - `cache` - Returns the cached version of the query, if exists and stores the result in cache.
@@ -652,7 +651,7 @@ class DboSource extends DataSource {
  * @param string $sql SQL statement
  * @param array $params parameters to be bound as values for the SQL statement
  * @param array $options additional options for the query.
- * @return array Array of resultset rows, or false if no rows matched
+ * @return boolean|array Array of resultset rows, or false if no rows matched
  */
 	public function fetchAll($sql, $params = array(), $options = array()) {
 		if (is_string($options)) {
@@ -1328,7 +1327,7 @@ class DboSource extends DataSource {
 	}
 
 /**
- * A more efficient way to fetch associations.	Woohoo!
+ * A more efficient way to fetch associations.
  *
  * @param Model $model Primary model object
  * @param string $query Association query
@@ -1344,8 +1343,7 @@ class DboSource extends DataSource {
 	}
 
 /**
- * mergeHasMany - Merge the results of hasMany relations.
- *
+ * Merge the results of hasMany relations.
  *
  * @param array $resultSet Data to merge into
  * @param array $merge Data to merge
@@ -1671,7 +1669,7 @@ class DboSource extends DataSource {
 	}
 
 /**
- * Builds and generates a JOIN statement from an array.	 Handles final clean-up before conversion.
+ * Builds and generates a JOIN statement from an array. Handles final clean-up before conversion.
  *
  * @param array $join An array defining a JOIN statement in a query
  * @return string An SQL JOIN statement to be used in a query
@@ -1699,7 +1697,7 @@ class DboSource extends DataSource {
 	}
 
 /**
- * Builds and generates an SQL statement from an array.	 Handles final clean-up before conversion.
+ * Builds and generates an SQL statement from an array. Handles final clean-up before conversion.
  *
  * @param array $query An array defining an SQL query
  * @param Model $model The model object which initiated the query
@@ -1917,7 +1915,7 @@ class DboSource extends DataSource {
 	}
 
 /**
- * Gets a list of record IDs for the given conditions.	Used for multi-record updates and deletes
+ * Gets a list of record IDs for the given conditions. Used for multi-record updates and deletes
  * in databases that do not support aliases in UPDATE/DELETE queries.
  *
  * @param Model $model

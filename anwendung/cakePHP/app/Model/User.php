@@ -24,17 +24,9 @@ class User extends AppModel {
     );
 
     var $name = 'User';
-    var $hasAndBelongsToMany = array(
-        'Event' => array(
-            'className' => 'Event',
-            'joinTable' => 'events_users',
-            'foreignKey' => 'user_id',
-            'associationForeignKey' => 'event_id',
-            'with' => 'EventsUsers'
-            )
-    );
 
 	public function beforeSave($options = array()) {
+        # Hashing password
 	    if (isset($this->data[$this->alias]['password'])) {
 	        $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 	    }

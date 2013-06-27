@@ -4,7 +4,6 @@
 		<?php 
 			echo $this->Form->create('User');
 			echo $this->Form->input('username');
-			echo $this->Form->input('password');
 			echo $this->Form->input('role', array('options' => array('user' => 'User', 'member' => 'Member', 'admin' => 'Admin')));
 			echo $this->Form->input('has_login', array('label' => 'Allowed to login', 'type' => 'checkbox'));
 			$elements = $this->User->getAllEvents($events);

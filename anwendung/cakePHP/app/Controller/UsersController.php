@@ -71,7 +71,6 @@ class UsersController extends AppController {
 
 	# Edit an user
 	public function edit($id = null) {
-
 		# Load the Model Event to get access to the sql entries
 		$this->loadModel('Event');
 		$this->set('events', $this->Event->find('all'));

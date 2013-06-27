@@ -18,7 +18,7 @@
 					$columns = array();
 					$i = 0;
 					foreach($columns_user as $column) {
-						if ($column != "password"&&$column != "event_id") {	# Exlude some columns
+						if ($column != "password") {	# Exlude some columns
 							echo "<th>".ucfirst($column)."</th>";
 							$columns[$i++] = $column;
 

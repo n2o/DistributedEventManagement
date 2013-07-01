@@ -76,18 +76,29 @@ class UsersController extends AppController {
 		$this->set('events', $this->Event->find('all'));
 
 		$this->User->id = $id;
-		if (!$this->User->exists()) {
+		# Get all marked entries from events_users, where the user is assigned to
+		$selectedFromSQL = $this->User->query("SELECT event_id FROM events_users WHERE user_id=".$id);
+		$i = 0;
+		foreach ($selectedFromSQL as $key => $value)
+			$eventIDs[$i++] = $value['events_users']['event_id'];
+		$this->set('selectedEventIDs', array_unique($eventIDs));
+
+		if (!$this->User->exists())
 			throw new NotFoundException(__('Invalid user'));
-		}
+
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'));
+
 				# Write all events in event_user
-				$user_id = $id;
+#				$diff = $array_diff($selected, $eventIDs);
+#				print_r($diff);
+
 				$selected = $this->request->data['User']['selected_events'];
-				if ($selected != "")
+				if ($selected != "") # do nothing if there is no change
 					for ($i = 0; $i < count($selected); $i++)
-						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE user_id=".$user_id);
+						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$id.") ON DUPLICATE KEY UPDATE user_id=".$id.", event_id=".$selected[$i]);
+
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -100,15 +111,13 @@ class UsersController extends AppController {
 
 	# Delete an user
 	public function delete($id = null) {
-		if (!$this->request->is('post')) {
+		if (!$this->request->is('post'))
 			throw new MethodNotAllowedException();
-		}
 		$this->User->id = $id;
-		if (!$this->User->exists()) {
+		if (!$this->User->exists())
 			throw new NotFoundException(__('Invalid user'));
-		}
-		if ($this->User->delete()) {
 
+		if ($this->User->delete()) {
 			$this->Session->setFlash(__('User deleted'));
 			$this->redirect(array('action' => 'index'));
 		}

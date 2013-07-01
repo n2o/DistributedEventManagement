@@ -78,10 +78,17 @@ class UsersController extends AppController {
 		$this->User->id = $id;
 		# Get all marked entries from events_users, where the user is assigned to
 		$selectedFromSQL = $this->User->query("SELECT event_id FROM events_users WHERE user_id=".$id);
-		$i = 0;
-		foreach ($selectedFromSQL as $key => $value)
-			$eventIDs[$i++] = $value['events_users']['event_id'];
-		$this->set('selectedEventIDs', array_unique($eventIDs));
+		if (count($selectedFromSQL) > 0) {
+			$i = 0;
+			foreach ($selectedFromSQL as $key => $value)
+				$eventIDs[$i++] = $value['events_users']['event_id'];
+			$eventIDs = array_unique($eventIDs);
+			$this->set('selectedEventIDs', $eventIDs);
+		}
+
+		#$a = array('a', 'b');
+		#$b = array('a', 'c');
+		#print_r((array_diff($a,$b)));
 
 		if (!$this->User->exists())
 			throw new NotFoundException(__('Invalid user'));
@@ -91,10 +98,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user has been saved'));
 
 				# Write all events in event_user
-#				$diff = $array_diff($selected, $eventIDs);
-#				print_r($diff);
-
 				$selected = $this->request->data['User']['selected_events'];
+
 				if ($selected != "") # do nothing if there is no change
 					for ($i = 0; $i < count($selected); $i++)
 						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$id.") ON DUPLICATE KEY UPDATE user_id=".$id.", event_id=".$selected[$i]);

@@ -135,6 +135,7 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 
 		if ($this->User->delete()) {
+			$this->User->query("DELETE FROM events_users WHERE user_id = $id");
 			$this->Session->setFlash(__('User deleted'));
 			$this->redirect(array('action' => 'index'));
 		}

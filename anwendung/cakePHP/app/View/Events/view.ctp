@@ -22,7 +22,7 @@
 							echo "<th>".ucfirst($column)."</th>";
 							$columns[$i++] = $column;
 
-							if ($i > 6)	# break after 6 elements in the heading
+							if ($i > 6)	# break after $i elements in the heading
 								break;
 						}
 					}

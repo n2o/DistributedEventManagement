@@ -2,7 +2,6 @@
 App::uses('AppHelper', 'View/Helper');
 
 class UserHelper extends AppHelper {
-
 	# Get all events from SQL to create an array
 	public function getAllEvents($events) {
 		$elements = array();

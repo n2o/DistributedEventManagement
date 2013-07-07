@@ -9,4 +9,8 @@
 			echo $this->Form->end('Save Event');
 		?>
 	</p>
+	<p>
+		<h2>Edit specific columns</h2>
+		<?php $this->Event->test(); ?>
+	</p>
 </article>

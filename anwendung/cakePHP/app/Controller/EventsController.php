@@ -23,11 +23,11 @@ class EventsController extends AppController {
 		# Take an event, look up the column types and return their names
 		$this->set('columns_event', array_keys($this->Event->getColumnTypes()));
 
-		# Load the Model User to get access to the sql entries
+		# Load Model User to get their column types
 		$this->loadModel('User');
 
 		# SQL query to get all users which are attached to this event
-		$this->set('users', $this->User->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
+		$this->set('users', $this->Event->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
 
 		# Save all columns for user in an array
 		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
@@ -40,12 +40,10 @@ class EventsController extends AppController {
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('Your event has been saved.');
-				$id = $this->Event->getInsertId();
-				$this->Event->query(
+				$id = $this->Event->getInsertId();	# Get last inserted id to create corresponding 
+				$this->Event->query(	# Create new SQL table for all information to this event
 					"CREATE TABLE event_$id (
-						id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-						created DATETIME DEFAULT NULL,
-						modified DATETIME DEFAULT NULL
+						id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
 					);");
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -56,7 +54,7 @@ class EventsController extends AppController {
 
 	public function edit($id = null) {
 		if (!$id)
-			throw new NotFoundException(__('Invalid event.'));
+			throw new NotFoundException(__('Invalid id.'));
 
 		$event = $this->Event->findById($id);
 
@@ -72,6 +70,10 @@ class EventsController extends AppController {
 				$this->Session->setFlash('Unable to update your event.');
 			}
 		}
+
+		# For editting the columns of an event
+		// post some useful stuff here...
+
 		if (!$this->request->data)	# If no new data has been entered, use the old one
 			$this->request->data = $event;
 	}

@@ -40,6 +40,13 @@ class EventsController extends AppController {
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('Your event has been saved.');
+				$id = $this->Event->getInsertId();
+				$this->Event->query(
+					"CREATE TABLE event_$id (
+						id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+						created DATETIME DEFAULT NULL,
+						modified DATETIME DEFAULT NULL
+					);");
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to add your event.');
@@ -48,14 +55,14 @@ class EventsController extends AppController {
 	}
 
 	public function edit($id = null) {
-		if (!$id) {
+		if (!$id)
 			throw new NotFoundException(__('Invalid event.'));
-		}
 
 		$event = $this->Event->findById($id);
-		if (!$event) {
+
+		if (!$event)
 			throw new NotFoundException(__('Invalid event.'));
-		}
+
 		if ($this->request->is('post')||$this->request->is('put')) {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
@@ -65,17 +72,18 @@ class EventsController extends AppController {
 				$this->Session->setFlash('Unable to update your event.');
 			}
 		}
-		if (!$this->request->data) {	# If no new data has been entered, use the old one
+		if (!$this->request->data)	# If no new data has been entered, use the old one
 			$this->request->data = $event;
-		}
 	}
 
 	public function delete($id) {
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-		if ($this->Post->delete($id)) {
-			$this->Session->setFlash('The post with id: '.$id.'has been deleted.');
+		$this->Event->query("DROP TABLE event_$id");
+		if ($this->Event->delete($id)) {
+			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
+			$this->Session->setFlash('The event with id: '.$id.' has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}

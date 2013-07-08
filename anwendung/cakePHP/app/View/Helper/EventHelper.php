@@ -6,5 +6,3 @@ class EventHelper extends AppHelper {
 		echo "Hallo Welt!";
 	}
 }
-
-?>

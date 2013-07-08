@@ -52,6 +52,24 @@ class EventsController extends AppController {
 		}
 	}
 
+	# Add specific column for event
+	public function addColumn($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+
+		if ($this->request->is('post')||$this->request->is('put')) {
+			if ($this->request->data['Column']) {
+				$name = $this->request->data['Column']['Name'];
+				$type = $this->request->data['Column']['Type'];
+				$this->Event->query("ALTER TABLE event_$id ADD $name $type");
+				$this->Session->setFlash('Your column has been added.');
+				$this->redirect(array('action' => 'edit/'.$id));
+			} else {
+				$this->Session->setFlash('Unable to update your event.');
+			}
+		}
+	}
+
 	public function edit($id = null) {
 		if (!$id)
 			throw new NotFoundException(__('Invalid id.'));
@@ -61,10 +79,13 @@ class EventsController extends AppController {
 		if (!$event)
 			throw new NotFoundException(__('Invalid event.'));
 
+		$this->set('id', $id); # Make $id accessible for View
+
+		# Update event
 		if ($this->request->is('post')||$this->request->is('put')) {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash('Your event has been updated');
+				$this->Session->setFlash('Your event has been updated.');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -72,16 +93,22 @@ class EventsController extends AppController {
 		}
 
 		# For editting the columns of an event
-		// post some useful stuff here...
+		$query = $this->Event->query("DESCRIBE event_$id");
+		$columns_event = array();
+		for ($i = 0; $i < count($query); $i++)
+			$columns_event[$i] = array($query[$i]['COLUMNS']['Field'] => $query[$i]['COLUMNS']['Type']);
+		$this->set('columns_event', $columns_event);
+		unset($query);
 
 		if (!$this->request->data)	# If no new data has been entered, use the old one
 			$this->request->data = $event;
 	}
 
+	# Delete whole event
 	public function delete($id) {
-		if ($this->request->is('get')) {
+		if ($this->request->is('get'))
 			throw new MethodNotAllowedException();
-		}
+
 		$this->Event->query("DROP TABLE event_$id");
 		if ($this->Event->delete($id)) {
 			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
@@ -90,4 +117,13 @@ class EventsController extends AppController {
 		}
 	}
 
+	# Delete specific column
+	public function deleteColumn($id, $column_name) {
+		if ($this->request->is('get'))
+			throw new MethodNotAllowedException();
+
+		$this->Event->query("ALTER TABLE event_$id DROP COLUMN $column_name");
+		$this->Session->setFlash('The column '.$column_name.' has been deleted.');
+		$this->redirect(array('action' => 'edit/'.$id));
+	}
 }

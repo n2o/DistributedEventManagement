@@ -48,9 +48,9 @@ class AppController extends Controller {
 
 	public function isAuthorized($user) {
 		# Admin can access every action
-		if (isset($user['role']) && $user['role'] === 'admin') {
+		if (isset($user['role']) && $user['role'] === 'admin')
 			return true;
-		}
+
 		# Default deny
 		return false;
 	}
@@ -96,9 +96,8 @@ class AppController extends Controller {
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
 			$layout_file = file_exists( 'Layouts' . 'mobile/' . $this->layout . '.ctp' );
-			if($view_file || $layout_file){
+			if($view_file || $layout_file)
 				$this->render($this->action, ($layout_file?'mobile/':'').$this->layout, ($view_file?'mobile/':'').$this->action);
-			}
 		}
 	}
 }

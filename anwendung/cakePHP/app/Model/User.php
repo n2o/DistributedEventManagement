@@ -4,8 +4,8 @@ class User extends AppModel {
 	public $validate = array(
         'username' => array(
             'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'rule' => array('isUnique'),
+                'message' => 'This username is not available'
             )
         ),
         'password' => array(

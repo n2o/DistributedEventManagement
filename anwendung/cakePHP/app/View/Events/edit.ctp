@@ -9,8 +9,36 @@
 			echo $this->Form->end('Save Event');
 		?>
 	</p>
+</article>
+
+<article>
+	<h2>Edit specific columns</h2>
 	<p>
-		<h2>Edit specific columns</h2>
-		<?php $this->Event->test(); ?>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+			<?php foreach($columns_event as $column): ?>
+			<tr>
+				<td>
+					<?php echo key($column); ?>
+				</td>
+				<td>
+					<?php echo $column[key($column)]; ?>
+				</td>
+				<td>
+					Edit <?php # need to add button ?>
+					<?php echo $this->Form->postLink(
+						'Delete',
+						array('action' => 'deleteColumn', $id, key($column)),
+						array('confirm' => 'Are you sure?')); 
+					?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+		<?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id));?>
 	</p>
 </article>

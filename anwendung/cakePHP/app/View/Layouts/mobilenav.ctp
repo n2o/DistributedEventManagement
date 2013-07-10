@@ -7,4 +7,8 @@
 		<?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a')); ?>
 		<?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a')); ?>
 	</div>
+
+	<div data-role="controlgroup">
+		<?php echo $this->Html->link('Geolocations', array('controller' => 'geolocations', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a')); ?>
+	</div>
 </div>

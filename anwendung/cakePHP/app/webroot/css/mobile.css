@@ -5,7 +5,7 @@
 article {
 	background: #fff;
 	margin-bottom: 1em;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	padding: 2px 2px 2px 2px;
 
 	box-shadow: 3px 2px 5px #aaa;
@@ -30,7 +30,7 @@ h1 {
 }
 
 h2 {
-	font-color:#DDD;
+	font-color:#000;
 	font-size: 2em;
 	margin: 0 0 1.25em 0;
 	line-height: 1em;
@@ -64,6 +64,23 @@ h4 {
  	width: auto;
  	margin: 0 0;
  	position: relative;
+}
+#map {
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+#overlay {
+	position: absolute;
+	background-color: #fff;
+	margin-bottom: 1em;
+	padding: 10px 10px 10px 10px;
+
+	box-shadow: 3px 2px 5px #aaa;
+	-webkit-box-shadow: 3px 2px 5px #aaa;
+	-moz-box-shadow: 3px 2px 5px #aaa;
 }
 /******************************************************
  * Rest

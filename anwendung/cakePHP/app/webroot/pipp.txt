@@ -1,0 +1,49 @@
+Array
+(
+    [0] => Array
+        (
+            [COLUMNS] => Array
+                (
+                    [Field] => event_id
+                    [Type] => varchar(6)
+                    [Null] => NO
+                    [Key] => PRI
+                    [Default] => 
+                    [Extra] => 
+                )
+
+        )
+
+    [1] => Array
+        (
+            [COLUMNS] => Array
+                (
+                    [Field] => user_id
+                    [Type] => varchar(6)
+                    [Null] => NO
+                    [Key] => PRI
+                    [Default] => 
+                    [Extra] => 
+                )
+
+        )
+
+)
+
+
+
+
+
+
+
+
+
+
+Array
+
+Array
+
+1
+
+1
+

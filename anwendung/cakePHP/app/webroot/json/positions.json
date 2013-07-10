@@ -1,0 +1,16 @@
+{
+	"Rathaus Remscheid": {
+		"Category": "building",
+		"Position": {
+			"Latitude": 51.180755,
+			"Longitude": 7.190015
+		}
+	},
+	"Remscheid HBF": {
+		"Category": "building",
+		"Position": {
+			"Latitude": 51.177271,
+			"Longitude": 7.199628
+		}
+	}
+}

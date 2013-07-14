@@ -12,5 +12,12 @@
 			"Latitude": 51.177271,
 			"Longitude": 7.199628
 		}
+	},
+	"ULB Düsseldorf": {
+		"Category": "building",
+		"Position": {
+			"Latitude": 51.188201,
+			"Longitude": 6.794869
+		}
 	}
 }

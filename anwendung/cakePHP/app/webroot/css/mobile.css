@@ -1,6 +1,10 @@
 /******************************************************
  * Styles for html5 sections
  *****************************************************/
+body {
+	margin: 0;
+	font-family: Helvetica;
+}
 
 article {
 	background: #fff;
@@ -65,23 +69,44 @@ h4 {
  	margin: 0 0;
  	position: relative;
 }
-#map {
+section {
 	position: absolute;
 	top: 40px;
 	bottom: 0;
 	right: 0;
 	left: 0;
 }
-#overlay {
-	position: absolute;
+section.active {
+	z-index: 1000;
+}
+#overlay_map {
 	background-color: #fff;
 	margin-bottom: 1em;
-	padding: 10px 10px 10px 10px;
+	padding: 10px;
 
 	box-shadow: 3px 2px 5px #aaa;
 	-webkit-box-shadow: 3px 2px 5px #aaa;
 	-moz-box-shadow: 3px 2px 5px #aaa;
 }
+#overlay_map ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-color: #c5ccd4;
+	border: 1px solid #aaa;
+}
+#overlay_map ul li {
+	padding: 3px 16px;
+	border-top: 1px solid #aaa;
+}
+#overlay_map ul li:first-child {
+	border-top: none;
+}
+#overlay_map ul li span {
+	font-weight: bold;
+	float: right;
+}
+
 /******************************************************
  * Rest
  *****************************************************/

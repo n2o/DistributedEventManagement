@@ -19,5 +19,12 @@
 			"Latitude": 51.188201,
 			"Longitude": 6.794869
 		}
+	},
+	"Fachschaft Informatik": {
+		"Category": "building",
+		"Position": {
+			"Latitude": 51.1880663,
+			"Longitude": 6.7968774
+		}
 	}
 }

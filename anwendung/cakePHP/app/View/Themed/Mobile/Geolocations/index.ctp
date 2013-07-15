@@ -2,15 +2,23 @@
 	<!--<a data-icon="grid" class="menu-trigger">Menu</a>-->
 	<a href="#nav" data-role="button" data-inline="true" data-icon="bars">Menu</a>
 	<h1>Where are my friends?</h1>
-	<button>Toggle</button>
+	<button class="switchInfo">Info</button>
 </div>
 <div class="body" data-role="content">
 
-	<section id="map"></section>
 	<section id="overlay_map">
 		<strong>Distances</strong>
-		<ul></ul>
+		<p>
+			<ul></ul>
+		</p>
+		<br/>
+		<strong>Own Position:</strong>
+		<p>
+			<span id="ownPosition"></span>
+		</p>
+		<button class="switchInfo">Close</button>
 	</section>
+	<section id="map"></section>
 
 	<!-- Include Google Maps API -->
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
@@ -20,7 +28,7 @@
 		$('#map').addClass('active');
 
 		// Switch between distances and map
-		$('button').on('click',function() {
+		$('.switchInfo').on('click',function() {
 			$('section').toggleClass('active');
 		});
 
@@ -33,7 +41,7 @@
 
 			// create JSON object
 			var options = {
-				zoom: 13,
+				zoom: 17,
 				center: new google.maps.LatLng(latitude,longitude),
 				mapType: google.maps.MapTypeId.ROADMAP
 			};
@@ -67,16 +75,6 @@
 					return Math.round(d*10)/10+" km";
 			};
 
-			// Mark own position on map
-			marker = new google.maps.Marker({
-				map: map,
-				position: new google.maps.LatLng(
-					latitude,
-					longitude
-				),
-				animation: google.maps.Animation.DROP
-			});
-
 			// Get other positions from JSON file
 			$.getJSON('json/positions.json', function(json) {
 				// goes through each entry in json file and creates a new marker
@@ -93,6 +91,19 @@
 						animation: google.maps.Animation.DROP
 					});
 				});
+			});
+			$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
+
+			// Mark own position on map
+			marker = new google.maps.Marker({
+				map: map,
+				position: new google.maps.LatLng(
+					latitude,
+					longitude
+				),
+				title: 'Here I am!',
+				icon: '//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',
+				animation: google.maps.Animation.DROP
 			});
 		});
 	});

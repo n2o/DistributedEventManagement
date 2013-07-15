@@ -16,9 +16,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes"> <!-- if added to iOS homescreen, it has fullscreen -->
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="apple-touch-startup-image" href="img/splashscreen.png">
+		
+
+		<!-- iPhone Retina -->
+		<link rel="apple-touch-startup-image" href="img/icons/apple-touch-startup-image-640x920.png" media="(device-width: 640px) and (device-height: 1136px) and (-webkit-device-pixel-ratio: 2)">
+		<!-- iPhone Classic -->
+		<link rel="apple-touch-startup-image" href="img/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 1096px) and (-webkit-device-pixel-ratio: 2)">
+		<!-- <link rel="apple-touch-startup-image" href="img/splashscreen.png"> -->
+
 		<!-- precomposed: forbid iOS to prepare my icon for the usual iOS theme
 		<link rel="apple-touch-icon-precomposed" href="icon.png"> -->
+
 		<link rel="apple-touch-icon" href="img/icon.png">
 		<?php
 			echo $this->Html->meta('icon');

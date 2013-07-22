@@ -20,7 +20,7 @@
 				<th>Type</th>
 				<th>Details</th>
 			</tr>
-			<?php foreach($columns_event as $column): ?>
+		<!-- 	<?php foreach($columns_event as $column): ?>
 			<tr>
 				<td>
 					<?php echo key($column); ?>
@@ -37,7 +37,7 @@
 					?>
 				</td>
 			</tr>
-		<?php endforeach; ?>
+		<?php endforeach; ?> -->
 		</table>
 		<?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id));?>
 	</p>

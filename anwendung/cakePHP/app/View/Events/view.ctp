@@ -3,8 +3,14 @@
 	<p>
 		<?php 
 			foreach($columns_event as $column) {
-				echo "<strong>".ucfirst($column)."</strong><br />";
-				echo $event['Event'][$column]."<br /><br />";
+				if ($column == "user_id") {
+					echo "<strong>Created by</strong><br />";
+					echo $username;
+				} else {
+					echo "<strong>".ucfirst($column)."</strong><br />";
+					echo $event['Event'][$column];
+				}
+				echo "<br /><br />";
 			}
 		?>
 	</p>
@@ -34,7 +40,6 @@
 						echo "<tr>";
 						foreach ($columns as $column)
 							echo "<td>".$users[$i]['users'][$column]."</td>";
-
 						echo "</tr>";
 					}
 				?>

@@ -10,9 +10,9 @@ class EventsController extends AppController {
 
 	# View one specific element by id
 	public function view($id = null) {
-		if (!$id) {
+		if (!$id)
 			throw new NotFoundException(__('Invalid event.'));
-		}
+
 		$event = $this->Event->findById($id);
 		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
@@ -25,6 +25,8 @@ class EventsController extends AppController {
 
 		# Load Model User to get their column types
 		$this->loadModel('User');
+		$user = $this->User->findById($event["Event"]["user_id"]);
+		$this->set('username', $user['User']['username']);
 
 		# SQL query to get all users which are attached to this event
 		$this->set('users', $this->Event->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
@@ -55,8 +57,8 @@ class EventsController extends AppController {
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['Column']) {
 				# Get data from view, encode it to json and save it into the key-value-store
-				$toJson = json_encode(array("field" => $this->request->data['Column']['field'], "type" => $this->request->data['Column']['type']));
-				$this->Event->query("INSERT INTO event_details (`event_id`, `entry`, `value`) VALUES ('$id', 'form', '$toJson')");
+				$toJson = json_encode(array("use" => "form", "field" => $this->request->data['Column']['field'], "type" => $this->request->data['Column']['type']));
+				$this->Event->query("INSERT INTO event_details (`entry`, `value`) VALUES ('$id', '$toJson')");
 				$this->Session->setFlash('Added a column to your event.');
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
@@ -76,13 +78,32 @@ class EventsController extends AppController {
 
 		$this->set('id', $id); # Make $id accessible for View
 
-		$specColumns = $this->Event->query("SELECT * FROM event_details WHERE event_id = $id AND entry = 'form'");
-		var_dump($specColumns);
-
+		# Get all entries corresponding to this event
+		$specColumns = $this->Event->query("SELECT * FROM event_details WHERE entry = $id");
+		
+		# Evaluate all form elements from key-value event_details
+		$json = array();
+		$i = 0;
 		foreach ($specColumns as $key => $value) {
-			var_dump($key);
-			echo $value["event_details"]["entry"];
+			$json[$i] = json_decode($value["event_details"]["value"], true);
+			if ($json[$i]["use"] == "form") $i++;
 		}
+
+		# Prepare array for view
+		$fields = array();
+		$i = 0;
+		foreach ($json as $key => $value) {
+			$fields[$value["field"]] = $value["type"];
+		}
+		$this->set("fields", $fields);
+
+		# Show list of users which are assigned to the event
+		$this->loadModel('User');
+		$this->set('users', $this->Event->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
+
+		# Save all columns for user in an array
+		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
+
 
 		# Update event
 		if ($this->request->is('post')||$this->request->is('put')) {
@@ -99,6 +120,16 @@ class EventsController extends AppController {
 			$this->request->data = $event;
 	}
 
+	public function editUser($userId = null, $eventId = null) {
+		if (!$userId)
+			throw new NotFoundException(__('Invalid event.'));
+		$this->loadModel('User');
+		$user = $this->User->findById($userId);
+
+		$eventDetails = $this->Event->query("SELECT * FROM event_details WHERE entry = $eventId");
+
+	}
+
 	# Delete whole event
 	public function delete($id) {
 		if ($this->request->is('get'))
@@ -113,10 +144,10 @@ class EventsController extends AppController {
 	}
 
 	# Delete specific column
-	public function deleteColumn($id, $column_name) {
+	public function deleteColumn($id, $field) {
 		if ($this->request->is('get'))
 			throw new MethodNotAllowedException();
-		$this->Session->setFlash('The column $column_name has been deleted.');
+		$this->Session->setFlash('The column $field has been deleted.');
 		$this->redirect(array('action' => 'edit/'.$id));
 	}
 }

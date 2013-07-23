@@ -47,15 +47,17 @@ class EventsController extends AppController {
 		}
 	}
 
-	# Add specific column for event
+	# Add specific column for event via key-value-store and json encoding
 	public function addColumn($id = null) {
 		if (!$id)
 			throw new NotFoundException(__('Invalid id.'));
 
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['Column']) {
-				$name = $this->request->data['Column']['Name'];
-				$type = $this->request->data['Column']['Type'];
+				# Get data from view, encode it to json and save it into the key-value-store
+				$toJson = json_encode(array("field" => $this->request->data['Column']['field'], "type" => $this->request->data['Column']['type']));
+				$this->Event->query("INSERT INTO event_details (`event_id`, `entry`, `value`) VALUES ('$id', 'form', '$toJson')");
+				$this->Session->setFlash('Added a column to your event.');
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -73,6 +75,14 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event.'));
 
 		$this->set('id', $id); # Make $id accessible for View
+
+		$specColumns = $this->Event->query("SELECT * FROM event_details WHERE event_id = $id AND entry = 'form'");
+		var_dump($specColumns);
+
+		foreach ($specColumns as $key => $value) {
+			var_dump($key);
+			echo $value["event_details"]["entry"];
+		}
 
 		# Update event
 		if ($this->request->is('post')||$this->request->is('put')) {
@@ -97,7 +107,7 @@ class EventsController extends AppController {
 		if ($this->Event->delete($id)) {
 			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
 			$this->Event->query("DELETE FROM event_details WHERE event_id = $id");
-			$this->Session->setFlash('The event with id: '.$id.' has been deleted.');
+			$this->Session->setFlash('The event with id: $id has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}
@@ -106,7 +116,7 @@ class EventsController extends AppController {
 	public function deleteColumn($id, $column_name) {
 		if ($this->request->is('get'))
 			throw new MethodNotAllowedException();
-		$this->Session->setFlash('The column '.$column_name.' has been deleted.');
+		$this->Session->setFlash('The column $column_name has been deleted.');
 		$this->redirect(array('action' => 'edit/'.$id));
 	}
 }

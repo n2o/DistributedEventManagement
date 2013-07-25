@@ -2,10 +2,10 @@
 	<h1>Add new column</h1>
 	<p>
 		<?php 
-			echo $this->Form->create('Column');	# creates HTML code for the <form>-Tag
-			echo $this->Form->input('field');
-			echo $this->Form->input('type', array('options' => array(
-				'standard' => 'Standard (Numbers, Text, ...)',
+			echo $this->Form->create('Column');
+			echo $this->Form->input('name');
+			echo $this->Form->input('value', array('options' => array(
+				'text' => 'Standard (Numbers, Text, ...)',
 				'checkbox' => 'Checkbox'
 			)));
 			echo $this->Form->end('Save Column');

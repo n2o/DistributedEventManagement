@@ -20,13 +20,13 @@
 				<th>Type</th>
 				<th>Details</th>
 			</tr>
-		 	<?php foreach($fields as $field => $type): ?>
+		 	<?php foreach($fields as $field): ?>
 			<tr>
 				<td>
-					<?php echo $field; ?>
+					<?php echo $field['event_columns']['name']; ?>
 				</td>
 				<td>
-					<?php echo $type; ?>
+                    <?php echo $field['event_columns']['value']; ?>
 				</td>
 				<td>
 					Edit

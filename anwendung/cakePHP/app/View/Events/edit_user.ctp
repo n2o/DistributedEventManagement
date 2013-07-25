@@ -9,10 +9,10 @@
 		<?php 
 			$i = 0;
 			echo $this->Form->create('inputColumn');
-			foreach ($columns as $column): ?> 
+			foreach ($fields as $field): ?>
 				<tr>
 					<td>
-						<?php echo $column['field']; ?>
+						<?php echo $field['event_columns']['name']; ?>
 					</td> 
 					<td>
 						<?php echo $this->Form->input('post'.$i++, array('label' => '')); ?>

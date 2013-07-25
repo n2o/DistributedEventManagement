@@ -57,8 +57,9 @@ class EventsController extends AppController {
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['Column']) {
 				# Get data from view, encode it to json and save it into the key-value-store
-				$toJson = json_encode(array("use" => "form", "field" => $this->request->data['Column']['field'], "type" => $this->request->data['Column']['type']));
-				$this->Event->query("INSERT INTO event_details (`entry`, `value`) VALUES ('$id', '$toJson')");
+                $name = $this->request->data['Column']['name'];
+                $value = $this->request->data['Column']['value'];
+				$this->Event->query("INSERT INTO event_columns (`event_id`, `type`, `name`, `value`) VALUES ($id, 'form', '$name', '$value')");
 				$this->Session->setFlash('Added a column to your event.');
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
@@ -79,22 +80,7 @@ class EventsController extends AppController {
 		$this->set('id', $id); # Make $id accessible for View
 
 		# Get all entries corresponding to this event
-		$specColumns = $this->Event->query("SELECT * FROM event_details WHERE entry = $id");
-		
-		# Evaluate all form elements from key-value event_details
-		$json = array();
-		$i = 0;
-		foreach ($specColumns as $key => $value) {
-			$json[$i] = json_decode($value["event_details"]["value"], true);
-			if ($json[$i]["use"] == "form") $i++;
-		}
-
-		# Prepare array for view
-		$fields = array();
-		$i = 0;
-		foreach ($json as $key => $value) {
-			$fields[$value["field"]] = $value["type"];
-		}
+		$fields = $this->Event->query("SELECT * FROM event_columns WHERE (event_id = $id AND type = 'form')");
 		$this->set("fields", $fields);
 
 		# Show list of users which are assigned to the event
@@ -103,7 +89,6 @@ class EventsController extends AppController {
 
 		# Save all columns for user in an array
 		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
-
 
 		# Update event
 		if ($this->request->is('post')||$this->request->is('put')) {
@@ -123,20 +108,9 @@ class EventsController extends AppController {
 	public function editUser($userId = null, $eventId = null) {
 		if (!$userId)
 			throw new NotFoundException(__('Invalid user id.'));
-		$this->loadModel('User');
-		$user = $this->User->findById($userId);
 
-		$eventDetails = $this->Event->query("SELECT * FROM event_details WHERE entry = $eventId");
-		#var_dump($eventDetails);
-		$i = 0;
-
-		foreach ($eventDetails as $key => $value) {
-			$temp = json_decode($value["event_details"]["value"], true);
-			if ($temp["use"] == "form") 
-				$json[$i++] = $temp;
-		}
-
-		$this->set("columns", $json);
+		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $eventId AND type = 'form'");
+        $this->set("fields", $fields);
 
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['inputColumn']) {

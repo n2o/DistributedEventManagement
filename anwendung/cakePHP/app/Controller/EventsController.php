@@ -122,11 +122,25 @@ class EventsController extends AppController {
 
 	public function editUser($userId = null, $eventId = null) {
 		if (!$userId)
-			throw new NotFoundException(__('Invalid event.'));
+			throw new NotFoundException(__('Invalid user id.'));
 		$this->loadModel('User');
 		$user = $this->User->findById($userId);
 
 		$eventDetails = $this->Event->query("SELECT * FROM event_details WHERE entry = $eventId");
+		#var_dump($eventDetails);
+		$i = 0;
+
+		foreach ($eventDetails as $key => $value) {
+			$temp = json_decode($value["event_details"]["value"], true);
+			if ($temp["use"] == "form") 
+				$json[$i++] = $temp;
+		}
+
+		$this->set("columns", $json);
+
+
+		#$json = json_decode($eventDetails, true);
+		#var_dump($json);
 
 	}
 

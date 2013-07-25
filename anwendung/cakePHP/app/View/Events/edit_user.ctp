@@ -1,6 +1,28 @@
 <article>
-	<h1>Edit User</h1>
+	<h1>Set event specific columns for user</h1>
 	<p>
-		<!-- Need to parse the JSON file from event and save the user information into some kind of JSON -->
+		<table>
+			<thead>
+				<th>Field</th>
+				<th>Value</th>
+			</thead>
+		<?php 
+			$i = 0;
+			echo $this->Form->create('inputColumn');
+			foreach ($columns as $column): ?> 
+				<tr>
+					<td>
+						<?php echo $column['field']; ?>
+					</td> 
+					<td>
+						<?php echo $this->Form->input($column['field']); ?>
+					</td>
+				</tr>
+		<?php
+			endforeach;
+			unset($columns); 
+		?>
+		</table>
+		<?php echo $this->Form->end('Save Changes'); ?>
 	</p>
 </article>

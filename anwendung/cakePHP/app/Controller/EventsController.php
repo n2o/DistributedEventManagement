@@ -138,10 +138,17 @@ class EventsController extends AppController {
 
 		$this->set("columns", $json);
 
-
-		#$json = json_decode($eventDetails, true);
-		#var_dump($json);
-
+		if ($this->request->is('post')||$this->request->is('put')) {
+			if ($this->request->data['inputColumn']) {
+				# Get data from view, encode it to json and save it into the key-value-store
+				$toJson = json_encode(array("use" => "form", "field" => $this->request->data['inputColumn']['field'], "type" => $this->request->data['inputColumn']['type']));
+				$this->Event->query("INSERT INTO event_details (`entry`, `value`) VALUES ('$id', '$toJson')");
+				$this->Session->setFlash('Added specific user value to Event.');
+				$this->redirect(array('action' => 'edit/'.$eventId));
+			} else {
+				$this->Session->setFlash('Unable to update your event.');
+			}
+		}
 	}
 
 	# Delete whole event

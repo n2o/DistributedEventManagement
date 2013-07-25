@@ -15,7 +15,7 @@
 						<?php echo $column['field']; ?>
 					</td> 
 					<td>
-						<?php echo $this->Form->input($column['field']); ?>
+						<?php echo $this->Form->input('post'.$i++, array('label' => '')); ?>
 					</td>
 				</tr>
 		<?php

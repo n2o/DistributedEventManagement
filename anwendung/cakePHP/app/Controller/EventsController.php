@@ -59,7 +59,7 @@ class EventsController extends AppController {
 				# Get data from view, encode it to json and save it into the key-value-store
                 $name = $this->request->data['Column']['name'];
                 $value = $this->request->data['Column']['value'];
-				$this->Event->query("INSERT INTO event_columns (`event_id`, `type`, `name`, `value`) VALUES ($id, 'form', '$name', '$value')");
+				$this->Event->query("INSERT INTO event_columns (`event_id`, `name`, `value`) VALUES ($id, '$name', '$value')");
 				$this->Session->setFlash('Added a column to your event.');
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
@@ -80,7 +80,7 @@ class EventsController extends AppController {
 		$this->set('id', $id); # Make $id accessible for View
 
 		# Get all entries corresponding to this event
-		$fields = $this->Event->query("SELECT * FROM event_columns WHERE (event_id = $id AND type = 'form')");
+		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $id");
 		$this->set("fields", $fields);
 
 		# Show list of users which are assigned to the event
@@ -109,14 +109,27 @@ class EventsController extends AppController {
 		if (!$userId)
 			throw new NotFoundException(__('Invalid user id.'));
 
-		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $eventId AND type = 'form'");
+		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $eventId");
         $this->set("fields", $fields);
+
+        $alreadTypedIn = $this->Event->query("SELECT * FROM event_properties WHERE user_id = $userId AND event_id = $eventId");
+
+        $posted = array();
+        foreach ($alreadTypedIn as $entry => $value)
+            $posted[$value['event_properties']['name']] = $value['event_properties']['value'];
+
+        $this->set("alreadyTypedIn", $posted);
 
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['inputColumn']) {
 				# Get data from view, encode it to json and save it into the key-value-store
-				$toJson = json_encode(array("use" => "form", "field" => $this->request->data['inputColumn']['field'], "type" => $this->request->data['inputColumn']['type']));
-				$this->Event->query("INSERT INTO event_details (`entry`, `value`) VALUES ('$id', '$toJson')");
+
+                for ($i = 0; $i < count($fields); $i++) {
+                    $postName = $fields[$i]['event_columns']['name'];
+                    $postValue = $this->request->data['inputColumn']['post'.$i];
+                    $this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
+                }
+
 				$this->Session->setFlash('Added specific user value to Event.');
 				$this->redirect(array('action' => 'edit/'.$eventId));
 			} else {
@@ -132,17 +145,20 @@ class EventsController extends AppController {
 
 		if ($this->Event->delete($id)) {
 			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
-			$this->Event->query("DELETE FROM event_details WHERE event_id = $id");
+			$this->Event->query("DELETE FROM event_columns WHERE event_id = $id");
+            $this->Event->query("DELETE FROM event_properties WHERE event_id = $id");
 			$this->Session->setFlash('The event with id: $id has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}
 
-	# Delete specific column
-	public function deleteColumn($id, $field) {
-		if ($this->request->is('get'))
-			throw new MethodNotAllowedException();
-		$this->Session->setFlash('The column $field has been deleted.');
-		$this->redirect(array('action' => 'edit/'.$id));
-	}
+    public function deleteColumn($id, $name) {
+        if ($this->request->is('get'))
+            throw new MethodNotAllowedException();
+
+        $this->Event->query("DELETE FROM event_columns WHERE event_id = $id AND name = '$name'");
+        $this->Event->query("DELETE FROM event_properties WHERE event_id = $id AND name = '$name'");
+        $this->Session->setFlash("The column ".$name." has been deleted.");
+        $this->redirect(array('action' => 'edit', $id));
+    }
 }

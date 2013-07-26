@@ -1,7 +1,8 @@
 <article>
 	<h1>Details for event</h1>
 	<p>
-		<?php 
+		<?php
+        echo  $this->Html->link('Edit this Event', array('controller' => 'events', 'action' => 'edit', $event['Event']['id']))."<br/><br/>";
 			foreach($columns_event as $column) {
 				if ($column == "user_id") {
 					echo "<strong>Created by</strong><br />";

@@ -14,6 +14,7 @@
 <article>
 	<h2>Edit specific columns</h2>
 	<p>
+        <?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id));?>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -30,13 +31,16 @@
 				</td>
 				<td>
 					Edit
-					Delete
+                    <?php echo $this->Form->postLink(	# postLink uses javascript to do a post request
+                        'Delete',
+                        array('action' => 'deleteColumn', $id, $field['event_columns']['name']),
+                        array('confirm' => 'Are you sure?'));
+                    ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>
 
 		</table>
-		<?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id));?>
 	</p>
 </article>
 

@@ -82,13 +82,13 @@ class UsersController extends AppController {
 		}
 
 		$this->User->id = $id;
+
 		# Get all marked entries from events_users, where the user is assigned to
-		$selectedFromSQL = $this->User->query("SELECT event_id FROM events_users WHERE user_id=".$id);
+		$selectedFromSQL = $this->User->query("SELECT event_id FROM events_users WHERE user_id=$id");
 		if (count($selectedFromSQL) > 0) {
 			$i = 0;
 			foreach ($selectedFromSQL as $key => $value)
 				$selectedEventsOld[$i++] = $value['events_users']['event_id'];
-			$selectedEventsOld = array_unique($selectedEventsOld);
 			$this->set('selectedEventIDs', $selectedEventsOld);
 		} else {
 			$this->set('selectedEventIDs', null); # if no events are assigned, return NULL

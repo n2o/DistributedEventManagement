@@ -6,19 +6,26 @@
 				<th>Field</th>
 				<th>Value</th>
 			</thead>
-		<?php 
+		<?php
 			$i = 0;
 			echo $this->Form->create('inputColumn');
-			foreach ($fields as $field): ?>
+			foreach ($fields as $field):
+                $name = $field['event_columns']['name'];
+                if (!isset($alreadyTypedIn[$name]))
+                    $value = "";
+                else
+                    $value = $alreadyTypedIn[$name];
+            ?>
 				<tr>
 					<td>
-						<?php echo $field['event_columns']['name']; ?>
+						<?php echo $name; ?>
 					</td> 
 					<td>
-						<?php echo $this->Form->input('post'.$i++, array('label' => '')); ?>
+						<?php echo $this->Form->input('post'.$i, array('label' => false, 'value' => $value)); ?>
 					</td>
 				</tr>
 		<?php
+            $i++;
 			endforeach;
 			unset($columns); 
 		?>

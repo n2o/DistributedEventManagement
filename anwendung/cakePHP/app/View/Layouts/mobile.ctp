@@ -13,7 +13,7 @@
 			<?php echo $cakeDescription; ?>
 			<?php echo $title_for_layout; ?>
 		</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta name="apple-mobile-web-app-capable" content="yes"> <!-- if added to iOS homescreen, it has fullscreen -->
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		
@@ -63,5 +63,9 @@
 			-->
 
 		</div><!-- /Page -->
+
+        <script type="text/javascript">
+            window.scrollTo(0,1); // Older versions: Scroll 1 pixel down to let the status bar fade out
+        </script>
 	</body>
 </html>

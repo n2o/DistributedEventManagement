@@ -29,8 +29,9 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 
-	# Show login form
+	# Show list of users
 	public function index() {
+		$this->paginate = array('limit' => -1); # set how many users are shown
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}

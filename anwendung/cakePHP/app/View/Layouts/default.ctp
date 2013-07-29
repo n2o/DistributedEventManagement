@@ -62,5 +62,15 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 			</footer>
 		</section>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Generate a dropdown menu
+			$("nav li:has(ul)").hover(function(){
+				$(this).find("ul").slideDown();
+			}, function(){
+				$(this).find("ul").hide();
+			});
+		});
+	</script>
 </body>
 </html>

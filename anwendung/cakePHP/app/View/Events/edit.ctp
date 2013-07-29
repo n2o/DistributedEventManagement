@@ -14,7 +14,7 @@
 <article>
 	<h2>Edit specific columns</h2>
 	<p>
-        <?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id));?>
+        <?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id), array('class' => 'button'));?>
 		<table>
 			<tr>
 				<th>Name</th>

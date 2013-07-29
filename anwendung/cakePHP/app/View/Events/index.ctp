@@ -1,9 +1,7 @@
 <article>
 	<h1>Overview of events</h1>
 	<p>
-		<?php echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add')); ?>
-		<br />
-		<br />
+		<?php echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('class' => 'button')); ?>
 		<table>
 		    <tr>
 		        <th>Id</th>

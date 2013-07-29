@@ -11,6 +11,10 @@
 /dist
 /tags
 /app/webroot/logs
+.idea
+.metadata
+.travis.yml
+.editorconfig
 
 # OS generated files #
 ######################

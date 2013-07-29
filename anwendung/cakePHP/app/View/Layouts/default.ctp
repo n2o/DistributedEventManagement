@@ -37,7 +37,8 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 
 		$cssimport = array(
 					'main',
-					'default'
+					'default',
+					'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
 				);
 		echo $this->Html->css($cssimport);
 
@@ -49,9 +50,12 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 <body>
 	<div id="container">
 		<section id="page">
-			<div id="header">
-				<?php include ('nav.ctp'); ?>
-			</div>
+			<header>
+				<?php 
+					echo $this->Html->image("logo/logo.png", array('fullBase' => true, 'width' => '100px'));
+					include ('nav.ctp'); 
+				?>
+			</header>
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>
 

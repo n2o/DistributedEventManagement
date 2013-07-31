@@ -31,7 +31,8 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(
-					'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'
+					'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
+					'slidingDiv.js'
 				);
 		echo $this->Html->script($jsimport);
 
@@ -68,12 +69,18 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// Generate a dropdown menu
+
+			// Generate a dropdown menu in the navigation
 			$("nav li:has(ul)").hover(function(){
 				$(this).find("ul").slideDown();
 			}, function(){
 				$(this).find("ul").hide();
 			});
+
+			// Enable sliding divs
+			$('.slide_div').slidingDiv({
+				speed: 500,	// speed you want the toggle to happen	
+			}); 
 		});
 	</script>
 </body>

@@ -46,13 +46,13 @@ body {
 
 /** General Style Info **/
 a {
-	color: #003d4c;
+	color: #9D0D16;
 	text-decoration: underline;
 	font-weight: bold;
 }
 a:hover {
-	color: #367889;
-	text-decoration:none;
+	color: #9D0D16;
+	text-decoration:underline;
 }
 a img {
 	border:none;
@@ -63,7 +63,7 @@ h1, h2, h3, h4 {
 	margin-bottom:0.5em;
 }
 h1 {
-	color: #003d4c;
+	color: #9D0D16;
 	font-size: 100%;
 }
 h2 {
@@ -705,4 +705,14 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
+}
+
+/** Sliding Divs **/
+.slidingDiv {
+	height: auto;
+	padding: 20px;
+	margin: 0.5em 0;
+	margin-right: 5px; 
+	display: none;
+	border: 1px solid #ccc;
 }

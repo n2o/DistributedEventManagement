@@ -7,12 +7,6 @@
 		<br>
 		<h2>Select Event</h2>
 		Here are some event-specific statistics.
-		<p>
-		<br>
-		<?php 
-			foreach ($eventTitlesWithUsers as $title => $id)
-				echo $this->Html->link($title, array('controller' => 'stats', 'action' => 'specEvent/'.$id), array('class' => 'button', 'style' => 'float: right;'));
-		?>
-		</p>
+		<div align="right"><?php echo $this->Html->link('Spec. Event', array('controller' => 'stats', 'action' => 'selectEvent'), array('class' => 'button')); ?></div>
 	</p>
 </article>

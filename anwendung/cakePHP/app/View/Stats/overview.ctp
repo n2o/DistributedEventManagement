@@ -11,7 +11,11 @@
 				<td><?php echo $stats['events']; ?></td>
 			</tr>
 		</table>
-		<div id="eventsUsers" style="width: 700px; height: 400px;"></div>
+
+		<a href="#" class="slide_div button" rel="#slidingDiv">Toggle Chart</a><br />
+		<div id="slidingDiv" class="slidingDiv">
+			<div id="eventsUsers"></div>
+		</div> 
 	</p>
 </article>
 
@@ -22,15 +26,17 @@
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
-			['Event', 0],
-			<?php foreach ($eventsUsers as $key => $value) echo "['$key', $value],"; ?>
+			['Event', 'Users'],<?php foreach ($eventsUsers as $key => $value) echo "['$key', $value],"; ?>
 		]);
 
 		var options = {
-			title: 'See how many of the total users are assigned to the events'
+			title: 'See how many of the total users are assigned to the events',
+			height: 400,
+			width: 960,
+			colors: ['#9D0D16']
 		};
 
-		var chart = new google.visualization.PieChart(document.getElementById('eventsUsers'));
+		var chart = new google.visualization.ColumnChart(document.getElementById('eventsUsers'));
 		chart.draw(data, options);
 	}
 </script>

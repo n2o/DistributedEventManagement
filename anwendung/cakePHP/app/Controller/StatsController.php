@@ -3,9 +3,17 @@ class StatsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Session');
 
-	public function index() {	
+	public function index() {
+		$this->loadModel('User');
+		$getEventTitles = $this->User->query("SELECT id, title FROM events");
+		$eventTitlesWithUsers = array();
+		foreach ($getEventTitles as $key => $value)
+			$eventTitlesWithUsers[$value['events']['title']] = $value['events']['id'];
+
+		$this->set('eventTitlesWithUsers', $eventTitlesWithUsers);
 	}
 
+	# Prepare total users, events and how many users are assigned to each event
 	public function overview() {
 		$stats = array();
 		$this->loadModel('User');
@@ -21,18 +29,26 @@ class StatsController extends AppController {
 		$eventsUsers = array();
 		foreach ($query as $key => $value) {
 			$event = $value['events_users']['event_id'];
-			if (!isset($eventsUsers[$event])) $eventsUsers[$event] = 0;
+			if (!isset($eventsUsers[$event])) 
+				$eventsUsers[$event] = 0;
 			$eventsUsers[$event]++;
 		}
 		
-		
+		# Create new array which replaces the event ids with the correct titles
+		$getEventTitles = $this->User->query("SELECT id, title FROM events");
+		$eventTitlesWithUsers = array();
+		foreach ($getEventTitles as $key => $value)
+			$eventTitlesWithUsers[$value['events']['title']] = $eventsUsers[$value['events']['id']];
 
-		$this->set('eventsUsers', $eventsUsers);
+		$this->set('eventsUsers', $eventTitlesWithUsers);
 		$this->set('stats', $stats);
 	}
 
-	public function specEvent() {
+	public function selectEvent() {
 
 	}
 
+	public function specEvent($id = null) {
+
+	}
 }

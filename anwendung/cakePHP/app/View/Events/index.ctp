@@ -3,13 +3,13 @@
 	<p>
 		<?php echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('class' => 'button')); ?>
 		<table>
-		    <tr>
+		    <thead>
 		        <th>Id</th>
 		        <th>Title</th>
 		        <th>Description</th>
 		        <th>Details</th>
 		        <th>Created</th>
-		    </tr>
+		    </thead>
 		    <!-- Here is where we loop through our $events array, printing out post info -->
 			<?php foreach ($events as $event): ?> 
 			<tr>

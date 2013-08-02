@@ -127,7 +127,8 @@ class EventsController extends AppController {
                 for ($i = 0; $i < count($fields); $i++) {
                     $postName = $fields[$i]['event_columns']['name'];
                     $postValue = $this->request->data['inputColumn']['post'.$i];
-                    $this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
+                    if ($postValue != "")
+                    	$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
                 }
 
 				$this->Session->setFlash('Added specific user value to Event.');

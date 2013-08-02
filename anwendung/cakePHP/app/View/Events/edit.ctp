@@ -14,28 +14,24 @@
 <article>
 	<h2>Edit specific columns</h2>
 	<p>
-        <?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id), array('class' => 'button'));?>
+		<?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id), array('class' => 'button'));?>
 		<table>
 			<tr>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Details</th>
 			</tr>
-		 	<?php foreach($fields as $field): ?>
+			<?php foreach($fields as $field): ?>
 			<tr>
-				<td>
-					<?php echo $field['event_columns']['name']; ?>
-				</td>
-				<td>
-                    <?php echo $field['event_columns']['value']; ?>
-				</td>
+				<td><?php echo $field['event_columns']['name']; ?></td>
+				<td><?php echo $field['event_columns']['value']; ?></td>
 				<td>
 					Edit
-                    <?php echo $this->Form->postLink(	# postLink uses javascript to do a post request
-                        'Delete',
-                        array('action' => 'deleteColumn', $id, $field['event_columns']['name']),
-                        array('confirm' => 'Are you sure?'));
-                    ?>
+					<?php echo $this->Form->postLink(	# postLink uses javascript to do a post request
+						'Delete',
+						array('action' => 'deleteColumn', $id, $field['event_columns']['name']),
+						array('confirm' => 'Are you sure?'));
+					?>
 				</td>
 			</tr>
 			<?php endforeach; ?>

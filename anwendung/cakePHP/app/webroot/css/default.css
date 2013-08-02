@@ -15,6 +15,9 @@ article {
 	-webkit-box-shadow: 3px 2px 5px #aaa;
 	-moz-box-shadow: 3px 2px 5px #aaa;
 }
+footer {
+	padding: 1em;
+}
 /******************************************************
  * Navigation elements
  *****************************************************/

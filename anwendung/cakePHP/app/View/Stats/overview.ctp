@@ -24,6 +24,7 @@
 <script type="text/javascript">
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
+	
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
 			['Event', 'Users'],<?php foreach ($eventsUsers as $key => $value) echo "['$key', $value],"; ?>
@@ -32,7 +33,7 @@
 		var options = {
 			title: 'See how many of the total users are assigned to the events',
 			height: 400,
-			width: 960,
+			width: window.innerWidth-200,
 			colors: ['#9D0D16']
 		};
 

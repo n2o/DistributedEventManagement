@@ -19,11 +19,26 @@
 						echo "</tr>";
 						$column = "";
 					}
-					echo $this->element('createColumnChart');
-					#if (count($value) > 1)
-						# print chart
 				}
 			?>
 		</table>
 	</p>
 </article>
+<article>
+	<h1>Charts</h1>
+	<p>
+		<?php foreach ($dataCharts as $column => $value) {
+			echo "
+				<a href='#' class='slide_div button' rel='#".$column."Div'>$column Chart</a><br>
+				<div id='".$column."Div' class='slidingDiv'>
+					<div id='".$column."Chart'></div>
+				</div>";
+
+		}
+		?>
+	</p>
+</article>
+<?php 
+foreach ($dataCharts as $column => $value)
+	echo $this->element('createColumnChart', array('title' => $column, 'stats' => $value));
+?>

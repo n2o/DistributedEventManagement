@@ -12,9 +12,9 @@
 			</tr>
 		</table>
 
-		<a href="#" class="slide_div button" rel="#slidingDiv">Toggle Chart</a><br />
-		<div id="slidingDiv" class="slidingDiv">
-			<div id="eventsUsers"></div>
+		<a href="#" class="slide_div button" rel="#eventsUsersDiv">Toggle Chart</a><br />
+		<div id="eventsUsersDiv" class="slidingDiv">
+			<div id="eventsUsersChart"></div>
 		</div> 
 	</p>
 </article>
@@ -37,7 +37,7 @@
 			colors: ['#9D0D16']
 		};
 
-		var chart = new google.visualization.ColumnChart(document.getElementById('eventsUsers'));
+		var chart = new google.visualization.ColumnChart(document.getElementById('eventsUsersChart'));
 		chart.draw(data, options);
 	}
 </script>

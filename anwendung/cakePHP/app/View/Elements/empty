@@ -1,5 +1,5 @@
 # Call elements with:
-echo $this->element(nameOfElement.ctp, array("var" => "set value"));
+echo $this->element(nameOfElement, array("var" => "set value"));
 
 # Access variable $var in nameOfElement.ctp with $var. It is already initialized with this call scheme above
 

@@ -73,7 +73,6 @@ class StatsController extends AppController {
 		}
 
 		$this->set('dataCharts', $this->Stats->prepareCharts($stats));
-
 		$this->set('stats', $stats);
 	}
 }

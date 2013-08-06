@@ -150,4 +150,12 @@ header img {
 	border: 1px solid #ccc;
 	background:  #fff;
 	color: #000;
+	-o-transition:color .2s ease-out, background .2s ease-in;
+	-ms-transition:color .2s ease-out, background .2s ease-in;
+	-moz-transition:color .2s ease-out, background .2s ease-in;
+	-webkit-transition:color .2s ease-out, background .2s ease-in;
+	transition:color .2s ease-out, background .2s ease-in;
+}
+.button:hover {
+	background: #f9f9f9;
 }

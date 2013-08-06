@@ -12,7 +12,7 @@
 	        echo $this->Form->input('role', array('options' => array('user' => 'User', 'member' => 'Member', 'admin' => 'Admin')));
 
 			#echo $this->Form->input('event_id', array('options' => $elements));
-			echo "<label for=\"UserHasLogin\">Is able to login</label> ".$this->Form->checkbox('has_login')."<br /><br />";
+			echo "<label for='UserHasLogin'>Is able to login</label> ".$this->Form->checkbox('has_login')."<br /><br />";
 
 			# Menu to choose one of the events
 			$elements = $this->User->getAllEvents($events);

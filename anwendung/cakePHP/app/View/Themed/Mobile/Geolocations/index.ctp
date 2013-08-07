@@ -38,7 +38,6 @@
 		navigator.geolocation.getCurrentPosition(function(position) {
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;
-
 			// create JSON object
 			var options = {
 				zoom: 17,

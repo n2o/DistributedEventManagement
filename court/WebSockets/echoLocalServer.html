@@ -1,3 +1,8 @@
+<!-- 
+	Sample page with an own local WebSocket echo server, which listens to
+	port 9999 and echos the text "Hello WebSocket"
+ -->
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,7 +12,7 @@ var timer;
 // Initialize WebSocket connection and event handlers
 function setup() {
 	output = document.getElementById("output");
-	ws = new WebSocket("ws://echo.websocket.org/echo");
+	ws = new WebSocket("ws://localhost:9999");
 
 	// Check here all possible events: open, close, error, message
 	ws.onopen = function(e) {
@@ -47,7 +52,7 @@ function log(s) {
 function startWebSocket() {
 	// Endless looping setup() to get an echo each 3s
 	log("Start sending messages to echo server");
-	timer = setInterval(function(){setup()}, 3000);	
+	timer = setInterval(function(){setup()}, 1000);	
 }
 
 function stopWebSocket() {

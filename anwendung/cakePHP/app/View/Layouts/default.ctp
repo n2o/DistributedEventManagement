@@ -27,6 +27,7 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<?php
 		echo $this->Html->meta('icon');
 

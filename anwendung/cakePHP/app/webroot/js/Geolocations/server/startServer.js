@@ -13,7 +13,7 @@
  */
 
 var port = 9999;
-var host = "localhost";
+var host = "192.168.178.59";
 var idleTime = 15; // Spec. after how many minutes a user is removed from the list
 
 // Do not edit these lines

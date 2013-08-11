@@ -1,11 +1,20 @@
+/**
+ * Client application to connect to a remote WebSocket server.
+ *
+ * Prepares 
+ */
+
 var wsUri, websocket;
 var connected = false;
 
 // Settings
 var port = 9999;
-var host = "localhost";
-var name = Math.random().toString().substr(2,2);
+var host = "192.168.178.59";
 var delay = 10000;
+
+if (name == null)
+	var name = Math.random().toString().substr(2,5);
+
 var wsUri = "ws://"+host+":"+port+"";
 
 // Start
@@ -16,8 +25,9 @@ function echoHandlePageLoad() {
 	// Reconnect on disconnect
 	if (!connected) {
 		doConnect();
+	} else {
+		doSend();
 	}
-	doSend();
 }
 
 function doConnect() {
@@ -31,13 +41,17 @@ function doConnect() {
 function doDisconnect() {
 	websocket.close();
 	connected = false;
+	$('.connectionState').text("Not connected");
+	$('.connectionState').removeClass('connected');
 }
 
+/**
+ * Get current location, prepare JSON String and send it to WS server
+ */
 function doSend() {
 	navigator.geolocation.getCurrentPosition(function(position) {
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
-
 		var msg = {
 			person: {
 				name: name,
@@ -53,10 +67,14 @@ function doSend() {
 
 function onOpen(evt) {
 	connected = true;
+	$('.connectionState').text("Connected");
+	$('.connectionState').addClass('connected');
 }
 
 function onClose(evt) {
 	connected = false;
+	$('.connectionState').text("Not connected");
+	$('.connectionState').removeClass('connected');
 }
 
 function onMessage(evt) {
@@ -64,8 +82,10 @@ function onMessage(evt) {
 }
 
 function onError(evt) {
-	console.log('ERROR:'+evt.data);
+	console.log('ERROR: '+evt.data);
 	connected = false;
+	$('.connectionState').text("Not connected");
+	$('.connectionState').removeClass('connected');
 }
 
 window.addEventListener("load", echoHandlePageLoad, false);

@@ -694,3 +694,17 @@ pre {
 	display: none;
 	border: 1px solid #ccc;
 }
+
+/** Connection Button for WebSockets **/
+.connectionState {
+	width:150px;
+	display: block; 
+	text-align: center;
+	text-decoration: none;  
+	border: 1px solid #ccc;
+	background: red;
+	color: #000;
+}
+.connected {
+	background: lightgreen;
+}

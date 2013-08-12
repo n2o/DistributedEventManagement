@@ -6,6 +6,7 @@
 
 var wsUri, socket;
 var connected = false;
+var sentProcess = false;
 
 // Settings
 var port = 9999;
@@ -15,12 +16,10 @@ var delay = 10000; // refresh rate in ms
 if (name == null)
 	var name = Math.random().toString().substr(2,5);
 
-console.log("Starting...");
 doConnect();
 var timer = setInterval(function(){refresh()}, delay);
 
 function refresh() {
-	console.log("Refreshing...");
 	// Reconnect on disconnect
 	if (!connected) {
 		doConnect();
@@ -34,7 +33,7 @@ function doConnect() {
 		socket = io.connect('http://'+host+':'+port+'/');
 		socket.on('connect', function (evt) {
 			onOpen(evt);
-			socket.on('disconnect', function (evt) { onClose(evt) });
+			socket.on('disconnect', function (evt) { onDisconnect(evt) });
 			socket.on('message', function (evt) { onMessage(evt) });
 			socket.on('error', function (evt) { onError(evt) });
 		});
@@ -55,11 +54,14 @@ function doDisconnect() {
  */
 function doSend() {
 	console.log("Sending...");
-	navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+	if (!sentProcess) {
+		sentProcess = true;
+		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+		sentProcess = false;
+	}
 }
 
 function getPosition(position) {
-	console.log("...");
 	var latitude = position.coords.latitude;
 	var longitude = position.coords.longitude;
 	var msg = {
@@ -70,7 +72,7 @@ function getPosition(position) {
 		}
 	}
 	msg = JSON.stringify(msg);
-	console.log("Sent: " + msg);
+	console.log("--> SENT: " + msg);
 	socket.send(msg);
 }
 
@@ -79,20 +81,20 @@ function noPosition() {
 }
 
 function onOpen(evt) {
-	console.log("Connected.");
+	console.log("Connected to WebSocket server.");
 	connected = true;
 	$('.connectionState').text("Connected");
 	$('.connectionState').addClass('connected');
 }
 
-function onClose(evt) {
+function onDisconnect(evt) {
 	connected = false;
 	$('.connectionState').text("Not connected");
 	$('.connectionState').removeClass('connected');
 }
 
 function onMessage(evt) {
-	console.log('RESPONSE: '+evt);
+	console.log('<-- RESPONSE: ' + evt);
 }
 
 function onError(evt) {

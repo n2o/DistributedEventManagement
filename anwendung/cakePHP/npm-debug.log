@@ -1,0 +1,333 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'ws' ]
+2 info using npm@1.3.5
+3 info using node@v0.10.15
+4 verbose cache add [ 'ws', null ]
+5 verbose cache add name=undefined spec="ws" args=["ws",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'ws',
+6 verbose parsed url   path: 'ws',
+6 verbose parsed url   href: 'ws' }
+7 silly lockFile 1457b75d-ws ws
+8 verbose lock ws /Users/cmeter/.npm/1457b75d-ws.lock
+9 silly lockFile 1457b75d-ws ws
+10 silly lockFile 1457b75d-ws ws
+11 verbose addNamed [ 'ws', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile e88fe629-ws ws@
+14 verbose lock ws@ /Users/cmeter/.npm/e88fe629-ws.lock
+15 silly addNameRange { name: 'ws', range: '*', hasData: false }
+16 verbose url raw ws
+17 verbose url resolving [ 'https://registry.npmjs.org/', './ws' ]
+18 verbose url resolved https://registry.npmjs.org/ws
+19 info trying registry request attempt 1 at 14:09:59
+20 http GET https://registry.npmjs.org/ws
+21 http 200 https://registry.npmjs.org/ws
+22 silly registry.get cb [ 200,
+22 silly registry.get   { vary: 'Accept',
+22 silly registry.get     server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+22 silly registry.get     etag: '"7G2HJL7LO0ZBL98I1CGBNF76I"',
+22 silly registry.get     date: 'Mon, 12 Aug 2013 12:10:01 GMT',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     'content-length': '86369' } ]
+23 silly addNameRange number 2 { name: 'ws', range: '*', hasData: true }
+24 silly addNameRange versions [ 'ws',
+24 silly addNameRange   [ '0.2.6',
+24 silly addNameRange     '0.2.8',
+24 silly addNameRange     '0.2.9',
+24 silly addNameRange     '0.3.0',
+24 silly addNameRange     '0.3.1',
+24 silly addNameRange     '0.3.2',
+24 silly addNameRange     '0.3.3',
+24 silly addNameRange     '0.3.4',
+24 silly addNameRange     '0.3.4-2',
+24 silly addNameRange     '0.3.5',
+24 silly addNameRange     '0.3.5-2',
+24 silly addNameRange     '0.3.5-3',
+24 silly addNameRange     '0.3.5-4',
+24 silly addNameRange     '0.3.6',
+24 silly addNameRange     '0.3.7',
+24 silly addNameRange     '0.3.8',
+24 silly addNameRange     '0.3.9',
+24 silly addNameRange     '0.4.0',
+24 silly addNameRange     '0.4.1',
+24 silly addNameRange     '0.4.2',
+24 silly addNameRange     '0.4.3',
+24 silly addNameRange     '0.4.5',
+24 silly addNameRange     '0.4.6',
+24 silly addNameRange     '0.4.7',
+24 silly addNameRange     '0.4.8',
+24 silly addNameRange     '0.4.9',
+24 silly addNameRange     '0.4.10',
+24 silly addNameRange     '0.4.11',
+24 silly addNameRange     '0.4.12',
+24 silly addNameRange     '0.4.13',
+24 silly addNameRange     '0.4.14',
+24 silly addNameRange     '0.4.15',
+24 silly addNameRange     '0.4.16',
+24 silly addNameRange     '0.4.17',
+24 silly addNameRange     '0.4.18',
+24 silly addNameRange     '0.4.19',
+24 silly addNameRange     '0.4.20',
+24 silly addNameRange     '0.4.21',
+24 silly addNameRange     '0.4.22',
+24 silly addNameRange     '0.4.23',
+24 silly addNameRange     '0.4.24',
+24 silly addNameRange     '0.4.25',
+24 silly addNameRange     '0.4.27' ] ]
+25 verbose addNamed [ 'ws', '0.4.27' ]
+26 verbose addNamed [ '0.4.27', '0.4.27' ]
+27 silly lockFile 894ea2e6-ws-0-4-27 ws@0.4.27
+28 verbose lock ws@0.4.27 /Users/cmeter/.npm/894ea2e6-ws-0-4-27.lock
+29 silly lockFile 17b7bd29-istry-npmjs-org-ws-ws-0-4-27-tgz https://registry.npmjs.org/ws/-/ws-0.4.27.tgz
+30 verbose lock https://registry.npmjs.org/ws/-/ws-0.4.27.tgz /Users/cmeter/.npm/17b7bd29-istry-npmjs-org-ws-ws-0-4-27-tgz.lock
+31 verbose addRemoteTarball [ 'https://registry.npmjs.org/ws/-/ws-0.4.27.tgz',
+31 verbose addRemoteTarball   '077d3a48b6e0b5a96f68f3b38a94ea1ec72c2555' ]
+32 info retry fetch attempt 1 at 14:10:02
+33 verbose fetch to= /var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz
+34 http GET https://registry.npmjs.org/ws/-/ws-0.4.27.tgz
+35 http 200 https://registry.npmjs.org/ws/-/ws-0.4.27.tgz
+36 verbose tar unpack /var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz
+37 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+38 verbose lock tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package /Users/cmeter/.npm/3e3d6d68-02153-0-5962493771221489-package.lock
+39 silly lockFile ebb332ff-02153-0-5962493771221489-tmp-tgz tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz
+40 verbose lock tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz /Users/cmeter/.npm/ebb332ff-02153-0-5962493771221489-tmp-tgz.lock
+41 silly gunzTarPerm modes [ '755', '644' ]
+42 silly gunzTarPerm extractEntry package.json
+43 silly gunzTarPerm extractEntry .npmignore
+44 silly gunzTarPerm extractEntry README.md
+45 silly gunzTarPerm extractEntry index.js
+46 silly gunzTarPerm extractEntry test/BufferPool.test.js
+47 silly gunzTarPerm extractEntry test/Sender.hixie.test.js
+48 silly gunzTarPerm extractEntry test/Sender.test.js
+49 silly gunzTarPerm extractEntry test/Validation.test.js
+50 silly gunzTarPerm extractEntry test/Receiver.test.js
+51 silly gunzTarPerm extractEntry test/Receiver.hixie.test.js
+52 silly gunzTarPerm extractEntry test/WebSocketServer.test.js
+53 silly gunzTarPerm extractEntry test/autobahn-server.js
+54 silly gunzTarPerm extractEntry test/autobahn.js
+55 silly gunzTarPerm extractEntry test/hybi-common.js
+56 silly gunzTarPerm extractEntry test/WebSocket.integration.js
+57 silly gunzTarPerm extractEntry test/testserver.js
+58 silly gunzTarPerm extractEntry test/WebSocket.test.js
+59 silly gunzTarPerm extractEntry test/fixtures/agent1-cert.pem
+60 silly gunzTarPerm extractEntry test/fixtures/agent1-key.pem
+61 silly gunzTarPerm extractEntry test/fixtures/ca1-cert.pem
+62 silly gunzTarPerm extractEntry test/fixtures/ca1-key.pem
+63 silly gunzTarPerm extractEntry test/fixtures/certificate.pem
+64 silly gunzTarPerm extractEntry test/fixtures/key.pem
+65 silly gunzTarPerm extractEntry test/fixtures/request.pem
+66 silly gunzTarPerm extractEntry test/fixtures/textfile
+67 silly gunzTarPerm extractEntry bench/parser.benchmark.js
+68 silly gunzTarPerm extractEntry bench/sender.benchmark.js
+69 silly gunzTarPerm extractEntry bench/speed.js
+70 silly gunzTarPerm extractEntry bench/util.js
+71 silly gunzTarPerm extractEntry bin/wscat
+72 silly gunzTarPerm extractEntry .travis.yml
+73 silly gunzTarPerm extractEntry doc/ws.md
+74 silly gunzTarPerm extractEntry examples/ssl.js
+75 silly gunzTarPerm extractEntry examples/fileapi/package.json
+76 silly gunzTarPerm extractEntry examples/fileapi/.npmignore
+77 silly gunzTarPerm extractEntry examples/fileapi/server.js
+78 silly gunzTarPerm extractEntry examples/fileapi/public/app.js
+79 silly gunzTarPerm extractEntry examples/fileapi/public/uploader.js
+80 silly gunzTarPerm extractEntry examples/fileapi/public/index.html
+81 silly gunzTarPerm extractEntry examples/serverstats/package.json
+82 silly gunzTarPerm extractEntry examples/serverstats/server.js
+83 silly gunzTarPerm extractEntry examples/serverstats/public/index.html
+84 silly gunzTarPerm extractEntry examples/serverstats-express_3/package.json
+85 silly gunzTarPerm extractEntry examples/serverstats-express_3/server.js
+86 silly gunzTarPerm extractEntry examples/serverstats-express_3/public/index.html
+87 silly gunzTarPerm extractEntry History.md
+88 silly gunzTarPerm extractEntry lib/BufferPool.js
+89 silly gunzTarPerm extractEntry lib/ErrorCodes.js
+90 silly gunzTarPerm extractEntry lib/Receiver.hixie.js
+91 silly gunzTarPerm extractEntry lib/Receiver.js
+92 silly gunzTarPerm extractEntry lib/BufferUtil.js
+93 silly gunzTarPerm extractEntry lib/Sender.js
+94 silly gunzTarPerm extractEntry lib/Validation.fallback.js
+95 silly gunzTarPerm extractEntry lib/Validation.js
+96 silly gunzTarPerm extractEntry lib/WebSocket.js
+97 silly gunzTarPerm extractEntry lib/WebSocketServer.js
+98 silly gunzTarPerm extractEntry lib/BufferUtil.fallback.js
+99 silly gunzTarPerm extractEntry lib/browser.js
+100 silly gunzTarPerm extractEntry lib/Sender.hixie.js
+101 silly gunzTarPerm extractEntry Makefile
+102 silly gunzTarPerm extractEntry src/bufferutil.cc
+103 silly gunzTarPerm extractEntry src/validation.cc
+104 silly gunzTarPerm extractEntry binding.gyp
+105 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+106 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+107 silly lockFile ebb332ff-02153-0-5962493771221489-tmp-tgz tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz
+108 silly lockFile ebb332ff-02153-0-5962493771221489-tmp-tgz tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/tmp.tgz
+109 verbose tar pack [ '/Users/cmeter/.npm/ws/0.4.27/package.tgz',
+109 verbose tar pack   '/var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package' ]
+110 verbose tarball /Users/cmeter/.npm/ws/0.4.27/package.tgz
+111 verbose folder /var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+112 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+113 verbose lock tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package /Users/cmeter/.npm/3e3d6d68-02153-0-5962493771221489-package.lock
+114 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+115 verbose lock tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz /Users/cmeter/.npm/d3830046-cmeter-npm-ws-0-4-27-package-tgz.lock
+116 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+117 silly lockFile 3e3d6d68-02153-0-5962493771221489-package tar:///var/folders/ly/p6k9cswd4zx7b2pmgwj7kvwm0000gn/T/npm-3365-JPBHl6z5/1376309402153-0.5962493771221489/package
+118 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+119 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+120 silly lockFile 20cf7867-ers-cmeter-npm-ws-0-4-27-package /Users/cmeter/.npm/ws/0.4.27/package
+121 verbose lock /Users/cmeter/.npm/ws/0.4.27/package /Users/cmeter/.npm/20cf7867-ers-cmeter-npm-ws-0-4-27-package.lock
+122 silly lockFile 20cf7867-ers-cmeter-npm-ws-0-4-27-package /Users/cmeter/.npm/ws/0.4.27/package
+123 silly lockFile 20cf7867-ers-cmeter-npm-ws-0-4-27-package /Users/cmeter/.npm/ws/0.4.27/package
+124 verbose tar unpack /Users/cmeter/.npm/ws/0.4.27/package.tgz
+125 silly lockFile ec4c789e-ers-cmeter-npm-ws-0-4-27-package tar:///Users/cmeter/.npm/ws/0.4.27/package
+126 verbose lock tar:///Users/cmeter/.npm/ws/0.4.27/package /Users/cmeter/.npm/ec4c789e-ers-cmeter-npm-ws-0-4-27-package.lock
+127 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+128 verbose lock tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz /Users/cmeter/.npm/d3830046-cmeter-npm-ws-0-4-27-package-tgz.lock
+129 silly gunzTarPerm modes [ '755', '644' ]
+130 silly gunzTarPerm extractEntry package.json
+131 silly gunzTarPerm extractEntry .npmignore
+132 silly gunzTarPerm extractEntry README.md
+133 silly gunzTarPerm extractEntry index.js
+134 silly gunzTarPerm extractEntry test/BufferPool.test.js
+135 silly gunzTarPerm extractEntry test/Sender.hixie.test.js
+136 silly gunzTarPerm extractEntry test/Sender.test.js
+137 silly gunzTarPerm extractEntry test/Validation.test.js
+138 silly gunzTarPerm extractEntry test/Receiver.test.js
+139 silly gunzTarPerm extractEntry test/Receiver.hixie.test.js
+140 silly gunzTarPerm extractEntry test/WebSocketServer.test.js
+141 silly gunzTarPerm extractEntry test/autobahn-server.js
+142 silly gunzTarPerm extractEntry test/autobahn.js
+143 silly gunzTarPerm extractEntry test/hybi-common.js
+144 silly gunzTarPerm extractEntry test/WebSocket.integration.js
+145 silly gunzTarPerm extractEntry test/testserver.js
+146 silly gunzTarPerm extractEntry test/WebSocket.test.js
+147 silly gunzTarPerm extractEntry test/fixtures/agent1-cert.pem
+148 silly gunzTarPerm extractEntry test/fixtures/agent1-key.pem
+149 silly gunzTarPerm extractEntry test/fixtures/ca1-cert.pem
+150 silly gunzTarPerm extractEntry test/fixtures/ca1-key.pem
+151 silly gunzTarPerm extractEntry test/fixtures/certificate.pem
+152 silly gunzTarPerm extractEntry test/fixtures/key.pem
+153 silly gunzTarPerm extractEntry test/fixtures/request.pem
+154 silly gunzTarPerm extractEntry test/fixtures/textfile
+155 silly gunzTarPerm extractEntry bench/parser.benchmark.js
+156 silly gunzTarPerm extractEntry bench/sender.benchmark.js
+157 silly gunzTarPerm extractEntry bench/speed.js
+158 silly gunzTarPerm extractEntry bench/util.js
+159 silly gunzTarPerm extractEntry bin/wscat
+160 silly gunzTarPerm extractEntry .travis.yml
+161 silly gunzTarPerm extractEntry doc/ws.md
+162 silly gunzTarPerm extractEntry examples/ssl.js
+163 silly gunzTarPerm extractEntry examples/fileapi/package.json
+164 silly gunzTarPerm extractEntry examples/fileapi/.npmignore
+165 silly gunzTarPerm extractEntry examples/fileapi/server.js
+166 silly gunzTarPerm extractEntry examples/fileapi/public/app.js
+167 silly gunzTarPerm extractEntry examples/fileapi/public/uploader.js
+168 silly gunzTarPerm extractEntry examples/fileapi/public/index.html
+169 silly gunzTarPerm extractEntry examples/serverstats/package.json
+170 silly gunzTarPerm extractEntry examples/serverstats/server.js
+171 silly gunzTarPerm extractEntry examples/serverstats/public/index.html
+172 silly gunzTarPerm extractEntry examples/serverstats-express_3/package.json
+173 silly gunzTarPerm extractEntry examples/serverstats-express_3/server.js
+174 silly gunzTarPerm extractEntry examples/serverstats-express_3/public/index.html
+175 silly gunzTarPerm extractEntry History.md
+176 silly gunzTarPerm extractEntry lib/BufferPool.js
+177 silly gunzTarPerm extractEntry lib/ErrorCodes.js
+178 silly gunzTarPerm extractEntry lib/Receiver.hixie.js
+179 silly gunzTarPerm extractEntry lib/Receiver.js
+180 silly gunzTarPerm extractEntry lib/BufferUtil.js
+181 silly gunzTarPerm extractEntry lib/Sender.js
+182 silly gunzTarPerm extractEntry lib/Validation.fallback.js
+183 silly gunzTarPerm extractEntry lib/Validation.js
+184 silly gunzTarPerm extractEntry lib/WebSocket.js
+185 silly gunzTarPerm extractEntry lib/WebSocketServer.js
+186 silly gunzTarPerm extractEntry lib/BufferUtil.fallback.js
+187 silly gunzTarPerm extractEntry lib/browser.js
+188 silly gunzTarPerm extractEntry lib/Sender.hixie.js
+189 silly gunzTarPerm extractEntry Makefile
+190 silly gunzTarPerm extractEntry src/bufferutil.cc
+191 silly gunzTarPerm extractEntry src/validation.cc
+192 silly gunzTarPerm extractEntry binding.gyp
+193 silly lockFile ec4c789e-ers-cmeter-npm-ws-0-4-27-package tar:///Users/cmeter/.npm/ws/0.4.27/package
+194 silly lockFile ec4c789e-ers-cmeter-npm-ws-0-4-27-package tar:///Users/cmeter/.npm/ws/0.4.27/package
+195 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+196 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+197 verbose chmod /Users/cmeter/.npm/ws/0.4.27/package.tgz 644
+198 verbose chown /Users/cmeter/.npm/ws/0.4.27/package.tgz [ 501, 20 ]
+199 silly lockFile 17b7bd29-istry-npmjs-org-ws-ws-0-4-27-tgz https://registry.npmjs.org/ws/-/ws-0.4.27.tgz
+200 silly lockFile 17b7bd29-istry-npmjs-org-ws-ws-0-4-27-tgz https://registry.npmjs.org/ws/-/ws-0.4.27.tgz
+201 silly lockFile 894ea2e6-ws-0-4-27 ws@0.4.27
+202 silly lockFile 894ea2e6-ws-0-4-27 ws@0.4.27
+203 silly lockFile e88fe629-ws ws@
+204 silly lockFile e88fe629-ws ws@
+205 silly resolved [ { author:
+205 silly resolved      { name: 'Einar Otto Stangvik',
+205 silly resolved        email: 'einaros@gmail.com',
+205 silly resolved        url: 'http://2x.io' },
+205 silly resolved     name: 'ws',
+205 silly resolved     description: 'simple to use, blazing fast and thoroughly tested websocket client, server and console for node.js, up-to-date against RFC-6455',
+205 silly resolved     version: '0.4.27',
+205 silly resolved     repository: { type: 'git', url: 'git://github.com/einaros/ws.git' },
+205 silly resolved     bin: { wscat: './bin/wscat' },
+205 silly resolved     scripts:
+205 silly resolved      { test: 'make test',
+205 silly resolved        install: '(node-gyp rebuild 2> builderror.log) || (exit 0)' },
+205 silly resolved     engines: { node: '>=0.4.0' },
+205 silly resolved     dependencies: { commander: '~0.6.1', tinycolor: '0.x', options: '>=0.0.5' },
+205 silly resolved     devDependencies:
+205 silly resolved      { mocha: '~1.2.1',
+205 silly resolved        should: '0.6.x',
+205 silly resolved        'expect.js': '0.1.x',
+205 silly resolved        benchmark: '0.3.x',
+205 silly resolved        ansi: 'latest' },
+205 silly resolved     browser: './lib/browser.js',
+205 silly resolved     readme: '[![Build Status](https://secure.travis-ci.org/einaros/ws.png)](http://travis-ci.org/einaros/ws)\n\n# ws: a node.js websocket library #\n\n`ws` is a simple to use websocket implementation, up-to-date against RFC-6455, and [probably the fastest WebSocket library for node.js](http://hobbycoding.posterous.com/the-fastest-websocket-module-for-nodejs).\n\nPasses the quite extensive Autobahn test suite. See http://einaros.github.com/ws for the full reports.\n\nComes with a command line utility, `wscat`, which can either act as a server (--listen), or client (--connect); Use it to debug simple websocket services.\n\n## Protocol support ##\n\n* **Hixie draft 76** (Old and deprecated, but still in use by Safari and Opera. Added to ws version 0.4.2, but server only. Can be disabled by setting the `disableHixie` option to true.)\n* **HyBi drafts 07-12** (Use the option `protocolVersion: 8`, or argument `-p 8` for wscat)\n* **HyBi drafts 13-17** (Current default, alternatively option `protocolVersion: 13`, or argument `-p 13` for wscat)\n\n_See the echo.websocket.org example below for how to use the `protocolVersion` option._\n\n## Usage ##\n\n### Installing ###\n\n`npm install ws`\n\n### Sending and receiving text data ###\n\n```js\nvar WebSocket = require(\'ws\');\nvar ws = new WebSocket(\'ws://www.host.com/path\');\nws.on(\'open\', function() {\n    ws.send(\'something\');\n});\nws.on(\'message\', function(data, flags) {\n    // flags.binary will be set if a binary data is received\n    // flags.masked will be set if the data was masked\n});\n```\n\n### Sending binary data ###\n\n```js\nvar WebSocket = require(\'ws\');\nvar ws = new WebSocket(\'ws://www.host.com/path\');\nws.on(\'open\', function() {\n    var array = new Float32Array(5);\n    for (var i = 0; i < array.length; ++i) array[i] = i / 2;\n    ws.send(array, {binary: true, mask: true});\n});\n```\n\nSetting `mask`, as done for the send options above, will cause the data to be masked according to the websocket protocol. The same option applies for text data.\n\n### Server example ###\n\n```js\nvar WebSocketServer = require(\'ws\').Server\n  , wss = new WebSocketServer({port: 8080});\nwss.on(\'connection\', function(ws) {\n    ws.on(\'message\', function(message) {\n        console.log(\'received: %s\', message);\n    });\n    ws.send(\'something\');\n});\n```\n\n### Error handling best practices ###\n\n```js\n// If the WebSocket is closed before the following send is attempted\nws.send(\'something\');\n\n// Errors (both immediate and async write errors) can be detected in an optional callback.\n// The callback is also the only way of being notified that data has actually been sent.\nws.send(\'something\', function(error) {\n    // if error is null, the send has been completed,\n    // otherwise the error object will indicate what failed.\n});\n\n// Immediate errors can also be handled with try/catch-blocks, but **note**\n// that since sends are inherently asynchronous, socket write failures will *not*\n// be captured when this technique is used.\ntry {\n    ws.send(\'something\');\n}\ncatch (e) {\n    // handle error\n}\n```\n\n### echo.websocket.org demo ###\n\n```js\nvar WebSocket = require(\'ws\');\nvar ws = new WebSocket(\'ws://echo.websocket.org/\', {protocolVersion: 8, origin: \'http://websocket.org\'});\nws.on(\'open\', function() {\n    console.log(\'connected\');\n    ws.send(Date.now().toString(), {mask: true});\n});\nws.on(\'close\', function() {\n    console.log(\'disconnected\');\n});\nws.on(\'message\', function(data, flags) {\n    console.log(\'Roundtrip time: \' + (Date.now() - parseInt(data)) + \'ms\', flags);\n    setTimeout(function() {\n        ws.send(Date.now().toString(), {mask: true});\n    }, 500);\n});\n```\n\n### wscat against echo.websocket.org ###\n\n    $ npm install -g ws\n    $ wscat -c ws://echo.websocket.org -p 8\n    connected (press CTRL+C to quit)\n    > hi there\n    < hi there\n    > are you a happy parrot?\n    < are you a happy parrot?\n\n### Other examples ###\n\nFor a full example with a browser client communicating with a ws server, see the examples folder.\n\nNote that the usage together with Express 3.0 is quite different from Express 2.x. The difference is expressed in the two different serverstats-examples.\n\nOtherwise, see the test cases.\n\n### Running the tests ###\n\n`make test`\n\n## API Docs ##\n\nSee the doc/ directory for Node.js-like docs for the ws classes.\n\n## License ##\n\n(The MIT License)\n\nCopyright (c) 2011 Einar Otto Stangvik &lt;einaros@gmail.com&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+205 silly resolved     readmeFilename: 'README.md',
+205 silly resolved     bugs: { url: 'https://github.com/einaros/ws/issues' },
+205 silly resolved     _id: 'ws@0.4.27',
+205 silly resolved     dist: { shasum: '077d3a48b6e0b5a96f68f3b38a94ea1ec72c2555' },
+205 silly resolved     _from: 'ws@',
+205 silly resolved     _resolved: 'https://registry.npmjs.org/ws/-/ws-0.4.27.tgz' } ]
+206 info install ws@0.4.27 into /usr/local/lib
+207 info installOne ws@0.4.27
+208 info /usr/local/lib/node_modules/ws unbuild
+209 verbose tar unpack /Users/cmeter/.npm/ws/0.4.27/package.tgz
+210 silly lockFile 381a2d43-ar-usr-local-lib-node-modules-ws tar:///usr/local/lib/node_modules/ws
+211 verbose lock tar:///usr/local/lib/node_modules/ws /Users/cmeter/.npm/381a2d43-ar-usr-local-lib-node-modules-ws.lock
+212 silly lockFile d3830046-cmeter-npm-ws-0-4-27-package-tgz tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz
+213 verbose lock tar:///Users/cmeter/.npm/ws/0.4.27/package.tgz /Users/cmeter/.npm/d3830046-cmeter-npm-ws-0-4-27-package-tgz.lock
+214 silly gunzTarPerm modes [ '755', '644' ]
+215 error Error: EACCES, mkdir '/usr/local/lib/node_modules/ws'
+215 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/ws']
+215 error   errno: 3,
+215 error   code: 'EACCES',
+215 error   path: '/usr/local/lib/node_modules/ws',
+215 error   fstream_type: 'Directory',
+215 error   fstream_path: '/usr/local/lib/node_modules/ws',
+215 error   fstream_class: 'DirWriter',
+215 error   fstream_stack:
+215 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+215 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53',
+215 error      'Object.oncomplete (fs.js:107:15)' ] }
+216 error Please try running this command again as root/Administrator.
+217 error System Darwin 12.4.0
+218 error command "node" "/usr/local/bin/npm" "install" "-g" "ws"
+219 error cwd /Applications/XAMPP/xamppfiles/htdocs/anwendung/cakePHP
+220 error node -v v0.10.15
+221 error npm -v 1.3.5
+222 error path /usr/local/lib/node_modules/ws
+223 error fstream_path /usr/local/lib/node_modules/ws
+224 error fstream_type Directory
+225 error fstream_class DirWriter
+226 error code EACCES
+227 error errno 3
+228 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/ws'
+229 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+229 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53
+229 error fstream_stack Object.oncomplete (fs.js:107:15)
+230 verbose exit [ 3, true ]

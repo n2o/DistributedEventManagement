@@ -1,27 +1,26 @@
 /**
  * Client application to connect to a remote WebSocket server.
  *
- * Prepares 
+ * Prepares own position
  */
 
-var wsUri, websocket;
+var wsUri, socket;
 var connected = false;
 
 // Settings
 var port = 9999;
-var host = "192.168.178.59";
-var delay = 10000;
+var host = "localhost";
+var delay = 10000; // refresh rate in ms
 
 if (name == null)
 	var name = Math.random().toString().substr(2,5);
 
-var wsUri = "ws://"+host+":"+port+"";
-
-// Start
+console.log("Starting...");
 doConnect();
-var timer = setInterval(function(){echoHandlePageLoad()}, delay);
+var timer = setInterval(function(){refresh()}, delay);
 
-function echoHandlePageLoad() {
+function refresh() {
+	console.log("Refreshing...");
 	// Reconnect on disconnect
 	if (!connected) {
 		doConnect();
@@ -31,15 +30,21 @@ function echoHandlePageLoad() {
 }
 
 function doConnect() {
-	websocket = new WebSocket(wsUri);
-	websocket.onopen = function(evt) { onOpen(evt) };
-	websocket.onclose = function(evt) { onClose(evt) };
-	websocket.onmessage = function(evt) { onMessage(evt) };
-	websocket.onerror = function(evt) { onError(evt) };
+	try {
+		socket = io.connect('http://'+host+':'+port+'/');
+		socket.on('connect', function (evt) {
+			onOpen(evt);
+			socket.on('disconnect', function (evt) { onClose(evt) });
+			socket.on('message', function (evt) { onMessage(evt) });
+			socket.on('error', function (evt) { onError(evt) });
+		});
+	} catch (e) {
+		console.log("Remote WebSocket server is currently not running.");
+	}
 }
 
 function doDisconnect() {
-	websocket.close();
+	socket.close();
 	connected = false;
 	$('.connectionState').text("Not connected");
 	$('.connectionState').removeClass('connected');
@@ -49,23 +54,32 @@ function doDisconnect() {
  * Get current location, prepare JSON String and send it to WS server
  */
 function doSend() {
-	navigator.geolocation.getCurrentPosition(function(position) {
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		var msg = {
-			person: {
-				name: name,
-				latitude: latitude,
-				longitude: longitude
-			}
+	console.log("Sending...");
+	navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+}
+
+function getPosition(position) {
+	console.log("...");
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude;
+	var msg = {
+		person: {
+			name: name,
+			latitude: latitude,
+			longitude: longitude
 		}
-		msg = JSON.stringify(msg);
-		console.log("Sent: " + msg);
-		websocket.send(msg);
-	});
+	}
+	msg = JSON.stringify(msg);
+	console.log("Sent: " + msg);
+	socket.send(msg);
+}
+
+function noPosition() {
+	console.log("Your position could not be located.");
 }
 
 function onOpen(evt) {
+	console.log("Connected.");
 	connected = true;
 	$('.connectionState').text("Connected");
 	$('.connectionState').addClass('connected');
@@ -78,7 +92,7 @@ function onClose(evt) {
 }
 
 function onMessage(evt) {
-	console.log('RESPONSE: '+evt.data);
+	console.log('RESPONSE: '+evt);
 }
 
 function onError(evt) {
@@ -88,4 +102,4 @@ function onError(evt) {
 	$('.connectionState').removeClass('connected');
 }
 
-window.addEventListener("load", echoHandlePageLoad, false);
+//window.addEventListener("load", echoHandlePageLoad, false);

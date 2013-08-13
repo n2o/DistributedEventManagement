@@ -1,3 +1,64 @@
+var map;
+var markersArray =	[];
+
+function addMarker(coords, title, icon, animation) {
+	marker = new google.maps.Marker({
+		position: coords,
+		map: map,
+		title: title,
+		icon: icon,
+		animation: animation
+	});
+	marker.info = new google.maps.InfoWindow({
+		content: title
+	});
+	markersArray.push(marker);
+}
+
+// Removes the overlays from the map, but keeps them in the array
+function clearOverlays() {
+	if (markersArray) {
+		for (i in markersArray) {
+			markersArray[i].setMap(null);
+		}
+	}
+}
+
+// Shows any overlays currently in the array
+function showOverlays() {
+	if (markersArray) {
+		for (i in markersArray) {
+			markersArray[i].setMap(map);
+		}
+	}
+}
+
+// Deletes all markers in the array by removing references to them
+function deleteOverlays() {
+	if (markersArray) {
+		for (i in markersArray) {
+			markersArray[i].setMap(null);
+		}
+		markersArray.length = 0;
+	}
+}
+
+// Delete old references and update all markers based upon the data from WebSocket server
+function updateMarkers(locations) {
+	delete locations.type;
+	deleteOverlays();
+	var coords;
+	var icon;
+	for (entry in locations) {
+		if (entry == name) {
+			icon = "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png";
+		}
+		coords = new google.maps.LatLng(locations[entry].latitude, locations[entry].longitude);
+		addMarker(coords, entry, icon, "");
+	}
+	showOverlays();
+}
+
 function calcDistance(myLat, myLong, otherLat, otherLong) {
 	radius = 6371; 	// radius of earth in km
 

@@ -15,14 +15,29 @@ var port = 9999;
 var idleTime = 15; // Spec. after how many minutes a user is removed from the list
 
 // Necessary, do not edit
-var persons = {};	// store all information about persons
+var locations = {type: 'location'};	// store all geo information about persons
+var clients = {};
 
 var io = require('socket.io').listen(port);
+io.set('log level', 2);
 
 io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
-		saveToPersons(message);
-		socket.send(JSON.stringify(persons));
+		var data = JSON.parse(message);
+		switch(data.type) {
+		case 'location':
+			saveToLocations(data);
+			socket.broadcast.send(JSON.stringify(locations));
+			break;
+		case 'syn':
+			clients[data.name] = socket;
+			console.log("Saved "+data.name+", Socket: "+socket);
+			break;
+		}
+
+		// console.log("Sending message to Admin...");
+		// var sendTo = clients['Admin'];
+		// sendTo.send("Bombe!");
 	});
 	socket.on('disconnect', function () { });
 });
@@ -33,15 +48,14 @@ io.sockets.on('connection', function (socket) {
  * Area to prepare the data just received, merge it with the other geolocations
  * and return an updated json file with all information
  **********************************************************************************/
-
 /**
  * Adds current person transmitted in data to array with all persons
  */
-function saveToPersons(data) {
-	var entry = JSON.parse(data);
-	addTimestamp(entry);
-	persons[entry.person.name] = entry;
-	delete persons[entry.person.name]['person']['name'];
+function saveToLocations(data) {
+	// var entry = JSON.parse(data);
+	addTimestamp(data);
+	locations[data.name] = data;
+	delete locations[data.name]['name'];
 }
 
 /**
@@ -52,10 +66,10 @@ function killIdle() {
 	var serverTime = currentDate.getHours() + ":" + currentDate.getMinutes();
 	var diff;
 
-	for (var key in persons) {
-		diff = timeDiff(persons[key].person.lastsync, serverTime);
+	for (var key in locations) {
+		diff = timeDiff(locations[key].person.lastsync, serverTime);
 		if (diff > idleTime) {
-			delete persons[key];
+			delete locations[key];
 		}
 	}
 }
@@ -66,7 +80,7 @@ function killIdle() {
 function addTimestamp(entry) {
 	var currentDate = new Date();
 	var timestamp = currentDate.getHours() + ":" + currentDate.getMinutes();
-	entry.person.lastsync = timestamp;
+	entry.lastsync = timestamp;
 	return entry;
 }
 

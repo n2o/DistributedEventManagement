@@ -28,20 +28,25 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<script type="text/javascript">
+		var name = '<?php echo $username; ?>';
+		var mobile = false;
+	</script>
 	<?php
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(
-					'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
-					'slidingDiv.js'
-				);
+			'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
+			'slidingDiv.js',
+			'connectWebSocket.js'
+		);
 		echo $this->Html->script($jsimport);
 
 		$cssimport = array(
-					'main',
-					'default',
-					'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
-				);
+				'main',
+				'default',
+				'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
+			);
 		echo $this->Html->css($cssimport);
 
 		echo $this->fetch('meta');

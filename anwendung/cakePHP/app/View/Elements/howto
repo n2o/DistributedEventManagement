@@ -1,0 +1,10 @@
+# Call elements with:
+echo $this->element(nameOfElement, array("var" => "set value"));
+
+# Access variable $var in nameOfElement.ctp with $var. It is already initialized with this call scheme above
+
+# Content of nameOfElement.ctp:
+# just write normal code inside it, for example:
+<?php
+echo "I AM AN ELEMENT!";
+# It is handled like include(); in php

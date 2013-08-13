@@ -1,5 +1,7 @@
 var map;
 var markersArray =	[];
+var autoupdate = true;
+var bounds;
 
 function addMarker(coords, title, icon, animation) {
 	marker = new google.maps.Marker({
@@ -45,17 +47,32 @@ function deleteOverlays() {
 
 // Delete old references and update all markers based upon the data from WebSocket server
 function updateMarkers(locations) {
-	delete locations.type;
-	deleteOverlays();
 	var coords;
 	var icon;
+	if (autoupdate)
+		var bounds = new google.maps.LatLngBounds();
+
+	delete locations.type;
+	deleteOverlays();
+	
 	for (entry in locations) {
-		if (entry == name) {
+		if (entry == name)
 			icon = "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png";
-		}
 		coords = new google.maps.LatLng(locations[entry].latitude, locations[entry].longitude);
+		if (autoupdate)
+			bounds.extend(coords);
+		
 		addMarker(coords, entry, icon, "");
+		icon = "";
 	}
+
+	// If the markers are first called, auto center and auto zoom to all markers
+	if (autoupdate) {
+		map.fitBounds(bounds);
+		map.panToBounds(bounds);
+		// autoupdate = false;
+	}
+
 	showOverlays();
 }
 

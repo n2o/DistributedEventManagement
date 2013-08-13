@@ -28,10 +28,10 @@ io.sockets.on('connection', function (socket) {
 		case 'location':
 			saveToLocations(data);
 			socket.broadcast.send(JSON.stringify(locations));
+			socket.send(JSON.stringify(locations));
 			break;
 		case 'syn':
 			clients[data.name] = socket;
-			console.log("Saved "+data.name+", Socket: "+socket);
 			break;
 		}
 

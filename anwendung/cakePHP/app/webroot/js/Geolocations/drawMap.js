@@ -20,11 +20,15 @@ $(function() {
 
 		addMarker(coords, "You are here!", "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png", "google.maps.Animation.DROP");
 
-		showOverlays();
+		var infoWindow = new google.maps.InfoWindow({
+			content: "That's me!"
+		});
 
 		google.maps.event.addListener(marker, 'click', function() {
-			marker.info.open(map, marker);
+			infoWindow.open(map, marker);
 		});
+
+		showOverlays();
 	}
 
 	if (navigator.geolocation) {

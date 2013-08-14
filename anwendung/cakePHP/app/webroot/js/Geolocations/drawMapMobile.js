@@ -20,25 +20,6 @@ $(function() {
 			mapType: google.maps.MapTypeId.ROADMAP
 		};
 
-		// Get other positions from JSON file
-		$.getJSON('json/positions.json', function(json) {
-			// goes through each entry in json file and creates a new marker
-			$.each(json,function(name,values) {
-
-				$('#overlay_map').find('ul').append('<li>'+name+': <span>'+calcDistance(latitude,longitude,values.Position.Latitude,values.Position.Longitude)+'</span></li>');
-
-				marker = new google.maps.Marker({
-					map: map,
-					position: new google.maps.LatLng(
-						values.Position.Latitude,
-						values.Position.Longitude
-					),
-					animation: google.maps.Animation.DROP
-				});
-			});
-		});
-		$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
-
 		// Mark own position on map
 		marker = new google.maps.Marker({
 			map: map,

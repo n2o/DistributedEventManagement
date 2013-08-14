@@ -1,8 +1,10 @@
 var map;
 var markersArray =	[];
+var infoWindow;
 var autoupdate = true;
 var bounds;
 
+// Adds custom marker on the google map
 function addMarker(coords, title, icon, animation) {
 	marker = new google.maps.Marker({
 		position: coords,
@@ -11,9 +13,16 @@ function addMarker(coords, title, icon, animation) {
 		icon: icon,
 		animation: animation
 	});
-	marker.info = new google.maps.InfoWindow({
-		content: title
-	});
+
+	infoWindow = new google.maps.InfoWindow();
+
+	google.maps.event.addListener(marker, 'click', (function(marker) {
+		return function() {
+			infoWindow.setContent(title);
+			infoWindow.open(map, marker);
+		}
+	})(marker));
+
 	markersArray.push(marker);
 }
 
@@ -101,4 +110,27 @@ function calcDistance(myLat, myLong, otherLat, otherLong) {
 		return Math.round(d*1000)+" m";
 	else
 		return Math.round(d*10)/10+" km";
-};
+}
+
+$(function() {
+	function updateDistances() {
+	// Get other positions from JSON file
+		$.getJSON('json/positions.json', function(json) {
+			// goes through each entry in json file and creates a new marker
+			$.each(json,function(name,values) {
+
+				$('#overlay_map').find('ul').append('<li>'+name+': <span>'+calcDistance(latitude,longitude,values.Position.Latitude,values.Position.Longitude)+'</span></li>');
+
+				marker = new google.maps.Marker({
+					map: map,
+					position: new google.maps.LatLng(
+						values.Position.Latitude,
+						values.Position.Longitude
+					),
+					animation: google.maps.Animation.DROP
+				});
+			});
+		});
+		$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
+	}
+});

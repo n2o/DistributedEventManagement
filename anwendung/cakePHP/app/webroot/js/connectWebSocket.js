@@ -64,12 +64,13 @@ function onDisconnect(evt) {
 
 function onMessage(evt) {
 	console.log('<-- ' + evt);
-	var n = noty({text: 'Incoming WebSocket.'});
+	noty({text: 'Incoming WebSocket.'});
 	// Update the marks on the map
 	var data = JSON.parse(evt)
 	switch(data.type) {
 		case 'location':
 			updateMarkers(data);
+
 			break;
 	}
 }

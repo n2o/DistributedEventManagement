@@ -1,22 +1,13 @@
 /**
  * Client application to connect to a remote WebSocket server
  */
-
-// Settings
-var host = '192.168.178.59';
-var port = 9999;
-var delay = 10000; // refresh rate in ms
+var socket;
 
 var wsUri, socket;
 var connected = false;
 var sentProcess = false;
 
-initializeWebSocket();
-
-function initializeWebSocket() {
-	includeSocketIO(); // load socket.io.js from websocket server
-	doConnect();
-}
+doConnect();
 
 function refresh() {
 	// Reconnect on disconnect
@@ -73,6 +64,7 @@ function onDisconnect(evt) {
 
 function onMessage(evt) {
 	console.log('<-- ' + evt);
+	var n = noty({text: 'Incoming WebSocket.'});
 	// Update the marks on the map
 	var data = JSON.parse(evt)
 	switch(data.type) {

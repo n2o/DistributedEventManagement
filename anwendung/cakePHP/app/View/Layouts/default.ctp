@@ -36,7 +36,11 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(
+			'config.js',
 			'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
+			'noty/jquery.noty.js',
+			'noty/layouts/bottom.js',
+			'noty/themes/default.js',
 			'slidingDiv.js',
 			'connectWebSocket.js'
 		);

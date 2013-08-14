@@ -21,6 +21,8 @@ var clients = {};
 var io = require('socket.io').listen(port);
 io.set('log level', 2);
 
+var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);
+
 io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		var data = JSON.parse(message);
@@ -42,8 +44,6 @@ io.sockets.on('connection', function (socket) {
 	socket.on('disconnect', function () { });
 });
 
-
-
 /**********************************************************************************
  * Area to prepare the data just received, merge it with the other geolocations
  * and return an updated json file with all information
@@ -52,7 +52,6 @@ io.sockets.on('connection', function (socket) {
  * Adds current person transmitted in data to array with all persons
  */
 function saveToLocations(data) {
-	// var entry = JSON.parse(data);
 	addTimestamp(data);
 	locations[data.name] = data;
 	delete locations[data.name]['name'];
@@ -67,9 +66,10 @@ function killIdle() {
 	var diff;
 
 	for (var key in locations) {
-		diff = timeDiff(locations[key].person.lastsync, serverTime);
-		if (diff > idleTime) {
-			delete locations[key];
+		if (key != "type") {
+			diff = timeDiff(locations[key].lastsync, serverTime);
+			if (diff > idleTime)
+				delete locations[key];
 		}
 	}
 }

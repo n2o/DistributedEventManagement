@@ -31,8 +31,12 @@
 			echo $this->Html->meta('icon');
 
 			$jsimport = array(
+				'config.js',
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
 				'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js',
+				'noty/jquery.noty.js',
+				'noty/layouts/bottom.js',
+				'noty/themes/default.js',
 				'connectWebSocket.js'
 			);
 			echo $this->Html->script($jsimport);

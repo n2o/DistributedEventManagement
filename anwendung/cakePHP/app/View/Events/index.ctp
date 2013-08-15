@@ -39,3 +39,8 @@
 		</table>
 	</p>
 </article>
+
+
+<?php
+	$this->Js->set("foo", "42");
+ ?>

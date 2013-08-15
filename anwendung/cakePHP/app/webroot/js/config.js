@@ -8,10 +8,16 @@ var host = '192.168.178.59';
 var port = 9999;
 var delay = 10000; // refresh rate in ms
 
+var name = jsVars.username;
+
 // Publish / Subscribe
+// Adding all events to the user who created it to get status updates
 var subEventsArray = [];
-for (var sub in subscriptions)
-	subEventsArray.push(subscriptions[sub].event);
+
+var allSubs = jsVars.subscriptions;
+
+for (var sub in allSubs)
+	subEventsArray.push(allSubs[sub].event);
 
 // Other stuff
 includeSocketIO(); // load socket.io.js from websocket server

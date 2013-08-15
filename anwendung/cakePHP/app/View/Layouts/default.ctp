@@ -29,10 +29,10 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 	</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<?php
+		echo $this->Html->scriptBlock('var jsVars = '.$this->Js->object($jsVars).';');
+
 		echo "
 			<script type=\"text/javascript\"><!--
-				var name = \"".$username."\";
-				var subscriptions = $subscriptions;
 				var mobile = false;
 			</script>
 		";

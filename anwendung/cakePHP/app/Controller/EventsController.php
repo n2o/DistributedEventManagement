@@ -1,6 +1,6 @@
 <?php
 class EventsController extends AppController {
-	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
+	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User', 'Js' => array('Jquery'));
 	public $components = array('Session', 'Other');
 
 	# Show all the events 
@@ -94,6 +94,7 @@ class EventsController extends AppController {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('Your event has been updated.');
+				$this->setJsVar('publishEvents', $id);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');

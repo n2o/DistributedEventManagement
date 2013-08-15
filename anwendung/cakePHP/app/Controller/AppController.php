@@ -34,6 +34,8 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 
+	var $_jsVars = array(); # array to store system wide JavaScript variables
+
 	var $isMobile = false;  # preparing for mobile view 
 
 	# Specify here were to go to after login / logout
@@ -45,6 +47,11 @@ class AppController extends Controller {
 			#'authorize' => array('Controller')
 		)
 	);
+
+	# Store $value into the JS array
+	public function setJsVar($name, $value) {
+		$this->_jsVars[$name] = $value;
+	}
 
 	public function isAuthorized($user) {
 		# Admin can access every action
@@ -60,7 +67,7 @@ class AppController extends Controller {
 		parent::beforeFilter();
 
 		# Make current username accessible for JavaScript
-		$this->set('username', $this->Session->read('Auth.User.username'));
+		$this->setJsVar('username', $this->Session->read('Auth.User.username'));
 
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');
@@ -75,7 +82,7 @@ class AppController extends Controller {
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = array('event' => $value['events']['id']);
 
-			$this->set('subscriptions', json_encode($subscriptions));
+			$this->setJsVar('subscriptions', $subscriptions);
 		}
 
 		# if device is mobile, change layout to mobile
@@ -95,6 +102,10 @@ class AppController extends Controller {
 	# Specifies what happens before the page is shown
 	public function beforeRender() {
 		parent::beforeRender();
+
+		# Make JS variables accessible
+		$this->set('jsVars', $this->_jsVars);
+
 		# Prepare mobile view for all controllers
 		if ($this->request->isMobile()||isset($this->request->query['mobile'])) {
 			$this->viewClass = 'Theme';

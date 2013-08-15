@@ -14,6 +14,7 @@ function refresh() {
 	if (!connected) {
 		doConnect();
 	}
+	publishChanges();
 }
 
 function doConnect() {
@@ -50,7 +51,6 @@ function doSend() {
 }
 
 function onOpen(evt) {
-	console.log("Connected to WebSocket server.");
 	connected = true;
 	$('.connectionState').text("Connected");
 	$('.connectionState').addClass('connected');
@@ -81,12 +81,9 @@ function onError(evt) {
 	$('.connectionState').removeClass('connected');
 }
 
-function includeSocketIO() {
-	var head= document.getElementsByTagName('head')[0];
-	var script= document.createElement('script');
-	script.type= 'text/javascript';
-	script.src= 'http://'+host+':'+port+'/socket.io/socket.io.js';
-	head.appendChild(script);
+function publishChanges() {
+	
+
 }
 
 /**

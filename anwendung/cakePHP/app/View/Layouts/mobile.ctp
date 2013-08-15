@@ -24,10 +24,10 @@
 		<link rel="apple-touch-icon" href="img/icon.png">
 
 		<?php
+
+			echo $this->Html->scriptBlock('var jsVars = '.$this->Js->object($jsVars).';');
 			echo "
 				<script type=\"text/javascript\"><!--
-					var name = \"".$username."\";
-					var subscriptions = $subscriptions;
 					var mobile = true;
 				</script>
 			";

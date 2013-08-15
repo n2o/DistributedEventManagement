@@ -10,7 +10,10 @@ var updatePosition = setInterval(function(){
 }, delay);
 
 function refresh() {
-	navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+	console.log();
+	if (typeof(connected) !== "undefined"&&connected) {
+		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+	}
 }
 
 function getPosition(position) {

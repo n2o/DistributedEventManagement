@@ -1,11 +1,11 @@
-var map;
+var map, infoWindow, latitude, longitude, bounds;
 var markersArray =	[];
-var infoWindow;
-var autoupdate = true;
-var bounds;
+var autoZoomCenter = true;
 
 // Adds custom marker on the google map
 function addMarker(coords, title, icon, animation) {
+	if (title == name)
+		title = "You are here!";
 	marker = new google.maps.Marker({
 		position: coords,
 		map: map,
@@ -58,7 +58,7 @@ function deleteOverlays() {
 function updateMarkers(locations) {
 	var coords;
 	var icon;
-	if (autoupdate)
+	if (autoZoomCenter)
 		var bounds = new google.maps.LatLngBounds();
 
 	delete locations.type;
@@ -68,7 +68,7 @@ function updateMarkers(locations) {
 		if (entry == name)
 			icon = "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png";
 		coords = new google.maps.LatLng(locations[entry].latitude, locations[entry].longitude);
-		if (autoupdate)
+		if (autoZoomCenter)
 			bounds.extend(coords);
 		
 		addMarker(coords, entry, icon, "");
@@ -76,10 +76,10 @@ function updateMarkers(locations) {
 	}
 
 	// If the markers are first called, auto center and auto zoom to all markers
-	if (autoupdate) {
+	if (autoZoomCenter) {
 		map.fitBounds(bounds);
 		map.panToBounds(bounds);
-		// autoupdate = false;
+		// autoZoomCenter = false;
 	}
 
 	showOverlays();
@@ -112,25 +112,25 @@ function calcDistance(myLat, myLong, otherLat, otherLong) {
 		return Math.round(d*10)/10+" km";
 }
 
-$(function() {
-	function updateDistances() {
-	// Get other positions from JSON file
-		$.getJSON('json/positions.json', function(json) {
-			// goes through each entry in json file and creates a new marker
-			$.each(json,function(name,values) {
-
-				$('#overlay_map').find('ul').append('<li>'+name+': <span>'+calcDistance(latitude,longitude,values.Position.Latitude,values.Position.Longitude)+'</span></li>');
-
-				marker = new google.maps.Marker({
-					map: map,
-					position: new google.maps.LatLng(
-						values.Position.Latitude,
-						values.Position.Longitude
-					),
-					animation: google.maps.Animation.DROP
-				});
-			});
-		});
-		$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
+// Switch between auto zooming to interesting points or
+function toggleAutoZoomCenter() {
+	if (autoZoomCenter) {
+		$('#autoZoomCenter').text("Enable autozoom");
+		autoZoomCenter = true;
+	} else {
+		$('#autoZoomCenter').text("Disable autozoom");
+		autoZoomCenter = false;
 	}
-});
+}
+
+function updateDistances() {
+// Get other positions from JSON file
+	$.getJSON('json/positions.json', function(json) {
+		// goes through each entry in json file and creates a new marker
+		$.each(json,function(name,values) {
+
+			$('#overlay_map').find('ul').append('<li>'+name+': <span>'+calcDistance(latitude,longitude,values.Position.Latitude,values.Position.Longitude)+'</span></li>');
+		});
+	});
+	$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
+}

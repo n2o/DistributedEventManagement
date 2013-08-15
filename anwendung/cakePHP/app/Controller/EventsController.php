@@ -1,7 +1,7 @@
 <?php
 class EventsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
-	public $components = array('Session');
+	public $components = array('Session', 'Other');
 
 	# Show all the events 
 	public function index() {
@@ -14,9 +14,9 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event.'));
 
 		$event = $this->Event->findById($id);
-		if (!$event) {
+		if (!$event)
 			throw new NotFoundException(__('Invalid event.'));
-		}
+
 		# Make current event available for the View
 		$this->set('event', $event);
 
@@ -84,7 +84,6 @@ class EventsController extends AppController {
 		$this->set("fields", $fields);
 
 		# Show list of users which are assigned to the event
-		$this->loadModel('User');
 		$this->set('users', $this->Event->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
 
 		# Save all columns for user in an array

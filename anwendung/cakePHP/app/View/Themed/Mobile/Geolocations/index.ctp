@@ -11,11 +11,6 @@
 			<ul></ul>
 		</p>
 		<br/>
-		<strong>Own Position:</strong>
-		<p>
-			<span id="ownPosition"></span>
-		</p>
-		<br/>
 		<strong>Status of WebSocket connection: </strong> <div class="connectionState"></div>
 		<br>
 		<br>

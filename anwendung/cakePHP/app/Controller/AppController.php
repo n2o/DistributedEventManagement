@@ -55,19 +55,31 @@ class AppController extends Controller {
 		return false;
 	}
 
-	# Specify which pages can be accessed without being logged in
+	# Specifies what happens before the page is loaded
 	public function beforeFilter() {
 		parent::beforeFilter();
+
+		# Make current username accessible for JavaScript
+		$this->set('username', $this->Session->read('Auth.User.username'));
+
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');
+		$id = $this->Session->read('Auth.User.id');
 
-		// if($this->request->isMobile()||isset($this->params['url']['mobile'])) {
-		//     $this->layout = 'mobile';
-		//     $this->isMobile = True;
-		// }
+		$i = 0;
 
+		# Create an array $subscriptions where all events  created by the user are stored
+		if (isset($id)) {
+			$this->loadModel('User');
+			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
+			foreach ($query as $key => $value)
+				$subscriptions[$i++] = array('event' => $value['events']['id']);
+
+			$this->set('subscriptions', json_encode($subscriptions));
+		}
+
+		# if device is mobile, change layout to mobile
 		if ($this->request->isMobile()) {
-			# if device is mobile, change layout to mobile
 			$this->layout = 'mobile';
 			# and if a mobile view file has been created for the action, serve it instead of the default view file
 			$mobileViewFile = strtolower($this->params['controller']) . '/mobile/' . $this->params['action'] . '.ctp';
@@ -77,13 +89,13 @@ class AppController extends Controller {
 			}
 		}
 
-
 		$this->set('is_mobile', $this->isMobile);
 	}
 
-	# Prepare mobile view for all controllers
+	# Specifies what happens before the page is shown
 	public function beforeRender() {
 		parent::beforeRender();
+		# Prepare mobile view for all controllers
 		if ($this->request->isMobile()||isset($this->request->query['mobile'])) {
 			$this->viewClass = 'Theme';
 			$this->theme = 'Mobile';    # Switch current theme to Mobile
@@ -92,7 +104,7 @@ class AppController extends Controller {
 	}
 
 	public function afterFilter() {
-	// if in mobile mode, check for a valid view and use it
+	# if in mobile mode, check for a valid view and use it
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
 			$layout_file = file_exists( 'Layouts' . 'mobile/' . $this->layout . '.ctp' );

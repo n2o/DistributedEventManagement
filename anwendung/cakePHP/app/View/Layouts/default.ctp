@@ -28,11 +28,15 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-	<script type="text/javascript">
-		var name = '<?php echo $username; ?>';
-		var mobile = false;
-	</script>
 	<?php
+		echo "
+			<script type=\"text/javascript\"><!--
+				var name = \"".$username."\";
+				var subscriptions = $subscriptions;
+				var mobile = false;
+			</script>
+		";
+
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(

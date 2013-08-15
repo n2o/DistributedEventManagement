@@ -5,6 +5,5 @@ class GeolocationsController extends AppController {
 
 	# Show all the events 
 	public function index() {
-		$this->set('username', $this->Session->read('Auth.User.username'));
 	}
 }

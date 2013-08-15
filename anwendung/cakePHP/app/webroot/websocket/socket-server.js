@@ -34,6 +34,7 @@ io.sockets.on('connection', function (socket) {
 			break;
 		case 'syn':
 			clients[data.name] = socket;
+			clients[data.name].subscriptions = data.subscribe;
 			break;
 		}
 

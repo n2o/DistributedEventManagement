@@ -23,11 +23,15 @@
 		<link rel="apple-touch-startup-image" href="img/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 1096px) and (-webkit-device-pixel-ratio: 2)">
 		<link rel="apple-touch-icon" href="img/icon.png">
 
-		<script type="text/javascript">
-			var name = '<?php echo $username; ?>';
-			var mobile = true;
-		</script>
 		<?php
+			echo "
+				<script type=\"text/javascript\"><!--
+					var name = \"".$username."\";
+					var subscriptions = $subscriptions;
+					var mobile = true;
+				</script>
+			";
+
 			echo $this->Html->meta('icon');
 
 			$jsimport = array(

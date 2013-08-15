@@ -7,6 +7,8 @@ $(function() {
 		initializeFrame();
 
 		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		latitude = position.coords.latitude;
+		longitude = position.coords.longitude;
 
 		var options = {
 			zoom: 15,
@@ -21,7 +23,7 @@ $(function() {
 		addMarker(coords, "You are here!", "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png", "google.maps.Animation.DROP");
 
 		var infoWindow = new google.maps.InfoWindow({
-			content: "That's me!"
+			content: "You are here!"
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {

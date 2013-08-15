@@ -64,13 +64,12 @@ function onDisconnect(evt) {
 
 function onMessage(evt) {
 	console.log('<-- ' + evt);
-	noty({text: 'Incoming WebSocket.'});
 	// Update the marks on the map
-	var data = JSON.parse(evt)
+	var data = JSON.parse(evt);
 	switch(data.type) {
 		case 'location':
+			noty({text: 'Incoming: New coordinates for geolocations.'});
 			updateMarkers(data);
-
 			break;
 	}
 }
@@ -96,7 +95,10 @@ function includeSocketIO() {
 function synSocketID() {
 	var msg = {
 		name: name,
-		type: 'syn'
+		type: 'syn',
+		subscribe: {
+			events: subEventsArray,
+		}
 	}
 	msg = JSON.stringify(msg);
 	console.log("--> " + msg);

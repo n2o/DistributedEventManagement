@@ -20,10 +20,6 @@
 	<section id="map"></section>
 </div>
 
-<script type="text/javascript">
-	var name = '<?php echo $username; ?>';
-	var mobile = true;
-</script>
 <?php 
 	$scripts = array(
 		"Geolocations/geoFunctions.js",

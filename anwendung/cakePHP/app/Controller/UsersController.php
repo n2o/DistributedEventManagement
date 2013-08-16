@@ -10,6 +10,10 @@ class UsersController extends AppController {
 
 	# Function to handle the login
 	public function login() {
+		# Automatic redirect if the user is already logged in
+		if ($this->Session->read('Auth.User.id') != "") {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) { # If login was successful
 				if ($this->Session->read('Auth.User.has_login')) { # Check if has_login is set

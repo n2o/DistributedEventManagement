@@ -12,8 +12,9 @@ function refresh() {
 	// Reconnect on disconnect
 	if (!connected) {
 		doConnect();
+	} else {
+		publishChanges();
 	}
-	publishChanges();
 }
 
 function doConnect() {
@@ -65,6 +66,11 @@ function onMessage(evt) {
 			noty({text: 'Incoming: New coordinates for geolocations.'});
 			updateMarkers(data);
 			break;
+		case 'update':
+			if (data.section == "events") {
+				noty({text: 'Your event with id '+data.id+" has been updated!"});
+			}
+			break;
 	}
 }
 
@@ -75,6 +81,7 @@ function onError(evt) {
 	$('.connectionState').removeClass('connected');
 }
 
+// Look up all events, which has not been sent, and send it to the ws server
 function publishChanges() {
 	if (publishEventsArray.length > 0) {
 		var msg = {
@@ -102,6 +109,7 @@ function synSocketID() {
 	msg = JSON.stringify(msg);
 	console.log("--> " + msg);
 	socket.send(msg);
+	publishChanges();
 }
 
 window.addEventListener("load", refresh, false);

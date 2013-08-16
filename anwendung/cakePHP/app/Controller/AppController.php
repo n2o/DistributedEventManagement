@@ -92,7 +92,7 @@ class AppController extends Controller {
 			foreach ($query as $key => $value) {
 				$publish_id = $value['publish']['id'];
 				$publish[$i++] = array($value['publish']['type'] => $value['publish']['type_id']);
-				$this->User->query("DELETE FROM publish WHERE id = '$publish_id'");
+				#$this->User->query("DELETE FROM publish WHERE id = '$publish_id'");
 			}
 			if (isset($publish))
 				$this->setJsVar('publish', $publish);

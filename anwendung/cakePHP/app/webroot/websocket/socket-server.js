@@ -35,6 +35,10 @@ io.sockets.on('connection', function (socket) {
 		case 'syn':
 			clients[data.name] = socket;
 			clients[data.name].subscriptions = data.subscribe;
+			clients[data.name].name = data.name;
+			break;
+		case 'publishEvent':
+			lookForSubscriber(data, 'event', socket);
 			break;
 		}
 
@@ -56,6 +60,29 @@ function saveToLocations(data) {
 	addTimestamp(data);
 	locations[data.name] = data;
 	delete locations[data.name]['name'];
+}
+
+/**
+ * Look in clients[] which client has subscribed the data and send a notification to those
+ */
+function lookForSubscriber(data, type, socket) {
+	var id = data.id;
+	for (var client in clients) { // look up all clients
+		for (var sub in clients[client].subscriptions) { // and check if they have subscribed to it
+			for (var i = 0; i < clients[client].subscriptions[sub].length; i++) { // go through all subscriptions
+				if (id == clients[client].subscriptions[sub][i]) { // check if the client has subscribed to the changes
+					var msg = {
+						type: "update",
+						section: "events",
+						id: id
+					}
+					msg = JSON.stringify(msg);
+					socket = clients[client];
+					socket.send(msg);
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -99,4 +126,11 @@ function timeDiff(start, end) {
 	diff -= hours * 1000 * 60 * 60;
 	var minutes = Math.floor(diff / 1000 / 60);
 	return minutes;
+}
+
+/**
+ * Check if an array contains a specific value
+ */
+function isInArray(value, array) {
+	return array.indexOf(value) > -1 ? true : false;
 }

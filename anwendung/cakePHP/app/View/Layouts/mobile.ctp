@@ -25,19 +25,17 @@
 
 		<?php
 
-			echo $this->Html->scriptBlock('var jsVars = '.$this->Js->object($jsVars).';');
-			echo "
-				<script type=\"text/javascript\"><!--
-					var mobile = true;
-				</script>
-			";
+			echo $this->Html->scriptBlock('
+				var jsVars = '.$this->Js->object($jsVars).';
+				var mobile = true;
+			');
 
 			echo $this->Html->meta('icon');
 
 			$jsimport = array(
-				'config.js',
-				'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
+				'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js',
 				'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js',
+				'config.js',
 				'noty/jquery.noty.js',
 				'noty/layouts/bottom.js',
 				'noty/themes/default.js',

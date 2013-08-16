@@ -416,7 +416,7 @@ if (typeof Object.create !== 'function') {
             easing:'swing',
             speed:500
         },
-        timeout:1500,
+        timeout:3000,
         force:false,
         modal:false,
         maxVisible:2,

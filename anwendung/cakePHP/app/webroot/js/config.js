@@ -10,14 +10,19 @@ var delay = 10000; // refresh rate in ms
 
 var name = jsVars.username;
 
-// Publish / Subscribe
-// Adding all events to the user who created it to get status updates
+/* Publish / Subscribe */
+// Subscribe: Adding all events to the user who created it to get status updates
 var subEventsArray = [];
-
 var allSubs = jsVars.subscriptions;
-
 for (var sub in allSubs)
 	subEventsArray.push(allSubs[sub].event);
+
+// Publish
+var publishEventsArray = [];
+var allPubs = jsVars.publish;
+for (var publish in allPubs) {
+	publishEventsArray.push(allPubs[publish].event);
+}
 
 // Other stuff
 includeSocketIO(); // load socket.io.js from websocket server

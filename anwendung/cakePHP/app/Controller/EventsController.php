@@ -1,6 +1,6 @@
 <?php
 class EventsController extends AppController {
-	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User', 'Js' => array('Jquery'));
+	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Session', 'Other');
 
 	# Show all the events 
@@ -56,7 +56,7 @@ class EventsController extends AppController {
 
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['Column']) {
-				# Get data from view, encode it to json and save it into the key-value-store
+				# Get data from view and save it into the key-value-store
                 $name = $this->request->data['Column']['name'];
                 $value = $this->request->data['Column']['value'];
 				$this->Event->query("INSERT INTO event_columns (`event_id`, `name`, `value`) VALUES ($id, '$name', '$value')");
@@ -94,7 +94,10 @@ class EventsController extends AppController {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('Your event has been updated.');
-				$this->setJsVar('publishEvents', $id);
+				
+				# WebSocket: Save which event has been updated to send the user a notification
+				$this->Event->query("INSERT INTO publish (`type`, `type_id`) VALUES ('event', $id)");
+
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -105,6 +108,7 @@ class EventsController extends AppController {
 			$this->request->data = $event;
 	}
 
+	# Edit event specific users and their properties
 	public function editUser($userId = null, $eventId = null) {
 		if (!$userId)
 			throw new NotFoundException(__('Invalid user id.'));
@@ -130,7 +134,6 @@ class EventsController extends AppController {
                     if ($postValue != "")
                     	$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
                 }
-
 				$this->Session->setFlash('Added specific user value to Event.');
 				$this->redirect(array('action' => 'edit/'.$eventId));
 			} else {

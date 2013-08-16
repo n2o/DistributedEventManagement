@@ -73,16 +73,29 @@ class AppController extends Controller {
 		$this->Auth->allow('login', 'logout');
 		$id = $this->Session->read('Auth.User.id');
 
+		$subscriptions = array();
 		$i = 0;
 
-		# Create an array $subscriptions where all events  created by the user are stored
+		# Prepare Publish/Subscribe for WebSocket server
 		if (isset($id)) {
+			# Set subscriptions
 			$this->loadModel('User');
 			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = array('event' => $value['events']['id']);
 
 			$this->setJsVar('subscriptions', $subscriptions);
+
+			# Set publish
+			$i = 0;
+			$query = $this->User->query('SELECT * FROM publish');
+			foreach ($query as $key => $value) {
+				$publish_id = $value['publish']['id'];
+				$publish[$i++] = array($value['publish']['type'] => $value['publish']['type_id']);
+				$this->User->query("DELETE FROM publish WHERE id = '$publish_id'");
+			}
+			if (isset($publish))
+				$this->setJsVar('publish', $publish);
 		}
 
 		# if device is mobile, change layout to mobile
@@ -115,7 +128,7 @@ class AppController extends Controller {
 	}
 
 	public function afterFilter() {
-	# if in mobile mode, check for a valid view and use it
+		# if in mobile mode, check for a valid view and use it
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
 			$layout_file = file_exists( 'Layouts' . 'mobile/' . $this->layout . '.ctp' );

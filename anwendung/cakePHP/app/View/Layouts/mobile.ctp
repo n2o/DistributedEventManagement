@@ -70,5 +70,6 @@
         <script type="text/javascript">
             window.scrollTo(0,1); // Older versions: Scroll 1 pixel down to let the status bar fade out
         </script>
+        <?php echo $this->Js->writeBuffer(); // Write cached scripts ?>
 	</body>
 </html>

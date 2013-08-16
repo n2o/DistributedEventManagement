@@ -5,7 +5,6 @@ var socket;
 
 var wsUri, socket;
 var connected = false;
-var sentProcess = false;
 
 doConnect();
 
@@ -28,7 +27,6 @@ function doConnect() {
 			socket.on('error', function (evt) { onError(evt) });
 		});
 	} catch (e) {
-		console.log("Remote WebSocket server is currently not running.");
 	}
 }
 
@@ -43,11 +41,7 @@ function doDisconnect() {
  * Get current location, prepare JSON String and send it to WS server
  */
 function doSend() {
-	if (!sentProcess) {
-		sentProcess = true;
-		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
-		sentProcess = false;
-	}
+	navigator.geolocation.getCurrentPosition(getPosition, noPosition);
 }
 
 function onOpen(evt) {
@@ -82,8 +76,16 @@ function onError(evt) {
 }
 
 function publishChanges() {
-	
-
+	if (publishEventsArray.length > 0) {
+		var msg = {
+			type: 'publishEvent',
+			id: publishEventsArray
+		}
+		msg = JSON.stringify(msg);
+		console.log("--> " + msg);
+		socket.send(msg);
+		publishEventsArray.length = 0;
+	}
 }
 
 /**

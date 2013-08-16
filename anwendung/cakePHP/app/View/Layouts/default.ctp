@@ -29,13 +29,10 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 	</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<?php
-		echo $this->Html->scriptBlock('var jsVars = '.$this->Js->object($jsVars).';');
-
-		echo "
-			<script type=\"text/javascript\"><!--
-				var mobile = false;
-			</script>
-		";
+		echo $this->Html->scriptBlock('
+			var jsVars = '.$this->Js->object($jsVars).';
+			var mobile = false;
+		');
 
 		echo $this->Html->meta('icon');
 
@@ -97,5 +94,6 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 			}); 
 		});
 	</script>
+	<?php echo $this->Js->writeBuffer(); // Write cached scripts ?>
 </body>
 </html>

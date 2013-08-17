@@ -5,7 +5,6 @@
 $(function() {
 	function drawMap(position) {
 		initializeFrame();
-
 		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
@@ -33,10 +32,23 @@ $(function() {
 		showOverlays();
 	}
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(drawMap);
-	} else {
-		error('Geo Location is not supported');
+	navigator.geolocation.getCurrentPosition(drawMap, noPosition);
+
+	function noPosition() {
+		initializeFrame();
+		var coords = new google.maps.LatLng(51.1793042, 7.193936);
+
+		var options = {
+			zoom: 15,
+			center: coords,
+			navigationControlOptions: {
+				style: google.maps.NavigationControlStyle.SMALL
+			},
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map($('#map')[0], options);
+
+		showOverlays();
 	}
 
 	function initializeFrame() {

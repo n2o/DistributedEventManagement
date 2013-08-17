@@ -31,5 +31,5 @@ function getPosition(position) {
 }
 
 function noPosition() {
-	console.log("Your position could not be located.");
+	//console.log("Your position could not be located.");
 }

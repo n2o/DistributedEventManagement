@@ -116,10 +116,10 @@ function calcDistance(myLat, myLong, otherLat, otherLong) {
 function toggleAutoZoomCenter() {
 	if (autoZoomCenter) {
 		$('#autoZoomCenter').text("Enable autozoom");
-		autoZoomCenter = true;
+		autoZoomCenter = false;
 	} else {
 		$('#autoZoomCenter').text("Disable autozoom");
-		autoZoomCenter = false;
+		autoZoomCenter = true;
 	}
 }
 

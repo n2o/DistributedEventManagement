@@ -1,3 +1,5 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 <article>
 	<h1>Statistics</h1>
 	<p>

@@ -1,6 +1,11 @@
-<article>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<div data-role="header">
+	<a href="#" data-rel="back" data-role="button" data-inline="true" data-icon="arrow-l">Back</a>
 	<h1>Statistics</h1>
-	<p>
+</div>
+<div data-role="content">
+	<article>
 		<table>
 			<tr>
 				<td>Total Users:</td>
@@ -11,14 +16,13 @@
 				<td><?php echo $stats['events']; ?></td>
 			</tr>
 		</table>
+	</article>
 
-		<a href="#" class="slide_div button" rel="#eventsUsersDiv">Show / Hide Chart</a><br />
-		<div id="eventsUsersDiv" class="slidingDiv">
-			<div id="eventsUsersChart"></div>
-		</div> 
-	</p>
-</article>
+	<article>
+		<div id="eventsUsersChart"></div>
+	</article>
+</div>
 
 <?php 
-	echo $this->element('createColumnChart', array('column' => 'eventsUsers', 'stats' => $eventsUsers, 'title' => 'Shows how many users are assigned to each event', 'type' => 'Users'));
+	#echo $this->element('createColumnChart', array('column' => 'eventsUsers', 'stats' => $eventsUsers, 'title' => 'Shows how many users are assigned to each event', 'type' => 'Users'));
 ?>

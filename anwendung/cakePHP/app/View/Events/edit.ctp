@@ -26,7 +26,6 @@
 				<td><?php echo $field['event_columns']['name']; ?></td>
 				<td><?php echo $field['event_columns']['value']; ?></td>
 				<td>
-					Edit
 					<?php echo $this->Form->postLink(	# postLink uses javascript to do a post request
 						'Delete',
 						array('action' => 'deleteColumn', $id, $field['event_columns']['name']),

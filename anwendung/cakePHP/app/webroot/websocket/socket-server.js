@@ -30,7 +30,7 @@ io.sockets.on('connection', function (socket) {
 		case 'location':
 			saveToLocations(data);
 			socket.broadcast.send(JSON.stringify(locations));
-			socket.send(JSON.stringify(locations));
+			//socket.send(JSON.stringify(locations)); Send current location back to sender
 			break;
 		case 'syn':
 			clients[data.name] = socket;

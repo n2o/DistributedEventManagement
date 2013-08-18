@@ -1,20 +1,27 @@
 /******************************************************
  * Styles for html5 sections
  *****************************************************/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 * {
 	margin: 0;
 }
 body {
-	margin: 0;
 	font-family: Helvetica;
 }
-
 article {
 	background: #fff;
 	margin-bottom: 1em;
-	/*overflow: hidden;*/
-	padding: 2px 2px 2px 2px;
-
+	padding: 2px;
 	box-shadow: 3px 2px 5px #aaa;
 	-webkit-box-shadow: 3px 2px 5px #aaa;
 	-moz-box-shadow: 3px 2px 5px #aaa;
@@ -23,7 +30,6 @@ article {
 /******************************************************
  * Headings
  *****************************************************/
-
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 800;
 }
@@ -63,7 +69,7 @@ h4 {
 #content{
 	clear: both;
 	color: #333;
-	padding: 0px 0px 0px 0px;
+	padding: 0;
 	overflow: auto;
 }
 #page {

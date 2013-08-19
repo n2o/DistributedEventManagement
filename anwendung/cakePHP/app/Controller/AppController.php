@@ -68,6 +68,7 @@ class AppController extends Controller {
 
 		# Make current username accessible for JavaScript
 		$this->setJsVar('username', $this->Session->read('Auth.User.username'));
+		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');

@@ -4,11 +4,11 @@
  */
 
 // Settings for WebSocket server
-var host = '192.168.178.59';
 var port = 9999;
 var delay = 10000; // refresh rate in ms
 
 var name = jsVars.username;
+var host = jsVars.hostname;
 
 /* Publish / Subscribe */
 // Subscribe: Adding all events to the user who created it to get status updates

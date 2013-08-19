@@ -12,7 +12,7 @@
 
 // Settings
 var port = 9999;
-var idleTime = 15; // Spec. after how many minutes a user is removed from the list
+var idleTime = 150; // Spec. after how many minutes a user is removed from the list
 
 // Necessary, do not edit
 var locations = {type: 'location'};	// store all geo information about persons
@@ -30,7 +30,7 @@ io.sockets.on('connection', function (socket) {
 		case 'location':
 			saveToLocations(data);
 			socket.broadcast.send(JSON.stringify(locations));
-			//socket.send(JSON.stringify(locations)); Send current location back to sender
+			socket.send(JSON.stringify(locations)); //Send current location back to sender
 			break;
 		case 'syn':
 			clients[data.name] = socket;
@@ -59,6 +59,7 @@ io.sockets.on('connection', function (socket) {
 function saveToLocations(data) {
 	addTimestamp(data);
 	locations[data.name] = data;
+	console.log("New location from: "+data.name);
 	delete locations[data.name]['name'];
 }
 

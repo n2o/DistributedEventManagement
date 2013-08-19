@@ -1,5 +1,6 @@
 <article>
 	<h1>Edit event</h1>
+	<?php echo $_SERVER['HTTP_HOST']; ?>
 	<p>
 		<?php 
 			echo $this->Form->create('Event');

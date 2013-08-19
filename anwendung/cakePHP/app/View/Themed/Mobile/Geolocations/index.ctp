@@ -24,7 +24,6 @@
 	$scripts = array(
 		"Geolocations/geoFunctions.js",
 		"http://maps.googleapis.com/maps/api/js?sensor=true",
-		"Geolocations/sendPosition.js",
 		"Geolocations/drawMap.js"
 	);
 	echo $this->Html->script($scripts);

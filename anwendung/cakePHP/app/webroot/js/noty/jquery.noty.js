@@ -419,7 +419,7 @@ if (typeof Object.create !== 'function') {
         timeout:3000,
         force:false,
         modal:false,
-        maxVisible:2,
+        maxVisible:1,
         closeWith:['click'],
         callback:{
             onShow:function () {

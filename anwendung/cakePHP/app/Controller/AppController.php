@@ -69,6 +69,7 @@ class AppController extends Controller {
 		# Make current username accessible for JavaScript
 		$this->setJsVar('username', $this->Session->read('Auth.User.username'));
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
+		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
 
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');
@@ -86,17 +87,6 @@ class AppController extends Controller {
 				$subscriptions[$i++] = array('event' => $value['events']['id']);
 
 			$this->setJsVar('subscriptions', $subscriptions);
-
-			# Set publish
-			$i = 0;
-			$query = $this->User->query('SELECT * FROM publish');
-			foreach ($query as $key => $value) {
-				$publish_id = $value['publish']['id'];
-				$publish[$i++] = array($value['publish']['type'] => $value['publish']['type_id']);
-				#$this->User->query("DELETE FROM publish WHERE id = '$publish_id'");
-			}
-			if (isset($publish))
-				$this->setJsVar('publish', $publish);
 		}
 
 		# if device is mobile, change layout to mobile

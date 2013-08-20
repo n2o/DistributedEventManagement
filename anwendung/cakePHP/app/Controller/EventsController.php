@@ -7,7 +7,6 @@ class EventsController extends AppController {
 	public function index() {
 		$this->set('events', $this->Event->find('all'));
 		$this->loadModel('Events');
-		$this->Event->query("DELETE FROM publish");
 	}
 
 	# View one specific element by id
@@ -59,8 +58,8 @@ class EventsController extends AppController {
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['Column']) {
 				# Get data from view and save it into the key-value-store
-                $name = $this->request->data['Column']['name'];
-                $value = $this->request->data['Column']['value'];
+				$name = $this->request->data['Column']['name'];
+				$value = $this->request->data['Column']['value'];
 				$this->Event->query("INSERT INTO event_columns (`event_id`, `name`, `value`) VALUES ($id, '$name', '$value')");
 				$this->Session->setFlash('Added a column to your event.');
 				$this->redirect(array('action' => 'edit/'.$id));
@@ -95,10 +94,10 @@ class EventsController extends AppController {
 		if ($this->request->is('post')||$this->request->is('put')) {
 			$this->Event->id = $id;
 			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash('Your event has been updated.');
+				$this->Session->setFlash('Update successful.');
 				
 				# WebSocket: Save which event has been updated to send the user a notification
-				$this->Event->query("INSERT INTO publish (`type`, `type_id`) VALUES ('event', $id)");
+				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
 
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -116,26 +115,26 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid user id.'));
 
 		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $eventId");
-        $this->set("fields", $fields);
+		$this->set("fields", $fields);
 
-        $alreadTypedIn = $this->Event->query("SELECT * FROM event_properties WHERE user_id = $userId AND event_id = $eventId");
+		$alreadTypedIn = $this->Event->query("SELECT * FROM event_properties WHERE user_id = $userId AND event_id = $eventId");
 
-        $posted = array();
-        foreach ($alreadTypedIn as $entry => $value)
-            $posted[$value['event_properties']['name']] = $value['event_properties']['value'];
+		$posted = array();
+		foreach ($alreadTypedIn as $entry => $value)
+			$posted[$value['event_properties']['name']] = $value['event_properties']['value'];
 
-        $this->set("alreadyTypedIn", $posted);
+		$this->set("alreadyTypedIn", $posted);
 
 		if ($this->request->is('post')||$this->request->is('put')) {
 			if ($this->request->data['inputColumn']) {
 				# Get data from view, encode it to json and save it into the key-value-store
 
-                for ($i = 0; $i < count($fields); $i++) {
-                    $postName = $fields[$i]['event_columns']['name'];
-                    $postValue = $this->request->data['inputColumn']['post'.$i];
-                    if ($postValue != "")
-                    	$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
-                }
+				for ($i = 0; $i < count($fields); $i++) {
+					$postName = $fields[$i]['event_columns']['name'];
+					$postValue = $this->request->data['inputColumn']['post'.$i];
+					if ($postValue != "")
+						$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
+				}
 				$this->Session->setFlash('Added specific user value to Event.');
 				$this->redirect(array('action' => 'edit/'.$eventId));
 			} else {
@@ -152,19 +151,19 @@ class EventsController extends AppController {
 		if ($this->Event->delete($id)) {
 			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
 			$this->Event->query("DELETE FROM event_columns WHERE event_id = $id");
-            $this->Event->query("DELETE FROM event_properties WHERE event_id = $id");
+			$this->Event->query("DELETE FROM event_properties WHERE event_id = $id");
 			$this->Session->setFlash('The event with id: $id has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}
 
-    public function deleteColumn($id, $name) {
-        if ($this->request->is('get'))
-            throw new MethodNotAllowedException();
+	public function deleteColumn($id, $name) {
+		if ($this->request->is('get'))
+			throw new MethodNotAllowedException();
 
-        $this->Event->query("DELETE FROM event_columns WHERE event_id = $id AND name = '$name'");
-        $this->Event->query("DELETE FROM event_properties WHERE event_id = $id AND name = '$name'");
-        $this->Session->setFlash("The column ".$name." has been deleted.");
-        $this->redirect(array('action' => 'edit', $id));
-    }
+		$this->Event->query("DELETE FROM event_columns WHERE event_id = $id AND name = '$name'");
+		$this->Event->query("DELETE FROM event_properties WHERE event_id = $id AND name = '$name'");
+		$this->Session->setFlash("The column ".$name." has been deleted.");
+		$this->redirect(array('action' => 'edit', $id));
+	}
 }

@@ -3,10 +3,8 @@
  * all JavaScript sensitive processes, like the WebSocket server and so on
  */
 
-// Settings for WebSocket server
-var port = 9999;
-var delay = 10000; // refresh rate in ms
-
+// Settings for WebSocket server from AppContronller.php
+var port = jsVars.port;
 var name = jsVars.username;
 var host = jsVars.hostname;
 

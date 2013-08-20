@@ -12,7 +12,7 @@
 
 // Settings
 var port = 9999;
-var idleTime = 150; // Spec. after how many minutes a user is removed from the list
+var idleTime = 15; // Spec. after how many minutes a user is removed from the list
 
 // Necessary, do not edit
 var locations = {type: 'location'};	// store all geo information about persons
@@ -41,10 +41,6 @@ io.sockets.on('connection', function (socket) {
 			lookForSubscriber(data, 'event', socket);
 			break;
 		}
-
-		// console.log("Sending message to Admin...");
-		// var sendTo = clients['Admin'];
-		// sendTo.send("Bombe!");
 	});
 	socket.on('disconnect', function () { });
 });
@@ -59,7 +55,6 @@ io.sockets.on('connection', function (socket) {
 function saveToLocations(data) {
 	addTimestamp(data);
 	locations[data.name] = data;
-	console.log("New location from: "+data.name);
 	delete locations[data.name]['name'];
 }
 

@@ -50,7 +50,7 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		$cssimport = array(
 				'main',
 				'default',
-				'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
+				#'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
 			);
 		echo $this->Html->css($cssimport);
 

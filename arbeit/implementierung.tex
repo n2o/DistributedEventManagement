@@ -1,0 +1,80 @@
+\chapter{Implementierung}
+TODO: Einleitung für das Kapitel schreiben
+
+\section{Problembeschreibung}
+Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
+\begin{quote}
+	Kann ich eine App entwickeln, in der man zu einer bestimmten Veranstaltung beliebig viele Teilnehmer hinzufügen, deren spezifischen Anmeldedaten hinterlegen und später schließlich verteilt mit beliebig vielen Helfern (mobil) daran arbeiten kann? 
+\end{quote}
+Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.\par
+
+\subsection{Identifizierung des Problems}
+Bei dem Gedanken eine App zu entwickeln steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS, \dots \ Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen, was eine schlechte Annahme ist, da dies nicht der Realität entspricht.\par
+
+Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Google Projekt \glqq HTML5 Rocks\grqq{}\cite{html5rocksmain} und vielen weiteren Personen ist \emph{HTML5} in aller Munde und somit gibt es tatsächlich die Möglichkeit jedes Betriebssystem mit einer einzigen Web-App abzudecken.\par
+
+Damit ist die zugrunde liegende Programmiersprache festgelegt. Mit der Wahl des Frameworks \emph{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank habe ich \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
+
+\subsection{Beschreibung der Umgebung}
+Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung zwischen den Bergen zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung eines eigenen Funkmasts zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
+
+\section{Struktur der Webanwendung}
+TODO: Einleitung für das Kapitel schreiben
+
+\subsection{Entwurfsmuster: Model View Controller}
+
+Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen Projekten, so stößt man direkt auf das Muster zur Strukturierung als Model View Controller (deutsch: Modell-Präsentation-Steuerung, kurz: \emph{MVC}). Dieses Muster kapselt die drei Elemente voneinander und ermöglicht dadurch, dass Änderungen einfach implementiert werden können.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=10cm]{fig/mvc}
+	\caption{Direkte Assoziationen zwischen Model, View und Controller}
+\end{figure}
+
+\underline{Model:}\\
+Verantwortlich für alles, was die Daten eines bestimmten Models angeht. In dieser Anwendung ist dieser Bereich für Interaktionen, Gültigkeit und Auswertung verantwortlich und repräsentiert hier zum Beispiel eine Veranstaltung, ein Benutzer, Statistiken oder Koordinaten der Benutzer.
+
+\underline{View:}\\
+Generiert das Aussehen einer bestimmten Seite. Hier wird vorwiegend mit gängigen Webformaten, wie HTML, PHP und JavaScript gearbeitet. Ein View kann auf die Daten zugreifen, die ihm der Controller liefert und diese dann anschaulich darstellen. Dadurch muss sich ein View nicht darum kümmern woher er seine Informationen zusammensuchen muss, sondern bekommt garantiert, dass diese vom Controller bereit gestellt wurden. Hierbei können verschiedene Views für verschiedene Geräte erstellt werden und erlauben so einfach eine mobile Seite zu generieren.
+
+\underline{Controller:}
+Hier findet die gesamte Logik und Aufbereitung der Daten statt, die später dem Benutzer im View angezeigt werden sollen. Sämtliche Datenbankabfragen, Berechnungen oder Ähnliches werden hier durchgeführt und dem Model / View bereitgestellt.
+\par
+
+Die Vorteile bei diesem Entwurfsmuster liegen auf der Hand: Es muss nur einmal ein Objekt im Model definiert werden, im Controller wird die komplette Logik verarbeitet und damit kann man mit entsprechenden Views für verschiedene Ansichten (z.B. eine mobile Anwendung der App) einfach auf die Daten des Controllers zugreifen. Der Code kann dadurch kompakter gehalten werden und muss nur im Controller angepasst werden, um auf allen Ansichten der Seite die Daten aktualisieren zu können.
+
+\section{Datenbanken}
+Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, da diese in der Regel zum Komplettpaket eines Webservers gehören.\par
+
+Als einfache Möglichkeit wurde hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat und für diesen Verwendungszweck ein relationales Datenbanksystem die richtige Wahl ist aufgrund von einem einheitlichen Schema mit dem in die Datenbank geschrieben / gelesen werden soll.\\
+Folgende Tabellen wurden daher angelegt:\par
+
+\underline{users:}\\
+Jeder Benutzer wird hier reingespeichert. Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, ein Passwort und einer zugewiesenen Rolle (z.B. Benutzer, Administrator, ...). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztes Änderungsdatum sowie einem Feld hinzugefügt, welches prüft, ob der Benutzer sich im System der Webanwendung einloggen kann, um Daten einsehen zu können.\\
+Das ist daher interessant, weil einer Veranstaltung hinterher viele Benutzer zugeordnet werden können, allerdings benötigen diese Personen keinen Zugang zur Verwaltung des Events.
+
+\underline{events:}\\
+Jede erzeugte Veranstaltung wird hier hinein gespeichert. Verpflichtende Felder sind ein Titel und eine Beschreibung. Dazu wird von der App eine eindeutige ID zugewiesen und die Benutzer-ID des Benutzers hinzugefügt, welcher diese Veranstaltung erstellt hat und zwei Zeitstempel der Erstellung und letzten Änderung.\par
+
+Dies sind die beiden grundlegenden Tabellen, die für diese Anwendung nötig sind. Jedoch besteht noch keine Verknüpfung untereinander, abgesehen von der Benutzer-ID in der events-Tabelle.
+
+\subsection{Verknüpfung von Benuter und Veranstaltung}
+Um 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

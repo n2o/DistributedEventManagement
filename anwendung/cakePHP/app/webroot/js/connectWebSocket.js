@@ -6,7 +6,6 @@ var socket;
 var wsUri, socket;
 var connected = false;
 
-$('.connectionState').text("Not connected");
 doConnect();
 
 function refresh() {
@@ -30,6 +29,7 @@ function doConnect() {
 		});
 	} catch (e) {
 		$('.connectionState').text("Not connected");
+		$('.connectionState').removeClass('connected');
 	}
 }
 

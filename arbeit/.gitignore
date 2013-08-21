@@ -1,4 +1,7 @@
-declaration.aux
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
 master.aux
 master.bbl
 master.blg

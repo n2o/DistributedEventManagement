@@ -19,12 +19,3 @@
 
 	<section id="map"></section>
 </div>
-
-<?php 
-	$scripts = array(
-		"Geolocations/geoFunctions.js",
-		"http://maps.googleapis.com/maps/api/js?sensor=true",
-		"Geolocations/drawMap.js"
-	);
-	echo $this->Html->script($scripts);
-?>

@@ -43,7 +43,10 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 			'noty/layouts/bottom.js',
 			'noty/themes/default.js',
 			'slidingDiv.js',
-			'connectWebSocket.js'
+			'connectWebSocket.js',
+			'Geolocations/geoFunctions.js',
+			'http://maps.googleapis.com/maps/api/js?sensor=true',
+			'Geolocations/drawMap.js'
 		);
 		echo $this->Html->script($jsimport);
 

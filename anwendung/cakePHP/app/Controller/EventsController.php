@@ -42,7 +42,11 @@ class EventsController extends AppController {
 			$this->Event->create();
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash('Your event has been saved.');
+				$this->Session->setFlash('The event has been saved.');
+
+				# WebSocket: Save which event has been updated to send the user a notification
+				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
+
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to add your event.');
@@ -61,7 +65,11 @@ class EventsController extends AppController {
 				$name = $this->request->data['Column']['name'];
 				$value = $this->request->data['Column']['value'];
 				$this->Event->query("INSERT INTO event_columns (`event_id`, `name`, `value`) VALUES ($id, '$name', '$value')");
-				$this->Session->setFlash('Added a column to your event.');
+				$this->Session->setFlash('Added a column to the event.');
+
+				# WebSocket: Save which event has been updated to send the user a notification
+				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
+				
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -136,6 +144,10 @@ class EventsController extends AppController {
 						$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$userId', '$eventId', '$postName', '$postValue')");
 				}
 				$this->Session->setFlash('Added specific user value to Event.');
+
+				# WebSocket: Save which event has been updated to send the user a notification
+				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$eventId.''));
+
 				$this->redirect(array('action' => 'edit/'.$eventId));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -153,6 +165,10 @@ class EventsController extends AppController {
 			$this->Event->query("DELETE FROM event_columns WHERE event_id = $id");
 			$this->Event->query("DELETE FROM event_properties WHERE event_id = $id");
 			$this->Session->setFlash('The event with id: $id has been deleted.');
+
+			# WebSocket: Save which event has been updated to send the user a notification
+			$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
+
 			$this->redirect(array('action' => 'index'));
 		}
 	}
@@ -164,6 +180,10 @@ class EventsController extends AppController {
 		$this->Event->query("DELETE FROM event_columns WHERE event_id = $id AND name = '$name'");
 		$this->Event->query("DELETE FROM event_properties WHERE event_id = $id AND name = '$name'");
 		$this->Session->setFlash("The column ".$name." has been deleted.");
+
+		# WebSocket: Save which event has been updated to send the user a notification
+		$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
+
 		$this->redirect(array('action' => 'edit', $id));
 	}
 }

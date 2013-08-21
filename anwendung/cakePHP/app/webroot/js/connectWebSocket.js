@@ -6,6 +6,7 @@ var socket;
 var wsUri, socket;
 var connected = false;
 
+$('.connectionState').text("Not connected");
 doConnect();
 
 function refresh() {
@@ -28,6 +29,7 @@ function doConnect() {
 			socket.on('error', function (evt) { onError(evt) });
 		});
 	} catch (e) {
+		$('.connectionState').text("Not connected");
 	}
 }
 
@@ -58,12 +60,11 @@ function onDisconnect(evt) {
 }
 
 function onMessage(evt) {
-	console.log('<-- ' + evt);
 	// Update the marks on the map
 	var data = JSON.parse(evt);
 	switch(data.type) {
 		case 'location':
-			noty({text: 'Incoming: New coordinates for geolocations.'});
+			//noty({text: 'Incoming: New coordinates for geolocations.'});
 			updateMarkers(data);
 			break;
 		case 'update':
@@ -89,7 +90,7 @@ function publishChanges() {
 			id: publishEventsArray
 		}
 		msg = JSON.stringify(msg);
-		console.log("--> " + msg);
+		//console.log("--> " + msg);
 		socket.send(msg);
 		publishEventsArray.length = 0;
 	}
@@ -107,7 +108,7 @@ function synSocketID() {
 		}
 	}
 	msg = JSON.stringify(msg);
-	console.log("--> " + msg);
+	//console.log("--> " + msg);
 	socket.send(msg);
 	publishChanges();
 }

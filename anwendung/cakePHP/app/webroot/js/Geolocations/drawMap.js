@@ -12,8 +12,8 @@ $(function() {
 		timeout: 5000
 	}
 
-	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:true});
-	navigator.geolocation.watchPosition(checkDiff, noPosition, {enableHighAccuracy:true});
+	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
+	navigator.geolocation.watchPosition(checkDiff, noPosition, geo_options);
 
 	function checkDiff(position) {
 		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -28,12 +28,11 @@ $(function() {
 		} else {
 			var diff = calcDistance(latitude, longitude, lastLatitude, lastLongitude);
 
-			console.log(diff);
-
-			if (diff < 0) 
-				diff = diff*1000;
-			if (diff > 0 && typeof(connected) !== "undefined" && connected)
-				sendPosition();
+			// if (diff < 0) 
+			// 	diff = diff*1000;
+			// if (diff > 0 && typeof(connected) !== "undefined" && connected)
+			// 	sendPosition();
+			sendPosition();
 		}
 	}
 
@@ -139,7 +138,7 @@ $(function() {
 			longitude: lastLongitude
 		}
 		msg = JSON.stringify(msg);
-		console.log("--> " + msg);
+		//console.log("--> " + msg);
 		socket.send(msg);
 	}
 });

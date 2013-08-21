@@ -16,6 +16,9 @@ function addMarker(coords, title, icon, animation) {
 
 	infoWindow = new google.maps.InfoWindow();
 
+	infoWindow.setContent(title);
+	infoWindow.open(map, marker);
+
 	google.maps.event.addListener(marker, 'click', (function(marker) {
 		return function() {
 			infoWindow.setContent(title);
@@ -79,7 +82,6 @@ function updateMarkers(locations) {
 	if (autoZoomCenter) {
 		map.fitBounds(bounds);
 		map.panToBounds(bounds);
-		// autoZoomCenter = false;
 	}
 
 	showOverlays();
@@ -94,16 +96,4 @@ function toggleAutoZoomCenter() {
 		$('#autoZoomCenter').text("Disable autozoom");
 		autoZoomCenter = true;
 	}
-}
-
-function updateDistances() {
-// Get other positions from JSON file
-	$.getJSON('json/positions.json', function(json) {
-		// goes through each entry in json file and creates a new marker
-		$.each(json,function(name,values) {
-
-			$('#overlay_map').find('ul').append('<li>'+name+': <span>'+calcDistance(latitude,longitude,values.Position.Latitude,values.Position.Longitude)+'</span></li>');
-		});
-	});
-	$('#ownPosition').html('Latitude: '+latitude+'<br/>Longitude: '+longitude);
 }

@@ -18,7 +18,17 @@ var idleTime = 15; // Spec. after how many minutes a user is removed from the li
 var locations = {type: 'location'};	// store all geo information about persons
 var clients = {};
 
-var io = require('socket.io').listen(port);
+// Open module for session based authentication
+var express = require('express'), http = require('http');
+var app = express();
+app.configure(function() {
+	app.use(express.static('/'));
+});
+
+var server = http.createServer(app)
+server.listen(port);
+
+var io = require('socket.io').listen(server);
 io.set('log level', 2);
 
 var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);

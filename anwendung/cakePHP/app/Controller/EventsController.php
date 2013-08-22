@@ -6,7 +6,6 @@ class EventsController extends AppController {
 	# Show all the events 
 	public function index() {
 		$this->set('events', $this->Event->find('all'));
-		$this->loadModel('Events');
 	}
 
 	# View one specific element by id

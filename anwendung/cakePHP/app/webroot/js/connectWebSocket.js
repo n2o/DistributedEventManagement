@@ -12,14 +12,12 @@ function refresh() {
 	// Reconnect on disconnect
 	if (!connected) {
 		doConnect();
-	} else {
-		publishChanges();
 	}
 }
 
 function doConnect() {
 	try {
-		socket = io.connect('http://'+host+':'+port+'/');
+		socket = io.connect('wss://'+host+':'+port+'/');
 		socket.on('connect', function (evt) {
 			onOpen(evt);
 			synSocketID();
@@ -82,35 +80,22 @@ function onError(evt) {
 	$('.connectionState').removeClass('connected');
 }
 
-// Look up all events, which has not been sent, and send it to the ws server
-function publishChanges() {
-	if (publishEventsArray.length > 0) {
-		var msg = {
-			type: 'publishEvent',
-			id: publishEventsArray
-		}
-		msg = JSON.stringify(msg);
-		//console.log("--> " + msg);
-		socket.send(msg);
-		publishEventsArray.length = 0;
-	}
-}
-
 /**
  * Called automatically to authenticate with the server
  */
 function synSocketID() {
-	var msg = {
-		name: name,
-		type: 'syn',
-		subscribe: {
-			events: subEventsArray,
+	if (name !== "null") {
+		var msg = {
+			name: name,
+			type: 'syn',
+			subscribe: {
+				events: subEventsArray,
+			}
 		}
+		msg = JSON.stringify(msg);
+		//console.log("--> " + msg);
+		socket.send(msg);
 	}
-	msg = JSON.stringify(msg);
-	//console.log("--> " + msg);
-	socket.send(msg);
-	publishChanges();
 }
 
 window.addEventListener("load", refresh, false);

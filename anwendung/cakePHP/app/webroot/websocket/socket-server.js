@@ -54,29 +54,48 @@ var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);
 io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		var data = JSON.parse(message);
-		switch(data.type) {
-			case 'location':
-				saveToLocations(data);
-				socket.broadcast.send(JSON.stringify(locations));
-				socket.send(JSON.stringify(locations)); // Send current location back to sender
-				break;
-			case 'syn':
-				clients[data.name] = socket;
-				clients[data.name].subscriptions = data.subscribe;
-				clients[data.name].name = data.name;
-				break;
-			case 'publishEvent':
-				lookForSubscriber(data, 'event', socket);
-				break;
+		if (data.name !== "null") {
+			switch(data.type) {
+				case 'location':
+					saveToLocations(data);
+					socket.broadcast.send(JSON.stringify(locations));
+					socket.send(JSON.stringify(locations)); // Send current location back to sender
+					break;
+				case 'syn':
+					// Initialize a client and identify him by name
+					if (clients[data.name] === undefined) {
+						clients[data.name] = {};
+						clients[data.name].sockets = [];
+					}
+					clients[data.name].sockets.push(socket);
+					clients[data.name].subscriptions = data.subscribe;
+					break;
+				case 'publishEvent':
+					lookForSubscriber(data, 'event');
+					break;
+			}
 		}
 	});
-	socket.on('disconnect', function () { });
+	socket.on('disconnect', function () {
+		removeSocketFromList(socket);
+	});
 });
 
 /**********************************************************************************
  * Area to prepare the data just received, merge it with the other geolocations
  * and return an updated json file with all information
  **********************************************************************************/
+
+/**
+ * Remove current socket from client on disconnect
+ */
+function removeSocketFromList(closeSocket) {
+	for (var client in clients)
+		for (var socket in clients[client].sockets)
+			if (clients[client].sockets[socket] == closeSocket)
+				clients[client].sockets.splice(socket, 1);
+}
+
 /**
  * Adds current person transmitted in data to array with all persons
  */
@@ -89,7 +108,7 @@ function saveToLocations(data) {
 /**
  * Look in clients[] which client has subscribed the data and send a notification to those
  */
-function lookForSubscriber(data, type, socket) {
+function lookForSubscriber(data, type) {
 	var id = data.id;
 	for (var client in clients) { // look up all clients
 		for (var sub in clients[client].subscriptions) { // and check if they have subscribed to it
@@ -101,8 +120,8 @@ function lookForSubscriber(data, type, socket) {
 						id: id
 					}
 					msg = JSON.stringify(msg);
-					socket = clients[client];
-					socket.send(msg);
+					for (var chooseSocket in clients[client].sockets)
+						clients[client].sockets[chooseSocket].send(msg);
 				}
 			}
 		}
@@ -150,11 +169,4 @@ function timeDiff(start, end) {
 	diff -= hours * 1000 * 60 * 60;
 	var minutes = Math.floor(diff / 1000 / 60);
 	return minutes;
-}
-
-/**
- * Check if an array contains a specific value
- */
-function isInArray(value, array) {
-	return array.indexOf(value) > -1 ? true : false;
 }

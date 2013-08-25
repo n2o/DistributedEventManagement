@@ -93,10 +93,25 @@ Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht 
 	\caption{Controller erfragt Felder aus event\_columns, stellt sie dem View zur Verfügung, speichert danach die Werte in event\_properties}
 \end{figure}
 
+Obige Abbildung zeigt noch einmal kurz das Zusammenspiel von Controller und View: Datenbankzugriffe werden über den View an den Controller gerichtet und dort ausgeführt. So können Daten abgefragt oder neue Daten geschrieben werden.
 
+\section{Views entwickeln}
+Eine spannende Herausforderung ist es nun mit modernen Webtechnologien und möglichst geringem Aufwand direkt eine mobile Seite der Anwendung zu erstellen, welche für Smartphone und Tablets optimiert ist. Schließlich soll diese Web-App auch auf dem zugehörigen Platz mobil genutzt werden können.\par
 
+Dabei gibt es mehrere Ansätze, wobei für diese Arbeit das sogenannte \emph{Responsive Webdesign} (deutsch: bedarfsgesteuertes Webdesign) für die mobile Version der Anwendung benutzt wird.
 
+\subsection{Responsive Webdesign}
+Hauptaugenmerk wird hier meistens auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit unglaublichen 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
+Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmte Objekte im Sichtbereich des Geräts sein können, sodass der Benutzer nicht von der schlechten Bedienung genervt ist, sondern weiterhin die Informationen aus der App holen möchte. Beim Responsive Webdesign werden über \emph{Media Queries} (Abfrage der Eigenschaften des Geräts, Beispiel: Auflösung, Orientierung des Endgeräts usw.) Informationen des Endgeräts eingeholt und darauf abgestimmte Stylesheets geladen.\par
 
+Diese Stylesheets sind auf entsprechenden Geräte abgestimmt und entscheiden, wie der Inhalt der Seite angeordnet sein muss und was überhaupt dargestellt werden soll. Eine unkomplizierte Lösung ist es das Layout der Seite über eine bestimmte Anzahl an gleichbreiten Streifen zu definieren. Zum Beispiel können zehn Streifen nebeneinander auf einem Computer mit gängiger Auflösung (mehr als 1000 Pixel breit) dargestellt werden, während auf einem Smartphone Inhalt mit einer Breite von lediglich drei Streifen möglich ist.\par
+
+Wie viele Streifen dargestellt werden, wählt ein Master-Stylesheet. Dafür ist allerdings eine gewisse Aktualität der genutzten Browser erforderlich, da die oben genannten Media Queries erst mit HTML5 und CSS3 eingeführt wurden, also auf alten Browsern nicht einwandfrei funktionieren wird.\par
+
+Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind.
+
+\subsection{DRY - Don't repeat yourself!}
+Sich selbst nicht wiederholen - mit diesem \glqq Paradigma\grqq{} im Hinterkopf gilt es nun in den Views möglichst so weit zu durchdenken, dass er sowohl 
 
 
 

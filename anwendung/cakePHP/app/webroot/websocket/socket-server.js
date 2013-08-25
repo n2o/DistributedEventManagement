@@ -19,17 +19,35 @@ var locations = {type: 'location'};	// store all geo information about persons
 var clients = {};
 
 // Open module for session based authentication
-var express = require('express'), http = require('http');
+var express = require('express'), http = require('http'), https = require('https');
 var app = express();
 app.configure(function() {
 	app.use(express.static('/'));
 });
 
+// Define path to certificates for secure connection
+var fs = require('fs');
+var options = {
+	key: fs.readFileSync(__dirname+'/ssl/certs/server.key'),
+	cert: fs.readFileSync(__dirname+'/ssl/certs/server.crt'),
+	ca: fs.readFileSync(__dirname+'/ssl/certs/ca.crt'),
+	requestCert: true,
+	rejectUnauthorized: false
+};
+
 var server = http.createServer(app)
 server.listen(port);
 
 var io = require('socket.io').listen(server);
-io.set('log level', 2);
+
+io.set('log level', 2);	// Normal: 2, Debug Mode: 3
+io.set('transports', [	// set fallbacks for unsupported browsers
+	'websocket',
+	'flashsocket',
+	'htmlfile',
+	'xhr-polling',
+	'jsonp-polling'
+]);
 
 var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);
 
@@ -37,19 +55,19 @@ io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		var data = JSON.parse(message);
 		switch(data.type) {
-		case 'location':
-			saveToLocations(data);
-			socket.broadcast.send(JSON.stringify(locations));
-			socket.send(JSON.stringify(locations)); //Send current location back to sender
-			break;
-		case 'syn':
-			clients[data.name] = socket;
-			clients[data.name].subscriptions = data.subscribe;
-			clients[data.name].name = data.name;
-			break;
-		case 'publishEvent':
-			lookForSubscriber(data, 'event', socket);
-			break;
+			case 'location':
+				saveToLocations(data);
+				socket.broadcast.send(JSON.stringify(locations));
+				socket.send(JSON.stringify(locations)); // Send current location back to sender
+				break;
+			case 'syn':
+				clients[data.name] = socket;
+				clients[data.name].subscriptions = data.subscribe;
+				clients[data.name].name = data.name;
+				break;
+			case 'publishEvent':
+				lookForSubscriber(data, 'event', socket);
+				break;
 		}
 	});
 	socket.on('disconnect', function () { });

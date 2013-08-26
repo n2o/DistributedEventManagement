@@ -54,7 +54,7 @@ var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);
 io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		var data = JSON.parse(message);
-		if (data.name !== "null") {
+		if (data.name !== "null" && data.name !== "false") {
 			switch(data.type) {
 				case 'location':
 					saveToLocations(data);

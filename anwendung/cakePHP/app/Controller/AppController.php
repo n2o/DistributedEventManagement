@@ -49,10 +49,49 @@ class AppController extends Controller {
 	);
 
 	# Store $value into the JS array
-	public function setJsVar($name, $value) {
+	private function setJsVar($name, $value) {
 		$this->_jsVars[$name] = $value;
 	}
 
+	# Create new public / private key pair if not available on server
+	private function createKeyValuePair() {
+		if (!(file_exists("pub.txt") && file_exists("priv.txt"))) {
+			$config = array(
+			    "digest_alg" => "sha512",
+			    "private_key_bits" => 1024,
+			    "private_key_type" => OPENSSL_KEYTYPE_RSA,
+			);
+			// Create the private and public key
+			$res = openssl_pkey_new($config);
+
+			// Extract the private key from $res to $privKey
+			openssl_pkey_export($res, $privKey);
+
+			// Extract the public key from $res to $pubKey
+			$pubKey = openssl_pkey_get_details($res);
+			$pubKey = $pubKey["key"];
+
+			$data = 'plaintext data goes here';
+
+			// Write new keys to files
+			$fp = fopen('pub.txt', 'w');
+			fwrite($fp, $pubKey);
+			fclose($fp);
+			$fp = fopen('priv.txt', 'w');
+			fwrite($fp, $privKey);
+			fclose($fp);
+
+			// Encrypt the data to $encrypted using the public key
+			openssl_public_encrypt($data, $encrypted, $pubKey);
+
+			// Decrypt the data using the private key and store the results in $decrypted
+			openssl_private_decrypt($encrypted, $decrypted, $privKey);
+
+			echo $decrypted;
+		}
+	}
+
+	# Check the role of the clients
 	public function isAuthorized($user) {
 		# Admin can access every action
 		if (isset($user['role']) && $user['role'] === 'admin')
@@ -99,7 +138,6 @@ class AppController extends Controller {
 				$this->viewPath = $mobileView;
 			}
 		}
-
 		$this->set('is_mobile', $this->isMobile);
 	}
 
@@ -116,6 +154,9 @@ class AppController extends Controller {
 			$this->theme = 'Mobile';    # Switch current theme to Mobile
 			$this->layout = 'mobile';
 		}
+
+		# Check if key value pair is accessible on webserver
+		$this->createKeyValuePair();
 	}
 
 	public function afterFilter() {

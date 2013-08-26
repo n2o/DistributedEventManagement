@@ -81,7 +81,7 @@ function updateMarkers(locations) {
 	// If the markers are first called, auto center and auto zoom to all markers
 	if (autoZoomCenter) {
 		map.fitBounds(bounds);
-		map.panToBounds(bounds);
+		map.panToBounds(bounds); // Smoothly set center of map to bounds
 	}
 
 	showOverlays();

@@ -106,6 +106,9 @@ class AppController extends Controller {
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = array('event' => $value['events']['id']);
 
+			# WebSocket: Save which events the user has subscribed
+			#$this->Other->sendElephantWebSocket(array('name'=>'', 'type' => 'publishEvent', 'id' => ''.$id.''));
+
 			$this->setJsVar('subscriptions', $subscriptions);
 
 		# Create signature for syn message for websocket server

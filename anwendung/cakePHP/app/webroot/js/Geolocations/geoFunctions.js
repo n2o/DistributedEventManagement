@@ -2,7 +2,9 @@ var map, infoWindow, latitude, longitude, bounds;
 var markersArray =	[];
 var autoZoomCenter = true;
 
-// Adds custom marker on the google map
+/**
+ * Adds custom marker on the google map
+ */
 function addMarker(coords, title, icon, animation) {
 	if (title == name)
 		title = "You are here!";
@@ -29,7 +31,9 @@ function addMarker(coords, title, icon, animation) {
 	markersArray.push(marker);
 }
 
-// Removes the overlays from the map, but keeps them in the array
+/**
+ * Removes the overlays from the map, but keeps them in the array
+ */
 function clearOverlays() {
 	if (markersArray) {
 		for (i in markersArray) {
@@ -38,7 +42,9 @@ function clearOverlays() {
 	}
 }
 
-// Shows any overlays currently in the array
+/**
+ * Shows any overlays currently in the array
+ */
 function showOverlays() {
 	if (markersArray) {
 		for (i in markersArray) {
@@ -47,7 +53,9 @@ function showOverlays() {
 	}
 }
 
-// Deletes all markers in the array by removing references to them
+/**
+ * Deletes all markers in the array by removing references to them
+ */
 function deleteOverlays() {
 	if (markersArray) {
 		for (i in markersArray) {
@@ -57,7 +65,9 @@ function deleteOverlays() {
 	}
 }
 
-// Delete old references and update all markers based upon the data from WebSocket server
+/**
+ * Delete old references and update all markers based upon the data from WebSocket server
+ */
 function updateMarkers(locations) {
 	var coords;
 	var icon;
@@ -78,7 +88,7 @@ function updateMarkers(locations) {
 		icon = "";
 	}
 
-	// If the markers are first called, auto center and auto zoom to all markers
+	// Autozoom to the center compared to all logged in clients
 	if (autoZoomCenter && typeof(map) != "undefined") {
 		map.fitBounds(bounds);
 		map.panToBounds(bounds); // Smoothly set center of map to bounds
@@ -87,7 +97,9 @@ function updateMarkers(locations) {
 	showOverlays();
 }
 
-// Switch between auto zooming to interesting points or
+/**
+ * Switch between auto zooming to interesting points or not
+ */ 
 function toggleAutoZoomCenter() {
 	if (autoZoomCenter) {
 		$('#autoZoomCenter').text("Enable autozoom");

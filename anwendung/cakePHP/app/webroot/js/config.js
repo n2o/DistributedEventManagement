@@ -24,11 +24,15 @@ includeSocketIO(); // load socket.io.js from websocket server
 /************************************************************************************/
 
 function includeSocketIO() {
-	var head= document.getElementsByTagName('head')[0];
-	var script= document.createElement('script');
-	script.type= 'text/javascript';
-	script.src= 'http://'+host+':'+port+'/socket.io/socket.io.js';
-	head.appendChild(script);
+	try {
+		var head= document.getElementsByTagName('head')[0];
+		var script= document.createElement('script');
+		script.type= 'text/javascript';
+		script.src= 'http://'+host+':'+port+'/socket.io/socket.io.js';
+		head.appendChild(script);
+	} catch (e) {
+		// Could not connect to websocket server
+	}
 }
 
 // short version to make an app notification

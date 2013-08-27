@@ -12,9 +12,16 @@ $(function() {
 		timeout: 5000
 	}
 
+	// Checks if geolocation is enabled or disabled by browser
 	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
+
+	// Start watching on new updates of the clients location
 	navigator.geolocation.watchPosition(checkDiff, noPosition, geo_options);
 
+	/**
+	 * Function to reduce unnecessary traffic by websockets
+	 * Specifies when an update should be promoted
+	 */
 	function checkDiff(position) {
 		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		latitude = position.coords.latitude;
@@ -36,6 +43,10 @@ $(function() {
 		}
 	}
 
+	/** 
+	 * Initializes the map and draws it to the section/article with id #map.
+	 * Marks own position on map with a green marker
+	 */
 	function drawMap(position) {
 		initializeFrame();
 
@@ -53,11 +64,8 @@ $(function() {
 		};
 		map = new google.maps.Map($('#map')[0], options);
 
+		// Adds own position to an array of markers
 		addMarker(coords, "You are here!", "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png", "google.maps.Animation.DROP");
-
-		var infoWindow = new google.maps.InfoWindow({
-			content: "You are here!"
-		});
 
 		google.maps.event.addListener(marker, 'click', function() {
 			infoWindow.open(map, marker);
@@ -66,6 +74,9 @@ $(function() {
 		showOverlays();
 	}
 
+	/**
+	 * If the browser does not support geolocations, set the center of the map to Remscheid
+	 */
 	function noPosition() {
 		initializeFrame();
 		var coords = new google.maps.LatLng(51.1793042, 7.193936);
@@ -83,6 +94,11 @@ $(function() {
 		showOverlays();
 	}
 
+	/**
+	 * Different schemes for mobile / desktop:
+	 * mobile: initialize overlay for options
+	 * desktop: has enough space to display it the whole time above the map
+	 */
 	function initializeFrame() {
 		if (mobile) {
 			// Display the map on top
@@ -102,6 +118,9 @@ $(function() {
 		}
 	}
 
+	/**
+	 * Calculate the distance in (kilo-)meters for two points
+	 */
 	function calcDistance(myLat, myLong, otherLat, otherLong) {
 		radius = 6371; 	// radius of earth in km
 
@@ -132,6 +151,9 @@ $(function() {
 			return Math.round(d*10)/10+" km";
 	}
 
+	/**
+	 * Send current location to websocket server
+	 */
 	function sendPosition() {
 		var msg = {
 			name: name,

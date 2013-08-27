@@ -1,11 +1,13 @@
 /**
  * Client application to connect to a remote WebSocket server
+ *
+ * Waits on states of socket and calls the corresponding function
  */
-var socket;
 
 var wsUri, socket;
 var connected = false;
 
+// Initial call
 doConnect();
 
 function refresh() {

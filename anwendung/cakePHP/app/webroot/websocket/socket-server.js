@@ -63,6 +63,8 @@ io.sockets.on('connection', function (socket) {
 						}
 						clients[data.name].sockets.push(socket);
 						//clients[data.name].subscriptions = data.subscribe;
+					} else {
+						socket.disconnect('unauthorized'); // close socket if wrong signature was sent
 					}
 					break;
 				case 'subscribe':

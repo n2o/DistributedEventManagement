@@ -55,8 +55,9 @@ class AppController extends Controller {
 
 	# Create new public / private key pair if not available on server
 	private function createKeyValuePair() {
-		if (file_exists("pub.txt") || !file_exists("priv.txt")) {
+		if (!file_exists("private.key") || !file_exists("public.key")) {
 			$privateKey = openssl_pkey_new(array(
+				'digest_alg' => 'sha512',
 			    'private_key_bits' => 1024,
 			    'private_key_type' => OPENSSL_KEYTYPE_RSA,
 			));
@@ -81,6 +82,9 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
+		# Check if key value pair is accessible on webserver
+		$this->createKeyValuePair();
+
 		# Make current username accessible for JavaScript
 		$username = $this->Session->read('Auth.User.username');
 		$this->setJsVar('username', $username);
@@ -104,18 +108,20 @@ class AppController extends Controller {
 
 			$this->setJsVar('subscriptions', $subscriptions);
 
-			# Create signature for syn message for websocket server
+		# Create signature for syn message for websocket server
 			$fileContents = file_get_contents('private.key');
 			$privateKey = openssl_pkey_get_private($fileContents);
 
-			$synMessage = '{"name": "'.$username.'", "type": "syn"}';
 			$signature = "";
-			if (!openssl_sign($synMessage, $signature, $privateKey))
+			if (!openssl_sign($username, $signature, $privateKey))
     			die('Failed to encrypt data');
+    		
+    		# Remove $privateKey from RAM
     		openssl_free_key($privateKey);
+
     		$signature = base64_encode($signature);
 
-			$synMessage = '{"name": "'.$username.'", "type": "syn", "sig": "'.$signature.'"}';
+			$synMessage = '{"name":"'.$username.'","type":"syn","sig":"'.$signature.'"}';
 			$this->setJsVar('synMessage', $synMessage);
 		}
 
@@ -145,9 +151,6 @@ class AppController extends Controller {
 			$this->theme = 'Mobile';    # Switch current theme to Mobile
 			$this->layout = 'mobile';
 		}
-
-		# Check if key value pair is accessible on webserver
-		$this->createKeyValuePair();
 	}
 
 	public function afterFilter() {

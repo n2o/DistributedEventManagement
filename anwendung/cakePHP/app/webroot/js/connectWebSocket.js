@@ -84,17 +84,9 @@ function onError(evt) {
  * Called automatically to authenticate with the server
  */
 function synSocketID() {
-	if (name !== "null") {
-		var msg = {
-			name: name,
-			type: 'syn',
-			subscribe: {
-				events: subEventsArray,
-			}
-		}
-		msg = JSON.stringify(msg);
+	if (synMessage != null) {
 		//console.log("--> " + msg);
-		socket.send(msg);
+		socket.send(synMessage);
 	}
 }
 

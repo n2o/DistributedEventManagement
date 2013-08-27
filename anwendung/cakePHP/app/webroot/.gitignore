@@ -1,5 +1,3 @@
 # User specific & automatically generated files #
 #################################################
-/ssl/certs/ca.crt
-/ssl/certs/server.crt
-/ssl/certs/server.key
+*.key

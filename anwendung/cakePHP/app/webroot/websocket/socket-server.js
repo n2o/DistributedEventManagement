@@ -62,13 +62,14 @@ io.sockets.on('connection', function (socket) {
 					socket.send(JSON.stringify(locations)); // Send current location back to sender
 					break;
 				case 'syn':
+					console.log("Syn received");
 					// Initialize a client and identify him by name
 					if (clients[data.name] === undefined) {
 						clients[data.name] = {};
 						clients[data.name].sockets = [];
 					}
 					clients[data.name].sockets.push(socket);
-					clients[data.name].subscriptions = data.subscribe;
+					//clients[data.name].subscriptions = data.subscribe;
 					break;
 				case 'publishEvent':
 					lookForSubscriber(data, 'event');

@@ -15,12 +15,8 @@ var allSubs = jsVars.subscriptions;
 for (var sub in allSubs)
 	subEventsArray.push(allSubs[sub].event);
 
-// Publish
-var publishEventsArray = [];
-var allPubs = jsVars.publish;
-for (var publish in allPubs) {
-	publishEventsArray.push(allPubs[publish].event);
-}
+// Synchronize current socket with name and signed message
+var synMessage = jsVars.synMessage;
 
 // Other stuff
 includeSocketIO(); // load socket.io.js from websocket server

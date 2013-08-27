@@ -19,18 +19,21 @@ class OtherComponent extends Component {
 	 *						for example array('type' => 'publishEvent', 'id' => '1') 
 	 */
 	function sendElephantWebSocket($data) {
-		require('lib/ElephantIO/Client.php');
+		try {
+			require('lib/ElephantIO/Client.php');
 
-		$json = json_encode($data);
-		// do not forget to set this in AppController.php
-		$elephant = new ElephantIO\Client('http://'.$_SERVER['HTTP_HOST'].':9999', 'socket.io', 1, false, true, true);
-		$elephant->init();
-		$elephant->send(
-		    ElephantIO\Client::TYPE_EVENT,
-		    null,
-		    null,
-		    json_encode(array('name' => 'message', 'args' => $json))
-		);
-		$elephant->close();
+			$json = json_encode($data);
+			// do not forget to set this in AppController.php
+			$elephant = new ElephantIO\Client('http://'.$_SERVER['HTTP_HOST'].':9999', 'socket.io', 1, false, true, true);
+			$elephant->init();
+			$elephant->send(
+				ElephantIO\Client::TYPE_EVENT,
+				null,
+				null,
+				json_encode(array('name' => 'message', 'args' => $json))
+			);
+			$elephant->close();	
+		} catch (Exception $e) {
+		}
 	}
 }

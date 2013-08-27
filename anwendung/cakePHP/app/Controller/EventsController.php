@@ -42,10 +42,6 @@ class EventsController extends AppController {
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('The event has been saved.');
-
-				# WebSocket: Save which event has been updated to send the user a notification
-				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
-
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to add your event.');

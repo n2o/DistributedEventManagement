@@ -55,39 +55,15 @@ class AppController extends Controller {
 
 	# Create new public / private key pair if not available on server
 	private function createKeyValuePair() {
-		if (!(file_exists("pub.txt") && file_exists("priv.txt"))) {
-			$config = array(
-			    "digest_alg" => "sha512",
-			    "private_key_bits" => 1024,
-			    "private_key_type" => OPENSSL_KEYTYPE_RSA,
-			);
-			// Create the private and public key
-			$res = openssl_pkey_new($config);
-
-			// Extract the private key from $res to $privKey
-			openssl_pkey_export($res, $privKey);
-
-			// Extract the public key from $res to $pubKey
-			$pubKey = openssl_pkey_get_details($res);
-			$pubKey = $pubKey["key"];
-
-			$data = 'plaintext data goes here';
-
-			// Write new keys to files
-			$fp = fopen('pub.txt', 'w');
-			fwrite($fp, $pubKey);
-			fclose($fp);
-			$fp = fopen('priv.txt', 'w');
-			fwrite($fp, $privKey);
-			fclose($fp);
-
-			// Encrypt the data to $encrypted using the public key
-			openssl_public_encrypt($data, $encrypted, $pubKey);
-
-			// Decrypt the data using the private key and store the results in $decrypted
-			openssl_private_decrypt($encrypted, $decrypted, $privKey);
-
-			echo $decrypted;
+		if (file_exists("pub.txt") || !file_exists("priv.txt")) {
+			$privateKey = openssl_pkey_new(array(
+			    'private_key_bits' => 1024,
+			    'private_key_type' => OPENSSL_KEYTYPE_RSA,
+			));
+			openssl_pkey_export_to_file($privateKey, 'private.key');
+			$a_key = openssl_pkey_get_details($privateKey);
+			file_put_contents('public.key', $a_key['key']);
+			openssl_free_key($privateKey);
 		}
 	}
 
@@ -106,26 +82,41 @@ class AppController extends Controller {
 		parent::beforeFilter();
 
 		# Make current username accessible for JavaScript
-		$this->setJsVar('username', $this->Session->read('Auth.User.username'));
+		$username = $this->Session->read('Auth.User.username');
+		$this->setJsVar('username', $username);
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
 
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');
-		$id = $this->Session->read('Auth.User.id');
 
+		$id = $this->Session->read('Auth.User.id');
 		$subscriptions = array();
-		$i = 0;
 
 		# Prepare Publish/Subscribe for WebSocket server
 		if (isset($id)) {
 			# Set subscriptions
 			$this->loadModel('User');
 			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
+			$i = 0;
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = array('event' => $value['events']['id']);
 
 			$this->setJsVar('subscriptions', $subscriptions);
+
+			# Create signature for syn message for websocket server
+			$fileContents = file_get_contents('private.key');
+			$privateKey = openssl_pkey_get_private($fileContents);
+
+			$synMessage = '{"name": "'.$username.'", "type": "syn"}';
+			$signature = "";
+			if (!openssl_sign($synMessage, $signature, $privateKey))
+    			die('Failed to encrypt data');
+    		openssl_free_key($privateKey);
+    		$signature = base64_encode($signature);
+
+			$synMessage = '{"name": "'.$username.'", "type": "syn", "sig": "'.$signature.'"}';
+			$this->setJsVar('synMessage', $synMessage);
 		}
 
 		# if device is mobile, change layout to mobile

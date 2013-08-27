@@ -93,10 +93,12 @@ $(function() {
 				$('section').toggleClass('active');
 			});
 		} else {
-			var mapcanvas = document.getElementById('map');
-			mapcanvas.id = 'map';
-			mapcanvas.style.height = '600px';
-			mapcanvas.style.width = '100%';
+			if (document.getElementById('map') != null) {
+				var mapcanvas = document.getElementById('map');
+				mapcanvas.id = 'map';
+				mapcanvas.style.height = '600px';
+				mapcanvas.style.width = '100%';
+			}
 		}
 	}
 
@@ -139,6 +141,8 @@ $(function() {
 		}
 		msg = JSON.stringify(msg);
 		//console.log("--> " + msg);
-		socket.send(msg);
+		if (typeof(socket) !== "undefined") {
+			socket.send(msg);
+		}
 	}
 });

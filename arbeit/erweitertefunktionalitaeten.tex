@@ -1,0 +1,23 @@
+\chapter{Erweiterte Funktionen}
+In diesem Kapitel werden nun Funktionen beschrieben, die über die Grundausstattung der Web-App hinaus gehen, um diese zu erweitern und produktiver zu gestalten. 
+
+\section{Statistiken}
+Da eine Auswertung der eingegebenen Daten für Veranstaltungen unabdinglich ist, wurde ein weiterer Controller implementiert, welcher sämtliche speziellen Felder der Events aus der Datenbank abfragt und diesen dann die Werte der einzelnen Benutzer zuweist.\par
+
+Im View wird dann eine grafische Auswertung gestartet, die mit Hilfe von Google Charts ansehnliche Graphen generiert, bei denen es Sinn ergibt und vergleichbare Werte von den Benutzern hinterlegt wurden. Außerdem gibt es allgemeine Statistiken, die die Veranstaltungen untereinander vergleichen, durch JavaScript gestützte Graphen visualisiert.
+
+\section{Lokalisierung von Clients}
+Um die eingetragenen Helfer in dieser Webanwendung besser koordinieren zu können, wurde ein Modul implementiert, welches im Hintergrund der Web-App läuft und die aktuelle Position des Endgeräts über eine SSL verschlüsselte Verbindung an den Server übermittelt. Unter der Voraussetzung, dass der Client diesem Vorgang zustimmt, sind dem Server damit die Positionen der eingeloggten Benutzer bekannt. Diese Positionsdaten können dann von der Anwendung ausgewertet und in einer Karte von Google Maps angezeigt werden.\par
+
+Jeder Client kann auf diese Weise die Positionen der anderen Helfer sehen. Der Vorteil liegt klar auf der Hand: eine zentral eingerichtete Verwaltung kann mit einem Blick sehen, wer sich an welcher Stelle auf dem Gelände befindet. So können Wege optimiert und gezielt Aufgaben verteilt werden, da ortsnahe Helfer die entsprechenden Aufgaben übernehmen können. Die kurzen Wege sorgen dann dafür, dass eine höhere Nutzung der Ressourcen (hier: die Helfer) möglich ist.\par
+
+Wie findet der Austausch der Positionen denn nun statt? Da es sich hier um sensible Daten handelt, ist eine sichere Übertragung Grundvoraussetzung. Allerdings steht im W3C Working Draft, dass keine sichere, verschlüsselte Peer to Peer Verbindung mit HTML5 möglich ist \cite{w3cworkingdraft}. Im aktuellen Draft wurde auch keine sichere Verbindung definiert und es ist auch aktuell keine vorgesehen \cite{w3ccurrent}.\\
+Also liegt nahe weitere Techniken zu betrachten, welche einen sicheren Austausch von Daten zwischen Clients über einen Server ermöglichen.
+
+\section{Echtzeitaktualisierung durch WebSockets}
+Das wohl spannendste Thema dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App. Mehrere Möglichkeiten sind dafür gegeben, wobei einige besser geeignet sind als andere. 
+
+\subsection{Vergleich: Polling, LongPolling, WebSockets}
+Für den Datenverkehr von Internetseiten wird HTTP verwendet, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit. Der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. xx]{ws}. Das hat wiederum zur Folge, dass es relative ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.\par
+
+Vor diesem technischen Hintergrund wurde Polling entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wurde mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersagbar. Dadurch ist Polling nicht die richtige Wahl, wenn es auf eine wirkliche Echtzeitaktualisierung ankommt.

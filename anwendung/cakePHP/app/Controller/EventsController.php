@@ -82,6 +82,7 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event.'));
 
 		$this->set('id', $id); # Make $id accessible for View
+		$title = $event['Event']['title'];
 
 		# Get all entries corresponding to this event
 		$fields = $this->Event->query("SELECT * FROM event_columns WHERE event_id = $id");
@@ -100,7 +101,7 @@ class EventsController extends AppController {
 				$this->Session->setFlash('Update successful.');
 				
 				# WebSocket: Save which event has been updated to send the user a notification
-				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
+				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'title' => ''.$title.'', 'id' => ''.$id.''));
 
 				$this->redirect(array('action' => 'index'));
 			} else {

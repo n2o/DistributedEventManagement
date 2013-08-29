@@ -68,9 +68,8 @@ function onMessage(evt) {
 			updateMarkers(data);
 			break;
 		case 'update':
-			if (data.section == "events") {
-				noty({text: 'Your event with id '+data.id+" has been updated!", type: 'information'});
-			}
+			if (data.section == "events")
+				noty({text: 'Your event '+data.title+" has been updated!", type: 'information'});
 			break;
 	}
 }

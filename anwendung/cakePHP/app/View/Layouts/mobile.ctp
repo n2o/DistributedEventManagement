@@ -47,7 +47,7 @@
 			echo $this->Html->script($jsimport);
 
 			$cssimport = array(
-				'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css',
+				'https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css',
 				'main',
 				'mobile'
 			);

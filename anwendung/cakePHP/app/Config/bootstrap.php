@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
 /**
  * This file is loaded automatically by the app/webroot/index.php file after core.php
  *

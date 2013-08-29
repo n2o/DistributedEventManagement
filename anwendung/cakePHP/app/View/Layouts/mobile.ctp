@@ -33,15 +33,15 @@
 			echo $this->Html->meta('icon');
 
 			$jsimport = array(
-				'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js',
-				'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js',
+				'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js',
+				'jquery.mobile-1.3.2.min.js',
 				'config.js',
 				'noty/jquery.noty.js',
 				'noty/layouts/bottom.js',
 				'noty/themes/default.js',
 				'connectWebSocket.js',
 				'Geolocations/geoFunctions.js',
-				'http://maps.googleapis.com/maps/api/js?sensor=true',
+				'https://maps.googleapis.com/maps/api/js?sensor=true',
 				'Geolocations/drawMap.js'
 			);
 			echo $this->Html->script($jsimport);
@@ -61,11 +61,9 @@
 	<body>
 		<!-- Page -->
 		<div data-role="page">
+			<?php include('mobilenav.ctp'); ?>
 			<?php echo $this->fetch('content'); ?>
 			<?php echo $this->Session->flash(); ?>
-
-    		<?php include('mobilenav.ctp'); ?>
-
 		</div><!-- /Page -->
 
         <script type="text/javascript">

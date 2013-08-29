@@ -5,6 +5,7 @@
 	<button class="button" onclick="clearOverlays()" style="float:left;">Clear Overlays</button>
 	<button class="button" onclick="showOverlays()" style="float:left;">Show Overlays</button>
 	<button class="button" id="autoZoomCenter" onclick="toggleAutoZoomCenter()" style="float:left;">Disable autozoom</button>
+	<section id="diff"></section>
 </article>
 
 <article>

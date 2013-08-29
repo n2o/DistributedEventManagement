@@ -19,7 +19,7 @@ function addMarker(coords, title, icon, animation) {
 	infoWindow = new google.maps.InfoWindow();
 
 	infoWindow.setContent(title);
-	infoWindow.open(map, marker);
+	//infoWindow.open(map, marker);
 
 	google.maps.event.addListener(marker, 'click', (function(marker) {
 		return function() {

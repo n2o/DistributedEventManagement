@@ -50,26 +50,37 @@ io.sockets.on('connection', function (socket) {
 		if (data.name !== "null" && data.name !== "false") {
 			switch(data.type) {
 				case 'location':
-					saveToLocations(data);
-					socket.broadcast.send(JSON.stringify(locations));
-					socket.send(JSON.stringify(locations)); // Send current location back to sender
+					if (clients[data.name] !== undefined) {
+						saveToLocations(data);
+						socket.broadcast.send(JSON.stringify(locations));
+						socket.send(JSON.stringify(locations)); // Send current location back to sender
+					} else {
+						socket.disconnect('unauthorized');
+					}
 					break;
 				case 'syn':
 					if (validSignature(data)) {
+						console.log("Client authorized");
 						// Initialize a client and identify him by name
 						if (clients[data.name] === undefined) {
 							clients[data.name] = {};
 							clients[data.name].sockets = [];
 						}
 						clients[data.name].sockets.push(socket);
-						//clients[data.name].subscriptions = data.subscribe;
+						clients[data.name].subscriptions = [];
 					} else {
+						console.log("Client unauthorized");
 						socket.disconnect('unauthorized'); // close socket if wrong signature was sent
 					}
 					break;
 				case 'subscribe':
+					if (clients[data.name] !== undefined)
+						clients[data.name].subscriptions = data.events;
+					else
+						socket.disconnect('unauthorized');
 					break;
 				case 'publishEvent':
+					console.log("Event: publish");
 					lookForSubscriber(data, 'event');
 					break;
 			}
@@ -113,6 +124,7 @@ function lookForSubscriber(data, type) {
 		for (var sub in clients[client].subscriptions) { // and check if they have subscribed to it
 			for (var i = 0; i < clients[client].subscriptions[sub].length; i++) { // go through all subscriptions
 				if (id == clients[client].subscriptions[sub][i]) { // check if the client has subscribed to the changes
+					console.log("Found subscription: "+id);
 					var msg = {
 						type: "update",
 						section: "events",

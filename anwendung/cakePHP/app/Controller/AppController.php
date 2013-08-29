@@ -45,7 +45,8 @@ class AppController extends Controller {
 			'loginRedirect' => array('controller' => 'events', 'action' => 'index'),
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
 			#'authorize' => array('Controller')
-		)
+		),
+		'Other'
 	);
 
 	# Store $value into the JS array
@@ -82,6 +83,9 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
+		# Guest can login and logout
+		$this->Auth->allow('login', 'logout');
+
 		# Check if key value pair is accessible on webserver
 		$this->createKeyValuePair();
 
@@ -91,27 +95,12 @@ class AppController extends Controller {
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
 
-		# Guest can login and logout
-		$this->Auth->allow('login', 'logout');
-
 		$id = $this->Session->read('Auth.User.id');
-		$subscriptions = array();
 
 		# Prepare Publish/Subscribe for WebSocket server
 		if (isset($id)) {
-			# Set subscriptions
-			$this->loadModel('User');
-			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
-			$i = 0;
-			foreach ($query as $key => $value)
-				$subscriptions[$i++] = array('event' => $value['events']['id']);
-
-			# WebSocket: Save which events the user has subscribed
-			#$this->Other->sendElephantWebSocket(array('name'=>'', 'type' => 'publishEvent', 'id' => ''.$id.''));
-
-			$this->setJsVar('subscriptions', $subscriptions);
-
 		# Create signature for syn message for websocket server
+			require('lib/ElephantIO/Client.php'); # includes library for socket.io
 			$fileContents = file_get_contents('private.key');
 			$privateKey = openssl_pkey_get_private($fileContents);
 
@@ -126,6 +115,20 @@ class AppController extends Controller {
 
 			$synMessage = '{"name":"'.$username.'","type":"syn","sig":"'.$signature.'"}';
 			$this->setJsVar('synMessage', $synMessage);
+
+			$id = $this->Session->read('Auth.User.id');
+			$username = $this->Session->read('Auth.User.username');
+
+			$subscriptions = array();
+			# Set subscriptions
+			$this->loadModel('User');
+			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
+			$i = 0;
+			foreach ($query as $key => $value)
+				$subscriptions[$i++] = $value['events']['id'];
+
+			# WebSocket: Save which events the user has subscribed
+			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).''));
 		}
 
 		# if device is mobile, change layout to mobile
@@ -144,7 +147,6 @@ class AppController extends Controller {
 	# Specifies what happens before the page is shown
 	public function beforeRender() {
 		parent::beforeRender();
-
 		# Make JS variables accessible
 		$this->set('jsVars', $this->_jsVars);
 
@@ -157,6 +159,7 @@ class AppController extends Controller {
 	}
 
 	public function afterFilter() {
+		parent::afterFilter();
 		# if in mobile mode, check for a valid view and use it
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );

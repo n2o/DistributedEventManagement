@@ -28,17 +28,22 @@ $(function() {
 		longitude = position.coords.longitude;
 
 		if (firstRun) {
+			console.log("First run");
 			lastLatitude = latitude;
 			lastLongitude = longitude;
 			sendPosition();
 			firstRun = false;
 		} else {
-			var diff = calcDistance(latitude, longitude, lastLatitude, lastLongitude);
+			// console.log("Next run");
+			// var diff = calcDistance(latitude, longitude, lastLatitude, lastLongitude);
 
 			// if (diff < 0) 
 			// 	diff = diff*1000;
-			// if (diff > 0 && typeof(connected) !== "undefined" && connected)
-			// 	sendPosition();
+			// console.log(diff);
+			// $('#diff').text(diff);
+
+			// // if (diff > 0 && typeof(connected) !== "undefined" && connected)
+			// // 	sendPosition();
 			sendPosition();
 		}
 	}
@@ -100,15 +105,7 @@ $(function() {
 	 * desktop: has enough space to display it the whole time above the map
 	 */
 	function initializeFrame() {
-		if (mobile) {
-			// Display the map on top
-			$('#map').addClass('active');
-
-			// Switch between distances and map
-			$('.switchInfo').on('click',function() {
-				$('section').toggleClass('active');
-			});
-		} else {
+		if (!mobile) {
 			if (document.getElementById('map') != null) {
 				var mapcanvas = document.getElementById('map');
 				mapcanvas.id = 'map';

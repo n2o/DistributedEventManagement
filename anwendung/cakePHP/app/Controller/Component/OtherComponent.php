@@ -20,8 +20,6 @@ class OtherComponent extends Component {
 	 */
 	function sendElephantWebSocket($data) {
 		try {
-			require('lib/ElephantIO/Client.php');
-
 			$json = json_encode($data);
 			// do not forget to set this in AppController.php
 			$elephant = new ElephantIO\Client('http://'.$_SERVER['HTTP_HOST'].':9999', 'socket.io', 1, false, true, true);

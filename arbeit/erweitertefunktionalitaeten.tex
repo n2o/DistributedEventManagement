@@ -11,13 +11,45 @@ Um die eingetragenen Helfer in dieser Webanwendung besser koordinieren zu könne
 
 Jeder Client kann auf diese Weise die Positionen der anderen Helfer sehen. Der Vorteil liegt klar auf der Hand: eine zentral eingerichtete Verwaltung kann mit einem Blick sehen, wer sich an welcher Stelle auf dem Gelände befindet. So können Wege optimiert und gezielt Aufgaben verteilt werden, da ortsnahe Helfer die entsprechenden Aufgaben übernehmen können. Die kurzen Wege sorgen dann dafür, dass eine höhere Nutzung der Ressourcen (hier: die Helfer) möglich ist.\par
 
+Eine wichtige Anforderung ist außerdem, dass die Daten schnell ausgetauscht werden. Wenn zwischen den Updates der Positionen zu viel Zeit vergeht, ist die aktuelle Position nicht mehr aktuell und damit nicht mehr relevant.\par
+
 Wie findet der Austausch der Positionen denn nun statt? Da es sich hier um sensible Daten handelt, ist eine sichere Übertragung Grundvoraussetzung. Allerdings steht im W3C Working Draft, dass keine sichere, verschlüsselte Peer to Peer Verbindung mit HTML5 möglich ist \cite{w3cworkingdraft}. Im aktuellen Draft wurde auch keine sichere Verbindung definiert und es ist auch aktuell keine vorgesehen \cite{w3ccurrent}.\\
 Also liegt nahe weitere Techniken zu betrachten, welche einen sicheren Austausch von Daten zwischen Clients über einen Server ermöglichen.
 
 \section{Echtzeitaktualisierung durch WebSockets}
-Das wohl spannendste Thema dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App. Mehrere Möglichkeiten sind dafür gegeben, wobei einige besser geeignet sind als andere. 
+Das wohl spannendste Thema dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App. Mehrere Möglichkeiten sind dafür gegeben, wobei einige besser geeignet sind als andere.
 
-\subsection{Vergleich: Polling, LongPolling, WebSockets}
-Für den Datenverkehr von Internetseiten wird HTTP verwendet, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit. Der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. xx]{ws}. Das hat wiederum zur Folge, dass es relative ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.\par
+\subsection{Vergleich: Polling und WebSockets}
+Für den Datenverkehr von Internetseiten wird HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit. Der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. xx]{ws}. Das hat wiederum zur Folge, dass es relative ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss und gleichzeitig Übertragungen nicht möglich sind.\par
 
-Vor diesem technischen Hintergrund wurde Polling entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wurde mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersagbar. Dadurch ist Polling nicht die richtige Wahl, wenn es auf eine wirkliche Echtzeitaktualisierung ankommt.
+Vor diesem technischen Hintergrund wurde Polling entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wurde mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersagbar. Dadurch ist Polling nicht die richtige Wahl für dieses Projekt, da es auf eine wirkliche Echtzeitaktualisierung ankommt.\par
+
+Mit der HTML5-Spezifikation wurden \emph{WebSockets} eingeführt, welche eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglichen \cite[S. Introducing WebSocket]{ws}. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

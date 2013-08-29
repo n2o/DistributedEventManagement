@@ -4,6 +4,7 @@
 		<?php 
 			echo $this->Html->link('Add User', array('controller' => 'users', 'action' => 'add'), array('class' => 'button'));
 		?>
+		<br>
 		<table>
 		    <tr>
 		        <th>Id</th>

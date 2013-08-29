@@ -1,23 +1,8 @@
-<?php 
-	
-	$host = 'localhost';  //where is the websocket server
-	$port = 9999;
-	$local = "http://localhost/";  //url where this script run
-	$data = 'hello world!';  //data to be send
-
-	$head = "GET / HTTP/1.1"."\r\n".
-		"Upgrade: WebSocket"."\r\n".
-		"Connection: Upgrade"."\r\n".
-		"Origin: $local"."\r\n".
-		"Host: $host"."\r\n".
-		"Content-Length: ".strlen($data)."\r\n"."\r\n";
- ?>
-
-
 <article>
 	<h1>Overview of events</h1>
 	<p>
 		<?php echo $this->Html->link('Add Event', array('controller' => 'events', 'action' => 'add'), array('class' => 'button')); ?>
+		<br>
 		<table>
 		    <thead>
 		        <th>Id</th>

@@ -182,4 +182,18 @@ class EventsController extends AppController {
 
 		$this->redirect(array('action' => 'edit', $id));
 	}
+
+	public function deleteUser($user_id, $user_name, $event_id) {
+		if ($this->request->is('get'))
+			throw new MethodNotAllowedException();
+
+		$this->Event->query("DELETE FROM events_users WHERE user_id = '$user_id' AND event_id = '$event_id'");
+		$this->Event->query("DELETE FROM event_properties WHERE user_id = '$user_id' AND event_id = '$event_id'");
+		$this->Session->setFlash("The User ".$user_name." is no longer part of this event.");
+
+		# WebSocket: Save which event has been updated to send the user a notification
+		$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$event_id.''));
+
+		$this->redirect(array('action' => 'edit', $event_id));
+	}
 }

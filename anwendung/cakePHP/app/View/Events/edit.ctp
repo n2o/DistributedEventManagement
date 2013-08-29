@@ -15,6 +15,7 @@
 	<h2>Edit specific columns</h2>
 	<p>
 		<?php echo $this->Html->link('Add Column', array('action' => 'addColumn', $id), array('class' => 'button'));?>
+		<br>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -64,12 +65,16 @@
 					$j = 0;
 					for ($i = 0; $i < count($users); $i = $i + 1) {
 						echo "<tr>";
-
 						foreach ($columns as $column)
 							echo "<td>".$users[$i]['users'][$column]."</td>";
-						echo "<td>".$this->Html->link('Edit', array('action' => 'editUser', $users[$i]['users']['id'], $id))."</td>";
-						echo "</tr>";
+						
+						echo "<td>".$this->Html->link('Edit', array('action' => 'editUser', $users[$i]['users']['id'], $id));
 
+						echo " ".$this->Form->postLink(	# postLink uses javascript to do a post request
+						'Delete',
+							array('action' => 'deleteUser', $users[$i]['users']['id'], $users[$i]['users']['username'],$id),
+							array('confirm' => 'Really delete the user from this event?'))."</td>";
+						echo "</tr>";
 					}
 				?>
 		</table>

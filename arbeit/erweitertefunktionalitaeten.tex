@@ -68,15 +68,15 @@ Außerdem ist ein Broadcasting-Funktion notwendig, die den bestehenden Sockets b
 Die Implementierung beider Funktionen hätte den Rahmen dieser Arbeit überschritten, weshalb serverseitig das Open Source Modul \emph{socket.io} für node.js verwendet wird, welches sämtliche benötigten Dienste bereitstellt und dabei noch einen Fallback zur Verfügung stellt, wodurch auch älteren Browsern ohne HTML5 Unterstützung eine websocketähnliche Verbindung ermöglicht wird.\par
 
 Clientseitig wurde eine Routine in JavaScript entwickelt, welche im Hintergrund der Web-App ausgeführt wird. Dieses Skript verbindet sich mit dem WebSocket Server, schickt initial die aktuellen Koordinaten (unabhängig davon, welcher View gerade angezeigt wird) und wartet auf eingehende Nachrichten oder auf eine Änderung der eigenen Position. Bewegt sich der Client werden automatisch die Koordinaten GoogleMaps-kompatibel in Form von Latitude und Longitude an den WebSocket Server übermittelt.\\
-Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten alle verbundenen Endgeräte in Echtzeit eine Aktualisierung aller Positionen.\par
+Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten die Endgeräte in Echtzeit eine Aktualisierung aller Positionen.\par
 
 Beendet ein Client die Verbindung oder erhält der Server keine Aktualisierungen mehr, so wird sein letzter Standort noch 15 Minuten gespeichert und dann auf allen Endgeräten gelöscht. Zu keiner Zeit werden Daten protokolliert oder länger als nötig gespeichert.\par
 
-\paragraph{Schwierigkeit beim Wechseln oder Neuladen eines Views}
+\paragraph{Schwierigkeit beim Wechseln oder Neuladen eines Views}\ \\ \
 Ein Problem, welches bei der Nutzung von WebSockets (kurz: WS) auftrat, war der Übergang zwischen den einzelnen Seiten: Wird eine Seite gewechselt, so wird die WebSocket Verbindung geschlossen, die nächste Seite per HTTP Request angefordert und eine neue Verbindung zum WS Server aufgebaut. Also wird mit jedem Wechsel ein neuer Socket erstellt, den der Server neu zu den bestehenden Daten des Clients referenzieren muss.\\
 Damit ist nun durch neue Assoziationen von Referenzen ein Wechsel zwischen den Views möglich, ohne dabei Werte wie Positionen des Clients zu verlieren, möglich.
 
-\paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}
+\paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}\ \\ \
 Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protokoll entwickelt, welches angibt, um welchen Inhalt es sich bei der Nachricht handelt. So haben alle Nachrichten, die zwischen Client und Server ausgetauscht werden, ein bestimmtes Format und ein Feld \emph{type}, welches aktuell folgende Werte annehmen kann:
 
 \begin{itemize}
@@ -96,7 +96,11 @@ Socket.io erkennt ein \emph{syn} und die Signatur, öffnet den öffentlichen Sch
 
 Dadurch ist garantiert, dass die Signatur der Web-App wirklich nur von dieser Anwendung stammt und es sich damit um einen normalen Benutzer handelt. Andernfalls wird die Verbindung mit der Fehlermeldung \emph{unauthorized} abgewiesen.\par
 
-Alle weiteren Typen von Nachrichten können nun durch eine einfache \emph{Default: Deny} Regel alle einkommenden Nachrichten verwerfen, die von Verbindungen stammen, welche vorher keine Authentifizierung beim Server vollzogen haben. Das spart Rechenleistung, denn es muss nur ein kurzer Vergleich der Objektreferenz erledigt werden.
+Alle weiteren Typen von Nachrichten können nun durch eine einfache \emph{default: deny} Regel alle einkommenden Nachrichten verwerfen, die von Verbindungen stammen, welche vorher keine Authentifizierung beim Server vollzogen haben. Das spart Rechenleistung, denn es muss nur ein kurzer Vergleich der Objektreferenz erledigt werden.\par
+
+
+\subsection{Entwurfsmuster: Publish/Subscribe}
+Da die Meißner App nun über eine Echtzeitaktualisierung verfügt, wird diese genutzt, um das \emph{Publish/Subscribe Muster} anzuwenden.
 
 
 

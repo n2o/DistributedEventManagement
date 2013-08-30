@@ -80,6 +80,8 @@ io.sockets.on('connection', function (socket) {
 				case 'publishEvent':
 					lookForSubscriber(data, 'event');
 					break;
+				default:
+					socket.disconnect('unauthorized');
 			}
 		}
 	});

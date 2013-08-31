@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://needim.github.io/noty/ -->
+<html><script type="text/javascript" async="" src="./noty v2.1.0 - A jQuery Notification Plugin_files/ga.js"></script><script id="twitter-wjs" src="./noty v2.1.0 - A jQuery Notification Plugin_files/widgets.js"></script><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>noty v2.1.0 - A jQuery Notification Plugin</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="noty is a jquery plugin which is have too many options for display notification">
+	<meta name="author" content="Nedim Arabacı (http://ned.im)">
+	<meta name="keywords" content="jquery, notification, plugin, opensource, open, source">
+
+	<!-- Optimized mobile viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Place favicon.ico and apple-touch-icon.png in root directory -->
+	<link href="./noty v2.1.0 - A jQuery Notification Plugin_files/css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="http://needim.github.io/noty/css/fluid.css">
+	<link rel="stylesheet" href="http://needim.github.io/noty/css/buttons.css">
+	<link rel="stylesheet" href="http://needim.github.io/noty/css/twilight.css">
+	<link rel="stylesheet" href="http://needim.github.io/noty/css/font-awesome.css">
+
+<style type="text/css"></style></head>
+
+<body data-twttr-rendered="true">
+	<div class="inner">
+		<header>
+			<div class="g3 logo-cont">
+				<a class="logo" href="http://needim.github.io/noty" title="noty - a jquery notification plugin">
+					<img src="./noty v2.1.0 - A jQuery Notification Plugin_files/noty-v2-logo.png" alt="noty - a jquery notification plugin">
+				</a>
+			</div>
+			<div class="g3">
+				<div class="top-right">
+
+					<div class="btn-top">
+						<iframe src="./noty v2.1.0 - A jQuery Notification Plugin_files/github-btn(1).html" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+	  			</div>
+
+	  			<div class="btn-top">
+		  			<iframe src="./noty v2.1.0 - A jQuery Notification Plugin_files/github-btn.html" allowtransparency="true" frameborder="0" scrolling="0" width="92px" height="20px"></iframe>
+	  			</div>
+
+	  			<div class="btn-top">
+					  <iframe src="./noty v2.1.0 - A jQuery Notification Plugin_files/github-btn(2).html" allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="20px"></iframe>
+	  			</div>
+
+                <div class="btn-top">
+                    <iframe allowtransparency="true" frameborder="0" scrolling="no" src="./noty v2.1.0 - A jQuery Notification Plugin_files/tweet_button.1375828408.html" class="twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 106px; height: 20px;"></iframe>
+                    <script>!function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "//platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, "script", "twitter-wjs");</script>
+                </div>
+
+	  			<div class="btn-top">
+		    		<a href="http://flattr.com/thing/529967/noty-jQuery-Notification-Plugin" target="_blank">
+						<img src="./noty v2.1.0 - A jQuery Notification Plugin_files/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+					</div>
+	    	    </div>
+			</div>
+		</header>
+		<div class="cf"></div>
+		<div id="wrapper">
+			<div class="g3">
+
+				<div class="content">
+
+					
+
+					<div id="hi">
+
+						<h4>Hi!<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p><span class="hl">noty</span> is a jQuery plugin that makes it easy to create <span class="hl">alert</span> - <span class="hl">success</span> - <span class="hl">error</span> - <span class="hl">warning</span> - <span class="hl">information</span> - <span class="hl">confirmation</span> messages as an alternative the standard alert dialog. Each notification is added to a <span class="hl">queue</span>. (Optional)</p>
+
+						<p>The notifications can be positioned at the; <br> <span class="hl">top</span> - <span class="hl">topLeft</span> - <span class="hl">topCenter</span> - <span class="hl">topRight</span> - <span class="hl">center</span> - <span class="hl">centerLeft</span> - <span class="hl">centerRight</span> - <span class="hl">bottom</span> - <span class="hl">bottomLeft</span> - <span class="hl">bottomCenter</span> - <span class="hl">bottomRight</span></p>
+
+						<p>There are lots of other options in the API to customise the text, animation, speed, buttons and much more.</p>
+
+						<p>It also has various callbacks for the buttons, opening closing the notifications and queue control.</p>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="layouts">
+
+						<h4>Layouts &amp; Demos<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<div class="g1 layout-demo">
+
+							&nbsp;
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">Top</span>
+							<span class="runner" data-layout="top" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="top" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="top" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="top" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="top" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="top" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							&nbsp;
+
+						</div>
+
+						<div class="cf"></div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">TopLeft</span>
+							<span class="runner" data-layout="topLeft" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topLeft" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topLeft" data-type="error">Error <i class="icon-caret-right"></i></span> <br>
+							<span class="runner" data-layout="topLeft" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topLeft" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topLeft" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">TopCenter</span>
+							<span class="runner" data-layout="topCenter" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topCenter" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topCenter" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="topCenter" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topCenter" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topCenter" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">TopRight</span>
+							<span class="runner" data-layout="topRight" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topRight" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topRight" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="topRight" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topRight" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="topRight" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="cf"></div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">CenterLeft</span>
+							<span class="runner" data-layout="centerLeft" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerLeft" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerLeft" data-type="error">Error <i class="icon-caret-right"></i></span> <br>
+							<span class="runner" data-layout="centerLeft" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerLeft" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerLeft" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">Center</span>
+							<span class="runner" data-layout="center" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="center" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="center" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="center" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="center" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="center" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">CenterRight</span>
+							<span class="runner" data-layout="centerRight" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerRight" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerRight" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="centerRight" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerRight" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="centerRight" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="cf"></div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">BottomLeft</span>
+							<span class="runner" data-layout="bottomLeft" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomLeft" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomLeft" data-type="error">Error <i class="icon-caret-right"></i></span> <br>
+							<span class="runner" data-layout="bottomLeft" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomLeft" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomLeft" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">BottomCenter</span>
+							<span class="runner" data-layout="bottomCenter" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomCenter" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomCenter" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="bottomCenter" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomCenter" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomCenter" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">BottomRight</span>
+							<span class="runner" data-layout="bottomRight" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomRight" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomRight" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="bottomRight" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomRight" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottomRight" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="cf"></div>
+
+						<div class="g1 layout-demo">
+
+							&nbsp;
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							<h6><span class="lay-title">Bottom</span>
+							<span class="runner" data-layout="bottom" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottom" data-type="success">Success <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottom" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+							<span class="runner" data-layout="bottom" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottom" data-type="information">Information <i class="icon-caret-right"></i></span>
+							<span class="runner" data-layout="bottom" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+							</h6>
+
+						</div>
+
+						<div class="g1 layout-demo">
+
+							&nbsp;
+
+						</div>
+
+						<div class="cf"></div>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="installation">
+
+						<h4>Installation<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						Include <a href="http://docs.jquery.com/Downloading_jQuery#Current_Release">jQuery latest release</a> in your header.
+						The Google AJAX Libraries API can be used for this but you could also host the library yourself.
+
+						<p>Download <span class="hl">noty</span> from the
+						<a href="https://github.com/needim/noty/releases"><i class="icon-github"></i> Github</a> and upload the files to your server.</p>
+						Include <span class="hl">noty/jquery.noty.js</span> and its dependancies below jQuery. <br>
+						Also add <span class="hl">noty/layouts/top.js</span> (you can use more layouts if you want) and <span class="hl">noty/themes/default.js</span> to your header. Or some other theme.
+
+						<p>noty is compatible with <span class="hl">jQuery 1.6+</span> for now.
+						But if you are using older version then 1.6 you can add <span class="hl">promise.js</span> to your header.
+						(Thanks for <a href="https://github.com/MrMaksimize" target="_blank">Maksim Pecherskiy</a>)</p>
+
+						<p>Your code should then be similar to this:</p>
+
+						<pre>						<code data-language="html" class="rainbow">
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"js/noty/jquery.noty.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"js/noty/layouts/top.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"js/noty/layouts/topLeft.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"js/noty/layouts/topRight.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+<span class="comment html">&lt;!-- You can add more layouts if you want --&gt;</span>
+
+<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span> <span class="entity tag script">src</span>=<span class="string">"js/noty/themes/default.js"</span><span class="support tag script">&gt;</span><span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>
+            </code>
+						</pre>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="creating-a-noty">
+
+						<h4>Creating a noty<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+							We wrote a helper for creating noty easily. So you can use <span class="hl">noty(properties);</span> Just like this;
+
+							<p>Returns a noty javascript object. (not jquery dom object, but you can access dom with this object)</p>
+
+							<pre>							<code data-language="javascript" class="rainbow">
+<span class="keyword">var</span> n <span class="keyword operator">=</span> <span class="function call">noty</span>({text: <span class="string">'noty - a jquery notification library!'</span>});
+              </code>
+							</pre>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="options">
+
+						<h4>Options &amp; Defaults<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>Available options listed below.</p>
+
+						<pre>						<code data-language="javascript" class="rainbow"><span class="selector">
+$</span>.noty.defaults <span class="keyword operator">=</span> {
+    layout: <span class="string">'top'</span>,
+    theme: <span class="string">'defaultTheme'</span>,
+    type: <span class="string">'alert'</span>,
+    text: <span class="string">''</span>,
+    dismissQueue: <span class="constant language">true</span>, <span class="comment">// If you want to use queue feature set this true</span>
+    template: <span class="string">'&lt;div class="noty_message"&gt;&lt;span class="noty_text"&gt;&lt;/span&gt;&lt;div class="noty_close"&gt;&lt;/div&gt;&lt;/div&gt;'</span>,
+    animation: {
+        open: {height: <span class="string">'toggle'</span>},
+        close: {height: <span class="string">'toggle'</span>},
+        easing: <span class="string">'swing'</span>,
+        speed: <span class="constant numeric">500</span> <span class="comment">// opening &amp; closing animation speed</span>
+    },
+    timeout: <span class="constant language">false</span>, <span class="comment">// delay for closing event. Set false for sticky notifications</span>
+    force: <span class="constant language">false</span>, <span class="comment">// adds notification to the beginning of queue when set to true</span>
+    modal: <span class="constant language">false</span>,
+    maxVisible: <span class="constant numeric">5</span>, <span class="comment">// you can set max visible notification for dismissQueue true option</span>
+    closeWith: [<span class="string">'click'</span>], <span class="comment">// ['click', 'button', 'hover']</span>
+    callback: {
+        <span class="entity function">onShow</span>: <span class="keyword">function</span>() {},
+        <span class="entity function">afterShow</span>: <span class="keyword">function</span>() {},
+        <span class="entity function">onClose</span>: <span class="keyword">function</span>() {},
+        <span class="entity function">afterClose</span>: <span class="keyword">function</span>() {}
+    },
+    buttons: <span class="constant language">false</span> <span class="comment">// an array of buttons</span>
+};
+            </code>
+						</pre>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="custom-container">
+
+						<h4>Custom Container<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>Just like this;</p>
+
+						<pre>						<code data-language="javascript" class="rainbow">
+<span class="keyword">var</span> n <span class="keyword operator">=</span><span class="selector"> $</span>(<span class="string">'.custom_container'</span>).<span class="function call">noty</span>({text: <span class="string">'noty - a jquery notification library!'</span>});
+            </code>
+						</pre>
+
+						<div class="cf">
+
+							<div class="g1">
+
+								<h5>Try!</h5>
+
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="alert">Alert <i class="icon-caret-right"></i></span>
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="success">Success <i class="icon-caret-right"></i></span>
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="error">Error <i class="icon-caret-right"></i></span>  <br>
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="warning">Warning <i class="icon-caret-right"></i></span>
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="information">Information <i class="icon-caret-right"></i></span>
+								<span class="runner" data-layout="inline" data-custom=".custom_container" data-type="confirm">Confirm <i class="icon-caret-right"></i></span>
+
+							</div>
+
+							<div class="g2">
+
+								<h5>Custom Container</h5>
+
+								<div class="custom_container"></div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="theme">
+
+						<h4>Theme<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>noty is easily themable using Javascript or CSS.</p>
+
+						<p>Theme structre is in <span class="hl">noty/themes/default.js</span> file. You can copy-paste this file and change.</p>
+
+						<p>After that you can set your new theme with noty <span class="hl">theme property</span>. Like;</p>
+
+						<pre>						<code data-language="javascript" class="rainbow">
+  <span class="keyword">var</span> n <span class="keyword operator">=</span> <span class="function call">noty</span>({
+    text: <span class="string">'noty - a jquery notification library!'</span>,
+    theme: <span class="string">'your_new_theme'</span>,
+  });
+            </code>
+						</pre>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="buttons">
+
+						<h4 id="buttons">Buttons<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>We can set button objects with an array like above;</p>
+
+						<pre>						<code data-language="javascript" class="rainbow">
+<span class="function call">noty</span>({
+  text: <span class="string">'Do you want to continue?'</span>,
+  buttons: [
+    {addClass: <span class="string">'btn btn-primary'</span>, text: <span class="string">'Ok'</span>, <span class="entity function">onClick</span>: <span class="keyword">function</span>($noty) {
+
+        <span class="comment">// this = button element</span>
+        <span class="comment">// $noty = $noty element</span>
+
+        $noty.<span class="function call">close</span>();
+        <span class="function call">noty</span>({text: <span class="string">'You clicked "Ok" button'</span>, type: <span class="string">'success'</span>});
+      }
+    },
+    {addClass: <span class="string">'btn btn-danger'</span>, text: <span class="string">'Cancel'</span>, <span class="entity function">onClick</span>: <span class="keyword">function</span>($noty) {
+        $noty.<span class="function call">close</span>();
+        <span class="function call">noty</span>({text: <span class="string">'You clicked "Cancel" button'</span>, type: <span class="string">'error'</span>});
+      }
+    }
+  ]
+});
+            </code>
+						</pre>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="callbacks">
+
+						<h4>Callbacks<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>noty have 4 callback option for now. We will add more callback asap.</p>
+
+						<p>
+							<span class="hl">onShow</span> -
+							<span class="hl">afterShow</span> -
+							<span class="hl">onClose</span> -
+							<span class="hl">afterClose</span>
+						</p>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="api">
+						<h4>API<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<p>
+							<span class="hl">$.noty.get(id)</span> - Returns a noty javascript object
+						</p>
+
+						<p>
+							<span class="hl">$.noty.close(id)</span> - Close a noty - <strong>same as var n = noty({text: 'Hi!'})); n.close();</strong>
+						</p>
+
+						<p>
+							<span class="hl">$.noty.clearQueue()</span> - Clears the notification queue
+						</p>
+
+						<p>
+							<span class="hl">$.noty.closeAll()</span> - Close all notifications
+						</p>
+
+						<p>
+							<span class="hl">$.noty.setText(id, text)</span> - Notification text updater - <strong>same as var n = noty({text: 'Hi!'})); n.setText('Hi again!');</strong>
+						</p>
+
+						<p>
+							<span class="hl">$.noty.setType(id, type)</span> - Notification type updater - <strong>same as var n = noty({text: 'Hi!'})); n.setType('error');</strong>
+						</p>
+
+					</div>
+
+					<div class="divider"></div>
+
+					<div id="history">
+
+						<h4>Github Commit History<div class="inner-menu" style="">
+
+						<a href="http://needim.github.io/noty/#hi">Hi!</a>
+						<a href="http://needim.github.io/noty/#layouts">Layouts</a>
+						<a href="http://needim.github.io/noty/#installation">Installation</a>
+						<a href="http://needim.github.io/noty/#creating-a-noty">Creating a noty</a>
+						<a href="http://needim.github.io/noty/#options">Options</a>
+						<a href="http://needim.github.io/noty/#custom-container">Custom Container</a>
+						<a href="http://needim.github.io/noty/#theme">Theme</a>
+						<a href="http://needim.github.io/noty/#buttons">Buttons</a>
+						<a href="http://needim.github.io/noty/#callbacks">Callbacks</a>
+						<a href="http://needim.github.io/noty/#api">API</a>
+						<a href="http://needim.github.io/noty/#history">History</a>
+
+					</div></h4>
+
+						<table class="dark">
+							<thead>
+								<tr>
+									<th style="width: 110px">Committer</th>
+									<th>Message</th>
+									<th style="width: 100px; text-align: right">Date</th>
+								</tr>
+							</thead>
+							<tbody id="commit-history-json">
+								
+							<tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/e07d0eebd3085c25d15391e022543f2ed9aad1d0">Merge pull request #150 from lynx1983/master
+
+call close before show is complete issue</a></td><td style="text-align: right; white-space: nowrap;">2013-08-28T10:13:25Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Pavlov Max</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/27143e714d17eafe30eba8b78b5970205620a21b">Wait until full show only when close</a></td><td style="text-align: right; white-space: nowrap;">2013-08-22T12:59:26Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Pavlov Max</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/dcef30309998f6977d86dc7d6e0ae41b534ba07c">Added intermediate state flag</a></td><td style="text-align: right; white-space: nowrap;">2013-08-20T05:39:32Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/6214267151e22b0678785b7bda293012b7017c6e">v2.1.0</a></td><td style="text-align: right; white-space: nowrap;">2013-07-03T07:35:59Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/8b5c11009c4d04c8f72ec8041884e100060e106b">logo update</a></td><td style="text-align: right; white-space: nowrap;">2013-07-03T07:04:01Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/6d4668bc0c3de32a6aa48833512dec90aebad098">MaxVisible option for all layouts.</a></td><td style="text-align: right; white-space: nowrap;">2013-07-03T06:54:58Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/675d965b317760641544073c6082b49e2188fbf1">Merge branch 'master' of https://github.com/DJMatty/noty into DJMatty-master</a></td><td style="text-align: right; white-space: nowrap;">2013-07-03T06:24:08Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/d761176a552097f6e89b7ce6319b9a9d3b695498">Merge pull request #144 from jonpacker/master
+
+Explicitly define `noty` helper on the global scope</a></td><td style="text-align: right; white-space: nowrap;">2013-07-01T07:18:31Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">DJMatty</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/d9df0a0313c1e598e982e1cf816b02c305fa91c3">Merge pull request #1 from liquidboy/master
+
+MaxVisible notifications</a></td><td style="text-align: right; white-space: nowrap;">2013-06-27T03:26:57Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">jose fajardo</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/8d19a9ae20e2399794e776a941b886d9a6c4b3e1">Ability to set the max number of visible notifications (via MaxVisible option). This is only applicable when "dismissQueue" = false</a></td><td style="text-align: right; white-space: nowrap;">2013-06-27T03:14:17Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Jon Packer</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/1e0612e3e684e9eff48fb900e0d9fb017a52af81">Explicitly define noty helper on the global scope</a></td><td style="text-align: right; white-space: nowrap;">2013-06-11T08:31:26Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Matt Evans</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/9c2756499c4b4868668cd01d117fe2ca4f96ea25">added stopPropagation function and call it from the close click event and close button click event, this prevents the close button triggering onCloseClick when both 'click' and 'button' are set in closeWith</a></td><td style="text-align: right; white-space: nowrap;">2013-05-23T07:02:53Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/8c35a9516bc6b980097211ac38f7701b7cabdec9">Merge pull request #120 from OliverUv/master
+
+Added callback onCloseClick</a></td><td style="text-align: right; white-space: nowrap;">2013-04-20T13:11:26Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/61859b590878ada2e8947a233588d5750da8a7f6">Merge pull request #127 from silentw/patch-1
+
+Prevent close button animation queue</a></td><td style="text-align: right; white-space: nowrap;">2013-04-20T13:09:10Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/4d8bc69e31f2df6681c4b3fe23b3faae2d3797b6">Merge pull request #129 from kubelsmieci/doubleClosing
+
+Dont allow second close() when already in closing.</a></td><td style="text-align: right; white-space: nowrap;">2013-04-10T15:55:18Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">kubelsmieci</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/7489ce76571cd5aac6467bb9626de661eabf2e63">Dont allow second close() when already in closing.</a></td><td style="text-align: right; white-space: nowrap;">2013-04-10T14:14:26Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Ricardo</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/7fb1b49bfbc4c745e29fe7c282702485c8806018">Prevent close button animation queue</a></td><td style="text-align: right; white-space: nowrap;">2013-03-05T17:04:53Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/be4215e97b62f26d2e52f23e2a9b60cd2d8c67b4">Merge pull request #123 from ssherif/master
+
+noty helper function doesn't consider defaults dismissQueue value</a></td><td style="text-align: right; white-space: nowrap;">2013-02-19T09:57:46Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Pavel Belyakov</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/d8053b122d0a87edc10d9a4b7ba07a46ea3178cd">Use default dismissQueue value in noty helper function if value not specified through function options</a></td><td style="text-align: right; white-space: nowrap;">2013-02-14T18:22:52Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Oliver Uvman</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/217aaefef03f6ee58b9a0817366914539076317b">Added onCloseClick callback.</a></td><td style="text-align: right; white-space: nowrap;">2013-01-25T10:44:35Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/3c32c0d0cc66296af20448e60e4f506521605daa">Merge pull request #95 from gsaricali/master
+
+Fixed a defect in close method of noty</a></td><td style="text-align: right; white-space: nowrap;">2012-10-05T12:06:15Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/0cfb7417aea0149dac2217453fe56e72f3975fe7">Merge pull request #97 from Mikhail-Fiadosenka/master
+
+Fix for incorrect positioning</a></td><td style="text-align: right; white-space: nowrap;">2012-10-05T12:05:15Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Mikhail Fiadosenka</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/9ee755e5d5dc5b0f69a51d673221ca28190974be">Fixed missing argument in $(this.element).outerWidth()
+
+Omitted argument caused issue https://github.com/needim/noty/issues/96</a></td><td style="text-align: right; white-space: nowrap;">2012-10-05T10:04:10Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Gulden Saricali</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/3e3f8d99892f65d03d47945969331ee80a5327b1">Make sure self. has not been removed before attempting to remove it in close method.</a></td><td style="text-align: right; white-space: nowrap;">2012-10-03T19:07:50Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/eebee2f326b729c083b15f64c3220f7e2be015a2">Reformating
+
+Signed-off-by: Nedim Arabacı <nedim@efabrika.com></nedim@efabrika.com></a></td><td style="text-align: right; white-space: nowrap;">2012-09-19T11:48:10Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/a64d4603b37d5eff5ef2060f24f74945069eb18f">Merge pull request #77 from marcin-wosinek/master
+
+Fix issues with ie8</a></td><td style="text-align: right; white-space: nowrap;">2012-09-19T11:33:22Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/e4263c566d6d403e3147af98371b918d318bd365">Merge pull request #58 from danieleorler/master
+
+Added setTimeout API</a></td><td style="text-align: right; white-space: nowrap;">2012-09-19T11:31:41Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Nedim Arabacı</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/7795295e230bdf8588f05955e42b4150d14b7c0a">Merge pull request #85 from ClemensSchneider/dont_modify_array_while_iterating
+
+Don't modify queue while iterating it</a></td><td style="text-align: right; white-space: nowrap;">2012-09-19T11:31:22Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Clemens</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/b9b502ffeaf4d3a5b06ea76011cfe58a33adcbf9">removed unnecessary change</a></td><td style="text-align: right; white-space: nowrap;">2012-09-16T09:12:51Z</td></tr><tr style="border-bottom: 1px solid #999; text-shadow: none"><td valign="top" style="white-space: nowrap;">Clemens</td><td valign="top" style="padding: 0 10px"><a style="font-weight: bold" href="https://github.com/needim/noty/commit/777567dccb7ecc7dc47c3a30ac5027345cb16013">fixed removing elements from the queue</a></td><td style="text-align: right; white-space: nowrap;">2012-09-16T08:44:32Z</td></tr></tbody>
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<footer class="g3 cf">
+			<small>Released under the MIT License.</small>
+		</footer>
+	</div>
+
+	<script src="./noty v2.1.0 - A jQuery Notification Plugin_files/jquery-1.7.1.min.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/jquery-ui-1.8.17.easing.min.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/jquery.dateFormat-1.0.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/rainbow.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/generic.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/javascript.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/html.js"></script>
+
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/jquery.noty.js"></script>
+
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/bottom.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/bottomCenter.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/bottomLeft.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/bottomRight.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/center.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/centerLeft.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/centerRight.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/inline.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/top.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/topCenter.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/topLeft.js"></script>
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/topRight.js"></script>
+
+  <script src="./noty v2.1.0 - A jQuery Notification Plugin_files/default.js"></script>
+
+  <script defer="" src="./noty v2.1.0 - A jQuery Notification Plugin_files/script.js"></script>
+
+	<!-- HTML5 IE Enabling Script -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- CSS3 Media Queries -->
+	<!--<script src="js/libs/respond.min.js"></script> -->
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28737816-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+      })();
+
+	</script>
+
+
+
+</body></html>

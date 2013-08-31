@@ -15,13 +15,13 @@ Bei dem Gedanken eine App zu entwickeln steht man oft vor der Entscheidung für 
 
 Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Google Projekt \glqq HTML5 Rocks\grqq{}\cite{html5rocksmain} und vielen weiteren Personen ist \emph{HTML5} in aller Munde und somit gibt es tatsächlich die Möglichkeit jedes Betriebssystem mit einer einzigen Web-App abzudecken.\par
 
-Damit ist die zugrunde liegende Programmiersprache festgelegt. Mit der Wahl des Frameworks \emph{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
+Damit ist die zugrunde liegende Programmiersprache festgelegt. Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
 
 \subsection{Beschreibung der Umgebung}
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung zwischen den Bergen zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung durch einen eigenen Funkmast zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
 
 \section{Struktur der Webanwendung}
-TODO: Einleitung für das Kapitel schreiben
+Für die Grundstruktur wurde das Open Source Framework cakePHP verwendet. Diese verwendet für einen sauberen Programmierstiel das Entwurfsmuster \emph{Model View Controller}.
 
 \subsection{Entwurfsmuster: Model View Controller}
 
@@ -39,7 +39,7 @@ Verantwortlich für alles, was die Daten eines bestimmten Models angeht. In dies
 \underline{View:}\\
 Generiert das Aussehen einer bestimmten Seite. Hier wird vorwiegend mit gängigen Webformaten, wie HTML, PHP und JavaScript gearbeitet. Ein View kann auf die Daten zugreifen, die ihm der Controller liefert und diese dann anschaulich darstellen. Dadurch muss sich ein View nicht darum kümmern woher er seine Informationen zusammensuchen muss, sondern bekommt garantiert, dass diese vom Controller bereit gestellt wurden. Hierbei können verschiedene Views für verschiedene Geräte erstellt werden und erlauben so einfach eine mobile Seite zu generieren.
 
-\underline{Controller:}
+\underline{Controller:}\\
 Hier findet die gesamte Logik und Aufbereitung der Daten statt, die später dem Benutzer im View angezeigt werden sollen. Sämtliche Datenbankabfragen, Berechnungen oder Ähnliches werden hier durchgeführt und dem Model / View bereitgestellt. Für jedes Objekt existiert ein eigener Controller, diese werden \emph{EventsController}, \emph{UsersController} etc. genannt. \\
 In diesem Framework ist jede Funktion direkt mit den Views verknüpft, das heißt definiert man im EventsController eine Funktion namens \emph{index()}, so stellt dies eine Seite der Webanwendung dar, die mit \emph{http://localhost/Events/index} aufgerufen werden kann und den entsprechenden View in \emph{/View/Events/index.ctp} erwartet.\par
 

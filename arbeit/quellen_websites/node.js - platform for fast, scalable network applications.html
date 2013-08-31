@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0018)http://nodejs.org/ -->
+<html lang="en"><script src="./node.js - platform for fast, scalable network applications_files/ga.js"></script><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+    <link type="image/x-icon" rel="icon" href="http://nodejs.org/favicon.ico">
+    <link type="image/x-icon" rel="shortcut icon" href="http://nodejs.org/favicon.ico">
+    <link rel="stylesheet" href="http://nodejs.org/pipe.css">
+    <link rel="stylesheet" href="http://nodejs.org/sh_vim-dark.css">
+    <link rel="alternate" type="application/rss+xml" title="node blog" href="http://feeds.feedburner.com/nodejs/123123123">
+    <title>node.js</title>
+  <style type="text/css"></style></head>
+  <body id="front">
+    <div id="intro">
+        <img id="logo" src="./node.js - platform for fast, scalable network applications_files/logo.png" alt="node.js">
+
+        <p>Node.js is a platform built on <a href="http://code.google.com/p/v8/">Chrome's JavaScript runtime</a>
+        for easily building fast, scalable network applications.  Node.js
+        uses an event-driven, non-blocking I/O model that makes it
+        lightweight and efficient, perfect for data-intensive real-time
+        applications that run across distributed devices.</p>
+
+        <p>Current Version: v0.10.17</p>
+
+        <div class="buttons">
+        <a href="http://nodejs.org/dist/v0.10.17/node-v0.10.17.pkg" class="button downloadbutton" id="downloadbutton">INSTALL</a>
+
+        <a href="http://nodejs.org/download/" class="button" id="all-dl-options">Downloads</a><a href="http://nodejs.org/api/" class="button" id="docsbutton">API Docs</a>
+        </div>
+
+        <a href="http://github.com/joyent/node"><img class="forkme" src="./node.js - platform for fast, scalable network applications_files/forkme.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <div id="quotes" class="clearfix"><h2>Node.js in the Industry</h2><ul><li class="asti"><img src="./node.js - platform for fast, scalable network applications_files/logo(1).png" alt="logo" height="34"><p>Node.js enables zero-to-hero prototyping to quickly bring ideas to life, while still being robust enough for no-nonsense military installations.  Node powers our internal and external APIs and manages our scalable real-time voice communication platforms.
+<br>
+<a href="https://hearvoisus.com/">Ross Kukulinski</a>
+<br>
+<span>Director of Product Development</span></p>
+</li>
+<li class="backbeam"><img src="./node.js - platform for fast, scalable network applications_files/logo(2).png" alt="logo" height="34"><p>Our entire software stack is built in Node. The key benefits for us are: great performance, fast development and a huge flexibility to do both high level and low level functionality.
+<br>
+<a href="http://backbeam.io/">Alberto Gimeno</a>
+<br>
+<span>CEO</span></p>
+</li>
+<li class="omniti"><img src="./node.js - platform for fast, scalable network applications_files/logo(3).png" alt="logo" height="34"><p>We've used Node.js for client projects including building web services for 
+geo-location data and creating the back-end infrastructure for a large mobile 
+deployment. It worked so well we re-wrote our own website with it.
+<br>
+<a href="http://omniti.com/">Robert Treat</a>
+<br>
+<span>COO</span>
+</p>
+</li>
+<li class="caliper"><img src="./node.js - platform for fast, scalable network applications_files/logo(4).png" alt="logo" height="34"><p>Node is a critical piece of our infrastructure. By handling millions of traces and thousands of connections with Node, we can focus on building a great service.
+<br>
+<a href="http://www.caliper.io/">Kalvir Sandhu</a>
+<br>
+<span>Co-founder and CTO</span></p>
+</li></ul><h2 style="clear:both"><a href="http://nodejs.org/industry/">More...</a></h2></div>
+
+    <div id="content" class="clearfix">
+            <div id="column1">
+                <h2>An example: Webserver</h2>
+                <p>This simple web server written in Node responds with "Hello World" for every request.</p>
+              <pre class="sh_sourceCode"><span class="sh_keyword">var</span> http <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'http'</span><span class="sh_symbol">);</span>
+http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span><span class="sh_keyword">function</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'Hello World</span><span class="sh_specialchar">\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">1337</span><span class="sh_symbol">,</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'Server running at http://127.0.0.1:1337/'</span><span class="sh_symbol">);</span></pre>
+
+              <p>To run the server, put the code into a file
+              <code>example.js</code> and execute it with the
+              <code>node</code> program from the command line:</p>
+              <pre class="sh_none">% node example.js
+Server running at http://127.0.0.1:1337/</pre>
+
+                <p>Here is an example of a simple TCP server which listens on port 1337 and echoes whatever you send it:</p>
+
+                <pre class="sh_sourceCode"><span class="sh_keyword">var</span> net <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'net'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">var</span> server <span class="sh_symbol">=</span> net<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span><span class="sh_keyword">function</span> <span class="sh_symbol">(</span>socket<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  socket<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span><span class="sh_string">'Echo server</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+  socket<span class="sh_symbol">.</span><span class="sh_function">pipe</span><span class="sh_symbol">(</span>socket<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+server<span class="sh_symbol">.</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">1337</span><span class="sh_symbol">,</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">);</span></pre>
+
+                <!-- <p>Ready to dig in? <a href="">Download the latest version</a> of node.js or learn how other organizations are <a href="">using the technology</a>.</p> -->
+        </div>
+        <div id="column2">
+            <h2>Featured</h2>
+            <a href="http://www.youtube.com/watch?v=jo_B4LTHi3I"><img src="./node.js - platform for fast, scalable network applications_files/ryan-speaker.jpg"></a>
+            A guided introduction to Node
+
+            <h2>Explore Node.js</h2>
+            <ul id="explore">
+                <li><a href="http://nodejs.org/about/" class="explore">About</a><br><span>Technical overview</span></li>
+                <li><a href="http://npmjs.org/" class="explore">npm Registry</a><br><span>Modules, resources and more</span></li>
+                <li><a href="http://nodejs.org/api/" class="explore">Documentation</a><br><span>API Specifications</span></li>
+                <li><a href="http://blog.nodejs.org/" class="explore">Node.js Blog</a><br><span>Insight, perspective and events</span></li>
+                <li><a href="http://nodejs.org/community/" class="explore">Community</a><br><span>Mailing lists, blogs, and more</span></li>
+                <li><a href="http://nodejs.org/logos/" class="explore">Logos</a><br><span>Logo and desktop background</span></li>
+                <li><a href="http://jobs.nodejs.org/" class="explore">Jobs</a><br><ol class="jobs"><!-- JOBS --><li><a href="http://jobs.nodejs.org/a/jbb/redirect/914771">Ziploop</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/908461">creativeLIVE</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/907576">Prolexic Technologies</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/907306">Nearbuy Systems</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/905343">Leadnomics</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/900929">Uber</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/900780">eBay, Inc</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/899384">Raindance</a></li><li><a href="http://jobs.nodejs.org/a/jbb/redirect/895578">Versus</a></li><!-- JOBS --></ol></li>
+            </ul>
+    </div>
+</div>
+
+    <div id="footer">
+        <a href="http://joyent.com/" class="joyent-logo">Joyent</a>
+        <ul class="clearfix">
+            <li><a href="./node.js - platform for fast, scalable network applications_files/node.js - platform for fast, scalable network applications.html">Node.js</a></li>
+            <li><a href="http://nodejs.org/download/">Download</a></li>
+            <li><a href="http://nodejs.org/about/">About</a></li>
+            <li><a href="http://npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/api/">Docs</a></li>
+            <li><a href="http://blog.nodejs.org/">Blog</a></li>
+            <li><a href="http://nodejs.org/community/">Community</a></li>
+            <li><a href="http://nodejs.org/logos/">Logos</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <!-- <li><a hrfe="http://twitter.com/nodejs" class="twitter">@nodejs</a></li> -->
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="http://nodejs.org/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.17/LICENSE">license</a>.</p>
+    </div>
+
+
+    <script src="./node.js - platform for fast, scalable network applications_files/sh_main.js"></script>
+    <script src="./node.js - platform for fast, scalable network applications_files/sh_javascript.min.js"></script>
+    <script>highlight(undefined, undefined, 'pre');</script>
+
+    <script>
+      window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];
+      (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s);
+      }(document, 'script'));
+      ;(function(d,n) {
+        var os = n.platform.match(/(Win|Mac|Linux)/);
+        var x = n.userAgent.match(/x86_64|Win64|WOW64/) ||
+                n.cpuClass === 'x64' ? 'x64' : 'x86';
+        var base = 'http://nodejs.org/dist/v0.10.17/';
+        var href = 'node-v0.10.17.tar.gz';
+        var db = d.getElementById('downloadbutton');
+        var d2;
+        switch (os && os[1]) {
+          case 'Mac':
+            href = 'node-v0.10.17.pkg';
+            break;
+          case 'Win':
+            href = 'node-v0.10.17-' + x + '.msi';
+            if (x === 'x64') href = 'x64/' + href;
+            break;
+
+          // TODO uncomment when we have these
+          // case 'Linux':
+          //   // two buttons: .deb and .rpm
+          //   href = 'node-v0.10.17-' + x + '.rpm';
+          //   var d2 = document.createElement('a');
+          //   d2.href = base + 'node-v0.10.17-' + x + '.deb';
+          //   d2.className = 'button downloadbutton';
+          //   d2.innerHTML = 'INSTALL .deb';
+          //   db.innerHTML = 'INSTALL .rpm';
+          //   db.parentNode.insertBefore(d2, db);
+          //   break;
+        }
+
+        db.href = base + href;
+        // if there's one download option, then download it at #download
+        if (location.hash === '#download' && !d2)
+          location.replace(b.href);
+      })(document,navigator);
+    </script>
+ 
+
+</body></html>

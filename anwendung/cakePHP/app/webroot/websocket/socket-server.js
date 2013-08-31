@@ -49,6 +49,7 @@ io.sockets.on('connection', function (socket) {
 		var data = JSON.parse(message);
 		if (data.name !== "null" && data.name !== "false") {
 			switch(data.type) {
+
 				case 'location':
 					if (clients[data.name] !== undefined) {
 						saveToLocations(data);
@@ -58,6 +59,7 @@ io.sockets.on('connection', function (socket) {
 						socket.disconnect('unauthorized');
 					}
 					break;
+
 				case 'syn':
 					if (validSignature(data)) {
 						// Initialize a client and identify him by name
@@ -71,15 +73,18 @@ io.sockets.on('connection', function (socket) {
 						socket.disconnect('unauthorized'); // close socket if wrong signature was sent
 					}
 					break;
+
 				case 'subscribe':
 					if (clients[data.name] !== undefined) 
 						clients[data.name].subscriptions = data.events;
 					else
 						socket.disconnect('unauthorized');
 					break;
+
 				case 'publishEvent':
 					lookForSubscriber(data, 'event');
 					break;
+					
 				default:
 					socket.disconnect('unauthorized');
 			}

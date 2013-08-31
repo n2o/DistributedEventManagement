@@ -28,7 +28,6 @@ $(function() {
 		longitude = position.coords.longitude;
 
 		if (firstRun) {
-			console.log("First run");
 			lastLatitude = latitude;
 			lastLongitude = longitude;
 			sendPosition();

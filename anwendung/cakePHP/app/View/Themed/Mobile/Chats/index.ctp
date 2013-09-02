@@ -1,14 +1,15 @@
-<article>
+<div data-role="header">
+	<a href="#nav" data-role="button" data-inline="true" data-icon="bars">Menu</a>
 	<h1>Chats</h1>
-	
-	<div id="chathistory"></div>
-	<div>
-		<span id="chatstatus">Establishing connection...</span>
-		<input type="text" id="chatinput" placeholder="Type new message" style=""/>
-		<button onclick="sendChatMessage()" class="button" style="margin-top:1em;">Send</button>
-	</div>
-
-</article>
+</div>
+<div data-role="content">
+	<article>
+		<div id="chathistory" style="height: 80%"></div>
+			<span id="chatstatus">Establishing connection...</span>
+			<input length="100%" type="text" id="chatinput" data-mini="true" placeholder="Type new message"/>
+			<button onclick="sendChatMessage()">Send</button>
+	</article>
+</div>
 
 <script type="text/javascript">
 /**

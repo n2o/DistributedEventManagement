@@ -1,5 +1,4 @@
 <div data-role="header">
-	<!--<a data-icon="grid" class="menu-trigger">Menu</a>-->
 	<a href="#nav" data-role="button" data-inline="true" data-icon="bars">Menu</a>
 	<h1>Statistics</h1>
 </div>

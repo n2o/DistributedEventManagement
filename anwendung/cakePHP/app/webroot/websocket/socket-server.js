@@ -106,13 +106,13 @@ io.sockets.on('connection', function (socket) {
 
 				case 'history':
 					console.log("Incoming history request from: "+data.name);
-					if (clients[data.name] !== undefined) {
-						if (history.length > 0) {
+					// if (clients[data.name] !== undefined) {
+						// if (history.length > 0) {
 							socket.send(JSON.stringify({type: 'history', data: history}));
-						}
-					} else {
-						socket.disconnect('unauthorized');
-					}
+						// }
+					// } else {
+					// 	socket.disconnect('unauthorized');
+					// }
 					break;					
 					
 				default:

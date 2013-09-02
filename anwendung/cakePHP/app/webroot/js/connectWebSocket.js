@@ -10,13 +10,18 @@ $(function () {
 	// Initial call
 	doConnect();
 
+	/**
+	 * Reconnect on disconnect, called by window eventlistener
+	 */
 	function refresh() {
-		// Reconnect on disconnect
 		if (!connected) {
 			doConnect();
 		}
 	}
 
+	/**
+	 * Connect to websocket server
+	 */
 	function doConnect() {
 		try {
 			socket = io.connect('wss://'+host+':'+port+'/');
@@ -33,6 +38,34 @@ $(function () {
 		}
 	}
 
+	/**
+	 * Get current location, prepare JSON String and send it to WS server
+	 */
+	function doSend() {
+		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+	}
+
+	/**
+	 * On new websocket connection, update state
+	 */
+	function onOpen(evt) {
+		connected = true;
+		$('.connectionState').text("Connected");
+		$('.connectionState').addClass('connected');
+	}
+
+	/**
+	 * On closed connection, update state
+	 */
+	function onDisconnect(evt) {
+		connected = false;
+		$('.connectionState').text("Not connected");
+		$('.connectionState').removeClass('connected');
+	}
+
+	/**
+	 * Close socket and update state
+	 */
 	function doDisconnect() {
 		socket.close();
 		connected = false;
@@ -41,24 +74,8 @@ $(function () {
 	}
 
 	/**
-	 * Get current location, prepare JSON String and send it to WS server
+	 * Look up type of message when received new message
 	 */
-	function doSend() {
-		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
-	}
-
-	function onOpen(evt) {
-		connected = true;
-		$('.connectionState').text("Connected");
-		$('.connectionState').addClass('connected');
-	}
-
-	function onDisconnect(evt) {
-		connected = false;
-		$('.connectionState').text("Not connected");
-		$('.connectionState').removeClass('connected');
-	}
-
 	function onMessage(evt) {
 		// Update the marks on the map
 		var data = JSON.parse(evt);
@@ -74,17 +91,20 @@ $(function () {
 				break;
 
 			case 'history':
-				console.log("Received new chat history");
+				console.log("incoming history");
 				incomingChatMessage(data);
 				break;
 
 			case 'message':
-				console.log("Received new chat message");
+				console.log("incoming message");
 				incomingChatMessage(data);
 				break;
 		}
 	}
 
+	/**
+	 * Print error message on error event
+	 */
 	function onError(evt) {
 		console.log('ERROR: '+evt.data);
 		connected = false;
@@ -101,6 +121,13 @@ $(function () {
 		}
 	}
 
+/************************** Chat section **************************/
+	/**
+	 * Main Logic for Chat function
+	 *
+	 * Sending new messages to websocket server and wait for new messages 
+	 * from other users. Request history on first connect.
+	 */
 	function incomingChatMessage(message) {
 		'use strict';
 
@@ -147,6 +174,9 @@ $(function () {
 		}
 	});
 
+	/**
+	 * Prepend the new text message on screen
+	 */
 	function addMessage(author, message, dt) {
 		$('#chathistory').prepend('<p>' + author + ' @ ' +
 			+ (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'

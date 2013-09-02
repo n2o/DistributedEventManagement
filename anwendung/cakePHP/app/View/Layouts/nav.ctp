@@ -4,5 +4,6 @@
 		<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link('Geolocations', array('controller' => 'geolocations', 'action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link('Stats', array('controller' => 'stats', 'action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link('Chats', array('controller' => 'chats', 'action' => 'index')); ?></li>
 	</ul>
 </nav>

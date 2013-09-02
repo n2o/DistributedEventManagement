@@ -16,6 +16,8 @@ var idleTime = 15; // Spec. after how many minutes a user is removed from the li
 
 // Necessary, do not edit
 var locations = {type: 'location'};	// store all geo information about persons
+
+var history = []
 var clients = {};
 
 // Open module for session based authentication
@@ -84,6 +86,34 @@ io.sockets.on('connection', function (socket) {
 				case 'publishEvent':
 					lookForSubscriber(data, 'event');
 					break;
+
+				case 'message':
+					console.log("Incoming message from: "+data.name);
+					if (clients[data.name] !== undefined) {
+						var obj = {
+							time: (new Date()).getTime(),
+							text: htmlEntities(data.text),
+							name: data.name
+						}
+						history.push(obj);
+						history = history.slice(-100);
+						socket.send(JSON.stringify({type: 'message', data: obj}));
+						socket.broadcast.send(JSON.stringify({type: 'message', data: obj}));
+					} else {
+						socket.disconnect('unauthorized');
+					}
+					break;
+
+				case 'history':
+					console.log("Incoming history request from: "+data.name);
+					if (clients[data.name] !== undefined) {
+						if (history.length > 0) {
+							socket.send(JSON.stringify({type: 'history', data: history}));
+						}
+					} else {
+						socket.disconnect('unauthorized');
+					}
+					break;					
 					
 				default:
 					socket.disconnect('unauthorized');
@@ -198,4 +228,12 @@ function timeDiff(start, end) {
 	diff -= hours * 1000 * 60 * 60;
 	var minutes = Math.floor(diff / 1000 / 60);
 	return minutes;
+}
+
+/**
+ * Extracting HTML Entities and correcting the format
+ */
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }

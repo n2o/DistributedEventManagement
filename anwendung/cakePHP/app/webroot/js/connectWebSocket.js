@@ -101,19 +101,9 @@ $(function () {
 		}
 	}
 
-	window.addEventListener("load", refresh, false);
-
 	function incomingChatMessage(message) {
 		'use strict';
 
-		if (firstRun) {
-			firstRun = false;
-			var msg = {
-				name: name,
-				type: 'history'
-			}
-			// socket.send(JSON.stringify(msg));
-		}
 		if (typeof(socket) === undefined) {
 			$('#chathistory').html($('<article>', { text: 'Sorry, but your browser doesn\'t support WebSockets.'} ));
 			$('#chatinput').hide();

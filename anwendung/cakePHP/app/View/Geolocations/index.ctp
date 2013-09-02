@@ -11,3 +11,13 @@
 <article>
 	<section id="map"></section>
 </article>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	try {
+		window.addEventListener("load", refresh, false);
+	} catch (e) {
+		// Ignore because first attempt often gets failed
+	}
+});
+</script>

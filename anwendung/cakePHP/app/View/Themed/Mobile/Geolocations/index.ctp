@@ -1,20 +1,3 @@
-<style type="text/css">
-#popupPanel-popup {
-    right: 0 !important;
-    left: auto !important;
-}
-#popupPanel {
-    width: 200px;
-    border: 1px solid #000;
-    border-right: none;
-    background: rgba(0,0,0,.5);
-    margin: -1px 0;
-}
-#popupPanel .ui-btn {
-    margin: 2em 15px;
-}
-</style>
-
 <div data-role="header">
 	<a href="#nav" data-role="button" data-inline="true" data-icon="bars">Menu</a>
 	<h1>Geolocations</h1>
@@ -32,3 +15,13 @@
 
 	<section id="map"></section>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	try {
+		window.addEventListener("load", refresh, false);
+	} catch (e) {
+		// Ignore because first attempt often gets failed
+	}
+});
+</script>

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Logic for Users
+ *
+ * Providing all actions for adding, deleting and editting users
+ */
 class UsersController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 

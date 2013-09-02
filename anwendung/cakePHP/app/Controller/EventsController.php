@@ -1,4 +1,11 @@
 <?php
+/**
+ * Logic used for Events is prepared here.
+ *
+ * Every function is a preparation for a view and can accessed by calling 
+ * 'events/view', 'events/add' etc.
+ */
+
 class EventsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Session', 'Other');

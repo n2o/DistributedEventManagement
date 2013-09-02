@@ -53,13 +53,13 @@ Mit \emph{Upgrade: websocket} wird signalisiert, dass der Client eine WebSocket-
 
 Der kryptische Schlüssel \emph{Sec-WebSocket-Accept} muss vom Server berechnet und zurückgegeben werden und zeigt damit, dass er das WebSocket Protokoll versteht. Ab diesem Zeitpunkt ist der Handshake abgeschlossen und die WebSocket-Verbindung wurde aufgebaut.\par
 
-Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. Das verringert Latenzzeiten (die Pakete werden direkt zugestellt, da der Server auf keinen Request vom Client warten muss), den Traffic (der Overhead ist deutlich geringer, nur ein Handshake zu Beginn erforderlich) und die CPU-Leistung der Server (der Austausch der Daten ist einfacher gestaltet als beim Polling o.Ä.).
-
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm]{fig/websockets}
 	\caption{Aufbau einer WebSocket Verbindung. Danach können beliebig Nachrichten in beide Richtungen (gleichzeitig) übermittelt werden}
 \end{figure}
+
+Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. Das verringert Latenzzeiten (die Pakete werden direkt zugestellt, da der Server auf keinen Request vom Client warten muss), den Traffic (der Overhead ist deutlich geringer, nur ein Handshake zu Beginn erforderlich) und die CPU-Leistung der Server (der Austausch der Daten ist einfacher gestaltet als beim Polling o.Ä.).
 
 \subsection{Implementierung der Echtzeitaktualisierung}
 Im ersten Ansatz dieser Arbeit wurde der WebSocket-Server auf Basis von \emph{node.js} \cite{node.js}, einem serverseitigem JavaScript Framework für Server, implementiert. Das verlief aufgrund der einfachen Handhabung von WebSockets und der guten Unterstützung von HTML5 problemlos. Jedoch wurden zu diesem Zeitpunkt weder verschlüsselte Verbindungen noch Broadcasting unterstützt. Daher war dies ungeeignet, weil sensible Daten, wie die Standorte der Clients, nicht im Klartext verschickt werden sollten.\\
@@ -72,11 +72,11 @@ Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Stando
 
 Beendet ein Client die Verbindung oder erhält der Server keine Aktualisierungen mehr, so wird sein letzter Standort noch 15 Minuten gespeichert und dann auf allen Endgeräten gelöscht. Zu keiner Zeit werden Daten protokolliert oder länger als nötig gespeichert.\par
 
-\paragraph{Schwierigkeit beim Wechseln oder Neuladen eines Views}\ \\ \
+\paragraph{Schwierigkeit beim Wechseln oder Neuladen eines Views.}
 Ein Problem, welches bei der Nutzung von WebSockets (kurz: WS) auftrat, war der Übergang zwischen den einzelnen Seiten: Wird eine Seite gewechselt, so wird die WebSocket Verbindung geschlossen, die nächste Seite per HTTP Request angefordert und eine neue Verbindung zum WS Server aufgebaut. Also wird mit jedem Wechsel ein neuer Socket erstellt, den der Server neu zu den bestehenden Daten des Clients referenzieren muss.\\
 Damit ist nun durch neue Assoziationen von Referenzen ein Wechsel zwischen den Views möglich, ohne dabei Werte wie Positionen des Clients zu verlieren, möglich.
 
-\paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}\ \\ \
+\paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets.}
 Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protokoll entwickelt, welches angibt, um welchen Inhalt es sich bei der Nachricht handelt. So haben alle Nachrichten, die zwischen Client und Server ausgetauscht werden, ein bestimmtes Format und ein Feld \emph{type}, welches aktuell folgende Werte annehmen kann:
 
 \begin{itemize}
@@ -107,13 +107,13 @@ Gab es eine Änderung an einer Veranstaltung, so meldet sich die Web-App beim We
 
 Bei diesem Entwurfsmuster wissen weder Publisher noch Subscriber voneinander und es läuft vollkommen unabhängig, asynchron miteinander. Sie müssen auch nichts voneinander wissen, da sämtlicher Datenaustausch über den socket.io Server läuft \cite{autobahn.js:pubsub}.
 
-\paragraph{Aufgetretende Probleme dieser Implementierung}\ \\ \
+\paragraph{Probleme dieser Implementierung.}
 Im ersten Entwurf der Technik in dieser Arbeit wurden alle Nachrichten, die über WebSockets verschickt wurden, über die Clients selbst geregelt. Das hatte den Grund, dass socket.io und die Entwicklungsumgebung node.js vollständig in JavaScript entwickelt wurden und daher die Kompatibilität zu dieser Skriptsprache komplett gegeben war. Das jeweilige Endgerät muss dafür nur das socket.io Modul vom Server laden und kann dann direkt Nachrichten verschicken.\\
 Die Webanwendung verwendet hauptsächlich PHP5 und die Views/Layouts HTML5 - für diese Sprachen stellt socket.io aber keine Bibliothek zur Verfügung, um sich mit dem WS Server zu verbinden. Es hat auch zur Folge, dass keine WebSockets verschickt werden können.\par
 
 Dass eine derartige Implementierung nicht ideal ist, ist sofort ersichtlich. Man stelle sich folgendes Szenario vor: ein Benutzer ist mit einem Endgerät eingeloggt, welches die Nutzung von JavaScript unterbindet. Er verändert nun eine Veranstaltung, kann aufgrund des abgeschaltetem JavaScript keine \emph{publish}-Nachricht verschicken, weshalb die Benutzer, die diese Veranstaltung abonniert haben, keine Aktualisierungsmeldung erhalten. Leider würde damit das Publish / Subscribe-Modul nicht zuverlässig funktionieren.
 
-\paragraph{Verbesserung des Moduls}\ \\ \
+\paragraph{Verbesserung des Moduls.}
 Eine bessere Lösung ist es, wenn die Meißner App selbst publishen könnte. Deshalb wurden auf Basis von Elephant.io \cite{elephant.io}, einer Open Source Bibliothek, welche die Verbindung zu socket.io über PHP5 realisiert, Methoden entwickelt, die die publish-Funktion der Webanwendung übernehmen.\\
 Der EventsController hat nun noch die zusätzliche Aufgabe bei jedem Datenbankzugriff eine Verbindung zum WS Server zu öffnen, eine publish-Nachricht abzuschicken, und dann die Verbindung wieder zu schließen.\par
 

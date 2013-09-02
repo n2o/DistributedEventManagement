@@ -1,4 +1,10 @@
 <?php
+/**
+ * Controller for stastics
+ *
+ * Querying SQL Database to provide all necessary information for stistical evaluation
+ */
+
 class StatsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Stats', 'Session');

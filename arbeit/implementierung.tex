@@ -1,5 +1,5 @@
 \chapter{Implementierung}
-TODO: Einleitung für das Kapitel schreiben
+Die grundlegenden Funktionen dieser Arbeit sollen das Erstellen von Veranstaltungen und Benutzern, die Zuweisung untereinander und die Kompatibilität mit mobilen Endgeräten umfassen. Wie diese Funktionen mit Hilfe von modernen Webtechniken implementiert wurden, wird hier beschrieben.
 
 \section{Problembeschreibung}
 Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
@@ -21,7 +21,7 @@ Damit ist die zugrunde liegende Programmiersprache festgelegt. Mit der Wahl des 
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung zwischen den Bergen zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung durch einen eigenen Funkmast zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
 
 \section{Struktur der Webanwendung}
-Für die Grundstruktur wurde das Open Source Framework cakePHP verwendet. Diese verwendet für einen sauberen Programmierstiel das Entwurfsmuster \emph{Model View Controller}.
+Für die Grundstruktur wurde das Open Source Framework cakePHP verwendet. Diese verwendet für eine klare Trennung der Logik und dem Design das Entwurfsmuster \emph{Model View Controller}.
 
 \subsection{Entwurfsmuster: Model View Controller}
 
@@ -47,7 +47,7 @@ Die Vorteile bei diesem Entwurfsmuster liegen auf der Hand: Es muss nur einmal e
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Datenbank}
+\section{Datenbanken}
 Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, da diese in der Regel zum Komplettpaket eines Webservers gehören.\par
 
 Als einfache Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat und für diesen Verwendungszweck ein relationales Datenbanksystem die richtige Wahl ist aufgrund von einem einheitlichen Schema mit dem in die Datenbank geschrieben / gelesen werden soll.\\
@@ -80,11 +80,9 @@ Zwei weitere Tabellen sind dafür nötig:
 
 \begin{enumerate} 
 	\item \emph{event\_columns}: Dient als Maske, um Feldnamen und -typen zu definieren. Kann innerhalb einer speziellen Veranstaltung genutzt werden, um diese Felder den zugeordneten Benutzern verfügbar zu machen. Gespeichert werden event\_id, der Name und der Typ der Eigenschaft.
-
 	\item \emph{event\_properties}: Nachdem vom Controller die Feldnamen des Events abgefragt wurden, werden diese in einer Variable gespeichert und dem View übergeben. Im View wird dann ein Formular generiert, welches die Feldnamen aus \emph{event\_columns} anzeigt und die Möglichkeit gibt dort Werte einzutragen. Diese Werte werden dann über den Controller in \emph{event\_properties} gespeichert.
 \end{enumerate}
 
-\newpage
 Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Feldern mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.
 
 \begin{figure}[!ht]

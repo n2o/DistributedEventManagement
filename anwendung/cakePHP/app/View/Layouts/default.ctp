@@ -32,7 +32,7 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		echo $this->Html->scriptBlock('
 			var jsVars = '.$this->Js->object($jsVars).';
 			var mobile = false;
-			var socket;
+			var socket = null;
 		');
 
 		echo $this->Html->meta('icon');

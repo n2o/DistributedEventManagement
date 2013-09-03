@@ -11,18 +11,6 @@
 </article>
 
 <script type="text/javascript">
-/**
- * Execute this after DOM has loaded to get current history from 
- * WebSocket Server
- */
-$(document).ready(function() {
-	var msg = {
-		name: name,
-		type: 'history'
-	}
-	socket.send(JSON.stringify(msg));
-});
-
 function sendChatMessage() {
 	var msg = {
 		name: name,

@@ -28,6 +28,7 @@
 			echo $this->Html->scriptBlock('
 				var jsVars = '.$this->Js->object($jsVars).';
 				var mobile = true;
+				var socket = null;
 			');
 
 			echo $this->Html->meta('icon');

@@ -25,9 +25,8 @@ $(function () {
 	function doConnect() {
 		try {
 			socket = io.connect('wss://'+host+':'+port+'/');
-			socket.on('connect', function (evt) {
+			socket.on('connect', function (evt) { 
 				onOpen(evt);
-				synSocketID();
 				socket.on('disconnect', function (evt) { onDisconnect(evt) });
 				socket.on('message', function (evt) { onMessage(evt) });
 				socket.on('error', function (evt) { onError(evt) });
@@ -49,6 +48,13 @@ $(function () {
 	 * On new websocket connection, update state
 	 */
 	function onOpen(evt) {
+		console.log("onOpen");
+		synSocketID();
+		var msg = {
+				name: name,
+				type: 'history'
+			}
+			socket.send(JSON.stringify(msg));
 		connected = true;
 		$('.connectionState').text("Connected");
 		$('.connectionState').addClass('connected');

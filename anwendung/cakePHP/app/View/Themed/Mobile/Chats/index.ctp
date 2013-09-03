@@ -4,10 +4,10 @@
 </div>
 <div data-role="content">
 	<article>
+		<span id="chatstatus">Please refresh page if you can read this...</span>
 		<div id="chathistory" style="height: 80%"></div>
-			<span id="chatstatus">Establishing connection...</span>
-			<input length="100%" type="text" id="chatinput" data-mini="true" placeholder="Type new message"/>
-			<button onclick="sendChatMessage()">Send</button>
+		<input type="text" id="chatinput" data-mini="true" disabled="disabled" placeholder="Type new message"/>
+		<button onclick="sendChatMessage()">Send</button>
 	</article>
 </div>
 

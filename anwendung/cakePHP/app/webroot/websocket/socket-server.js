@@ -115,8 +115,8 @@ io.sockets.on('connection', function (socket) {
 					// }
 					break;					
 					
-				default:
-					socket.disconnect('unauthorized');
+				// default:
+				// 	socket.disconnect('unauthorized');
 			}
 		}
 	});

@@ -5,7 +5,7 @@
  */
 $(function () {
 	var wsUri;
-	var connected = false;
+	var connected = false, gotHistory = false;
 
 	// Initial call
 	doConnect();
@@ -48,13 +48,20 @@ $(function () {
 	 * On new websocket connection, update state
 	 */
 	function onOpen(evt) {
-		console.log("onOpen");
 		synSocketID();
-		var msg = {
+
+		var reference = (function initHistory(){
+			var msg = {
 				name: name,
 				type: 'history'
 			}
 			socket.send(JSON.stringify(msg));
+			return initHistory; //return the function itself to reference
+		}()); //auto-run
+
+		// reference(); //call it again
+		// reference(); //and again
+
 		connected = true;
 		$('.connectionState').text("Connected");
 		$('.connectionState').addClass('connected');

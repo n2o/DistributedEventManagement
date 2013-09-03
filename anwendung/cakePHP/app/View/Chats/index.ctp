@@ -1,16 +1,22 @@
 <article>
 	<h1>Chats</h1>
 	
+	<span id="chatstatus">Please refresh page if you can read this...</span>
 	<div id="chathistory"></div>
-	<div>
-		<span id="chatstatus">Establishing connection...</span>
-		<input type="text" id="chatinput" placeholder="Type new message" style=""/>
-		<button onclick="sendChatMessage()" class="button" style="margin-top:1em;">Send</button>
-	</div>
+	<input type="text" id="chatinput" placeholder="Type new message" disabled="disabled"/>
+	<button onclick="sendChatMessage()" class="button" style="margin-top:1em;">Send</button>
 
 </article>
 
 <script type="text/javascript">
+$(document).ready(function(){
+	setTimeout("getHistory()", 3000);
+});
+
+function getHistory() {
+	// maybe i need this later...
+}
+
 function sendChatMessage() {
 	var msg = {
 		name: name,

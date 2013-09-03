@@ -20,11 +20,13 @@
 $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 ?>
 <!DOCTYPE html>
-<html>
+
+<!-- Including manifest.php to cache page for offline application -->
+<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $cakeDescription; ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -32,14 +34,14 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 		echo $this->Html->scriptBlock('
 			var jsVars = '.$this->Js->object($jsVars).';
 			var mobile = false;
-			var socket = null;
+			var socket = undefined;
 		');
 
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(
 			'config.js',
-			'https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
+			'jquery.min.js',
 			'noty/jquery.noty.js',
 			'noty/layouts/bottom.js',
 			'noty/themes/default.js',

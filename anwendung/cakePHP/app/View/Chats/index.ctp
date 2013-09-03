@@ -14,7 +14,12 @@ $(document).ready(function(){
 });
 
 function getHistory() {
-	// maybe i need this later...
+	var msg = {
+		name: name,
+		type: 'message',
+		text: $('#chatinput').val()
+	}
+	socket.send(JSON.stringify(msg));
 }
 
 function sendChatMessage() {
@@ -26,8 +31,7 @@ function sendChatMessage() {
 	socket.send(JSON.stringify(msg));
 	$('#chatinput').val('');
 
-	// disable the input field to make the user wait until server
-	// sends back response
+	// disable the input field to make the user wait until server sends back response
 	$('#chatinput').attr('disabled', 'disabled');
 }
 </script>

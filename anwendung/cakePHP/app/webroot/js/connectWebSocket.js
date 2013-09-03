@@ -95,7 +95,11 @@ $(function () {
 		switch(data.type) {
 			case 'location':
 				//noty({text: 'Incoming: New coordinates for geolocations.'});
-				updateMarkers(data);
+				try {
+					updateMarkers(data);
+				} catch (e) {
+					// Map not correctly loaded!
+				}
 				break;
 			
 			case 'update':
@@ -104,12 +108,10 @@ $(function () {
 				break;
 
 			case 'history':
-				console.log("incoming history");
 				incomingChatMessage(data);
 				break;
 
 			case 'message':
-				console.log("incoming message");
 				incomingChatMessage(data);
 				break;
 		}

@@ -1,3 +1,7 @@
+<!-- <script type="text/javascript" src="Geolocations/geoFunctions.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="Geolocations/drawMap.js"></script> -->
+
 <article>
 	<h1>Geolocations</h1>
 	<button class="button" onclick="window.location.reload()" style="float:left;">Refresh page</button>
@@ -21,3 +25,4 @@ $(document).ready(function() {
 	}
 });
 </script>
+

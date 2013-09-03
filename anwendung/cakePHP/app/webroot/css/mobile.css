@@ -146,11 +146,8 @@ section.active {
 	max-height: 300px; 
 }
 #chatinput { 
-	border-radius:2px; 
-	border:1px solid #ccc;
-	margin-top:10px; 
-	padding:5px; 
-	width:400px;
+	border:0;
+	width:100%;
 }
 #chatstatus { 
 	display:block; 

@@ -3,14 +3,14 @@
 	
 	<span id="chatstatus">Please refresh page if you can read this...</span>
 	<div id="chathistory"></div>
-	<input type="text" id="chatinput" placeholder="Type new message" disabled="disabled"/>
+	<input type="text" id="chatinput" placeholder="Type new message"/>
 	<button onclick="sendChatMessage()" class="button" style="margin-top:1em;">Send</button>
 
 </article>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	setTimeout("getHistory()", 3000);
+	//setTimeout("getHistory()", 3000);
 });
 
 function getHistory() {
@@ -23,15 +23,14 @@ function getHistory() {
 }
 
 function sendChatMessage() {
-	var msg = {
-		name: name,
-		type: 'message',
-		text: $('#chatinput').val()
+	if ($('#chatinput').val().length > 0) {
+		var msg = {
+			name: name,
+			type: 'message',
+			text: $('#chatinput').val()
+		}
+		socket.send(JSON.stringify(msg));
+		$('#chatinput').val('');
 	}
-	socket.send(JSON.stringify(msg));
-	$('#chatinput').val('');
-
-	// disable the input field to make the user wait until server sends back response
-	$('#chatinput').attr('disabled', 'disabled');
 }
 </script>

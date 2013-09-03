@@ -6,23 +6,22 @@
 	<article>
 		<span id="chatstatus">Please refresh page if you can read this...</span>
 		<div id="chathistory" style="height: 80%"></div>
-		<input type="text" id="chatinput" data-mini="true" disabled="disabled" placeholder="Type new message"/>
+		<input type="text" id="chatinput" placeholder="Type new message"/>
 		<button onclick="sendChatMessage()">Send</button>
 	</article>
 </div>
 
 <script type="text/javascript">
-function sendChatMessage() {
-	var msg = {
-		name: name,
-		type: 'message',
-		text: $('#chatinput').val()
-	}
-	socket.send(JSON.stringify(msg));
-	$('#chatinput').val('');
 
-	// disable the input field to make the user wait until server
-	// sends back response
-	$('#chatinput').attr('disabled', 'disabled');
+function sendChatMessage() {
+	if ($('#chatinput').val().length > 0) {
+		var msg = {
+			name: name,
+			type: 'message',
+			text: $('#chatinput').val()
+		}
+		socket.send(JSON.stringify(msg));
+		$('#chatinput').val('');
+	}
 }
 </script>

@@ -157,12 +157,10 @@ $(function () {
 
 		$('#chatstatus').hide();
 		if (type === 'history') {
-			$('#chatinput').removeAttr('disabled').focus();
 			for (var i=0; i < message.data.length; i++) {
 				addMessage(message.data[i].name, message.data[i].text, new Date(message.data[i].time));
 			}
 		} else if (type === 'message') {
-			$('#chatinput').removeAttr('disabled'); // let the user write another message
 			addMessage(message.data.name, message.data.text, new Date(message.data.time));
 		} else {
 			console.log('Something went wrong...');
@@ -173,7 +171,7 @@ $(function () {
 	* Send mesage when user presses Enter key
 	*/
 	$('#chatinput').keydown(function(e) {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 && $(this).val().length > 0) {
 			var msg = {
 				name: name,
 				type: 'message',
@@ -181,11 +179,6 @@ $(function () {
 			}
 			socket.send(JSON.stringify(msg));
 			$(this).val('');
-
-			// disable the input field to make the user wait until server
-			// sends back response
-			$('#chatinput').attr('disabled', 'disabled');
-
 		}
 	});
 

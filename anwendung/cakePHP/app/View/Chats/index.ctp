@@ -9,19 +9,6 @@
 </article>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	//setTimeout("getHistory()", 3000);
-});
-
-function getHistory() {
-	var msg = {
-		name: name,
-		type: 'message',
-		text: $('#chatinput').val()
-	}
-	socket.send(JSON.stringify(msg));
-}
-
 function sendChatMessage() {
 	if ($('#chatinput').val().length > 0) {
 		var msg = {

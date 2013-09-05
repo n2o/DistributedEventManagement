@@ -71,6 +71,7 @@ io.sockets.on('connection', function (socket) {
 							clients[data.name].subscriptions = [];
 						}
 						clients[data.name].sockets.push(socket);
+						socket.send(JSON.stringify({type: 'history', data: history}));
 					} else {
 						socket.disconnect('unauthorized'); // close socket if wrong signature was sent
 					}

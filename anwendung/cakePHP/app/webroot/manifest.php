@@ -11,8 +11,9 @@ echo "\n\nCACHE:\n";
 echo "\n";
 
 echo "\n\nNETWORK:\n";
+echo "./chats/*\n";
 echo "*\n";
 
-echo "# Version 2\n";
+echo "# Version 30\n";
 
 ?>

@@ -50,14 +50,14 @@ $(function () {
 	function onOpen(evt) {
 		synSocketID();
 
-		var reference = (function initHistory(){
-			var msg = {
-				name: name,
-				type: 'history'
-			}
-			socket.send(JSON.stringify(msg));
-			return initHistory; //return the function itself to reference
-		}()); //auto-run
+		// var reference = (function initHistory(){
+		// 	var msg = {
+		// 		name: name,
+		// 		type: 'history'
+		// 	}
+		// 	socket.send(JSON.stringify(msg));
+		// 	return initHistory; //return the function itself to reference
+		// }()); //auto-run
 
 		// reference(); //call it again
 		// reference(); //and again

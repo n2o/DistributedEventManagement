@@ -56,7 +56,7 @@ class EventsController extends AppController {
 		}
 	}
 
-	# Add specific column for event via key-value-store and json encoding
+	# Add specific column for event via key-value-store
 	public function addColumn($id = null) {
 		if (!$id)
 			throw new NotFoundException(__('Invalid id.'));

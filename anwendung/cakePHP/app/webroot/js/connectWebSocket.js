@@ -10,18 +10,16 @@ $(function () {
 	// Initial call
 	doConnect();
 
-	try {
-		window.addEventListener("load", refresh, false);
-	} catch (e) {
-		// Ignore because first attempt often gets failed
-	}
-
 	/**
 	 * Reconnect on disconnect, called by window eventlistener
 	 */
 	function refresh() {
-		if (!connected) {
-			doConnect();
+		try {
+			if (!connected) {
+				doConnect();
+			}
+		} catch (e) {
+			// If socket.io could ont be received, do nothing
 		}
 	}
 
@@ -149,6 +147,7 @@ $(function () {
 		$('#chatstatus').hide();
 		if (type === 'history') {
 			for (var i=0; i < message.data.length; i++) {
+				console.log("calling");
 				addMessage(message.data[i].name, message.data[i].text, new Date(message.data[i].time));
 			}
 		} else if (type === 'message') {

@@ -65,6 +65,7 @@ io.sockets.on('connection', function (socket) {
 
 					case 'syn':
 						if (validSignature(data)) {
+							console.log("Received syn");
 							// Initialize a client and identify him by name
 							if (clients[data.name] === undefined) {
 								clients[data.name] = {};

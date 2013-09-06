@@ -1,8 +1,11 @@
 \chapter{Echtzeitaktualisierung durch WebSockets}
-Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App. Mehrere Möglichkeiten sind dafür gegeben, wobei einige besser geeignet sind als andere.
+Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App.
 
 \section{Einführung in WebSockets}
-Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf TCP basierendes Netzwerkprotokoll, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Der erste Handshake erfolgt über HTTP/1.1 und ähnelt dem zum Aufruf einer Homepage.
+Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf TCP basierendes Netzwerkprotokoll, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. 
+
+\paragraph{Handshake} 
+Der Handshake erfolgt über HTTP/1.1 und ähnelt dem zum Aufruf einer Homepage.
 \\
 \begin{lstlisting}[captionpos=b, caption=HTTP Request vom Client {\cite[S. 6]{rfc6455:handshake}}]
   GET / HTTP/1.1

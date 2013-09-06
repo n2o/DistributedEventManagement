@@ -88,4 +88,6 @@ Für den Datenverkehr von Internetseiten wird HTTP benutzt, welches die wechsels
 	\caption[Datenaustausch beim Polling]{Datenaustausch mittels HTTP Request / Response beim Polling {\cite[S. 7]{ws}}}
 \end{figure}
 
-Vor diesem technischen Hintergrund wurde Polling entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wird mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersehbar. Dadurch ist Polling nicht die richtige Wahl für dieses Projekt, weil es auf eine wirkliche Echtzeitaktualisierung ankommt.
+Vor diesem technischen Hintergrund wurde \emph{Polling} entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wird mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersehbar. Dadurch ist Polling nicht die richtige Wahl für dieses Projekt, weil es auf eine wirkliche Echtzeitaktualisierung ankommt.\par
+
+Da bei sämtlichen Techniken neben Polling höhere Latenzen, mehr Rechenleistung und ein komplizierterer Aufbau zu erwarten sind, ist HTML5 mit WebSockets auf dem aktuellen Stand der Dinge und kann vieles besser machen als seine Vorgänger, weshalb für diese Arbeit auch auf diese junge Technik zurückgegriffen wird.

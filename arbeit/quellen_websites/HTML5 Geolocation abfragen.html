@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://9elements.com/html5demos/geolocation/ -->
+<html><script type="text/javascript" style="">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>HTML5 Geolocation</title>
+    
+	<script src="./HTML5 Geolocation abfragen_files/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<link href="./HTML5 Geolocation abfragen_files/reset.css" rel="stylesheet" type="text/css">
+
+	<script src="./HTML5 Geolocation abfragen_files/main.js" type="text/javascript" charset="utf-8"></script>
+	<link href="./HTML5 Geolocation abfragen_files/main.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="./HTML5 Geolocation abfragen_files/js"></script><script src="./HTML5 Geolocation abfragen_files/main(1).js" type="text/javascript"></script>
+<style type="text/css"></style><script type="text/javascript" charset="UTF-8" src="./HTML5 Geolocation abfragen_files/{common,util,stats}.js"></script></head>
+<body class=" canvas rgba hsla multiplebgs borderimage borderradius boxshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransitions">
+	<script src="./HTML5 Geolocation abfragen_files/modernizr-0.9.min.js"></script>
+	<div class="page-align">
+		<header>
+			<h1>HTML5 Geolocation abfragen</h1>
+		</header>
+		<div id="content">			
+			<div class="chapter">
+				<div class="result">					
+					<h2>navigator.geolocation</h2>
+					<p>Im HTML5 Standard wurde die JavaScript API um ein <code>navigator.geolocation</code> Klasse erweitert. Geolocation berechnet die Position aufgrund von GPS Daten, sofern ein GPS Gerät zur Verfügung steht (iPhone, Android), oder mittels WiFi und IP Auswertungen über einen Google Service.</p>
+					<p>Die Funktion <code>navigator.geolocation.getCurrentPosition</code> bekommt zwei Callback Funktionen als Parameter. Zum einen <code>success</code> zum anderen <code>error</code></p>
+					<p>Wird der <code>success</code> Callback aufgerufen, so bekommt die Funktion ein Positionsobjekt als Parameter. Dieses Objekt enthält eine Menge Attribute, wobei das Unterobjekt <code>coords</code> wohl am interessantesten ist.</p>
+					<p><code>coords</code> enthält z.B. die Informationen <code>latitude</code> oder <code>longitude</code></p>
+					<p>Veränderungen der Position können dann sogar mit den Funktionen <code>navigator.geolocation.watchPosition</code> und <code>navigator.geolocation.clearWatch</code> beobachtet werden.</p>
+				</div>
+				<div class="code">
+					<h2>Der Code</h2>
+<pre>if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  alert("Not Supported!");
+}
+</pre>
+
+<p>Der <code>succes</code> Callback</p>
+
+<pre>function success(position) {
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
+}
+</pre>
+
+<p>Der <code>error</code> Callback</p>
+
+<pre>function error(msg) {
+  console.log(typeof msg == 'string' ? msg : "error");
+}
+</pre>
+
+<p>Veränderung der Position des Benutzers tracken</p>
+
+<pre>var watchId = navigator.geolocation.watchPosition(function(position) {  
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
+});
+</pre>
+
+<p>Stoppen der Beobachtung</p>
+
+<pre>  navigator.geolocation.clearWatch(watchId);
+</pre>
+
+
+
+				</div>
+			</div>
+			
+			<div class="chapter">
+				<div id="status">
+				</div>
+				<article>
+				</article>
+				<script>
+					$(function() {
+						function success(position) {							
+							var s = $('#status');
+
+							// im FF wird die Funktion scheinbar mehrfach aufgerufen - einmal reicht
+							if(s.hasClass('success')) {
+								return
+							}
+							
+							s.text("Deine Position konnte ermittelt werden!");
+							s.addClass('success');
+
+							var mapcontainer = $('<div id="mapcontainer"></div>');
+							mapcontainer.css({
+								width : '100%',
+								height : '400px'
+							})
+
+							$('article').append(mapcontainer);
+
+							var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+							var myOptions = {
+							  zoom: 15,
+							  center: latlng,
+							  mapTypeControl: false,
+							  navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+							  mapTypeId: google.maps.MapTypeId.ROADMAP
+							};
+							var map = new google.maps.Map(mapcontainer.get(0), myOptions);
+
+							var marker = new google.maps.Marker({
+							    position: latlng, 
+							    map: map, 
+							    title:"Du bist hier!"
+							});					  
+						}
+						
+						function error(msg) {
+							$('#status').text = typeof msg == 'string' ? msg : "error";							
+						}
+						
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition(success, error);
+						} else {
+							$('#status').text = "Sorry your browser does not support geolocation."
+						}
+					});
+				</script>
+			</div>
+			
+						
+			<div class="chapter last">
+				<h2>Ressourcen</h2>
+				<ul>
+					<li><a href="http://html5demos.com/geo">http://html5demos.com/geo</a></li>
+					<li><a href="https://developer.mozilla.org/En/Using_geolocation">https://developer.mozilla.org/En/Using_geolocation</a></li>
+					<li><a href="http://hacks.mozilla.org/2009/06/geolocation/">http://hacks.mozilla.org/2009/06/geolocation/</a></li>
+				</ul>
+		</div>
+		<footer>
+		</footer>
+	</div>
+	
+</div></body></html>

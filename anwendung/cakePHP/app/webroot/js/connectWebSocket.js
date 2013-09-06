@@ -10,6 +10,12 @@ $(function () {
 	// Initial call
 	doConnect();
 
+	try {
+		window.addEventListener("load", refresh, false);
+	} catch (e) {
+		// Ignore because first attempt often gets failed
+	}
+
 	/**
 	 * Reconnect on disconnect, called by window eventlistener
 	 */
@@ -23,17 +29,19 @@ $(function () {
 	 * Connect to websocket server
 	 */
 	function doConnect() {
-		try {
-			socket = io.connect('wss://'+host+':'+port+'/');
-			socket.on('connect', function (evt) { 
-				onOpen(evt);
-				socket.on('disconnect', function (evt) { onDisconnect(evt) });
-				socket.on('message', function (evt) { onMessage(evt) });
-				socket.on('error', function (evt) { onError(evt) });
-			});
-		} catch (e) {
-			$('.connectionState').text("Not connected");
-			$('.connectionState').removeClass('connected');
+		if (typeof(name) != null) {
+			try {
+				socket = io.connect('ws://'+host+':'+port+'/');
+				socket.on('connect', function (evt) { 
+					onOpen(evt);
+					socket.on('disconnect', function (evt) { onDisconnect(evt) });
+					socket.on('message', function (evt) { onMessage(evt) });
+					socket.on('error', function (evt) { onError(evt) });
+				});
+			} catch (e) {
+				$('.connectionState').text("Not connected");
+				$('.connectionState').removeClass('connected');
+			}
 		}
 	}
 
@@ -49,19 +57,6 @@ $(function () {
 	 */
 	function onOpen(evt) {
 		synSocketID();
-
-		// var reference = (function initHistory(){
-		// 	var msg = {
-		// 		name: name,
-		// 		type: 'history'
-		// 	}
-		// 	socket.send(JSON.stringify(msg));
-		// 	return initHistory; //return the function itself to reference
-		// }()); //auto-run
-
-		// reference(); //call it again
-		// reference(); //and again
-
 		connected = true;
 		$('.connectionState').text("Connected");
 		$('.connectionState').addClass('connected');
@@ -95,11 +90,7 @@ $(function () {
 		switch(data.type) {
 			case 'location':
 				//noty({text: 'Incoming: New coordinates for geolocations.'});
-				try {
-					updateMarkers(data);
-				} catch (e) {
-					// Map not correctly loaded!
-				}
+				updateMarkers(data);
 				break;
 			
 			case 'update':

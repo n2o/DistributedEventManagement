@@ -22,7 +22,8 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 <!DOCTYPE html>
 
 <!-- Including manifest.php to cache page for offline application -->
-<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
+<!-- <?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?> -->
+<html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>

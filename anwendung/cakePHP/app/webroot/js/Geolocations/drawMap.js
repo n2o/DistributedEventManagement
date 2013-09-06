@@ -33,16 +33,6 @@ $(function() {
 			sendPosition();
 			firstRun = false;
 		} else {
-			// console.log("Next run");
-			// var diff = calcDistance(latitude, longitude, lastLatitude, lastLongitude);
-
-			// if (diff < 0) 
-			// 	diff = diff*1000;
-			// console.log(diff);
-			// $('#diff').text(diff);
-
-			// // if (diff > 0 && typeof(connected) !== "undefined" && connected)
-			// // 	sendPosition();
 			sendPosition();
 		}
 	}
@@ -82,20 +72,25 @@ $(function() {
 	 * If the browser does not support geolocations, set the center of the map to Remscheid
 	 */
 	function noPosition() {
-		initializeFrame();
-		var coords = new google.maps.LatLng(51.1793042, 7.193936);
+		if ("geolocation" in navigator) {
+ 			// ignore this, just needed to avoid a Firefox bug
+		} else {
+  			// Geolocation IS NOT available. Focus on Remscheid
+			initializeFrame();
+			var coords = new google.maps.LatLng(51.1793042, 7.193936);
 
-		var options = {
-			zoom: 15,
-			center: coords,
-			navigationControlOptions: {
-				style: google.maps.NavigationControlStyle.SMALL
-			},
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		map = new google.maps.Map($('#map')[0], options);
+			var options = {
+				zoom: 15,
+				center: coords,
+				navigationControlOptions: {
+					style: google.maps.NavigationControlStyle.SMALL
+				},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map($('#map')[0], options);
 
-		showOverlays();
+			showOverlays();
+		}
 	}
 
 	/**
@@ -158,8 +153,7 @@ $(function() {
 			longitude: lastLongitude
 		}
 		msg = JSON.stringify(msg);
-		//console.log("--> " + msg);
-		if (typeof(socket) !== "undefined") {
+		if (typeof(socket) !== "undefined" && name !== "null") {
 			socket.send(msg);
 		}
 	}

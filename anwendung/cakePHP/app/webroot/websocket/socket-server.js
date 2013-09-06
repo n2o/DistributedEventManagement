@@ -48,77 +48,82 @@ var killIdleTimer = setInterval(function() {killIdle()}, idleTime/3);
 
 io.sockets.on('connection', function (socket) {
 	socket.on('message', function (message) {
-		var data = JSON.parse(message);
-		if (data.name !== "null" && data.name !== "false") {
-			switch(data.type) {
-
-				case 'location':
-					if (clients[data.name] !== undefined) {
-						saveToLocations(data);
-						socket.broadcast.send(JSON.stringify(locations));
-						socket.send(JSON.stringify(locations)); // Send current location back to sender
-					} else {
-						socket.disconnect('unauthorized');
-					}
-					break;
-
-				case 'syn':
-					if (validSignature(data)) {
-						// Initialize a client and identify him by name
-						if (clients[data.name] === undefined) {
-							clients[data.name] = {};
-							clients[data.name].sockets = [];
-							clients[data.name].subscriptions = [];
+		try {
+			var data = JSON.parse(message);
+			if (typeof(data.name) !== "null" && data.name !== "false") {
+				switch(data.type) {
+					case 'location':
+						if (clients[data.name] !== undefined) {
+							saveToLocations(data);
+							socket.broadcast.send(JSON.stringify(locations));
+							socket.send(JSON.stringify(locations)); // Send current location back to sender
+						} else {
+							socket.disconnect('unauthorized');
 						}
-						clients[data.name].sockets.push(socket);
-						socket.send(JSON.stringify({type: 'history', data: history}));
-					} else {
-						socket.disconnect('unauthorized'); // close socket if wrong signature was sent
-					}
-					break;
+						break;
 
-				case 'subscribe':
-					if (clients[data.name] !== undefined) 
-						clients[data.name].subscriptions = data.events;
-					else
-						socket.disconnect('unauthorized');
-					break;
-
-				case 'publishEvent':
-					lookForSubscriber(data, 'event');
-					break;
-
-				case 'message':
-					console.log("Incoming message from: "+data.name);
-					if (clients[data.name] !== undefined) {
-						var obj = {
-							time: (new Date()).getTime(),
-							text: htmlEntities(data.text),
-							name: data.name
-						}
-						history.push(obj);
-						history = history.slice(-100);
-						socket.send(JSON.stringify({type: 'message', data: obj}));
-						socket.broadcast.send(JSON.stringify({type: 'message', data: obj}));
-					} else {
-						socket.disconnect('unauthorized');
-					}
-					break;
-
-				case 'history':
-					console.log("Incoming history request from: "+data.name);
-					// if (clients[data.name] !== undefined) {
-						// if (history.length > 0) {
+					case 'syn':
+						if (validSignature(data)) {
+							// Initialize a client and identify him by name
+							if (clients[data.name] === undefined) {
+								clients[data.name] = {};
+								clients[data.name].sockets = [];
+								clients[data.name].subscriptions = [];
+							}
+							clients[data.name].sockets.push(socket);
 							socket.send(JSON.stringify({type: 'history', data: history}));
+						} else {
+							console.log("Invalid Signature");
+							socket.disconnect('unauthorized'); // close socket if wrong signature was sent
+						}
+						break;
+
+					case 'subscribe':
+						if (clients[data.name] !== undefined) 
+							clients[data.name].subscriptions = data.events;
+						else
+							socket.disconnect('unauthorized');
+						break;
+
+					case 'publishEvent':
+						lookForSubscriber(data, 'event');
+						break;
+
+					case 'message':
+						console.log("Incoming message from: "+data.name);
+						if (clients[data.name] !== undefined) {
+							var obj = {
+								time: (new Date()).getTime(),
+								text: htmlEntities(data.text),
+								name: data.name
+							}
+							history.push(obj);
+							history = history.slice(-100);
+							socket.send(JSON.stringify({type: 'message', data: obj}));
+							socket.broadcast.send(JSON.stringify({type: 'message', data: obj}));
+						} else {
+							socket.disconnect('unauthorized');
+						}
+						break;
+
+					case 'history':
+						console.log("Incoming history request from: "+data.name);
+						// if (clients[data.name] !== undefined) {
+							// if (history.length > 0) {
+								socket.send(JSON.stringify({type: 'history', data: history}));
+							// }
+						// } else {
+						// 	socket.disconnect('unauthorized');
 						// }
-					// } else {
-					// 	socket.disconnect('unauthorized');
-					// }
-					break;					
-					
-				// default:
-				// 	socket.disconnect('unauthorized');
+						break;					
+						
+					default:
+						socket.disconnect('unauthorized');
+				}
 			}
+		} catch (e) {
+			console.log("Invalid message received");
+			socket.disconnect('invalid');
 		}
 	});
 	socket.on('disconnect', function () {

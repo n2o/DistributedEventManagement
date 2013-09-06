@@ -55,6 +55,7 @@ io.sockets.on('connection', function (socket) {
 					case 'location':
 						if (clients[data.name] !== undefined) {
 							saveToLocations(data);
+							console.log("New position: " + message);
 							socket.broadcast.send(JSON.stringify(locations));
 							socket.send(JSON.stringify(locations)); // Send current location back to sender
 						} else {

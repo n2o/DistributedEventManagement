@@ -6,6 +6,8 @@ $(function() {
 
 	var lastLatitude = 0;
 	var lastLongitude = 0;
+	var latitude = 0;
+	var longitude = 0;
 	var firstRun = true;
 	geo_options = {
 		enableHighAccuracy: true,
@@ -26,15 +28,11 @@ $(function() {
 		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
-
-		if (firstRun) {
-			lastLatitude = latitude;
-			lastLongitude = longitude;
+		
+		if (lastLatitude != latitude || lastLongitude != longitude)
 			sendPosition();
-			firstRun = false;
-		} else {
-			sendPosition();
-		}
+		lastLatitude = latitude;
+		lastLongitude = longitude;
 	}
 
 	/** 
@@ -149,8 +147,8 @@ $(function() {
 		var msg = {
 			name: name,
 			type: 'location',
-			latitude: lastLatitude,
-			longitude: lastLongitude
+			latitude: latitude,
+			longitude: longitude
 		}
 		msg = JSON.stringify(msg);
 		if (typeof(socket) !== "undefined" && name !== "null") {

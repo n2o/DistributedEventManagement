@@ -30,8 +30,10 @@ $(function () {
 		if (typeof(name) != null) {
 			try {
 				socket = io.connect('ws://'+host+':'+port+'/');
+				//synSocketID();
 				socket.on('connect', function (evt) { 
-					onOpen(evt);
+					onOpen(evt);									
+					synSocketID();
 					socket.on('disconnect', function (evt) { onDisconnect(evt) });
 					socket.on('message', function (evt) { onMessage(evt) });
 					socket.on('error', function (evt) { onError(evt) });
@@ -54,7 +56,6 @@ $(function () {
 	 * On new websocket connection, update state
 	 */
 	function onOpen(evt) {
-		synSocketID();
 		connected = true;
 		$('.connectionState').text("Connected");
 		$('.connectionState').addClass('connected');

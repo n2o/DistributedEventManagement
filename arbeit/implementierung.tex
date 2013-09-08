@@ -8,7 +8,7 @@ Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
 	Kann man eine App entwickeln, in der man zu einer bestimmten Veranstaltung beliebig viele Teilnehmer hinzufügen, deren spezifischen Anmeldedaten hinterlegen und später schließlich verteilt mit beliebig vielen Helfern (mobil) daran arbeiten kann? 
 \end{quote}
 
-Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.\par
+Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
 
 \subsection{Identifizierung des Problems}
 Bei dem Gedanken eine App zu entwickeln steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS, \dots \ Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen, was eine schlechte Annahme ist, da dies nicht der Realität entspricht.\par
@@ -18,9 +18,13 @@ Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Googl
 \paragraph{Definition Webanwendung} 
 Eine Webanwendung (auch \emph{Web-App} genannt) ist eine Anwendung, die vollständig in einem Browser ausführbar ist. Da sie (fast) vollständig auf einem Webserver ausgeführt wird, ist das zugrunde liegende Übertragungsprotokoll \emph{HTTP}.\par
 
-Web-Apps bieten den Vorteil, dass sie in jedem modernen Browser ausgeführt werden können, ohne, dass spezielle Programmiersprachen erlernt und angewendet werden müssen. Interessant sind diese Anwendungen, da sie auch auf Smartphones und Tablets ausgeführt werden können ohne sie vollständig auf die jeweilige Plattform portieren zu müssen.
+Interessant sind diese Art der Anwendungen, da sie auch auf Smartphones und Tablets ausgeführt werden können ohne sie vollständig auf die jeweilige Plattform portieren zu müssen. Das heißt man entwickelt einmal eine Webanwendung und kann sie dann auf allen gängigen Endgeräten ausführen.\par
 
-Damit sind die zugrunde liegenden Programmiersprachen festgelegt. Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
+\paragraph{Programmiersprache: HTML5}
+\emph{HTML5} ist der angehende Nachfolger des aktuell verwendeten HTML 4.0.1. Es ist immer noch im experimentellen Entwicklungsstand, wird aber durch große Unternehmen wie Google gefördert und erreichte damit auch eine große Beliebtheit. Alle Browser verstehen daher die gängigsten HTML5 Befehle, allerdings werden nie alle Funktionen unterstützt. Der Grundbefehlssatz ist aber in allen Browsern enthalten, weshalb es schon seit einiger Zeit möglich ist mit dem neuen angehenden Webstandard seine Webanwendung zu gestalten.
+
+\paragraph{Frameworks}
+Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
 
 \subsection{Beschreibung der Umgebung}
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung zwischen den Bergen zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung durch einen eigenen Funkmast zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
@@ -38,13 +42,13 @@ Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen
 	\caption{Direkte Assoziationen zwischen Model, View und Controller}
 \end{figure}
 
-\underline{Model:}\\
+\paragraph{Model:}
 Verantwortlich für alles, was die Daten eines bestimmten Models angeht. In dieser Anwendung ist dieser Bereich für Interaktionen, Gültigkeit und Auswertung verantwortlich und repräsentiert hier zum Beispiel eine Veranstaltung, ein Benutzer, Statistiken oder Koordinaten der Benutzer.
 
-\underline{View:}\\
+\paragraph{View:}
 Generiert das Aussehen einer bestimmten Seite. Hier wird vorwiegend mit gängigen Webformaten, wie HTML, PHP und JavaScript gearbeitet. Ein View kann auf die Daten zugreifen, die ihm der Controller liefert und diese dann anschaulich darstellen. Dadurch muss sich ein View nicht darum kümmern woher er seine Informationen zusammensuchen muss, sondern bekommt garantiert, dass diese vom Controller bereit gestellt wurden. Hierbei können verschiedene Views für verschiedene Geräte erstellt werden und erlauben so einfach eine mobile Seite zu generieren.
 
-\underline{Controller:}\\
+\paragraph{Controller:}
 Hier findet die gesamte Logik und Aufbereitung der Daten statt, die später dem Benutzer im View angezeigt werden sollen. Sämtliche Datenbankabfragen, Berechnungen oder Ähnliches werden hier durchgeführt und dem Model / View bereitgestellt. Für jedes Objekt existiert ein eigener Controller, diese werden \emph{EventsController}, \emph{UsersController} etc. genannt. \\
 In diesem Framework ist jede Funktion direkt mit den Views verknüpft, das heißt definiert man im EventsController eine Funktion namens \emph{index()}, so stellt dies eine Seite der Webanwendung dar, die mit \emph{http://localhost/Events/index} aufgerufen werden kann und den entsprechenden View in \emph{/View/Events/index.ctp} erwartet.\par
 
@@ -58,11 +62,11 @@ Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nö
 Als einfachste Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat und für diesen Verwendungszweck ein relationales Datenbanksystem die richtige Wahl ist aufgrund von einem einheitlichen Schema mit dem in die Datenbank geschrieben und auch daraus gelesen werden soll.\\
 Folgende Tabellen wurden daher angelegt:\par
 
-\underline{users:}\\
+\paragraph{users:}
 Jeder Benutzer findet sich in dieser Tabelle wieder. Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, ein Passwort und einer zugewiesenen Rolle (z.B. Administrator, Benutzer, \dots). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztes Änderungsdatum sowie einem Feld hinzugefügt, welches prüft, ob der Benutzer sich im System der Webanwendung einloggen kann, um Daten einsehen zu können.\\
 Das ist daher interessant, weil einer Veranstaltung hinterher viele Benutzer zugeordnet werden können, allerdings benötigen diese Personen keinen Zugang zur Verwaltung des Events.
 
-\underline{events:}\\
+\paragraph{events:}
 Jede erzeugte Veranstaltung wird hier hinein gespeichert. Verpflichtende Felder sind ein Titel und eine Beschreibung. Dazu wird von der App eine eindeutige ID zugewiesen und die Benutzer-ID des Benutzers hinzugefügt, welcher diese Veranstaltung erstellt hat und zwei Zeitstempel der Erstellung und letzten Änderung.\par
 
 Dies sind die beiden grundlegenden Tabellen, die für diese Anwendung nötig sind. Jedoch besteht noch keine Verknüpfung untereinander, abgesehen von der Benutzer-ID in der events-Tabelle.

@@ -8,8 +8,8 @@
 			echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
 			echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
 			echo $this->Html->link('Geolocations', array('controller' => 'geolocations', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
-			echo $this->Html->link('Stats', array('controller' => 'stats', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
-			echo $this->Html->link('Chats', array('controller' => 'chats', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
+			echo $this->Html->link('Statistics', array('controller' => 'stats', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
+			echo $this->Html->link('Chat', array('controller' => 'chats', 'action' => 'index'), array('data-role' => 'button', 'data-theme' => 'a'));
 		?>
 	</div>
 

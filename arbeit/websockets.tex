@@ -1,5 +1,5 @@
-\chapter{Echtzeitaktualisierung durch WebSockets}
-Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App, welche hier thematisiert wird.
+\chapter{Echtzeitaktualisierung mit WebSockets}
+Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App.
 
 \section{Einführung in WebSockets}
 Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf \emph{TCP} basierendes Protokoll der Anwendungsschicht, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Dieser Datenaustausch geschieht sehr schnell und mit einem sehr kleinen Overhead, da die Verbindung nicht neu aufgebaut werden muss und die Daten somit sofort verschickt werden können.\\
@@ -27,12 +27,12 @@ Mit \emph{Upgrade: websocket} wird signalisiert, dass der Client eine WebSocket-
   Upgrade: WebSocket
 \end{lstlisting}
 
-Der kryptische Schlüssel \emph{Sec-WebSocket-Accept} muss vom Server berechnet und zurückgegeben werden und zeigt damit, dass er das WebSocket Protokoll versteht. Ab diesem Zeitpunkt ist der Handshake abgeschlossen und die WebSocket-Verbindung wurde aufgebaut.\par
+Der kryptische Schlüssel \emph{Sec-WebSocket-Accept} muss vom Server berechnet und zurückgegeben werden und zeigt damit, dass er das WebSocket Protokoll versteht. Ab diesem Zeitpunkt ist der Handshake abgeschlossen und die Verbindung wurde aufgebaut.\par
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm]{fig/websockets}
-	\caption[Aufbau einer WebSocket Verbindung]{Aufbau einer WebSocket Verbindung. Danach können beliebig Nachrichten in beide Richtungen (gleichzeitig) übermittelt werden}
+	\caption[Aufbau einer WebSocket Verbindung]{Aufbau einer WebSocket Verbindung. Danach können beliebig Nachrichten in beide Richtungen (gleichzeitig) übermittelt werden {\cite[S. 7]{ws}}}
 \end{figure}
 
 Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. Das verringert Latenzzeiten (die Pakete werden direkt zugestellt, da der Server auf keinen Request vom Client warten muss), den Traffic (der Overhead ist deutlich geringer, nur ein Handshake zu Beginn erforderlich) und die CPU-Leistung der Server (der Austausch der Daten ist einfacher gestaltet als beim Polling o.Ä.).
@@ -103,4 +103,4 @@ Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches 
 
 Vor diesem technischen Hintergrund wurde \emph{Polling} entwickelt, bei dem in einem zeitlich bekannten Intervall eine Anfrage an den Server geschickt wird mit der Bitte um Aktualisierung. Diese Technik ist sehr attraktiv, wenn die zeitlichen Abstände der Aktualisierung der Daten bekannt ist, allerdings sind Echtzeitdaten schlecht vorhersehbar. Dadurch ist Polling nicht die richtige Wahl für dieses Projekt, weil es auf eine wirkliche Echtzeitaktualisierung ankommt.\par
 
-Da bei sämtlichen Techniken neben Polling höhere Latenzen, mehr Rechenleistung und ein komplizierterer Aufbau zu erwarten sind, ist HTML5 mit WebSockets auf dem aktuellen Stand der Dinge und kann vieles besser machen als seine Vorgänger, weshalb für diese Arbeit auch auf diese junge Technik zurückgegriffen wird.
+Da bei sämtlichen Techniken, die dem echtzeitähnlichen Austausch von Daten dienen, höhere Latenzen, mehr Rechenleistung und ein komplizierterer Aufbau zu erwarten sind, ist HTML5 mit WebSockets auf dem aktuellen Stand der Dinge und kann vieles besser machen als seine Vorgänger, weshalb für diese Arbeit auch auf diese junge Technik zurückgegriffen wird. Pollingähnliche Verbindungen werden bei dieser Webanwendung nur angewendet, wenn HTML5 oder die WebSockets von dem verwendeten Browser nicht unterstützt werden.

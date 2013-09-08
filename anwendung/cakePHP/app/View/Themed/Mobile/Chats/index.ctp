@@ -4,7 +4,7 @@
 </div>
 <div data-role="content">
 	<article>
-		<span id="chatstatus">Please refresh page if you can read this...</span>
+		<span id="chatstatus">If you can read this AND your WebSocket Server ist definitely running, please refresh this page</span>
 		<div id="chathistory" style="height: 80%"></div>
 		<input type="text" id="chatinput" placeholder="Type new message"/>
 		<button onclick="sendChatMessage()">Send</button>

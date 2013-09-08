@@ -19,7 +19,7 @@ $(function () {
 				doConnect();
 			}
 		} catch (e) {
-			// If socket.io could ont be received, do nothing
+			// If socket.io could not be received, do nothing
 		}
 	}
 

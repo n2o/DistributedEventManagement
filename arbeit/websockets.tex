@@ -2,8 +2,9 @@
 Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App, welche hier thematisiert wird.
 
 \section{Einführung in WebSockets}
-Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf TCP basierendes Protokoll der Anwendungsschicht, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Dieser Datenaustausch geschieht sehr schnell und mit einem sehr kleinen Overhead, da die Verbindung nicht neu aufgebaut werden muss und die Daten somit sofort verschickt werden können.\\
-Ähnlich wie \glqq normale\grqq{} Sockets werden WebSockets von einer Anwendung erzeugt und stellen dann die Schnittstelle zwischen der Webanwendung und dem Transportprotokoll TCP dar. 
+Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf \emph{TCP} basierendes Protokoll der Anwendungsschicht, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Dieser Datenaustausch geschieht sehr schnell und mit einem sehr kleinen Overhead, da die Verbindung nicht neu aufgebaut werden muss und die Daten somit sofort verschickt werden können.\\
+Ähnlich wie \glqq normale\grqq{} Sockets werden WebSockets von einer Anwendung erzeugt und stellen dann die Schnittstelle zwischen der Webanwendung und dem Transportprotokoll TCP dar.\\
+Im direkten Vergleich zu den normalen generischen Sockets, erfüllen WebSockets eine ähnliche Funktion, sind allerdings auf Webanwendungen und TCP beschränkt. 
 
 \paragraph{Handshake} 
 Der Handshake erfolgt über HTTP/1.1 und ähnelt dem zum Aufruf einer Homepage.
@@ -59,11 +60,20 @@ Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protoko
 
 Der socket.io Server wertet diese Fälle über ein \emph{Switch-Case-Statement} aus und ruft entsprechende Methoden zur weiteren Verarbeitung auf.
 
+\section{Kommunikation zwischen Apache und WebSocket Server}
+Bei dem Webserver Apache und dem WebSocket Server socket.io handelt es sich um zwei Anwendungen, die selbstständig und unabhängig voneinander aktiv sind. Beide verwenden das HTTP Protokoll und müssen mit je einem HTTP Request angesprochen werden. Diese Implementierung sieht vor, dass beide parallel auf einem Server ausgeführt und mit verschiedenen Ports angesprochen werden.\\
+Um die Berechtigungen des WebSockets Server möglichst gering zu halten und diesen nur für die Echtzeitaktualisierung zu nutzen, hat socket.io keinerlei Rechte, um auf die Datenbank oder andere Elemente der Webanwendung zugreifen zu können. Dadurch bleibt die Kapselung beider Anwendungen erhalten, aber ein weiterer Schritt zur Authentifizierung eines Benutzers ist erforderlich.
+
+\paragraph{WebSockets über PHP mit ElephantIO}
+Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, muss die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io. So ist es also möglich, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
+Die Kommunikation in die andere Richtung ist nicht notwendig, da die Web-App keine Informationen benötigt welche Endgeräte sich über WebSockets angemeldet haben.
+
+
 \section{Authentifizierung eines Clients beim WebSocket Server}
-Der Server für diese Webanwendung besteht wie beschrieben aus zwei Teilen: Apache Webserver und der socket.io WebSocket Server. Um zu beiden Servern zu verbinden sind zwei verschiedene HTTP Requests erforderlich. Bei der Webanwendung mit dem Apache kann mit einem normalen Formular der Benutzername und das Passwort eingegeben werden, allerdings hat der WS Server keinen Zugang zur Datenbank. Es muss aber eine Authentifizierung am WebSocket Server stattfinden, damit nur Benutzer aus der Webanwendung eine Verbindung erstellen können. Dafür wird das \emph{RSA Kryptosystem} verwendet.
+In der Webanwendung auf dem Apache kann mit einem normalen Formular der Benutzername und das Passwort eingegeben werden, allerdings hat der WS Server bekanntlich keinen Zugang zur Datenbank. Es muss aber eine Authentifizierung am WebSocket Server stattfinden, damit nur Benutzer aus der Webanwendung eine Verbindung erstellen können. Dafür wird das \emph{RSA Kryptosystem} verwendet.
 
 \paragraph{Erzeugung der Schlüssel}
-Bei der ersten Initialisierung der Webanwendung erstellt die App sich selbst mittels RSA Verfahren einen privaten $K^-_A$ und einen öffentlichen $K^+_A$ Schlüssel. Diese liegen beide auf dem Server wobei der öffentliche Schlüssel dem WebSocket Server bereitgestellt wird.
+Zur ersten Initialisierung der Webanwendung erstellt die App sich selbst mittels RSA Verfahren einen privaten $K^-_A$ und einen öffentlichen $K^+_A$ Schlüssel. Diese liegen beide auf dem Server wobei der öffentliche Schlüssel dem WebSocket Server bereitgestellt wird.
 
 \paragraph{Signieren der Nachricht und anschließende Authentifizierung}
 Wenn sich nun ein Client in der Webanwendung mit Benutzernamen und Passwort einloggt, nimmt die App diese Nachricht $m$ und erstellt mit dem privaten Schlüssel eine Signatur $K^-_A(m)$, welche dem Client zur Verfügung gestellt wird. Damit kann dieser nun einen syn-Request mit Benutzernamen, Passwort und Signatur an den WebSocket Server schicken. Der WS Server überprüft nun die Signatur mit dem öffentlichen Schlüssel $K^+_A(K^-_A(m))$ und wenn diese der ursprünglichen Nachricht entspricht, ist der Client authentifiziert.
@@ -79,8 +89,9 @@ Durch diese Authentifizierung kann socket.io alle eingehenden Verbindungen ableh
 
 Dieser Weg der Authentifizierung wurde so gewählt, da zum Zeitpunkt des Logins der WebSocket des Endgeräts noch nicht bekannt ist. Also kann der Apache dem WS Server nicht mitteilen, welcher Benutzer zu welchem WebSocket gehört. Ein zweiter Schritt zur endgültigen Authentifizierung über eine Signatur ist also notwendig für die korrekte Zuordnung vom offenen WebSocket zum Benutzer. 
 
+
 \section{Vor HTML5: Benutzung von Polling}
-Für den Datenverkehr von Internetseiten wird HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}. Das hat wiederum zur Folge, dass es relativ ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.\par
+Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}. Das hat wiederum zur Folge, dass es relativ ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.\par
 
 \begin{figure}[!ht]
 	\centering

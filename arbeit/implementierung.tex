@@ -13,9 +13,14 @@ Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im O
 \subsection{Identifizierung des Problems}
 Bei dem Gedanken eine App zu entwickeln steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS, \dots \ Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen, was eine schlechte Annahme ist, da dies nicht der Realität entspricht.\par
 
-Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Google Projekt \glqq HTML5 Rocks\grqq{}\cite{html5rocksmain} und vielen weiteren Personen ist \emph{HTML5} in aller Munde und somit gibt es tatsächlich die Möglichkeit jedes Betriebssystem mit einer einzigen Web-App abzudecken.\par
+Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Google Projekt \glqq HTML5 Rocks\grqq{}\cite{html5rocksmain} und vielen weiteren Personen ist \emph{HTML5} in aller Munde und somit gibt es tatsächlich die Möglichkeit jedes Betriebssystem mit einer einzigen Web-App abzudecken.
 
-Damit ist die zugrunde liegende Programmiersprache festgelegt. Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
+\paragraph{Definition Webanwendung} 
+Eine Webanwendung (auch \emph{Web-App} genannt) ist eine Anwendung, die vollständig in einem Browser ausführbar ist. Da sie (fast) vollständig auf einem Webserver ausgeführt wird, ist das zugrunde liegende Übertragungsprotokoll \emph{HTTP}.\par
+
+Web-Apps bieten den Vorteil, dass sie in jedem modernen Browser ausgeführt werden können, ohne, dass spezielle Programmiersprachen erlernt und angewendet werden müssen. Interessant sind diese Anwendungen, da sie auch auf Smartphones und Tablets ausgeführt werden können ohne sie vollständig auf die jeweilige Plattform portieren zu müssen.
+
+Damit sind die zugrunde liegenden Programmiersprachen festgelegt. Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
 
 \subsection{Beschreibung der Umgebung}
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung zwischen den Bergen zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung durch einen eigenen Funkmast zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
@@ -48,9 +53,9 @@ Die Vorteile bei diesem Entwurfsmuster liegen auf der Hand: Es muss nur einmal e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Datenbanken}
-Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, da diese in der Regel zum Komplettpaket eines Webservers gehören.\par
+Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, weil diese in der Regel zum Komplettpaket eines Webservers gehören.\par
 
-Als einfache Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat und für diesen Verwendungszweck ein relationales Datenbanksystem die richtige Wahl ist aufgrund von einem einheitlichen Schema mit dem in die Datenbank geschrieben / gelesen werden soll.\\
+Als einfachste Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat und für diesen Verwendungszweck ein relationales Datenbanksystem die richtige Wahl ist aufgrund von einem einheitlichen Schema mit dem in die Datenbank geschrieben und auch daraus gelesen werden soll.\\
 Folgende Tabellen wurden daher angelegt:\par
 
 \underline{users:}\\
@@ -76,15 +81,15 @@ Diese \emph{Many-to-many}-Verknüpfung (in cakePHP auch \emph{hasAndBelongsToMan
 \subsection{Veranstaltungsspezifische Eigenschaften}
 Die ersten Schritte zu einer Webanwendung, die Veranstaltungen und Benutzer verwalten kann, sind nun erledigt. Bisher ist es allerdings nicht möglich in Veranstaltungen Felder zu definieren, die für eben jene Veranstaltung von Bedeutung sind. Das können im konkreten Fall Felder sein wie \glqq Art des Transportmittels\grqq{}, \glqq Wird ein Parkplatz benötigt?\grqq{}, \glqq Welcher Holzstangenbedarf besteht?\grqq{} oder Ähnliches.\par
 
-\paragraph{Key-Value-Store} In einem Key-Value-Store wird die Datenbank mit den Werten (\emph{values}) über die Schlüssel (\emph{keys}) indexiert. Das hat den Vorteil, dass vorher nicht bekannt sein muss, welche Werte in die Datenbank eingetragen werden sollen. In der Meißner App wurde diese Methode implementiert, um eventspezifisch ein Feld zu definieren, welches Werte als Strings annimmt.\\
-Das hat den Vorteil, dass den Benutzern dieser Anwendung die größtmögliche Freiheit gewährt wird, was die Inhalte der Veranstaltungen angeht. Jede kann individuell angelegt und personalisiert werden, sodass sie den gewünschten Anforderungen genügt.\\
-Als Format für die Values wurden hier ausschließlich Strings gewählt, um den gesamten Vorgang zur Erstellung von speziellen Feldern möglichst gering zu halten. In der späteren statistischen Auswertung ist die Beschränkung des Feldes auf Strings irrelelevant, da sich diese sehr einfach verwerten lassen.\par
+\paragraph{Key-Value-Store} In einem Key-Value-Store wird die Datenbank mit den Werten (\emph{values}) über die Schlüssel (\emph{keys}) indexiert. Das hat den Vorteil, dass vorher nicht bekannt sein muss, welche Werte in die Datenbank eingetragen werden sollen. In der Meißner App wurde diese Methode implementiert, um eventspezifisch ein beliebiges Feld zu definieren, welches Werte als Strings annimmt.\\
+So ist gewährleistet, dass die Benutzer dieser Anwendung die größtmögliche Freiheit besitzen, was die Inhalte der Veranstaltungen angeht. Jede kann individuell angelegt und personalisiert werden, sodass sie den gewünschten Anforderungen genügt.\\
+Als Format für die Values wurden hier ausschließlich Strings gewählt, um den gesamten Vorgang zur Erstellung von speziellen Feldern möglichst gering zu halten. In der späteren statistischen Auswertung ist die Beschränkung des Feldes auf Strings irrelelevant, da sich diese sehr einfach beispielsweise mit PHP verwerten lassen.\par
 
 \paragraph{Implementierung}
 Für die Implementierung sind zwei weitere Tabellen notwendig: 
 
 \begin{enumerate} 
-	\item \emph{event\_columns}: Dient als Maske, um Feldnamen und -typen zu definieren. Kann innerhalb einer speziellen Veranstaltung genutzt werden, um diese Felder den zugeordneten Benutzern verfügbar zu machen. Gespeichert werden event\_id, der Name und der Typ der Eigenschaft.
+	\item \emph{event\_columns}: Dient als Maske, um Feldnamen und -typen zu definieren. Kann innerhalb einer speziellen Veranstaltung genutzt werden, um diese Felder den zugeordneten Benutzern verfügbar zu machen.
 	\item \emph{event\_properties}: Nachdem vom Controller die Feldnamen des Events abgefragt wurden, werden diese in einer Variable gespeichert und dem View übergeben. Im View wird dann ein Formular generiert, welches die Feldnamen aus \emph{event\_columns} anzeigt und die Möglichkeit gibt dort Werte einzutragen. Diese Werte werden dann über den Controller in \emph{event\_properties} gespeichert.
 \end{enumerate}
 
@@ -107,6 +112,6 @@ Dabei gibt es mehrere Ansätze, wobei für diese Arbeit das sogenannte \emph{Res
 Hauptaugenmerk wird hier meistens auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit unglaublichen 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
 Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmte Objekte im Sichtbereich des Geräts sein können, sodass der Benutzer nicht von der schlechten Bedienung genervt ist, sondern weiterhin die Informationen aus der App holen möchte. Beim Responsive Webdesign werden über \emph{Media Queries} (Abfrage der Eigenschaften des Geräts, Beispiel: Auflösung, Orientierung des Endgeräts usw.) Informationen des Endgeräts eingeholt und darauf abgestimmte Stylesheets geladen.\par
 
-Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind.\par
+Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.\par
 
 So sind lediglich wenige Änderungen am normalen View nötig, um daraus eine mobile Version zu entwickeln, die für die Bedienung mit dem Finger optimiert ist.

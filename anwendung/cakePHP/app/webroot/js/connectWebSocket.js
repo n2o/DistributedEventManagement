@@ -30,6 +30,7 @@ $(function () {
 		if (typeof(name) != null) {
 			try {
 				socket = io.connect('ws://'+host+':'+port+'/');
+				// socket = io.connect('wss://'+host+':'+port+'/', {secure: true});
 				//synSocketID();
 				socket.on('connect', function (evt) { 
 					onOpen(evt);									

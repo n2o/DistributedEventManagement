@@ -35,7 +35,7 @@ server.listen(port);
 
 var io = require('socket.io').listen(server);
 
-io.set('log level', 2);	// Normal: 2, Debug Mode: 3
+io.set('log level', 3);	// Normal: 2, Debug Mode: 3
 io.set('transports', [	// set fallbacks for unsupported browsers
 	'websocket',
 	'flashsocket',
@@ -65,7 +65,6 @@ io.sockets.on('connection', function (socket) {
 
 					case 'syn':
 						if (validSignature(data)) {
-							console.log("Received syn");
 							// Initialize a client and identify him by name
 							if (clients[data.name] === undefined) {
 								clients[data.name] = {};
@@ -92,7 +91,6 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'message':
-						console.log("Incoming message from: "+data.name);
 						if (clients[data.name] !== undefined) {
 							var obj = {
 								time: (new Date()).getTime(),
@@ -109,7 +107,6 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'history':
-						console.log("Incoming history request from: "+data.name);
 						// if (clients[data.name] !== undefined) {
 							// if (history.length > 0) {
 								socket.send(JSON.stringify({type: 'history', data: history}));

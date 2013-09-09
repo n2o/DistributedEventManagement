@@ -35,26 +35,26 @@ Der kryptische Schlüssel \emph{Sec-WebSocket-Accept} muss vom Server berechnet 
 	\caption[Aufbau einer WebSocket Verbindung]{Aufbau einer WebSocket Verbindung. Danach können beliebig Nachrichten in beide Richtungen (gleichzeitig) übermittelt werden {\cite[S. 7]{ws}}}
 \end{figure}
 
-Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. Das verringert Latenzzeiten (die Pakete werden direkt zugestellt, da der Server auf keinen Request vom Client warten muss), den Traffic (der Overhead ist deutlich geringer, nur ein Handshake zu Beginn erforderlich) und die CPU-Leistung der Server (der Austausch der Daten ist einfacher gestaltet als beim Polling o.Ä.).
+Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. So verringern sich die Latenzzeiten, der Traffic und die CPU-Leistung der Server. Das liegt daran, dass die Pakete direkt zugestellt werden können, der Overhead dank einmaligem Handshake deutlich geringer ist und der Austausch der Daten sehr einfach gestaltet ist.
 
 \section{Implementierung der Echtzeitaktualisierung}
 Im ersten Ansatz dieser Arbeit wurde der WebSocket-Server auf Basis von \emph{node.js} \cite{node.js}, einem serverseitigem JavaScript Framework für Server, implementiert. Das verlief aufgrund der einfachen Handhabung von WebSockets und der guten Unterstützung von HTML5 problemlos. Jedoch wurden zu diesem Zeitpunkt weder verschlüsselte Verbindungen noch Broadcasting unterstützt. Daher war dies ungeeignet, weil sensible Daten, wie die Standorte der Clients, nicht im Klartext verschickt werden sollten.\\
-Außerdem ist ein Broadcast-Funktion notwendig, die den bestehenden Sockets bei Aktualisierung einer Position sofort die neuen Koordinaten übermittelt.\par
+Außerdem ist eine Broadcast-Funktion notwendig, die den bestehenden Sockets bei Aktualisierung einer Position sofort die neuen Koordinaten übermittelt.\par
 
-Die Implementierung beider Funktionen hätte den Rahmen dieser Arbeit überschritten, weshalb serverseitig das Open Source Modul \emph{socket.io} \cite{socket.io} für node.js verwendet wird, welches sämtliche benötigten Dienste bereitstellt und dabei noch einen Fallback zur Verfügung stellt, wodurch auch älteren Browsern ohne HTML5 Unterstützung eine websocketähnliche Verbindung ermöglicht wird.\par
+Die Implementierung beider Funktionen hätte den Rahmen dieser Arbeit überschritten, weshalb serverseitig das Open Source Modul \emph{socket.io} \cite{socket.io} für node.js verwendet wird. Es stellt sämtliche benötigten Dienste sowie einen Fallback bereit, wodurch auch älteren Browsern ohne HTML5 Unterstützung eine websocketähnliche Verbindung ermöglicht wird.\par
 
-Clientseitig wurde eine Routine in JavaScript entwickelt, welche im Hintergrund der Web-App ausgeführt wird. Dieses Skript verbindet sich mit dem WebSocket Server, schickt initial die aktuellen Koordinaten (unabhängig davon, welcher View gerade angezeigt wird) und wartet auf eingehende Nachrichten oder auf eine Änderung der eigenen Position. Bewegt sich der Client werden automatisch die Koordinaten GoogleMaps-kompatibel in Form von Latitude und Longitude an den WebSocket Server übermittelt.\\
-Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten die Endgeräte in Echtzeit eine Aktualisierung aller Positionen (dazu später mehr).
+Clientseitig wurde ein Skript in JavaScript entwickelt, welche im Hintergrund der Web-App ausgeführt wird. Es verbindet sich mit dem WebSocket Server, schickt initial die aktuellen Koordinaten unabhängig davon, welcher View gerade angezeigt wird und wartet auf eingehende Nachrichten oder auf eine Änderung der eigenen Position. Bewegt sich der Client, werden automatisch die Koordinaten GoogleMaps-kompatibel in Form von Latitude und Longitude an den WebSocket Server übermittelt.\\
+Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten die Endgeräte in Echtzeit eine Aktualisierung aller Positionen.
 
 \paragraph{Fallback}
-Nicht jedes Endgerät unterstützt die Verwendung von WebSockets. Zwar gab es keine Komplikationen mit den getesteten Geräten, da WebSockets mit allen gängigen Desktop Browsern und fast allen mobilen Browsern (außer Opera Mini) lauffähig ist, jedoch ist eine Unterstützung bei veralteter Software nicht immer gegeben. Daher wurde socket.io so eingerichtet, dass ein Fallback über \emph{flashsockets} hin zum \emph{polling} ermöglicht wird. So kann der größte Teil aller Browser die Echtzeitaktualisierung verwenden.
+Nicht jedes Endgerät unterstützt die Verwendung von WebSockets. Zwar gab es keine Komplikationen mit den getesteten Geräten, da WebSockets mit allen gängigen Desktop Browsern und fast allen mobilen Browsern außer Opera Mini lauffähig ist. Bei veralteter Software ist eine eine Unterstützung bei jedoch nicht immer gegeben. Daher wurde socket.io so eingerichtet, dass ein Fallback über \emph{flashsockets} hin zum \emph{polling} ermöglicht wird. So kann der größte Teil aller Browser die Echtzeitaktualisierung verwenden.
 
 \paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}
 Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protokoll entwickelt, welches angibt, um welchen Inhalt es sich bei der Nachricht handelt. So haben alle Nachrichten, die zwischen Client und Server ausgetauscht werden, ein bestimmtes Format und ein Feld \emph{type}, welches aktuell folgende Werte annehmen kann:
 
 \begin{itemize}
 	\item[] \emph{location:} enthält Latitude und Longitude des Clients
-	\item[] \emph{syn:} enthält eine Signatur, die überprüft wird
+	\item[] \emph{syn:} enthält eine Signatur für die Authentifizierung
 	\item[] \emph{subscribe:} abonniert bestimmte Events, dazu später mehr
 	\item[] \emph{publish:} signalisiert eine Änderung an der Datenbank
 	\item[] \emph{message:} eine neue Chat Nachricht hat den Server erreicht und wird per Broadcast an die Clients verschickt

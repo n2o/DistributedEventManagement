@@ -1,8 +1,19 @@
 \chapter{Zusammenfassung}
-Mit dieser Bachelorarbeit ist die \emph{Meißner App} entstanden, welche das Erstellen von beliebig vielen Veranstaltungen und Benutzern ermöglicht. Sie bietet die Möglichkeit eigene Felder und Formulare für spezifische Events zu definieren und diese frei mit Werten der Benutzer zu füllen.\par
+Mit dieser Bachelorarbeit ist die \emph{Meißner App} entstanden, welche das Erstellen von beliebig vielen Veranstaltungen und Benutzern ermöglicht. Sie bietet die Möglichkeit eigene Felder und Formulare für spezifische Events zu definieren und diese frei mit Werten der Benutzer zu füllen. Diese Werte stammen hauptsächlich aus den Anmeldungen der Teilnehmer.\par
 
-Die Anpassung an touchfähige Geräte ermöglicht eine einfache Bedienung mit Smartphone und Tablets, wobei ganz klar diese mobilen Endgeräte als Hauptzielgruppe zu verstehen sind.\par
+Die Anpassung an touchfähige Geräte ermöglicht eine einfache Bedienung mit Smartphone und Tablets, wobei hauptsächlich mobile Endgeräte in Verwendung sein werden. Hierbei wurde auf die Unterstützung von Android 2.3 - 4.3 und iOS 5 - 7 Beta sowie die Browser Safari 6, Firefox 23 und Google Chrome 29 besonderen Wert gelegt.\\
+Durch die einfache Bedienung können ungeschulte Personen die Webanwendung benutzen, verwalten und anpassen.\par
 
+Moderne Webtechnologien aus dem Web 2.0 kommen hier zum Einsatz. Davon sind die bedeutensten das experimentelle HTML5 und die damit definierten WebSockets.
+
+\paragraph{Besonderheiten} 
+Für den produktiveren Einsatz der Helfer wurde eine Echtzeitaktualisierung mit Hilfe von HTML5 und WebSockets implementiert. Dadurch sind Erweiterungen wie die Geolokalisierung von Benutzern, PUSH-Benachrichtigungen innerhalb der Webanwendung und Chats für interessierte Benutzer möglich.\\
+Optimiert ist die Anwendung für die Verwendung unter freiem Himmel, denn nur dort kann die Lokalisierung mit Smartphones genau erfolgen. Eine automatische statistische Auswertung der einzelnen Veranstaltungen ermöglichen eine grafisch ansprechende und verständliche Aufbereitung der eingegebenen Daten.\par
+
+Mit diesen sinnvollen Erweiterungen erreicht die Anwendung einen Funktionsumfang, der bei keiner ähnlichen Anwendung gefunden werden konnte. Professionelle Entwickler verlangen viel Geld für ihre Produkte, während hier sowohl notwendige als auch erweiternde Funktionen für ein produktives Veranstaltungsmanagement-System gratis und Open Source zur Verfügung gestellt werden.\par
+
+Zuletzt bleibt noch zu erwähnen, dass die Meißner App ein eigenständiges Programm ist, welches auf einem einfachen Webserver installiert werden kann. Sie benötigt kein besonderes Backend, sondern eine Standardumgebung, wie sie für heutige Webseiten üblich ist. Das heißt eine Apache Installation, MySQL Datenbank sowie die Unterstützung von HTML5 und PHP5.\\
+Für die erweiterten Funktionen muss nur node.js serverseitig installiert sein.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -11,7 +22,7 @@ Die Anpassung an touchfähige Geräte ermöglicht eine einfache Bedienung mit Sm
 Diese Erweiterungen könnten noch implementiert werden, um den Funktionsumfang sinnvoll zu erweitern. Aus Zeitgründen konnten diese Funktionen nicht mit in die Bachelorarbeit aufgenommen und implementiert werden:
 
 \paragraph{Geolocations}
-Aktuell kann immer nur ein Endgerät eines Accounts auf der Google Maps Karte angezeigt werden. Zwar wird das Verbinden mehrerer Endgeräte über den gleichen Account von der Webanwendung unterstützt, allerdings wird auf der Karte immer nur ein Marker pro Account angezeigt. Das stört nicht, wenn beispielsweise ein Notebook und ein mobiles Endgerät über den gleichen Account eingeloggt sind, da das Notebook initial seine Position verschickt, diese aber nicht updatet, da sie sich nicht verändert (sofern es kein GPS besitzt). Das mobile Endgerät wird öfter seine Position updaten und damit aktuell auf der Karte angezeigt.
+Unterstützung von mehreren Endgeräten, die mit dem gleichen Account eingeloggt sind.
 
 \paragraph{Chat}
 Im Moment ist nur ein großes Channel zum chatten verfügbar. Das könnte man ändern und für jede Veranstaltung einen eigenen kleinen Channel erstellen.
@@ -20,10 +31,10 @@ Im Moment ist nur ein großes Channel zum chatten verfügbar. Das könnte man ä
 Beliebige Veranstaltungen abonnieren, um damit mehr Informationen zu Veranstaltungen zu erhalten, die den Benutzer interessieren.
 
 \paragraph{Kompression der übertragenen Daten}
-Damit der Datentransfer möglichst gering gehalten wird, könnten die für die Webanwendung nötigen Daten weiter komprimiert werden. Dadurch werden Ladezeiten optimiert und das benötigte Datenvolumen minimiert.
+Um ded Datentransfer möglichst gering zu halten, könnten die für die Webanwendung notwendigen Daten weiter komprimiert werden. Dadurch werden Ladezeiten optimiert und das benötigte Datenvolumen minimiert.
 
 \paragraph{Voice Chat}
-Um direkten Kontakt zu anderen Helfern aufnehmen zu können, könnte man aus der App heraus einen Sprachanruf starten. So muss man nicht umständlich die Telefonnummer desjenigen Helfers suchen, sondern kann per Klick / Tippen auf den Namen einen Anruf starten.
+Um direkten Kontakt zu anderen Helfern aufnehmen zu können, könnte man aus der App heraus einen Sprachanruf starten. So muss man nicht umständlich die Telefonnummer desjenigen Helfers suchen, sondern kann per Klick / Tipp auf den Namen einen Anruf starten.
 
 
 

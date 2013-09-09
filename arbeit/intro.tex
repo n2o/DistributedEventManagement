@@ -1,20 +1,22 @@
 \chapter{Einleitung}
 Jede große Veranstaltung muss mit viel Aufwand geplant und organisiert werden. Viele Hände sind dafür nötig, doch wie kann man diese Hände sinnvoll verwenden und ihre Arbeit miteinander verknüpfen?\par
 
-Seit vielen Jahren bin ich nun schon Teil der bündischen Jugendbewegung im Deutschen Pfadfinderbund. Traditionsbewusst erinnert man sich an wichtige Ereignisse, wie der wohl bedeutendsten Verkündung der Jugendlichen in Deutschland im Jahr 1913 auf dem Hohen Meißner (ein 753,6 m über Normalnull hoher Berg in Nordhessen). Bei diesem Treffen entstand eine Formel, die die Entstehung deutscher bündischer Pfadfinder ausgelöst hat - Die Meißner Formel:
+Seit vielen Jahren bin ich Teil der bündischen Jugendbewegung im Deutschen Pfadfinderbund. Traditionsbewusst erinnert man sich an wichtige Ereignisse, wie der wohl bedeutendsten Verkündung der Jugendlichen in Deutschland im Jahr 1913 auf dem Hohen Meißner, ein 753,6 m über Normalnull hoher Berg in Nordhessen. Bei diesem Treffen entstand eine Formel, die die Entstehung deutscher bündischer Pfadfinder ausgelöst hat - die Meißner Formel:
 \begin{quote}
 	\textit{\glqq Die Freideutsche Jugend will nach eigener Bestimmung, vor eigener Verantwortung, in innerer Wahrhaftigkeit ihr Leben gestalten. Für diese innere Freiheit tritt Sie unter allen Umständen geschlossen ein.\grqq{}}\cite[S. 109]{meissnerformel}
 \end{quote}
-Seitdem sind 100 Jahre vergangen, die Formel behält ihre Aktualität und es wird im Oktober eine große Veranstaltung mit über 4000 Pfadfindern und 90 freiwilligen Helfern an eben jenem Ort von 1913 stattfinden.\par
-
-Durch diese Veranstaltung angeregt ist mit dieser Bachelorarbeit eine Webanwendung (kurz: Web-App) entstanden, welche sich auf die Organisation großer Events mit vielen Helfern spezialisiert.
+Seitdem sind 100 Jahre vergangen. Die Formel behält ihre Aktualität und es wird im Oktober das große Meißnerlager mit über 4000 Pfadfindern und 90 freiwilligen Helfern an eben jenem Ort von 1913 stattfinden.
 
 \section{Ziele der Arbeit}
 Als Ziel soll eine Webanwendung entwickelt werden, die auf nahezu allen modernen Endgeräten ungeachtet des benutzten Betriebssystems lauffähig ist. Sie muss dabei grundlegende Funktionen zur Erstellung und Verwaltung von Veranstaltungen und deren zugehörigen Teilnehmern besitzen. Diese Einträge sollen zentral in einer MySQL-Datenbank gespeichert werden und auf diese Datenbank sollen die zugeordneten Helfer entsprechend ihren Rechten Daten einsehen und verändern können.\\
-Die Meißner App soll eine mobile Seite bereitstellen, die für touchfähige Geräte optimiert ist und somit die Nutzung von Smartphones und Tables bequem ermöglicht.\\
-Da das Lager des Meißnertreffens unter freiem Himmel stattfinden wird, ist die App für den Außenbereich optimiert.\par
+Die Meißner App soll eine mobile Seite bereitstellen, die für touchfähige Geräte optimiert ist und somit die bequem Nutzung von Smartphones und Tablets ermöglicht.\\
+Das Meißnerlager findet unter freiem Himmel statt, sodass die App für den Außenbereich und die mobile Nutzung optimiert sein muss. Auf knapp 40.000 $m^2$ Lagerplatzfläche werden sich ca. 90 freiwillige Helfer zwischen den ca. 4.000 erwarteten Teilnehmern bewegen. Dabei werden sie eigene Smartphones mit zu der Veranstaltung nehmen und über ihren Zugang zu der Meißner App ihre Aufgaben organisieren können.\par
 
-Diese App wird im Oktober 2013 bei der oben beschriebenen Veranstaltung getestet und verwendet werden. Die dafür nötige Infrastruktur ist vor Ort gegeben.
+Die Organisation durch diese Anwendung wird so einfach gehalten werden, dass sie von ungelernten Helfern produktiv genutzt werden kann. Mit einer einfachen Implementierung wird die App auch auf einem leistungsschwachem Server mit ausreichender Geschwindigkeit ausführbar sein weshalb keine kostenintensive Computer notwendig sind.\par
+
+Diese App wird im Oktober 2013 bei der oben beschriebenen Veranstaltung getestet und verwendet werden. Die dafür nötige Infrastruktur wird durch ein großes Telekommunikationsunternehmen gefördert. Davon können nicht alle profitieren, da es bekanntlich vier verschiedene Telefonanbieter gibt. Sollte es zu Empfangsproblemen über die interne Antenne kommen, können sich die Smartphones in die installierten LTE Router einwählen.\par
+
+Über die Homepage \url{http://www.meissner-2013.de} kann man sich über ein hinterlegtes PDF Formular zu der Veranstaltung anmelden. Dort werden viele Details abgefragt, welche den Großteil der Daten in der Datenbank ausmachen wird.
 
 \section{Gliederung}
-Das zweite Kapitel befasst sich mit der Implementierung der Grundfunktionen einer Webanwendung, Kapitel drei und vier erläutern die erweiterten Funktionen dieser Arbeit. Im fünften Kapitel wurden ähnliche Arbeiten gesucht und die Unterschiede kurz verdeutlicht. Das sechste und damit letzte Kapitel fasst die Ergebnisse dieser Arbeit kurz zusammen. 
+Das zweite Kapitel befasst sich mit der Implementierung der Grundfunktionen einer Webanwendung, Kapitel drei und vier erläutern die erweiterten Funktionen dieser Arbeit. Im fünften Kapitel wurden ähnliche Arbeiten gesucht und die Unterschiede kurz verdeutlicht. Das sechste und damit letzte Kapitel fasst die Ergebnisse dieser Arbeit kurz zusammen und gibt einen Ausblick für potentielle Erweiterungen. 

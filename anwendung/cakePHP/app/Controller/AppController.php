@@ -106,8 +106,8 @@ class AppController extends Controller {
 
 			$signature = "";
 			if (!openssl_sign($username, $signature, $privateKey))
-    			die('Failed to encrypt data');
-    		
+    			die('Failed to encrypt data');    
+
     		# Remove $privateKey from RAM
     		openssl_free_key($privateKey);
 
@@ -126,6 +126,10 @@ class AppController extends Controller {
 			$i = 0;
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = $value['events']['id'];
+
+			# Add subscription for chats if current controller is 'chats'
+			if ($this->params['controller'] == "chats") 
+				$subscriptions[$i] = "chats";
 
 			# WebSocket: Save which events the user has subscribed
 			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).''));

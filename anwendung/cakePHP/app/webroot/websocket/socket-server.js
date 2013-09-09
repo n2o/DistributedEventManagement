@@ -55,7 +55,6 @@ io.sockets.on('connection', function (socket) {
 					case 'location':
 						if (clients[data.name] !== undefined) {
 							saveToLocations(data);
-							console.log("New position: " + message);
 							socket.broadcast.send(JSON.stringify(locations));
 							socket.send(JSON.stringify(locations)); // Send current location back to sender
 						} else {
@@ -80,6 +79,7 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'subscribe':
+					console.log("Subscription: "+message);
 						if (clients[data.name] !== undefined) 
 							clients[data.name].subscriptions = data.events;
 						else
@@ -99,6 +99,7 @@ io.sockets.on('connection', function (socket) {
 							}
 							history.push(obj);
 							history = history.slice(-100);
+							
 							socket.send(JSON.stringify({type: 'message', data: obj}));
 							socket.broadcast.send(JSON.stringify({type: 'message', data: obj}));
 						} else {

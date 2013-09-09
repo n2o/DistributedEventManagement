@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://developers.google.com/maps/?hl=de -->
+<html lang="en" class="devsite wf-opensans-n4-active wf-active"><script src="./Google Maps API — Google Developers_files/cb=gapi.loaded_1" async=""></script><script src="./Google Maps API — Google Developers_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Google Maps API — Google Developers_files/plusone.js" gapi_processed="true"></script><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <script src="./Google Maps API — Google Developers_files/script_head.js"></script>
+    <link rel="stylesheet" type="text/css" href="./Google Maps API — Google Developers_files/screen.css">
+    <link rel="shortcut icon" href="https://developers.google.com/_static/images/favicon.ico">
+    <link rel="apple-touch-icon" href="https://developers.google.com/_static/images/apple-touch-icon.png">
+    <link href="./Google Maps API — Google Developers_files/css" rel="stylesheet" type="text/css">
+    
+    <script src="./Google Maps API — Google Developers_files/jquery.min.js"></script><style type="text/css"></style>
+    <script id="jqueryui" src="./Google Maps API — Google Developers_files/jquery-ui.min.js"></script>
+    <script src="./Google Maps API — Google Developers_files/jsapi"></script>
+
+    <script type="text/javascript" src="./Google Maps API — Google Developers_files/api.js"></script>
+    <script type="text/javascript" src="./Google Maps API — Google Developers_files/saved_resource"></script>
+    <!--[if lt IE 9]>
+    <script src="/_static/js/html5shim/html5.js"></script>
+    <![endif]-->
+
+    
+  <script type="text/javascript">
+    var contentTimer = new window.jstiming.Timer();
+
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'de';
+  </script>
+  
+    
+    <title>Google Maps API — Google Developers</title>
+    
+  
+  
+  <meta name="description" content="Google Maps bietet eine Vielzahl von APIs, mit denen Sie die zuverlässigen Funktionen und die Alltagstauglichkeit von Google Maps in eigene Websites und eigene Anwendungen einbetten und eigene Daten darüber einblenden können.">
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://developers.google.com/maps/styles/local.css">
+
+
+
+    
+
+    <style>
+    
+    </style><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+
+  <style>.a-b-c{position:relative;display:-moz-inline-box;display:inline-block}* html .a-b-c,*:first-child+html .a-b-c{display:inline}.a-d-e{margin:2px;border:0;padding:0;font-family:Arial,sans-serif;color:#000;background:#ddd url(//ssl.gstatic.com/editor/button-bg.png) repeat-x top left;text-decoration:none;list-style:none;vertical-align:middle;cursor:default;outline:none}.a-d-e-f-g,.a-d-e-h-g{border-style:solid;border-color:#aaa;vertical-align:top}.a-d-e-f-g{margin:0;border-width:1px 0;padding:0}.a-d-e-h-g{-moz-box-orient:vertical;margin:0 -1px;border-width:0 1px;padding:3px 4px;white-space:nowrap}* html .a-d-e-h-g{left:-1px}* html .a-d-e-i .a-d-e-f-g{left:-1px}* html .a-d-e-i .a-d-e-h-g{right:auto}*:first-child+html .a-d-e-h-g{left:-1px}*:first-child+html .a-d-e-i .a-d-e-h-g{left:1px}::root .a-d-e{line-height:0}::root .a-d-e-f-g{line-height:0}::root .a-d-e-h-g{line-height:normal}.a-d-e-j{background-image:none!important;opacity:.3;-moz-opacity:.3;filter:alpha(opacity=30)}.a-d-e-j .a-d-e-f-g,.a-d-e-j .a-d-e-h-g{color:#333!important;border-color:#999!important}* html .a-d-e-j,*:first-child+html .a-d-e-j{margin:2px 1px!important;padding:0 1px!important}.a-d-e-k .a-d-e-f-g,.a-d-e-k .a-d-e-h-g{border-color:#9cf #69e #69e #7af!important}.a-d-e-l,.a-d-e-m{background-color:#bbb;background-position:bottom left}.a-d-e-n .a-d-e-f-g,.a-d-e-n .a-d-e-h-g{border-color:orange}.a-d-e-o-p,.a-d-e-o-p .a-d-e-f-g,.a-d-e-o-p .a-d-e-h-g{margin-right:0}.a-d-e-o-q,.a-d-e-o-q .a-d-e-f-g{margin-left:0}.a-d-e-o-q .a-d-e-h-g{margin-left:0;border-left:1px solid #fff}.a-d-e-o-q.a-d-e-m .a-d-e-h-g{border-left:1px solid #ddd}* html .a-d-e-o-q .a-d-e-h-g,*:first-child+html .a-d-e-o-q .a-d-e-h-g{left:0}.a-r-e{position:relative;margin:2px;border:1px solid #000;padding:2px 6px;font:normal 13px "Trebuchet MS",Tahoma,Arial,sans-serif;color:#fff;background-color:#8c2425;cursor:pointer;outline:none}.a-r-e-j{border-color:#888;color:#888;background-color:#ccc;cursor:default}.a-r-e-k{border-color:#8c2425;color:#8c2425;background-color:#eaa4a5}.a-r-e-l,.a-r-e-s,.a-r-e-m{border-color:#5b4169;color:#5b4169;background-color:#d1a8ea}.a-r-e-n{border-color:#5b4169}.a-r-e-o-p{margin-right:0}.a-r-e-o-q{margin-left:0;border-left:none}.a-e{color:#036;border-color:#036;background-color:#69c}.a-e-j{border-color:#333;color:#333;background-color:#999}.a-e-k{color:#369;border-color:#369;background-color:#9cf}.a-e-l{color:#69c;border-color:#69c}</style><link href="./Google Maps API — Google Developers_files/table.css" rel="stylesheet" type="text/css"></head>
+  <body class="two-column docs">
+    
+    <div id="sandbar">
+      
+      
+
+
+
+
+<header id="gc-googlebar">
+
+  <a id="gc-logo" href="https://developers.google.com/?hl=de">
+    <img src="./Google Maps API — Google Developers_files/developers-logo.svg" alt="Google">
+  </a>
+<script>
+if ($.browser.msie && $.browser.version.indexOf('8') == 0) {
+  $('#gc-logo img').attr({src:'/_static/images/developers-logo.png'});
+}
+</script>
+
+  <div class="gc-social">
+    
+    <span class="signed-in">
+      <div>
+        <a class="email" href="https://plus.google.com/me">cmeter@gmail.com</a>
+        <a href="https://www.google.com/accounts/Logout?continue=https://developers.google.com/maps/&service=ahsid">Sign out</a>
+      </div>
+      <img src="./Google Maps API — Google Developers_files/silhouette36.png">
+    </span>
+    
+  </div>
+
+  <form class="gc-search" action="https://developers.google.com/search/results" method="GET">
+    <div class="searchbox" style="width: 391px;">
+      
+      
+        <span class="button button-blue mini">Google Maps API<pre>  X</pre></span>
+      
+      <input type="text" name="q" class="q" id="q" value="" placeholder="Suchen" autocomplete="off" style="width: 263px;">
+    </div>
+    <button class="button button-blue" style="top: 0px; left: 406px;">
+      <img src="./Google Maps API — Google Developers_files/search.png" alt="Search">
+    </button>
+    
+      <input type="hidden" name="p" id="search_project" value="/maps">
+    
+  </form>
+
+</header>
+
+
+<script>
+  (function() { var a=window.devsite||{};window.devsite=a;var _gaq=_gaq||[];WebFontConfig={google:{families:["Open+Sans"]}};a.location=window.location;a.reloadWindow=function(){a.location.reload()};a.inProd=function(){return a.location.hostname.match(/\.google\.com$/)&&!a.location.hostname.match(/\.corp\.google\.com$/)};a.openWindow=window.open;a.devsite=a.devsite||{};a.devsite.HOSTNAME=a.inProd()?"//developers.google.com":"";a.devsite.dialogConfig={autoOpen:!1,modal:!0,show:"fade",dialogClass:"msgDialog",closeText:"",resizable:!1,draggable:!1,zIndex:9999};
+a.KD_FADE_LONG=218;a.KD_FADE_SHORT=130;a.progress=a.progress||{};a.progress.INTERVAL_TIME_MS=460;a.progress.MAX_LOOP=100;a.progress.RIGHT_MARGIN=6;a.progress.TOP_MARGIN=-15;
+a.progress.kennedyProgressDot=function(d){a.progress.circleInnerHtml='<span class="mask first"><span class="base"></span><span class="mover"></span></span><span class="mask second"><span class="base"></span><span class="mover"></span></span>';a.progress.spinnerHtml='<div class="circle initial"><span class="mask"><span class="mover"></span></span></div><div class="circle red"></div><div class="circle yellow"></div><div class="circle green"></div><div class="circle blue"></div>';var c=$("<div></div>").prop("id",
+"loader").prop("class","yellow").html(a.progress.spinnerHtml);c.find(".red").html(a.progress.circleInnerHtml);c.find(".blue").html(a.progress.circleInnerHtml);c.find(".green").html(a.progress.circleInnerHtml);c.find(".yellow").html(a.progress.circleInnerHtml);c.css({position:"absolute",right:a.progress.RIGHT_MARGIN+"px",top:a.progress.TOP_MARGIN+"px"});d.append(c);d=function(){this.colorIndex=-1;this.colors=["red","yellow","green","blue"];this.loader=c;this.loopCount=0;this.shouldStop=!1};d.prototype.start=
+function(){var b=this;this.loader.removeClass();this.loader.addClass("firstTime");this.interval=setInterval(function(){b.loop()},a.progress.INTERVAL_TIME_MS)};d.prototype.loop=function(){this.loopCount+=1;this.loader.hasClass("firstTime")?(this.loader.removeClass("firstTime"),this.loader.addClass("initial")):this.loader.hasClass("stopped")?(this.loader.removeClass("stopped"),this.loader.addClass("finishing")):this.loader.hasClass("finishing")?(clearInterval(this.interval),c.remove()):(this.colorIndex=
+(this.colorIndex+1)%this.colors.length,this.loader.removeClass(),this.loader.addClass(this.colors[this.colorIndex]),(this.shouldStop||this.loopCount>a.progress.MAX_LOOP)&&this.loader.addClass("stopped"))};d.prototype.stop=function(){this.shouldStop=!0};var f=new d;return d={start:function(){$.fx.off||f.start()},clear:function(){c.remove()},error:function(){f.stop()}}};a.progress=a.progress||{};
+a.progress.progressDot=function(d){function c(){e+=1;100>e&&b.animate({opacity:"toggle"},a.KD_FADE_LONG,c)}var f=6,b=d.parent().find(".progress");b.remove();b=$("<div></div>").addClass("progress");b.css({position:"absolute","border-radius":f+"px",border:f+"px solid #3D9400",right:f+"px",top:d.parent().height()/2-f+"px",width:0,height:0});d.parent().append(b);var e=0;return d={start:function(){$.fx.off||c()},clear:function(){b.remove()},error:function(){b.stop();b.css({opacity:1,border:f+"px solid #DD4B39"})}}};a.location=window.location;a.setTimeout=function(){return window.setTimeout.apply(window,arguments)};a.clearTimeout=function(){window.clearTimeout.apply(window,arguments)};a.localInit=function(){a.search.init()};a.search={KEY_ESC:27,fadeTime:a.KD_FADE_SHORT,keyDelay:300};
+a.search.init=function(){window.devsite.search.initResultHandlers();var d=$(".gc-search");d.submit(function(){if(window.devsite.geo){var b=window.devsite.geo.lat+","+window.devsite.geo.lon,b=$('<input type="hidden" name="l"/>').val(b);d.append(b)}});var c=$("#q");c.unbind("keyup click");c.bind("keyup click",function(b){a.search.timeout&&a.clearTimeout(a.search.timeout);$(this).val()&&b.keyCode!=a.search.KEY_ESC?a.search.timeout=a.setTimeout(function(){a.search.updateResults()},a.search.keyDelay):
+a.search.removeAutocomplete()});var c=$(".searchbox").children(".button"),f=$("#restrict input");(f.is(":checked")||0==f.length&&0!=c.length)&&a.search.grow();$("body").delegate("#restrict input","click",function(){$(this).is(":checked")?a.search.grow($("#restrict input").val()):a.search.shrink();a.search.updateResults();$("#q").focus()})};
+a.search.initResultHandlers=function(){$(".search-results .result").unbind("click");$(".search-results .result").click(function(){var d={type:$(this).data("type"),url:$(this).data("url"),hl:$(this).data("hl"),q:$(this).data("q")};$.post("/search/go",d,function(c){c&&(a.location.href=c)});return!1})};a.search.fadeOutIfExists=function(d,c,f){d&&d.length?d.fadeOut(c,f):f()};a.search.removeAutocomplete=function(){var d=$(".search-autocomplete");d.remove();a.search.lastQ=null};
+a.search.grow=function(d){var c=$("#q"),f=$(".searchbox"),b=$(".gc-search").children("button"),e=f.children(".button");if(d){var e=c.val(),g=$(".results").data("query-match");g&&c.val(e.substr(g.length+1));e=$("<span></span>");e.addClass("button button-blue mini");e.text($("#restrict").find("span").text());e.data("query-match",g);f.prepend(e);g=$("<input />");g.attr({id:"search_project",type:"hidden",name:"p",value:d});$(".gc-search").append(g)}e.append($("<pre>  X</pre>"));g=$(".searchbox").width();
+d=e.outerWidth(!0);var k=f.outerWidth(!0)+d;f.css("width",k+"px");c.css("width",g+"px");c=b.offset();c.left+=d+10;b.offset(c);b=function(){a.search.shrink();$("#q").focus()};e.click(b)};
+a.search.shrink=function(){var d=$("#q"),c=$(".searchbox"),f=c.children("input"),b=c.children(".button"),e=b.data("query-match");e&&f.val($.trim(e)+" "+f.val());f=$(".gc-search").children("button");$("#restrict input").prop("checked",!1);$("#search_project").remove();e=b.outerWidth(!0);b.remove();b=f.offset();b.left-=e+10;c.css("width","");d.css("width","100%");f.offset(b)};
+a.search.updateResults=function(){var d=$(".searchbox"),c=$("#q"),f=$("#search_project"),b={q:$.trim(c.val()||"")};window.devsite.geo&&(b.l=window.devsite.geo.lat+","+window.devsite.geo.lon);f&&f.val()&&(b.p=escape(f.val()));if(!a.search.lastQ||a.search.lastQ.q!=b.q||a.search.lastQ.p!=b.p){a.search.lastQ=b;a.search.xhr&&a.search.xhr.abort();var e=$(".search-results");b.n=e.data("n")||4;var g=a.progress.kennedyProgressDot(d);g.start();a.search.xhr=$.get("/search/results",b,function(f){g.clear();f&&
+($("#what-q").text(b.q),e=$(".search-results"),a.search.fadeOutIfExists(e,a.search.fadeTime,function(){e.empty();if($.trim(f).length){if(!e.length){e=$("<div></div>").addClass("search-results search-autocomplete").data("n",4);$("body").append(e);var g=d.offset();e.css({position:"absolute",top:g.top+d.outerHeight()+3,left:g.left})}e.append(f);var g=$("#search-next"),h=e.children(".results").data("c");g.length?h?(g.attr("href","/search/results?c="+encodeURIComponent(h)+"&q="+encodeURIComponent(b.q)),
+g.show()):g.hide():$("#search-full").show();$("body").bind("click.searchAutocomplete",function(b){$.contains(e.get(0),b.target)||e.is(b.target)||c.is(b.target)||!e.hasClass("search-autocomplete")||(a.search.removeAutocomplete(),$(this).unbind("click.searchAutocomplete"))});a.search.initResultHandlers();e.fadeIn(a.search.fadeTime)}}))});a.search.xhr.error(function(){g.error()})}};
+ })();
+
+  if (window.jQuery) {
+    $(document).ready(function() {
+      window.devsite.search.init();
+
+      var loginLink = $('#loginLink');
+      if (loginLink.length > 0) {
+        loginLink.click(devsite.devsite.login);
+      }
+    });
+  }
+</script>
+
+      
+    </div>
+    
+
+    
+    <div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article">
+      
+      <input id="gc-analytics" type="hidden" value="UA-24532603-1">
+      
+
+      
+
+      <div id="gc-topnav">
+        <div>
+
+          
+          
+
+          <ul>
+
+            
+            
+
+            
+            
+            
+            
+            <li class=""><a href="https://developers.google.com/?hl=de">Start</a></li>
+            
+            <li class="active"><a href="https://developers.google.com/products/?hl=de">Produkte</a></li>
+            
+            <li class=""><a href="https://developers.google.com/events/?hl=de">Konferenzen</a></li>
+            
+            <li class=""><a href="https://developers.google.com/showcase/?hl=de">Schaufenster</a></li>
+            
+            <li class=""><a href="https://developers.google.com/live/?hl=de">Live</a></li>
+            
+            <li class=""><a href="https://developers.google.com/groups/?hl=de">Groups</a></li>
+            
+
+            
+            
+            
+          </ul>
+        </div>
+      </div>
+      
+      
+
+      
+      
+      
+        <div id="gc-appbar">
+          
+          
+<h1>
+
+  <a href="./Google Maps API — Google Developers_files/Google Maps API — Google Developers.html">Google Maps API</a>
+
+  
+  
+  <div class="plusone-container">
+    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background-color: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background-position: initial initial; background-repeat: initial initial;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1378750237828" name="I0_1378750237828" src="./Google Maps API — Google Developers_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+  </div>
+  
+
+
+<div style="float:right;">
+  
+  <a href="./Google Maps API — Google Developers_files/Google Maps API — Google Developers.html" class="google-feedback" data-p="81777" data-b="" data-context="Maps API Marketing Layer">Feedback zu diesem Dokument</a>
+</div>
+
+
+
+</h1>
+
+
+          
+        </div>
+      
+      
+
+      
+        
+      <div id="gc-main" class="main">
+        
+        
+  
+  
+      
+      
+      <div id="gc-sidebar">
+        
+
+  
+
+
+
+  <nav class="gc-toc"><ul><li class="active"><a href="./Google Maps API — Google Developers_files/Google Maps API — Google Developers.html" data-title="Übersicht"><span>Übersicht</span></a></li><li class=""><a href="https://developers.google.com/maps/location-based-apps?hl=de" data-title="Standortbasierte Apps"><span>Standortbasierte Apps</span></a></li><li class=""><a href="https://developers.google.com/maps/mobile-apps?hl=de" data-title="Mobile Apps"><span>Mobile Apps</span></a></li><li class=""><a href="https://developers.google.com/maps/visualize?hl=de" data-title="Darstellen"><span>Darstellen</span></a></li><li class=""><a href="https://developers.google.com/maps/customize?hl=de" data-title="Anpassen"><span>Anpassen</span></a></li><li class=""><a href="https://developers.google.com/maps/licensing?hl=de" data-title="Lizenzierung"><span>Lizenzierung</span></a></li></ul><hr><ul><li class=""><a href="https://developers.google.com/showcase/?hl=de" data-title="Schaufenster"><span>Schaufenster</span></a></li><li class=""><a href="https://developers.google.com/maps/documentation/?hl=de" data-title="Dokumentation"><span>Dokumentation</span></a></li><li class=""><a href="https://www.youtube.com/user/GoogleDevelopers/videos?query=geo" data-title="Videos"><span>Videos</span></a></li></ul></nav>
+
+
+
+      </div>
+      
+
+      <div id="gc-content">
+        
+        <div>
+  
+          
+  
+  <div itemprop="articleBody">
+  
+
+  <section class="carousel" data-aspect="19:6" style="width: 960px; height: 303.15789473684214px; visibility: visible;"><a class="prev left default-anchor-style disabled"><div></div></a>
+    <div class="frame" tabindex="0" style="width: 958px; height: 301.15789473684214px;"><div class="items" tabindex="-1"><article style="background-image: url(https://developers.google.com/maps/images/maps-showcase-banner.jpg); background-color: rgb(51, 51, 51); width: 958px; height: 301.15789473684214px; background-position: initial initial; background-repeat: no-repeat no-repeat;" data-clickall="true" class="default-carousel-style" tabindex="-1">
+      <header tabindex="-1">Schaufenster für Entwickler</header>
+      <summary class="dark-back carousel-intro" tabindex="-1">
+        Erkunden Sie die innovativsten Websites, die mit dem Google Maps API erstellt wurden.
+      </summary>
+      <a href="https://developers.google.com/showcase/?hl=de" class="button-red button" tabindex="-1">Schaufenster ansehen</a>
+    </article><article style="background-image: url(https://developers.google.com/maps/images/maps-api-banner.jpg); background-color: rgb(51, 51, 51); width: 958px; height: 301.15789473684214px; background-position: initial initial; background-repeat: no-repeat no-repeat;" data-clickall="true" class="default-carousel-style" tabindex="-1">
+      <header tabindex="-1">Google Maps API</header>
+      <summary class="dark-back carousel-intro" tabindex="-1">
+        Die einfachste Möglichkeit, interaktive Kartenanwendungen zu erstellen
+      </summary>
+      <a href="https://developers.google.com/maps/location-based-apps/?hl=de" class="button-red button" tabindex="-1">Weitere Informationen</a>
+    </article></div></div>
+    
+  <a class="next right default-anchor-style"><div></div></a></section>
+
+  <section class="banner add-map">
+    <header class="light-header">
+      Fügen Sie in drei Schritten ganz einfach<br>
+      Kartenfunktionen zu Ihrer Website hinzu.
+    </header>
+    <a href="http://maps.google.com/help/maps/getmaps/plot-one.html" class="button button-green button-big">Karten zu meiner Website hinzufügen </a> <a href="http://maps.google.com/help/maps/getmaps/plot-one.html" data-clickall="true"></a>
+  </section>
+
+  <section class="features">
+    <header>
+      <h2>Möglichkeiten der Google Maps APIs</h2>
+    </header>
+
+    <div id="feature-list">
+      <section class="feature location-based-apps">
+        <header>
+          <a href="https://developers.google.com/maps/location-based-apps/?hl=de">Standortbasierte Apps erstellen </a>
+        </header>
+        <summary>
+          Verwenden Sie Google-Tools und -Dienste zum Erstellen innovativer <a href="https://developers.google.com/maps/location-based-apps/?hl=de">standortbasierter Apps</a>.
+        </summary>
+      </section>
+
+      <section class="feature mobile-apps">
+        <header>
+          <a href="https://developers.google.com/maps/mobile-apps/?hl=de">Karten für mobile Apps erstellen</a>
+        </header>
+        <summary>
+          Erstellen Sie <a href="https://developers.google.com/maps/mobile-apps/?hl=de">leistungsfähige Apps</a>, die auf unterschiedlichen Mobilgeräten funktionieren.
+        </summary>
+      </section>
+
+      <div class="cf"></div>
+
+      <section class="feature geospatial-data">
+        <header>
+          <a href="https://developers.google.com/maps/visualize/?hl=de">Geodaten darstellen</a>
+        </header>
+        <summary>
+          Erstellen Sie 3D-Bilder mit dem Google Earth API, Heatmaps in Fusion Tables und <a href="https://developers.google.com/maps/visualize/?hl=de">mehr</a>.
+        </summary>
+      </section>
+
+      <section class="feature customization">
+        <header>
+          <a href="https://developers.google.com/maps/customize/?hl=de">Karten anpassen</a>
+        </header>
+        <summary>
+          Erstellen Sie <a href="https://developers.google.com/maps/customize/?hl=de">angepasste Karten</a>, um Ihre Daten, Bilder und Marke hervorzuheben.
+        </summary>
+      </section>
+
+      <div class="cf"></div>
+
+      <section class="feature licensing">
+        <header>
+          <a href="https://developers.google.com/maps/licensing/?hl=de">Google Maps API-Lizenzierung</a>
+        </header>
+        <summary>
+          <a href="https://developers.google.com/maps/licensing/?hl=de">Weitere Informationen</a> zu Preisen und Bedingungen
+        </summary>
+      </section>
+
+      <div class="cf"></div>
+    </div>
+
+  </section>
+
+  <section class="features">
+    <div id="home-nav-list">
+      <a href="https://developers.google.com/showcase/?hl=de" class="nav-icon showcase">Schaufenster</a> <a href="https://developers.google.com/maps/documentation/?hl=de" class="nav-icon docs">Dokumentationen</a> <a href="https://www.youtube.com/user/GoogleDevelopers/videos?query=geo" class="nav-icon videos">Videos</a>
+    </div>
+  </section>
+
+
+  </div>
+
+  
+        </div>
+        
+<div id="gc-content-footer">
+
+<div id="gc-content-license">
+
+    
+      
+        <p>Except as otherwise noted, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.com/site-policies?hl=de">Site Policies</a>.</p>
+      
+    
+    
+    
+
+</div>
+
+
+
+<div itemprop="datePublished" content="2013-01-31T03:24:19.590370" id="gc-content-last-updated">Last updated Januar 31, 2013.</div>
+
+</div>
+
+
+
+
+      </div>
+  
+
+        
+      </div>
+        
+      
+
+      
+      
+      <footer id="gc-footer">
+        <div id="gc-copyright">
+          <a href="https://developers.google.com/?hl=de">
+            <img id="developers-logo-footer" src="./Google Maps API — Google Developers_files/developers-logo-footer.png" alt="Google Developers logo" style="vertical-align: center; float: left">
+          </a>
+          <ul>
+            <li><a href="http://www.google.com/">Google</a></li>
+            <li><a href="https://developers.google.com/site-terms?hl=de">Nutzungsbedingungen</a></li>
+            <li><a href="http://www.google.com/intl/en/privacy/">Datenschutzerklärung</a></li>
+            <li><a href="https://developers.google.com/jobs?hl=de">Jobs</a></li>
+            <li><a class="google-feedback" data-p="81425" data-b="Documentation" data-v="devsite-20130906-rc00.default" href="./Google Maps API — Google Developers_files/Google Maps API — Google Developers.html">Programmfehler melden</a></li>
+          </ul>
+        </div>
+        
+        <div id="gc-language">
+          <ul>
+            <li>
+              <form id="setlang" action="https://developers.google.com/i18n/setlang/" method="post">
+                <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="485526ab5c329e8014db8a416d0879c2"></div>
+                <select id="footer_language" name="language" style="display: none;">
+                  <option value="ar">
+                    العربيّة
+                  </option><option value="bg">
+                    български
+                  </option><option value="ca">
+                    català
+                  </option><option value="zh-cn">
+                    简体中文
+                  </option><option value="zh-tw">
+                    繁體中文
+                  </option><option value="hr">
+                    Hrvatski
+                  </option><option value="cs">
+                    česky
+                  </option><option value="da">
+                    Dansk
+                  </option><option value="nl">
+                    Nederlands
+                  </option><option value="en">
+                    English
+                  </option><option value="fa">
+                    فارسی
+                  </option><option value="fi">
+                    suomi
+                  </option><option value="fr">
+                    Français
+                  </option><option value="de" selected="selected">
+                    Deutsch
+                  </option><option value="el">
+                    Ελληνικά
+                  </option><option value="he">
+                    עברית
+                  </option><option value="hi">
+                    Hindi
+                  </option><option value="hu">
+                    Magyar
+                  </option><option value="id">
+                    Bahasa Indonesia
+                  </option><option value="it">
+                    italiano
+                  </option><option value="ja">
+                    日本語
+                  </option><option value="ko">
+                    한국어
+                  </option><option value="lv">
+                    latviešu
+                  </option><option value="lt">
+                    Lithuanian
+                  </option><option value="nb">
+                    Norsk (bokmål)
+                  </option><option value="nn">
+                    Norsk (nynorsk)
+                  </option><option value="pl">
+                    polski
+                  </option><option value="pt-br">
+                    Português Brasileiro
+                  </option><option value="pt">
+                    Português
+                  </option><option value="ro">
+                    Română
+                  </option><option value="ru">
+                    Русский
+                  </option><option value="sr">
+                    српски
+                  </option><option value="sk">
+                    slovenský
+                  </option><option value="sl">
+                    Slovenščina
+                  </option><option value="es">
+                    español
+                  </option><option value="sv">
+                    Svenska
+                  </option><option value="th">
+                    Thai
+                  </option><option value="tr">
+                    Türkçe
+                  </option><option value="uk">
+                    Українська
+                  </option><option value="vi">
+                    Vietnamese
+                  </option>
+                </select><span class="kd-button kd-menubutton kd-select"><div style="display: inline-block;"><div class="label" style="float: left;">
+                    Deutsch
+                  </div><div class="kd-disclosureindicator"></div></div></span>
+              </form>
+            </li>
+          </ul>
+        </div>
+        
+      </footer>
+      
+      
+    </div>
+    <div id="needAuth" class="msgDialogContent">
+      
+      <h1>Authentifizierung erforderlich</h1>
+      
+      <div>
+        Dazu müssen Sie in <a href="http://www.google.com/+">Google+</a> angemeldet sein.
+      </div>
+      <button>Anmelden</button>
+      <button>Abbrechen</button>
+    </div>
+    <div id="signingIn" class="msgDialogContent">
+      
+      <h1>Anmeldung...</h1>
+      <div>
+        
+        Google Developers braucht hierfür Ihre Erlaubnis.
+      </div>
+      
+      <button>Erneut versuchen</button>
+      
+      <button>Abbrechen</button>
+    </div>
+    <script src="./Google Maps API — Google Developers_files/script_foot.js"></script>
+    <script>
+      (function($) {
+        devsite.devsite.Init($, null, '',
+            'de', true);
+      })(jQuery);
+
+      
+      devsite.localInit = function() {
+        
+      };
+      
+    </script>
+    <!-- Google Code for PXL - Developers - Codesite - HP - 90d Remarketing List -->
+    <script type="text/javascript">
+    $('#setlang select').each(function() {
+      if ($.browser.msie) {
+        $(this).change(function() {
+          $('#setlang').submit();
+        });
+      } else {
+        $(this).kdSelect({'change': function() {
+          $('#setlang').submit();
+        }});
+      }
+    });
+    </script><ul class="kd-menulist" style="position: absolute; left: 1065px; top: 1153.5px; display: none;"><li class="kd-menulistitem" style="">
+                    العربيّة
+                  </li><li class="kd-menulistitem">
+                    български
+                  </li><li class="kd-menulistitem">
+                    català
+                  </li><li class="kd-menulistitem">
+                    简体中文
+                  </li><li class="kd-menulistitem">
+                    繁體中文
+                  </li><li class="kd-menulistitem">
+                    Hrvatski
+                  </li><li class="kd-menulistitem">
+                    česky
+                  </li><li class="kd-menulistitem">
+                    Dansk
+                  </li><li class="kd-menulistitem">
+                    Nederlands
+                  </li><li class="kd-menulistitem">
+                    English
+                  </li><li class="kd-menulistitem">
+                    فارسی
+                  </li><li class="kd-menulistitem">
+                    suomi
+                  </li><li class="kd-menulistitem">
+                    Français
+                  </li><li class="kd-menulistitem selected" style="font-weight: normal;">
+                    Deutsch
+                  </li><li class="kd-menulistitem">
+                    Ελληνικά
+                  </li><li class="kd-menulistitem">
+                    עברית
+                  </li><li class="kd-menulistitem">
+                    Hindi
+                  </li><li class="kd-menulistitem">
+                    Magyar
+                  </li><li class="kd-menulistitem">
+                    Bahasa Indonesia
+                  </li><li class="kd-menulistitem">
+                    italiano
+                  </li><li class="kd-menulistitem">
+                    日本語
+                  </li><li class="kd-menulistitem">
+                    한국어
+                  </li><li class="kd-menulistitem">
+                    latviešu
+                  </li><li class="kd-menulistitem">
+                    Lithuanian
+                  </li><li class="kd-menulistitem">
+                    Norsk (bokmål)
+                  </li><li class="kd-menulistitem">
+                    Norsk (nynorsk)
+                  </li><li class="kd-menulistitem">
+                    polski
+                  </li><li class="kd-menulistitem">
+                    Português Brasileiro
+                  </li><li class="kd-menulistitem">
+                    Português
+                  </li><li class="kd-menulistitem">
+                    Română
+                  </li><li class="kd-menulistitem">
+                    Русский
+                  </li><li class="kd-menulistitem">
+                    српски
+                  </li><li class="kd-menulistitem">
+                    slovenský
+                  </li><li class="kd-menulistitem">
+                    Slovenščina
+                  </li><li class="kd-menulistitem">
+                    español
+                  </li><li class="kd-menulistitem">
+                    Svenska
+                  </li><li class="kd-menulistitem">
+                    Thai
+                  </li><li class="kd-menulistitem">
+                    Türkçe
+                  </li><li class="kd-menulistitem">
+                    Українська
+                  </li><li class="kd-menulistitem">
+                    Vietnamese
+                  </li></ul>
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 992540712;
+      var google_conversion_language = "en";
+      var google_conversion_format = "3";
+      var google_conversion_color = "ffffff";
+      var google_conversion_label = "qio2CKCPwQMQqPCj2QM";
+      var google_conversion_value = 0;
+      /* ]]> */
+    </script>
+    <script type="text/javascript" src="./Google Maps API — Google Developers_files/conversion.js">
+    </script><img height="1" width="1" border="0" src="https://www.googleadservices.com/pagead/conversion/992540712/?random=1378750236143&cv=7&fst=1378750236143&num=1&fmt=3&value=0&label=qio2CKCPwQMQqPCj2QM&bg=ffffff&hl=en&guid=ON&u_h=800&u_w=1280&u_ah=774&u_aw=1280&u_cd=24&u_his=4&u_tz=120&u_java=true&u_nplug=21&u_nmime=83&url=https%3A//developers.google.com/maps/%3Fhl%3Dde&frm=0">
+
+    
+
+    <script>
+      
+      google.load('visualization', '1', {packages: ['table']});
+    </script><script src="./Google Maps API — Google Developers_files/saved_resource(1)" type="text/javascript"></script><script src="./Google Maps API — Google Developers_files/format+de,default,table.I.js" type="text/javascript"></script>
+
+    <noscript>
+      &lt;div style="display:inline;"&gt;
+        &lt;img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/992540712/?label=qio2CKCPwQMQqPCj2QM&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+      &lt;/div&gt;
+    </noscript>
+    
+
+
+
+
+
+<script type="text/javascript" defer="">
+
+
+$(document).ready(function() {
+    contentTimer.name = 'content';
+    contentTimer.tick('ol');
+    window.jstiming.report(contentTimer);
+
+    // Boilerplate javascript to enable the plusone button
+    var po = document.createElement('script'); po.type = 'text/javascript';
+    po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js?onload=devsite_plusoneLoaded';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+});
+</script>
+
+
+
+
+
+  
+
+  
+
+<iframe name="oauth2relay893979246" id="oauth2relay893979246" src="./Google Maps API — Google Developers_files/postmessageRelay.html" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

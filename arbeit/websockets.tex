@@ -2,7 +2,7 @@
 Das wohl spannendste Thema und die erste große Erweiterung dieser Arbeit ist die Echtzeitaktualisierung im Hintergrund der Web-App.
 
 \section{Einführung in WebSockets}
-Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf \emph{TCP} basierendes Protokoll der Anwendungsschicht, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Dieser Datenaustausch geschieht sehr schnell und mit einem sehr kleinen Overhead, da die Verbindung nicht neu aufgebaut werden muss und die Daten somit sofort verschickt werden können.\\
+Mit der HTML5-Spezifikation wurden \emph{WebSockets}, ein auf \emph{TCP} basierendes Protokoll der Anwendungsschicht, eingeführt, welches eine Vollduplex, bidirektionale, Single-Socket Verbindung ermöglicht \cite[S. 7]{ws}. Eine Anfrage öffnet die Verbindung zum WebSocket Server (kurz: WS Server) und kann beliebig lange offen gehalten werden, wobei zu jeder Zeit Daten zwischen Client und Server ausgetauscht werden. Dieser Datenaustausch geschieht sehr schnell und mit einem sehr kleinen Overhead, da die Verbindung nicht neu aufgebaut werden muss und die Daten somit sofort verschickt werden können.\\
 Ähnlich wie \glqq normale\grqq{} Sockets werden WebSockets von einer Anwendung erzeugt und stellen dann die Schnittstelle zwischen der Webanwendung und dem Transportprotokoll TCP dar.\\
 Im direkten Vergleich zu den normalen generischen Sockets, erfüllen WebSockets eine ähnliche Funktion, sind allerdings auf Webanwendungen und TCP beschränkt. 
 
@@ -18,7 +18,7 @@ Der Handshake erfolgt über HTTP/1.1 und ähnelt dem zum Aufruf einer Homepage.
   Upgrade: websocket
 \end{lstlisting}
 
-Mit \emph{Upgrade: websocket} wird signalisiert, dass der Client eine WebSocket-Verbindung zum Server aufbauen möchte. Der entsprechende WebSocket Server reagiert darauf mit dem HTTP-Statuscode \emph{101 Switching Protocols}, womit er bestätigt, dass er mit dem Wechsel des Protokolls einverstanden ist.
+Mit \emph{Upgrade: websocket} wird signalisiert, dass der Client eine WebSocket-Verbindung zum Server aufbauen möchte. Der entsprechende WS Server reagiert darauf mit dem HTTP-Statuscode \emph{101 Switching Protocols}, womit er bestätigt, dass er mit dem Wechsel des Protokolls einverstanden ist.
 \\
 \begin{lstlisting}[captionpos=b, caption=HTTP Response des Servers {\cite[S. 8]{rfc6455:handshake}}]
   101 Switching Protocols
@@ -75,10 +75,10 @@ Die Kommunikation in die andere Richtung ist nicht notwendig, da die Web-App kei
 In der Webanwendung auf dem Apache kann mit einem normalen Formular der Benutzername und das Passwort eingegeben werden, allerdings hat der WS Server bekanntlich keinen Zugang zur Datenbank. Es muss aber eine Authentifizierung am WebSocket Server stattfinden, damit nur Benutzer aus der Webanwendung eine Verbindung erstellen können. Dafür wird das \emph{RSA Kryptosystem} verwendet.
 
 \paragraph{Erzeugung der Schlüssel}
-Zur ersten Initialisierung der Webanwendung erstellt die App sich selbst mittels RSA Verfahren einen privaten $K^-_A$ und einen öffentlichen $K^+_A$ Schlüssel. Diese liegen beide auf dem Server wobei der öffentliche Schlüssel dem WebSocket Server bereitgestellt wird.
+Zur ersten Initialisierung der Webanwendung erstellt die Webanwendung sich selbst mittels RSA Verfahren einen privaten $K^-_A$ und einen öffentlichen $K^+_A$ Schlüssel. Sie gehören ausschließlich der Meißner App selbst und werden lokal gespeichert. Der öffentliche Schlüssel wird dem WebSocket Server bereitgestellt, welcher sich diesen direkt aus dem entsprechenden Ordner in der Webanwendung laden kann. Das ist sinnvoll, weil WS Server und Webanwendung sich vertrauen können, da sie auf einer Maschine laufen.
 
 \paragraph{Signieren der Nachricht und anschließende Authentifizierung}
-Wenn sich nun ein Client in der Webanwendung mit Benutzernamen und Passwort einloggt, nimmt die App diese Nachricht $m$ und erstellt mit dem privaten Schlüssel eine Signatur $K^-_A(m)$, welche dem Client zur Verfügung gestellt wird. Damit kann dieser nun einen syn-Request mit Benutzernamen, Passwort und Signatur an den WebSocket Server schicken. Der WS Server überprüft nun die Signatur mit dem öffentlichen Schlüssel $K^+_A(K^-_A(m))$ und wenn diese der ursprünglichen Nachricht entspricht, ist der Client authentifiziert.
+Wenn sich nun ein Client in der Webanwendung mit Benutzernamen und Passwort erfolgreich einloggt, nimmt die App diese Nachricht $m$ und erstellt mit dem privaten Schlüssel eine Signatur $K^-_A(m)$, welche dem Client zur Verfügung gestellt wird. Damit kann dieser nun einen syn-Request mit Benutzernamen, Passwort und Signatur an den WebSocket Server schicken. Der WS Server überprüft nun die Signatur mit dem öffentlichen Schlüssel $K^+_A(K^-_A(m))$ und wenn diese der ursprünglichen Nachricht entspricht, ist der Client authentifiziert.
 
 \begin{figure}[!ht]
 	\centering

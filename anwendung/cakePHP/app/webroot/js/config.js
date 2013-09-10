@@ -7,6 +7,7 @@
 var port = jsVars.port;
 var name = jsVars.username;
 var host = jsVars.hostname;
+var controller = jsVars.controller;
 
 /* Publish / Subscribe */
 // Subscribe: Adding all events to the user who created it to get status updates

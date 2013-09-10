@@ -94,6 +94,7 @@ class AppController extends Controller {
 		$this->setJsVar('username', $username);
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
+		$this->setJsVar('controller', $this->params['controller']);
 
 		$id = $this->Session->read('Auth.User.id');
 

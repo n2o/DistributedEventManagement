@@ -5,7 +5,7 @@
  */
 $(function () {
 	var wsUri;
-	var connected = false, gotHistory = false;
+	var connected = false;
 
 	// Initial call
 	doConnect();
@@ -29,8 +29,7 @@ $(function () {
 	function doConnect() {
 		if (typeof(name) != null) {
 			try {
-				socket = io.connect('ws://'+host+':'+port+'/');
-				// socket = io.connect('wss://'+host+':'+port+'/', {secure: true});
+				socket = io.connect('http://localhost:9999/');
 				//synSocketID();
 				socket.on('connect', function (evt) { 
 					onOpen(evt);									
@@ -50,7 +49,7 @@ $(function () {
 	 * Get current location, prepare JSON String and send it to WS server
 	 */
 	function doSend() {
-		navigator.geolocation.getCurrentPosition(getPosition, noPosition);
+		navigator.geolocation.getCurrentPosition(getPosition, noPosition, {enableHighAccuracy:false});
 	}
 
 	/**
@@ -69,6 +68,7 @@ $(function () {
 		connected = false;
 		$('.connectionState').text("Not connected");
 		$('.connectionState').removeClass('connected');
+		doConnect();
 	}
 
 	/**
@@ -90,7 +90,8 @@ $(function () {
 		switch(data.type) {
 			case 'location':
 				//noty({text: 'Incoming: New coordinates for geolocations.'});
-				updateMarkers(data);
+				if (controller == "geolocations")
+					updateMarkers(data);
 				break;
 			
 			case 'update':
@@ -149,7 +150,6 @@ $(function () {
 		$('#chatstatus').hide();
 		if (type === 'history') {
 			for (var i=0; i < message.data.length; i++) {
-				console.log("calling");
 				addMessage(message.data[i].name, message.data[i].text, new Date(message.data[i].time));
 			}
 		} else if (type === 'message') {

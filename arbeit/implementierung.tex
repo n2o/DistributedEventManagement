@@ -8,7 +8,7 @@ Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
 	Kann man eine App entwickeln, in der man zu einer bestimmten Veranstaltung beliebig viele Teilnehmer hinzufügen, deren spezifischen Anmeldedaten hinterlegen und später schließlich verteilt mit beliebig vielen Helfern (mobil) daran arbeiten kann? 
 \end{quote}
 
-Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen werden. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
+Diese Fragestellung ist deshalb interessant, weil diese App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, der Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen werden. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
 
 \subsection{Identifizierung des Problems}
 Bei dem Gedanken eine App zu entwickeln steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS etc. Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen. Für eine Veranstaltung, wie das Meißnerlager, eine sehr schlechte Annahme. Die ehrenamtlichen Helfer müssen mit ihren eigenen / privaten Smartphones und Tablets arbeiten. Es ist davon auszugehen, dass es sich dabei um unterschiedliche Geräte mit verschiedenen Betriebssystemen handelt.\par
@@ -21,7 +21,7 @@ Eine Webanwendung, auch \emph{Web-App} genannt, ist eine Anwendung, die vollstä
 Das Interessante an dieser Art der Anwendung ist, dass sie auch auf Smartphones und Tablets ausgeführt werden können ohne sie vollständig auf die jeweilige Plattform portieren zu müssen. Das heißt man entwickelt einmal eine Webanwendung und kann sie dann auf allen gängigen Endgeräten ausführen.\\
 Damit wäre ein wichtiges Kriterium für die Nutzung beim Meißner erfüllt: die betriebssystemunabhängige Nutzung.
 
-\paragraph{Programmiersprache: HTML5}
+\paragraph{Auszeichnungssprache HTML5}
 \emph{HTML5} ist der angehende Nachfolger des aktuell verwendeten HTML 4.0.1. Es ist immer noch im experimentellen Entwicklungsstand, wird aber durch große Unternehmen wie Google gefördert und erreichte damit auch eine große Beliebtheit. Alle Browser verstehen daher die gängigsten HTML5 Befehle, allerdings werden nie alle Funktionen unterstützt. Der Grundbefehlssatz ist in allen Browsern enthalten, weshalb es schon seit einiger Zeit möglich ist mit dem neuen angehenden Webstandard seine Webanwendung zu gestalten.
 
 \paragraph{Frameworks}
@@ -35,7 +35,7 @@ Für die Grundstruktur wurde das Open Source Framework cakePHP verwendet. Es ver
 
 \subsection{Entwurfsmuster: Model View Controller}
 
-Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen Projekten, so stößt man direkt auf das Muster zur Strukturierung als Model View Controller (deutsch: Modell-Präsentation-Steuerung, kurz: \emph{MVC}). Dieses Muster kapselt die drei Elemente voneinander und ermöglicht dadurch, dass Änderungen einfach implementiert werden können.
+Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen Projekten, so stößt man direkt auf das Muster zur Strukturierung als Model View Controller (\emph{MVC}, deutsch: Modell-Präsentation-Steuerung). Dieses Muster kapselt die drei Elemente voneinander und ermöglicht dadurch, dass Änderungen einfach implementiert werden können.
 
 \begin{figure}[!ht]
 	\centering
@@ -113,7 +113,7 @@ Eine spannende Herausforderung ist es nun mit modernen Webtechnologien und mögl
 Dabei gibt es mehrere Ansätze, wobei für diese Arbeit das sogenannte \emph{Responsive Webdesign} (deutsch: bedarfsgesteuertes Webdesign) für die mobile Version der Anwendung benutzt wird.
 
 \subsection{Responsive Webdesign mit jQuery Mobile}
-Hauptaugenmerk wird hier meistens auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit unglaublichen 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
+Hauptaugenmerk wird hier meistens auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
 Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmte Objekte im Sichtbereich des Geräts sein können, sodass der Benutzer nicht von der schlechten Bedienung genervt ist, sondern weiterhin die Informationen aus der App holen möchte. Beim Responsive Webdesign werden über \emph{Media Queries} (Abfrage der Eigenschaften des Geräts, Beispiel: Auflösung, Orientierung des Endgeräts usw.) Informationen des Endgeräts eingeholt und darauf abgestimmte Stylesheets geladen.\par
 
 Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.\par

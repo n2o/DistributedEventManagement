@@ -80,10 +80,11 @@ io.sockets.on('connection', function (socket) {
 
 					case 'subscribe':
 					console.log("Subscription: "+message);
-						if (clients[data.name] !== undefined) 
+						if (clients[data.name] !== undefined) {
 							clients[data.name].subscriptions = data.events;
-						else
+						} else {
 							socket.disconnect('unauthorized');
+						}
 						break;
 
 					case 'publishEvent':

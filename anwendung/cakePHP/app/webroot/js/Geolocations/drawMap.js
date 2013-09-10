@@ -25,7 +25,6 @@ $(function() {
 	 * Specifies when an update should be promoted
 	 */
 	function checkDiff(position) {
-		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
 		
@@ -40,39 +39,41 @@ $(function() {
 	 * Marks own position on map with a green marker
 	 */
 	function drawMap(position) {
-		initializeFrame();
+		if (controller == "geolocations") {
+			initializeFrame();
 
-		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		latitude = position.coords.latitude;
-		longitude = position.coords.longitude;
+			var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			latitude = position.coords.latitude;
+			longitude = position.coords.longitude;
 
-		var options = {
-			zoom: 15,
-			center: coords,
-			navigationControlOptions: {
-				style: google.maps.NavigationControlStyle.SMALL
-			},
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		map = new google.maps.Map($('#map')[0], options);
+			var options = {
+				zoom: 15,
+				center: coords,
+				navigationControlOptions: {
+					style: google.maps.NavigationControlStyle.SMALL
+				},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map($('#map')[0], options);
 
-		// Adds own position to an array of markers
-		addMarker(coords, "You are here!", "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png", "google.maps.Animation.DROP");
+			// Adds own position to an array of markers
+			addMarker(coords, "You are here!", "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png", "google.maps.Animation.DROP");
 
-		google.maps.event.addListener(marker, 'click', function() {
-			infoWindow.open(map, marker);
-		});
+			google.maps.event.addListener(marker, 'click', function() {
+				infoWindow.open(map, marker);
+			});
 
-		showOverlays();
+			showOverlays();
+		}
 	}
 
 	/**
 	 * If the browser does not support geolocations, set the center of the map to Remscheid
 	 */
 	function noPosition() {
-		if ("geolocation" in navigator) {
- 			// ignore this, just needed to avoid a Firefox bug
-		} else {
+		// if ("geolocation" in navigator) {
+ 	// 		// ignore this, just needed to avoid a Firefox bug
+		// } else {
   			// Geolocation IS NOT available. Focus on Remscheid
 			initializeFrame();
 			var coords = new google.maps.LatLng(51.1793042, 7.193936);
@@ -88,7 +89,7 @@ $(function() {
 			map = new google.maps.Map($('#map')[0], options);
 
 			showOverlays();
-		}
+		// }
 	}
 
 	/**

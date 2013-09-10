@@ -22,7 +22,7 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 <!DOCTYPE html>
 
 <!-- Including manifest.php to cache page for offline application -->
-<!-- <?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>-->
+<!--<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>-->
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
@@ -56,8 +56,7 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 
 		$cssimport = array(
 				'main',
-				'default',
-				#'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900'
+				'default'
 			);
 		echo $this->Html->css($cssimport);
 

@@ -2,7 +2,7 @@
 /**
  * Create mobile layout with jQuery Mobile
  */
-$cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
+$cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 ?>
 
 <!DOCTYPE HTML>

@@ -59,7 +59,7 @@ class AppController extends Controller {
 		if (!file_exists("private.key") || !file_exists("public.key")) {
 			$privateKey = openssl_pkey_new(array(
 				'digest_alg' => 'sha512',
-			    'private_key_bits' => 1024,
+			    'private_key_bits' => 2048,
 			    'private_key_type' => OPENSSL_KEYTYPE_RSA,
 			));
 			openssl_pkey_export_to_file($privateKey, 'private.key');
@@ -165,6 +165,7 @@ class AppController extends Controller {
 
 	public function afterFilter() {
 		parent::afterFilter();
+
 		# if in mobile mode, check for a valid view and use it
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
@@ -172,5 +173,14 @@ class AppController extends Controller {
 			if($view_file || $layout_file)
 				$this->render($this->action, ($layout_file?'mobile/':'').$this->layout, ($view_file?'mobile/':'').$this->action);
 		}
+	}
+
+	public function afterRender() {
+		parent::afterRender();
+		# Look if Appcache must be updated or not
+		#if ($this->Session->read('updateCache') == '1') {
+			echo "<script type='text/javascript'>window.applicationCache.update();</script>";
+		#	$this->Session->write('updateCache', '0');
+		#}
 	}
 }

@@ -19,7 +19,7 @@ class EventsController extends AppController {
 	public function view($id = null) {
 		if (!$id)
 			throw new NotFoundException(__('Invalid event.'));
-		$id = Sanitize::paranoid($id);		
+		$id = Sanitize::paranoid($id);
 
 		$event = $this->Event->findById($id);
 		if (!$event)
@@ -50,6 +50,8 @@ class EventsController extends AppController {
 			$this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash('The event has been saved.');
+
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to add your event.');
@@ -76,6 +78,7 @@ class EventsController extends AppController {
 				# WebSocket: Save which event has been updated to send the user a notification
 				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
 				
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'edit/'.$id));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -115,6 +118,7 @@ class EventsController extends AppController {
 				# WebSocket: Save which event has been updated to send the user a notification
 				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'title' => ''.$title.'', 'id' => ''.$id.''));
 
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -158,6 +162,7 @@ class EventsController extends AppController {
 				# WebSocket: Save which event has been updated to send the user a notification
 				$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$event_id.''));
 
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'edit/'.$event_id));
 			} else {
 				$this->Session->setFlash('Unable to update your event.');
@@ -180,6 +185,7 @@ class EventsController extends AppController {
 			# WebSocket: Save which event has been updated to send the user a notification
 			$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
 
+			$this->Other->incrementManifestVersion();
 			$this->redirect(array('action' => 'index'));
 		}
 	}
@@ -196,6 +202,7 @@ class EventsController extends AppController {
 		# WebSocket: Save which event has been updated to send the user a notification
 		$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
 
+		$this->Other->incrementManifestVersion();
 		$this->redirect(array('action' => 'edit', $id));
 	}
 
@@ -212,6 +219,7 @@ class EventsController extends AppController {
 		# WebSocket: Save which event has been updated to send the user a notification
 		$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$event_id.''));
 
+		$this->Other->incrementManifestVersion();
 		$this->redirect(array('action' => 'edit', $event_id));
 	}
 }

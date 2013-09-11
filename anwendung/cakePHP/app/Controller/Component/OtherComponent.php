@@ -26,4 +26,29 @@ class OtherComponent extends Component {
 		} catch (Exception $e) {
 		}
 	}
+
+	/**
+	 * Force clients to get updates from server if the data in SQL database has changed
+	 *
+	 * Needed for a proper use of Application Cache
+	 */
+	function incrementManifestVersion() {
+		$reading = fopen('manifest.version', 'r');
+		$writing = fopen('manifest.version.tmp', 'w');
+
+		$replaced = false;
+
+		while (!feof($reading)) {
+			$line = fgets($reading);
+			$line = (int) $line + 1; 
+			
+			if ($line > 1000)
+				$line = 0;
+
+			fputs($writing, $line);
+		}
+		fclose($reading); fclose($writing);
+		// might as well not overwrite the file if we didn't replace anything
+		rename('manifest.version.tmp', 'manifest.version');
+	}
 }

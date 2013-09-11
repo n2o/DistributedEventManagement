@@ -77,6 +77,8 @@ class UsersController extends AppController {
 				if ($selected != "")
 					for ($i = 0; $i < count($selected); $i++)
 						$this->User->query("INSERT INTO events_users (event_id, user_id) VALUES (".$selected[$i].",".$user_id.") ON DUPLICATE KEY UPDATE user_id=".$user_id);
+				
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -135,6 +137,7 @@ class UsersController extends AppController {
 							$this->User->query("DELETE FROM events_users WHERE user_id = $id AND event_id = $event");
 				}
 
+				$this->Other->incrementManifestVersion();
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -162,6 +165,8 @@ class UsersController extends AppController {
 		if ($this->User->delete()) {
 			$this->User->query("DELETE FROM events_users WHERE user_id = $id");
 			$this->Session->setFlash(__('User deleted'));
+			
+			$this->Other->incrementManifestVersion();
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('User was not deleted'));

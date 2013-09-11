@@ -34,5 +34,6 @@ foreach(new RecursiveIteratorIterator($dir) as $file) {
 	}
 } 
 echo "# Hash: " . md5($hashes) . "\n";
+echo "# Version: 38";
 
 ?>

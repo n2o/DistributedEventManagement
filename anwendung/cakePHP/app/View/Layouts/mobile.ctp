@@ -34,7 +34,9 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 					// Browser downloaded a new app cache.
 					// Swap it in and reload the page to get the new hotness.
 					window.applicationCache.swapCache();
-					window.location.reload();
+					//if (confirm('A new version of this site is available. Load it?')) {
+						window.location.reload();
+					//}
 				} else {
 					// Manifest didn't changed. Nothing new to server.
 				}

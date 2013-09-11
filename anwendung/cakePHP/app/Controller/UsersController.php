@@ -4,6 +4,7 @@
  *
  * Providing all actions for adding, deleting and editting users
  */
+App::uses('Sanitize', 'Utility');
 class UsersController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 
@@ -47,6 +48,10 @@ class UsersController extends AppController {
 
 	# Same code as it was in creating a post...
 	public function view($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+		$id = Sanitize::paranoid($id);
+
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -81,6 +86,10 @@ class UsersController extends AppController {
 
 	# Edit an user
 	public function edit($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+		$id = Sanitize::paranoid($id);
+
 		# Load the Model Event to get access to the sql entries
 		$this->loadModel('Event');
 		$this->set('events', $this->Event->find('all'));
@@ -138,9 +147,15 @@ class UsersController extends AppController {
 
 	# Delete an user
 	public function delete($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+		$id = Sanitize::paranoid($id);
+
 		if (!$this->request->is('post'))
 			throw new MethodNotAllowedException();
+
 		$this->User->id = $id;
+		
 		if (!$this->User->exists())
 			throw new NotFoundException(__('Invalid user'));
 

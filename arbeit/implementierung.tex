@@ -28,14 +28,13 @@ Damit wäre ein wichtiges Kriterium für die Nutzung beim Meißner erfüllt: die
 Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
 
 \subsection{Beschreibung der Umgebung}
-Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Meine Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung auf dem Gelände zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
+Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Die Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung auf dem Gelände zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
 
 \section{Struktur der Webanwendung}
 Für die Grundstruktur wurde das Open Source Framework cakePHP verwendet. Es verwendet für eine klare Trennung der Logik und dem Design das Entwurfsmuster \emph{Model View Controller}.
 
 \subsection{Entwurfsmuster: Model View Controller}
-
-Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen Projekten, so stößt man direkt auf das Muster zur Strukturierung als Model View Controller (\emph{MVC}, deutsch: Modell-Präsentation-Steuerung). Dieses Muster kapselt die drei Elemente voneinander und ermöglicht dadurch, dass Änderungen einfach implementiert werden können.
+Befasst man sich mit dem Entwickeln von modernen Webseiten, Apps oder ähnlichen Projekten, so stößt man direkt auf das Muster zur Strukturierung als Model View Controller (\emph{MVC}, deutsch: Modell-Präsentation-Steuerung). Dieses Muster kapselt drei Elemente voneinander und ermöglicht dadurch, dass Änderungen einfach implementiert werden können.
 
 \begin{figure}[!ht]
 	\centering
@@ -64,7 +63,7 @@ Als einfachste Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich di
 Folgende Tabellen wurden daher angelegt:\par
 
 \paragraph{users:}
-Jeder Benutzer findet sich in dieser Tabelle wieder. Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, einem Passwort und einer zugewiesenen Rolle (z.B. Administrator, Benutzer usw.). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztem Änderungsdatum sowie einem Feld hinzugefügt, welches prüft, ob der Benutzer sich im System der Webanwendung einloggen kann und damit Daten einsehen kann.
+Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, einem Passwort und einer zugewiesenen Rolle (z.B. Administrator, Benutzer usw.). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztem Änderungsdatum sowie einem Feld hinzugefügt, welches prüft, ob der Benutzer sich im System der Webanwendung einloggen kann und damit Daten einsehen kann.
 
 \paragraph{events:}
 Jede erzeugte Veranstaltung wird hier hinein gespeichert. Verpflichtende Felder sind ein Titel und eine Beschreibung. Dazu wird von der App eine eindeutige ID zugewiesen und die Benutzer-ID des Benutzers hinzugefügt, welcher diese Veranstaltung erstellt. Dazu noch zwei Zeitstempel: Erstellungsdatum und Zeitpunkt der letzten Änderung.\par

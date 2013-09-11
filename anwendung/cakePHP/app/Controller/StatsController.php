@@ -4,7 +4,7 @@
  *
  * Querying SQL Database to provide all necessary information for stistical evaluation
  */
-
+App::uses('Sanitize', 'Utility');
 class StatsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Stats', 'Session');
@@ -51,6 +51,10 @@ class StatsController extends AppController {
 	}
 
 	public function specEvent($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+		$id = Sanitize::paranoid($id);
+		
 		$this->loadModel('User');
 		$stats = array();	# Array where all stats are stored
 

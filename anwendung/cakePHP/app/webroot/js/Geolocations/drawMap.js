@@ -18,7 +18,7 @@ $(function() {
 	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
 
 	// Start watching on new updates of the clients location
-	navigator.geolocation.watchPosition(checkDiff, noPosition, geo_options);
+	navigator.geolocation.watchPosition(checkDiff, null, geo_options);
 
 	/**
 	 * Function to reduce unnecessary traffic by websockets

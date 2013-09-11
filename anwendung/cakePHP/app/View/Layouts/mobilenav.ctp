@@ -22,5 +22,8 @@
 				echo $this->Html->link('User: '.$this->Session->read('Auth.User.username').'. Logout', array('controller' => 'users', 'action' => 'logout'), array('data-role' => 'button', 'data-theme' => 'a')); 
 			}
 		?>
+		<br>
+		<br>
+		<div class="connectionState"></div>
 	</div>
 </div>

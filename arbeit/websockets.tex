@@ -47,7 +47,7 @@ Clientseitig wurde ein Skript in JavaScript entwickelt, welche im Hintergrund de
 Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten die Endgeräte in Echtzeit eine Aktualisierung aller Positionen.
 
 \paragraph{Fallback}
-Nicht jedes Endgerät unterstützt die Verwendung von WebSockets. Zwar gab es keine Komplikationen mit den getesteten Geräten, da WebSockets mit allen gängigen Desktop Browsern und fast allen mobilen Browsern außer Opera Mini lauffähig ist. Bei veralteter Software ist eine eine Unterstützung bei jedoch nicht immer gegeben. Daher wurde socket.io so eingerichtet, dass ein Fallback über \emph{flashsockets} hin zum \emph{polling} ermöglicht wird. So kann der größte Teil aller Browser die Echtzeitaktualisierung verwenden.
+Nicht jedes Endgerät unterstützt die Verwendung von WebSockets. Zwar gab es keine Komplikationen mit den getesteten Geräten, da WebSockets mit allen gängigen Desktop Browsern und fast allen mobilen Browsern außer Opera Mini lauffähig ist. Bei veralteter Software ist eine eine Unterstützung jedoch nicht immer gegeben. Daher wurde socket.io so eingerichtet, dass ein Fallback über \emph{flashsockets} hin zum \emph{polling} ermöglicht wird. So kann der größte Teil aller Browser die Echtzeitaktualisierung verwenden.
 
 \paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}
 Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protokoll entwickelt, welches angibt, um welchen Inhalt es sich bei der Nachricht handelt. So haben alle Nachrichten, die zwischen Client und Server ausgetauscht werden, ein bestimmtes Format und ein Feld \emph{type}, welches aktuell folgende Werte annehmen kann:
@@ -68,7 +68,7 @@ Bei dem Webserver Apache und dem WebSocket Server socket.io handelt es sich um z
 Um die Berechtigungen des WebSockets Server möglichst gering zu halten und diesen nur für die Echtzeitaktualisierung zu nutzen, hat socket.io keinerlei Rechte, um auf die Datenbank oder andere Elemente der Webanwendung zugreifen zu können. Dadurch bleibt die Kapselung beider Anwendungen erhalten, aber ein weiterer Schritt zur Authentifizierung eines Benutzers ist erforderlich.
 
 \paragraph{WebSockets über PHP mit ElephantIO}
-Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht (auch nicht über \emph{curl}) möglich ist. So gibt es die Funktion, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
+Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht (auch nicht über \emph{curl}) ohne Weiteres möglich ist. So gibt es die Funktion, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
 Die Kommunikation in die andere Richtung ist nicht notwendig, da die Web-App keine Informationen benötigt welche Endgeräte sich über WebSockets angemeldet haben.
 
 \section{Authentifizierung eines Clients beim WebSocket Server}

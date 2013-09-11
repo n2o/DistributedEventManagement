@@ -29,11 +29,10 @@ $(function () {
 	function doConnect() {
 		if (typeof(name) != null) {
 			try {
-				socket = io.connect('http://localhost:9999/');
-				//synSocketID();
+				socket = io.connect('ws://'+host+':'+port+'/');
+				synSocketID();
 				socket.on('connect', function (evt) { 
-					onOpen(evt);									
-					synSocketID();
+					onOpen(evt);
 					socket.on('disconnect', function (evt) { onDisconnect(evt) });
 					socket.on('message', function (evt) { onMessage(evt) });
 					socket.on('error', function (evt) { onError(evt) });
@@ -43,13 +42,6 @@ $(function () {
 				$('.connectionState').removeClass('connected');
 			}
 		}
-	}
-
-	/**
-	 * Get current location, prepare JSON String and send it to WS server
-	 */
-	function doSend() {
-		navigator.geolocation.getCurrentPosition(getPosition, noPosition, {enableHighAccuracy:false});
 	}
 
 	/**

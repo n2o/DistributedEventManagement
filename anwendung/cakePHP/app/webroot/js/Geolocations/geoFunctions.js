@@ -78,9 +78,11 @@ function updateMarkers(locations) {
 	deleteOverlays();
 	
 	for (entry in locations) {
-		if (entry == name)
+		if (entry == name) // mark own position with green marker
 			icon = "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png";
+
 		coords = new google.maps.LatLng(locations[entry].latitude, locations[entry].longitude);
+
 		if (autoZoomCenter)
 			bounds.extend(coords);
 		
@@ -89,7 +91,7 @@ function updateMarkers(locations) {
 	}
 
 	// Autozoom to the center compared to all logged in clients
-	if (autoZoomCenter && typeof(map) != "undefined") {
+	if (autoZoomCenter && controller == "geolocations") {
 		map.fitBounds(bounds);
 		map.panToBounds(bounds); // Smoothly set center of map to bounds
 	}

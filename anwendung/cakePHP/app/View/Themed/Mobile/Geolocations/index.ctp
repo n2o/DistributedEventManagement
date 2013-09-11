@@ -9,8 +9,6 @@
 		<button data-theme="a" data-icon="gear" data-mini="true" onclick="clearOverlays()">Clear Overlays</button>
 		<button data-theme="a" data-icon="gear" data-mini="true" onclick="showOverlays()">Show Overlays</button>
 		<button data-theme="a" data-icon="info" data-mini="true" onclick="toggleAutoZoomCenter()" id="autoZoomCenter">Switch autozoom</button>
-
-		<div class="connectionState"></div>
 	</div>
 
 	<section id="map"></section>

@@ -7,8 +7,8 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 
 <!DOCTYPE HTML>
 <!-- Including manifest.php to cache page for offline application -->
-<!-- <?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?> -->
-<html>
+<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
+<!-- <html> -->
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -25,8 +25,24 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 	<link rel="apple-touch-startup-image" href="img/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 1096px) and (-webkit-device-pixel-ratio: 2)">
 	<link rel="apple-touch-icon" href="img/icon.png">
 
-	<?php
+	<script type="text/javascript">
+		// Check if a new cache is available on page load.
+		// from: http://www.html5rocks.com/de/tutorials/appcache/beginner/
+		window.addEventListener('load', function(e) {
+			window.applicationCache.addEventListener('updateready', function(e) {
+				if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+					// Browser downloaded a new app cache.
+					// Swap it in and reload the page to get the new hotness.
+					window.applicationCache.swapCache();
+					window.location.reload();
+				} else {
+					// Manifest didn't changed. Nothing new to server.
+				}
+			}, false);
+		}, false);
+	</script>
 
+	<?php
 		echo $this->Html->scriptBlock('
 			var jsVars = '.$this->Js->object($jsVars).';
 			var mobile = true;

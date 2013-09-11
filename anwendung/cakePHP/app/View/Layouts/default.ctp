@@ -22,14 +22,32 @@ $cakeDescription = __d('cake_dev', 'Bachelorarbeit Christian Meter');
 <!DOCTYPE html>
 
 <!-- Including manifest.php to cache page for offline application -->
-<!--<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>-->
-<html>
+<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
+<!-- <html> -->
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $cakeDescription; ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+
+	<script type="text/javascript">
+		// Check if a new cache is available on page load.
+		// from: http://www.html5rocks.com/de/tutorials/appcache/beginner/
+		window.addEventListener('load', function(e) {
+			window.applicationCache.addEventListener('updateready', function(e) {
+				if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+					// Browser downloaded a new app cache.
+					// Swap it in and reload the page to get the new hotness.
+					window.applicationCache.swapCache();
+					window.location.reload();
+				} else {
+					// Manifest didn't changed. Nothing new to server.
+				}
+			}, false);
+		}, false);
+	</script>
+
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<?php
 		echo $this->Html->scriptBlock('

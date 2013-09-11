@@ -15,7 +15,7 @@ $(function() {
 	}
 
 	// Checks if geolocation is enabled or disabled by browser
-	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
+	navigator.geolocation.getCurrentPosition(drawMap, noPosition);
 
 	// Start watching on new updates of the clients location
 	navigator.geolocation.watchPosition(checkDiff, null, geo_options);

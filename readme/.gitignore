@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
+master.aux
+master.bbl
+master.blg
+master.lof
+master.log
+master.lot
+master.out
+master.pdf
+master.toc
+master.synctex.gz
+titlepage.aux

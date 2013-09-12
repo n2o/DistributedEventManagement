@@ -52,6 +52,19 @@ Das ist für die Lokalisierung problematisch, da so die Position des Clients nic
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Offline-Funktionalität}
+Mit der HTML5-Spezifikation wurde die \emph{Application Cache API} eingeführt, welche es ermöglicht, bestimmte Dateien einer Webanwendung in einen lokalen Cache zu speichern \cite[S. 189f]{friberg2013web}. Dafür ist eine \emph{Manifest}-Datei notwendig, die eine Liste mit den zu cachenden Dateien erstellt. Findet ein Browser ein Manifest, so lädt er initial die Webseite und speichert dabei alle Dateien in seinem Cache. Dieser ist bei normalen Anwendungen auf 5 MB beschränkt. Das reicht aber in der Regel vollkommen aus.\par
+
+Die Meißner App generiert dynamisch mit jedem Aufruf der Anwendung ein Manifest, in der alle relevanten JavaScript Files, Bilder oder PHP-Seiten aufgeführt sind \cite{dynamic:manifest}. Dadurch kann die App erweitert werden, ohne die Offlinefunktion überarbeiten zu müssen.
+
+\paragraph{Update des Caches}
+Wurde die Anwendung einmal geladen und gecacht, so zeigt sie immer diesen Stand der Seite an. Damit der Browser aber angeregt wird die Seite neu zu cachen, muss eine Änderung am Manifest vorliegen. Das geschieht über eine Versionsnummer innerhalb dieser Datei: werden Änderungen an der Datenbank vorgenommen, dann inkrementiert die Webanwendung diese Nummer. Erreicht sie die Zahl 1000, so beginnt die Versionsnummer wieder bei 0.\par
+
+Dadurch ist die Anwendung nun großteils offline verfügbar. Funktionen, wie die Geolocations oder der Chat, können allerdings nicht einwandfrei genutzt werden ohne Internetanbindung. Das liegt zum einen daran, dass Google das Cachen von Google Maps im Allgemeinen für Webanwendungen verbietet \cite{google:mapsforbidden} und daher die Offlineverwendung der Karte nicht möglich ist. Zum anderen ist für den Chat eine WebSocket-Verbindung notwendig, da sonst keine Nachrichten ausgetauscht werden können.\\
+Mit gewissen Einschränkungen kann die Meißner App auch dort verwendet werden, wo nur eine schlechte Verbindung zur Verfügung steht. In jedem Fall lädt die App aber nun schneller, da sie nicht mehr alle Daten vom Webserver beziehen muss.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Analyse der Skalierbarkeit}
 An den Webserver auf Apache-Basis o.Ä. werden mit der Meißner-App keine hohen Anforderungen gestellt, da ressourcenschonend entwickelt wurde und nur wenige SQL-Querys nötig sind für die Anzeige der Views. Interessanter ist allerdings die Echtzeitaktualisierung, da diese mit steigender Anzahl von Endgeräten deutlich mehr Sockets verwalten und mit Updates beliefern muss.
 
@@ -105,7 +118,7 @@ Zur Kommunikation der Clients untereinander wurde der Bereich \emph{Chats} hinzu
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm]{fig/screenshot_chat}
-	\caption[Beispielansicht der Chats]{Getestet unter Chrome 29: Chatverlauf von drei verschiedenen Benutzern}
+	\caption[Beispielansicht der Chats]{Getestet unter OS X 10.8.4., Chrome 29: Chatverlauf von drei verschiedenen Benutzern}
 \end{figure}
 
 Hierbei wird wieder Publish / Subscribe verwendet: Befindet sich ein Endgerät gerade im View des Chats, so abonniert die Webanwendung automatisch den Chat beim WebSocket Server und erhält dadurch alle eingehenden Nachrichten.

@@ -82,11 +82,11 @@ Um einer Veranstaltung beliebig viele Benutzer zuordnen zu können, wurde die Ta
 Diese \emph{Many-to-many}-Verknüpfung (in cakePHP auch \emph{hasAndBelongsToMany, HABTM} genannt) kann der EventsController mit einer einzigen SQL-Abfrage erfragen und erhält damit alle dem Event zugeordneten Benutzer. Diese Daten können dann in einer Variable gespeichert und dem View bereitgestellt werden.
 
 \subsection{Veranstaltungsspezifische Eigenschaften}
-Die ersten Schritte zu einer Webanwendung, die Veranstaltungen und Benutzer verwalten kann, sind nun erledigt. Bisher ist es allerdings nicht möglich in Veranstaltungen Felder zu definieren, die für eben jene Veranstaltung von Bedeutung sind. Das können im konkreten Fall Felder sein wie \glqq Art des Transportmittels\grqq{}, \glqq Wird ein Parkplatz benötigt?\grqq{}, \glqq Welcher Holzstangenbedarf besteht?\grqq{} oder Ähnliches.\par
+Die ersten Schritte zu einer Webanwendung, die Veranstaltungen und Benutzer verwalten kann, sind nun erledigt. Bisher ist es allerdings nicht möglich in Veranstaltungen Felder zu definieren, die für eben jene Veranstaltung von Bedeutung sind. Das können im konkreten Fall Felder sein wie \glqq Art des Transportmittels\grqq{}, \glqq Wird ein Parkplatz benötigt?\grqq{}, \glqq Welcher Holzstangenbedarf besteht?\grqq{} oder Ähnliches.
 
 \paragraph{Key-Value-Store} In einem Key-Value-Store wird die Datenbank mit den Werten (\emph{values}) über die Schlüssel (\emph{keys}) indexiert. Der Vorteil ist, dass vorher nicht bekannt sein muss, welche Werte in die Datenbank eingetragen werden sollen. In der Meißner App wurde diese Methode implementiert, um eventspezifisch ein beliebiges Feld zu definieren, welches Werte als Strings annimmt.\\
 So ist gewährleistet, dass die Benutzer dieser Anwendung die größtmögliche Freiheit besitzen, was die Inhalte der Veranstaltungen angeht. Jede kann individuell angelegt und personalisiert werden, sodass sie den gewünschten Anforderungen genügt.\\
-Als Format für die Values wurden hier ausschließlich Strings gewählt, um den gesamten Vorgang zur Erstellung von speziellen Feldern möglichst gering zu halten. In der späteren statistischen Auswertung ist die Beschränkung des Feldes auf Strings irrelelevant, da sich diese sehr einfach beispielsweise mit PHP verwerten lassen.\par
+Als Format für die Values wurden hier ausschließlich Strings gewählt, um den gesamten Vorgang zur Erstellung von speziellen Feldern möglichst gering zu halten. In der späteren statistischen Auswertung ist die Beschränkung des Feldes auf Strings irrelelevant, da sich diese sehr einfach beispielsweise mit PHP verwerten lassen.
 
 \paragraph{Implementierung}
 Für die Implementierung sind zwei weitere Tabellen notwendig: 
@@ -96,7 +96,7 @@ Für die Implementierung sind zwei weitere Tabellen notwendig:
 	\item \emph{event\_properties}: Nachdem vom Controller die Feldnamen des Events abgefragt wurden, werden diese in einer Variable gespeichert und dem View übergeben. Im View wird dann ein Formular generiert, welches die Feldnamen aus \emph{event\_columns} anzeigt und die Möglichkeit gibt, Werte einzutragen. Diese Werte werden dann über den Controller in \emph{event\_properties} gespeichert.
 \end{enumerate}
 
-Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Feldern mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.
+Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Felder mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.
 
 \begin{figure}[!ht]
 	\centering
@@ -105,6 +105,13 @@ Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht 
 \end{figure}
 
 Obige Abbildung zeigt kurz das Zusammenspiel von Controller und View: Datenbankzugriffe werden über den View an den Controller gerichtet und dort ausgeführt. So können Daten abgefragt oder neue Daten geschrieben werden.
+
+\paragraph{Verhinderung von SQL-Injection}
+Bei der \emph{SQL-Injection} versucht ein Angreifer durch geschicktes Manipulieren von Eingabefeldern eines Formulars, einen String zu erzeugen, mit dem er einen ungewollten Zugang zur Datenbank erhält. Schafft er das, so kann er Datensätze aus der SQL Tabelle ausgeben lassen, verändern oder sogar komplett löschen.\par
+
+Um diese Art der Angriffe zu verhindern, setzt cakePHP selbst die gängigen Industriestandards ein \cite[S. 427f]{cakephp:injection}. Zusätzlich gibt es das Modul \emph{Sanitize}, welches die Eingabestrings des Benutzers überprüft und alle Sonderzeichen, wie Hochkommata und Semikolons, aus dem String entfernt. Damit lässt sich keine zusätzliche Anweisung in den SQL-Query mit einbauen und die Anwendung ist somit weitgehend vor diesen Angriffen geschützt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Views entwickeln}
 Eine spannende Herausforderung ist es nun mit modernen Webtechnologien und möglichst geringem Aufwand direkt eine mobile Seite der Anwendung zu erstellen, welche für Smartphone und Tablets optimiert ist. Schließlich soll und muss diese Web-App auch auf dem Gelände mobil genutzt werden können.\par

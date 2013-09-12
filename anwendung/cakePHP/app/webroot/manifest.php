@@ -4,11 +4,15 @@
  *
  * Dynamic manifest file to enable caching on alle pages. Scanning all 
  * available folders for files to be cached.
+ *
+ * Based on the code snippet by Nial Giacomelli from 
+ * http://nial.me/2010/01/using-the-html5-cache-manifest-with-dynamic-files/
+ * 25.01.2010
  */
 header('Content-Type: text/cache-manifest');
 echo "CACHE MANIFEST\n";
 
-echo "\n\nNETWORK:\n";
+echo "\n\nNETWORK:\n"; # Force app to load all files from the web which are not listed in the next sections
 echo "*\n";
 
 echo "\n\nCACHE:\n";

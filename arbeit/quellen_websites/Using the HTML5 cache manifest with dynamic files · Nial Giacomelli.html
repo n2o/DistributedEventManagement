@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)http://nial.me/2010/01/using-the-html5-cache-manifest-with-dynamic-files/ -->
+<html class="wf-chaparralpro1-i4-active wf-chaparralpro1-i7-active wf-chaparralpro1-n4-active wf-chaparralpro1-n7-active wf-futurapt1-n4-active wf-futurapt1-n7-active wf-futurapt1-n8-active wf-minionpro1-i7-active wf-minionpro1-n7-active wf-active"><script type="text/javascript" async="" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/ga.js"></script><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>  Using the HTML5 cache manifest with dynamic files · Nial Giacomelli</title>		    
+		
+		<meta name="description" content="">
+		<meta name="generator" content="WordPress 3.5.1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/reset.css" type="text/css" media="print">
+		<link rel="stylesheet" href="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/style.css" type="text/css" media="screen">
+		<link rel="alternate" type="application/rss+xml" href="http://nial.me/feed/" title="Nial Giacomelli RSS Feed">
+		<link rel="alternate" type="application/rss+xml" href="http://nial.me/comments/feed/" title="Nial Giacomelli Comments RSS Feed">
+		<link rel="pingback" href="http://nial.me/xmlrpc.php">
+	
+		<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/jquery.min.js"></script><style type="text/css"></style>
+		<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/nabatar.1.0.min.js"></script>
+		<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/base.js"></script>
+		<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/oov2oow.js"></script>
+		<style type="text/css">.tk-futura-pt{font-family:"futura-pt-1","futura-pt-2",sans-serif;}.tk-chaparral-pro{font-family:"chaparral-pro-1","chaparral-pro-2",sans-serif;}.tk-minion-pro{font-family:"minion-pro-1","minion-pro-2",sans-serif;}</style><link rel="stylesheet" href="http://use.typekit.com/c/734a20/chaparral-pro-1:i4:i7:n4:n7,futura-pt-1:n4:n7:n8,minion-pro-1:i7:n7.XXw:F:2,XXn:F:2,XY8:F:2,XXk:F:2,SH8:F:2,SH5:F:2,SHC:F:2,XvD:F:2,XvC:F:2/d?3bb2a6e53c9684ffdc9a9af0135b2a62b7764f55d1e067ec9f69cff6ce16a51177e564f68d82f85d09708ee764b3d906736e1471dbc2fd5a1825f5fc567d50c6b05b9c1c7d"><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		
+		<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/jquery.js"></script>
+<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/jquery.chili-2.2.js"></script>
+<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/recipes.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://nial.me/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://nial.me/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Showtime" href="http://nial.me/2009/12/showtime-2/">
+<link rel="next" title="Rhombus." href="http://nial.me/2010/02/rhombus/">
+<meta name="generator" content="WordPress 3.5.1">
+<link rel="canonical" href="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/Using the HTML5 cache manifest with dynamic files · Nial Giacomelli.html">
+<link rel="shortlink" href="http://nial.me/?p=146">
+	
+<!-- START: Syntax Highlighter ComPress -->
+<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/shCore.js"></script>
+<script type="text/javascript" src="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/shAutoloader.js"></script>
+<link type="text/css" rel="stylesheet" href="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/shCoreEclipse.css">
+<!-- END: Syntax Highlighter ComPress -->
+
+  
+<!-- WP-GeSHi-Highlight plugin by Jan-Philip Gehrcke: http://gehrcke.de -->
+<link rel="stylesheet" href="./Using the HTML5 cache manifest with dynamic files · Nial Giacomelli_files/wp-geshi-highlight.css" type="text/css" media="screen">
+<style type="text/css"><!--/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.php  {font-family:monospace;}
+.php .imp {font-weight: bold; color: red;}
+.php .kw1 {color: #b1b100;}
+.php .kw2 {color: #000000; font-weight: bold;}
+.php .kw3 {color: #990000;}
+.php .kw4 {color: #009900; font-weight: bold;}
+.php .co1 {color: #666666; font-style: italic;}
+.php .co2 {color: #666666; font-style: italic;}
+.php .co3 {color: #0000cc; font-style: italic;}
+.php .co4 {color: #009933; font-style: italic;}
+.php .coMULTI {color: #666666; font-style: italic;}
+.php .es0 {color: #000099; font-weight: bold;}
+.php .es1 {color: #000099; font-weight: bold;}
+.php .es2 {color: #660099; font-weight: bold;}
+.php .es3 {color: #660099; font-weight: bold;}
+.php .es4 {color: #006699; font-weight: bold;}
+.php .es5 {color: #006699; font-weight: bold; font-style: italic;}
+.php .es6 {color: #009933; font-weight: bold;}
+.php .es_h {color: #000099; font-weight: bold;}
+.php .br0 {color: #009900;}
+.php .sy0 {color: #339933;}
+.php .sy1 {color: #000000; font-weight: bold;}
+.php .st0 {color: #0000ff;}
+.php .st_h {color: #0000ff;}
+.php .nu0 {color: #cc66cc;}
+.php .nu8 {color: #208080;}
+.php .nu12 {color: #208080;}
+.php .nu19 {color:#800080;}
+.php .me1 {color: #004000;}
+.php .me2 {color: #004000;}
+.php .re0 {color: #000088;}
+.php span.xtra { display:block; }
+//--></style>
+		
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-31480056-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+	</head>
+<body>
+<div id="header">
+	<div class="center">
+	    <div class="center-inner">
+		    <h1><a href="http://nial.me/" title="Nial Giacomelli">Nial Giacomelli</a></h1>
+		</div>
+	</div>
+</div>
+<div id="wrapper" class="center clearfix">
+    <div class="center-inner">	<div id="content">
+		<div id="main-content">
+					<div class="post" id="post-146">
+				<h2>Using the HTML5 cache manifest with dynamic files</h2>
+				<span class="date">Published on 25/01/2010</span>
+				<div class="entry">
+					<p>I recently added HTML5 cache manifest support to <a href="http://showtime-app.com/">Showtime</a> in an attempt to decrease load times for users on older hardware and for those with spotty network connectivity. As <a href="http://www.phpied.com/iphone-caching/">Stoyan Stefanov</a> mentions: the current iPhone will not cache individual components if they are larger than 15K and will wipe all caches when the device is powered down or restarted. </p>
+<p>This represents an inherent issue with using the <a href="http://jqtouch.com/">jQTouch</a> library for iPhone-related web app development. Although jQTouch keeps itself fairly focused in terms of support (and thus lean), jQuery is bloated by its necessity to support all manner of rendering platforms and browser technologies. At the time of writing, a minified version of jQuery 1.4 will weigh in at about 72KB. As a result, jQuery must be remotely served each time your web application is accessed. While there has been talk of forking the jQuery codebase to shave away all non-essential (specifically, non-Webkit related implemenations and other pieces of fluff), those of us currently running web apps need a slightly more immediate solution.</p>
+<p>That solution is the <a href="http://developer.apple.com/safari/library/documentation/iPhone/Conceptual/SafariJSDatabaseGuide/OfflineApplicationCache/OfflineApplicationCache.html">HTML5 cache manifest</a>. As the Safari Dev Center explains:</p>
+<blockquote><p>The manifest file specifies the resources—such as HTML, JavaScript, CSS, and image files —to download and store in the application cache. After the first time a webpage is loaded, the resources specified in the manifest file are obtained from the application cache, not the web server.</p></blockquote>
+<p>Although I had read about the cache manifest around the Internet, it wasn’t until I read Jonathon Stark’s wonderful <a href="http://www.amazon.com/Building-iPhone-Apps-HTML-JavaScript/dp/0596805780/ref=ntt_at_ep_dpt_1">Building iPhone Apps with HTML, CSS, and JavaScript: Making App Store Apps Without Objective-C or Cocoa</a> that I came across a cleverly dynamic means of generating a manifest and supplying it to the browser. There was only one problem: Stark’s implementation didn’t account for web apps that made use of dynamic content.</p>
+<p>To resolve the issue, I forked his manifest.php implementation to account for .php files:</p>
+
+
+<div class="wp-geshi-highlight-wrap5"><div class="wp-geshi-highlight-wrap4"><div class="wp-geshi-highlight-wrap3"><div class="wp-geshi-highlight-wrap2"><div class="wp-geshi-highlight-wrap"><div class="wp-geshi-highlight"><div class="php"><pre class="de1"><span class="kw3">header</span><span class="br0">(</span><span class="st_h">'Content-Type: text/cache-manifest'</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">echo</span> <span class="st0">"CACHE MANIFEST<span class="es1">\n</span>"</span><span class="sy0">;</span>
+&nbsp;
+<span class="re0">$hashes</span> <span class="sy0">=</span> <span class="st0">""</span><span class="sy0">;</span>
+<span class="re0">$lastFileWasDynamic</span> <span class="sy0">=</span> <span class="kw4">FALSE</span><span class="sy0">;</span>
+&nbsp;
+<span class="re0">$dir</span> <span class="sy0">=</span> <span class="kw2">new</span> RecursiveDirectoryIterator<span class="br0">(</span><span class="st0">"."</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">foreach</span><span class="br0">(</span><span class="kw2">new</span> RecursiveIteratorIterator<span class="br0">(</span><span class="re0">$dir</span><span class="br0">)</span> <span class="kw1">as</span> <span class="re0">$file</span><span class="br0">)</span> 
+<span class="br0">{</span>
+	<span class="kw1">if</span> <span class="br0">(</span><span class="re0">$file</span><span class="sy0">-&gt;</span><span class="me1">IsFile</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="re0">$file</span> <span class="sy0">!=</span> <span class="st0">"./manifest.php"</span> <span class="sy0">&amp;&amp;</span> <span class="kw3">substr</span><span class="br0">(</span><span class="re0">$file</span><span class="sy0">-&gt;</span><span class="me1">getFilename</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">!=</span> <span class="st0">"."</span><span class="br0">)</span> 
+	<span class="br0">{</span>
+		<span class="kw1">if</span><span class="br0">(</span><span class="kw3">preg_match</span><span class="br0">(</span><span class="st_h">'/.php$/'</span><span class="sy0">,</span> <span class="re0">$file</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+			<span class="kw1">if</span><span class="br0">(</span><span class="sy0">!</span><span class="re0">$lastFileWasDynamic</span><span class="br0">)</span> 
+			<span class="br0">{</span>
+				<span class="kw1">echo</span> <span class="st0">"<span class="es1">\n</span><span class="es1">\n</span>NETWORK:<span class="es1">\n</span>"</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+			<span class="re0">$lastFileWasDynamic</span> <span class="sy0">=</span> <span class="kw4">TRUE</span><span class="sy0">;</span>
+		<span class="br0">}</span> 
+		<span class="kw1">else</span> 
+		<span class="br0">{</span>
+			<span class="kw1">if</span><span class="br0">(</span><span class="re0">$lastFileWasDynamic</span><span class="br0">)</span> 
+			<span class="br0">{</span>
+				<span class="kw1">echo</span> <span class="st0">"<span class="es1">\n</span><span class="es1">\n</span>CACHE:<span class="es1">\n</span>"</span><span class="sy0">;</span>
+				<span class="re0">$lastFileWasDynamic</span> <span class="sy0">=</span> <span class="kw4">FALSE</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+		<span class="kw1">echo</span> <span class="re0">$file</span> <span class="sy0">.</span> <span class="st0">"<span class="es1">\n</span>"</span><span class="sy0">;</span>
+		<span class="re0">$hashes</span> <span class="sy0">.=</span> <span class="kw3">md5_file</span><span class="br0">(</span><span class="re0">$file</span><span class="br0">)</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw1">echo</span> <span class="st0">"# Hash: "</span> <span class="sy0">.</span> <span class="kw3">md5</span><span class="br0">(</span><span class="re0">$hashes</span><span class="br0">)</span> <span class="sy0">.</span> <span class="st0">"<span class="es1">\n</span>"</span><span class="sy0">;</span></pre></div></div></div></div></div></div></div>
+
+
+<p>The above code should be fairly clear. Jonathon Stark’s original manifest.php made use of PHP5′s RecursiveDirectoryIterator class to generate a complete list of all the resources your web application relies upon (with the exception of the manifest.php file itself). I’ve simply altered it slightly to do a fairly primitive regex check to catch any files with a .php extension and preface those files within the manifest with a NETWORK flag (which forces the files to be requested from the web server, rather than the local cache).</p>
+<p>Documentation on the application cache is fairly scarce at the moment, and I’m not professing to being any kind of expert. I just hope this code can help anyone else looking to use the cache manifest as a means of speeding up their dynamic mobile web applications.</p>
+				</div>
+			</div>
+				</div><!-- close:main-content -->
+	</div><!-- close:content -->
+    	<div id="sidebar-wrapper" class="clearfix">
+	<div id="sidebar" style="width: 100%;" class="">
+		<h3>About</h3>
+		<p>
+			Nial Giacomelli is a twenty-four year old web/application developer living in the United Kingdom.
+		</p>
+	
+		<h3>My Kickstarter</h3>
+		<ul>
+			<li><a href="http://thediabeticjournal.com/" title="The Diabetic Journal">The Diabetic Journal</a></li>
+		</ul>
+
+		<h3>My work</h3>
+		<ul>
+			<li><a href="http://lumicongame.com/" title="Lumicon">Lumicon</a></li>
+			<li><a href="http://episodesapp.com/" title="Episodes">Episodes</a></li>
+			<li><a href="http://uglyapps.co.uk/houdini/" title="Houdini">Houdini</a></li>
+		</ul>
+		
+		<h3>Hackery</h3>
+		<ul>
+			<li><a href="http://appstorerank.net/" title="AppStoreRank">AppStoreRank</a></li>
+			<li><a href="http://skimreddit.com/" title="Skimreddit">Skimreddit</a></li>
+			<li><a href="https://github.com/NialG/Nabatar/" title="Nabatar">Nabatar</a></li>
+			<li><a href="http://uglyapps.co.uk/nibbble" title="Nibbble">Nibbble</a></li>
+		</ul>
+	
+		<h3>Contact</h3>
+		<ul>
+			<li class="social"><a href="http://twitter.com/nialgiacomelli/" title="Twitter">Twitter</a></li>
+			<li class="social"><a href="http://dribbble.com/nial/" title="Dribbble">Dribbble</a></li>
+			<li class="social"><a href="http://www.thisismyjam.com/NialGiacomelli/" title="ThisIsMyJam">ThisIsMyJam</a></li>
+			<li class="social"><a href="mailto:nial@nial.me" title="Email">Email</a></li>		
+		</ul>
+	</div>
+</div>    </div>
+    	
+<!-- START: Syntax Highlighter ComPress -->
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+        'applescript			http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushAppleScript.js',
+        'actionscript3 as3		http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushAS3.js',
+        'bash shell				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushBash.js',
+        'coldfusion cf			http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushColdFusion.js',
+        'cpp c					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCpp.js',
+        'c# c-sharp csharp		http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCSharp.js',
+        'css					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCss.js',
+        'delphi pascal pas		http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushDelphi.js',
+        'diff patch			    http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushDiff.js',
+        'erl erlang				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushErlang.js',
+        'groovy					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushGroovy.js',
+        'java					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJava.js',
+        'jfx javafx				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJavaFX.js',
+        'js jscript javascript	http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJScript.js',
+        'perl pl				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPerl.js',
+        'php					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPhp.js',
+        'text plain				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPlain.js',
+        'powershell ps          http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPowerShell.js',
+        'py python				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPython.js',
+        'ruby rails ror rb		http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushRuby.js',
+        'sass scss              http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushSass.js',
+        'scala					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushScala.js',
+        'sql					http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushSql.js',
+        'vb vbnet				http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushVb.js',
+        'xml xhtml xslt html	http://nial.me/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushXml.js'
+    );
+    SyntaxHighlighter.defaults['auto-links'] = false;             SyntaxHighlighter.defaults['gutter'] = false;     SyntaxHighlighter.defaults['toolbar'] = false;     SyntaxHighlighter.defaults['tab-size'] = 4;
+    SyntaxHighlighter.all();
+</script>
+<!-- END: Syntax Highlighter ComPress -->
+
+	</div>
+
+
+<!-- This Quick Cache file was built for (  nial.me/2010/01/using-the-html5-cache-manifest-with-dynamic-files/ ) in 0.23476 seconds, on Sep 12th, 2013 at 11:37 am UTC. -->
+<!-- This Quick Cache file will automatically expire ( and be re-built automatically ) on Sep 12th, 2013 at 12:37 pm UTC --></body></html>

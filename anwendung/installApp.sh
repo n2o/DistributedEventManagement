@@ -24,6 +24,20 @@ echo " "
 
 apt-get install apache2 php5 libapache2-mod-php5 mysql-server mysql-client php-pear php5-suhosin php5-mysql phpmyadmin javascript-common openssl
 
+# echo " "
+# echo "# Done."
+# echo " "
+# echo "# Installing node.js for WebSocket Server..."
+# echo " "
+
+# apt-get install python g++ make checkinstall
+# mkdir ~/src && cd $_
+# wget -N http://nodejs.org/dist/node-latest.tar.gz
+# tar xzvf node-latest.tar.gz && cd node-v*
+# ./configure
+# checkinstall #(remove the "v" in front of the version number in the dialog)
+# sudo dpkg -i node_*
+
 echo " "
 echo "# Done."
 echo " "
@@ -38,10 +52,21 @@ echo "# Done."
 echo " "
 echo "# Now moving the Meissner webpage to /var/www and changing user privilegs for www-data..."
 
-mv meissner/ /var/www/meissner
+cp meissner/ /var/www
 chown -R www-data:www-data /var/www/meissner
 chmod -R 755 /var/www/meissner
 
 echo " "
 echo "# Done."
+echo " "
+echo "# Restarting apache..."
+echo " "
+
+/etc/init.d/apache2 stop
+/etc/init.d/apache2 start
+
+echo " "
+echo "# Completed!"
+echo " "
+echo "# Now you just need to open 'localhost/meissner/app/webroot/setup' in your webbrowser."
 echo " "

@@ -36,8 +36,6 @@ class OtherComponent extends Component {
 		$reading = fopen('manifest.version', 'r');
 		$writing = fopen('manifest.version.tmp', 'w');
 
-		$replaced = false;
-
 		while (!feof($reading)) {
 			$line = fgets($reading);
 			$line = (int) $line + 1; 

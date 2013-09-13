@@ -23,6 +23,7 @@ echo "# Now downloading and installing Apache2, PHP5, MySQL, phpmyadmin, openssl
 echo " "
 
 apt-get install apache2 php5 libapache2-mod-php5 mysql-server mysql-client php-pear php5-suhosin php5-mysql phpmyadmin javascript-common openssl
+a2enmod rewrite
 
 # echo " "
 # echo "# Done."
@@ -52,7 +53,8 @@ echo "# Done."
 echo " "
 echo "# Now moving the Meissner webpage to /var/www and changing user privilegs for www-data..."
 
-cp meissner/ /var/www
+rm -rf /var/www/meissner
+mv meissner/ /var/www
 chown -R www-data:www-data /var/www/meissner
 chmod -R 755 /var/www/meissner
 
@@ -68,5 +70,5 @@ echo " "
 echo " "
 echo "# Completed!"
 echo " "
-echo "# Now you just need to open 'localhost/meissner/app/webroot/setup' in your webbrowser."
+echo "# Now you just need to open 'localhost/meissner/setup' in your webbrowser."
 echo " "

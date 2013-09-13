@@ -10,6 +10,7 @@ class OtherComponent extends Component {
 	 *						for example array('type' => 'publishEvent', 'id' => '1') 
 	 */
 	function sendElephantWebSocket($data) {
+		echo getcwd();
 		try {
 			$json = json_encode($data);
 			// do not forget to set this in AppController.php

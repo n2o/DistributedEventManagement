@@ -94,7 +94,6 @@ class AppController extends Controller {
 		$this->setJsVar('username', $username);
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
-		$this->setJsVar('controller', $this->params['controller']);
 
 		$id = $this->Session->read('Auth.User.id');
 
@@ -107,8 +106,8 @@ class AppController extends Controller {
 
 			$signature = "";
 			if (!openssl_sign($username, $signature, $privateKey))
-    			die('Failed to encrypt data');    
-
+    			die('Failed to encrypt data');
+    		
     		# Remove $privateKey from RAM
     		openssl_free_key($privateKey);
 
@@ -127,10 +126,6 @@ class AppController extends Controller {
 			$i = 0;
 			foreach ($query as $key => $value)
 				$subscriptions[$i++] = $value['events']['id'];
-
-			# Add subscription for chats if current controller is 'chats'
-			if ($this->params['controller'] == "chats") 
-				$subscriptions[$i] = "chats";
 
 			# WebSocket: Save which events the user has subscribed
 			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).''));
@@ -165,7 +160,6 @@ class AppController extends Controller {
 
 	public function afterFilter() {
 		parent::afterFilter();
-
 		# if in mobile mode, check for a valid view and use it
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
@@ -173,14 +167,5 @@ class AppController extends Controller {
 			if($view_file || $layout_file)
 				$this->render($this->action, ($layout_file?'mobile/':'').$this->layout, ($view_file?'mobile/':'').$this->action);
 		}
-	}
-
-	public function afterRender() {
-		parent::afterRender();
-		# Look if Appcache must be updated or not
-		#if ($this->Session->read('updateCache') == '1') {
-			echo "<script type='text/javascript'>window.applicationCache.update();</script>";
-		#	$this->Session->write('updateCache', '0');
-		#}
 	}
 }

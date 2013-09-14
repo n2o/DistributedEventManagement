@@ -57,6 +57,7 @@ rm -rf /var/www/meissner
 mv meissner/ /var/www
 chown -R www-data:www-data /var/www/meissner
 chmod -R 755 /var/www/meissner
+chmod -R 777 /var/www/meissner/app/tmp
 
 echo " "
 echo "# Done."

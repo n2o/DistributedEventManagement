@@ -1,9 +1,7 @@
 /**
  * Initialize frame for Google Map, draw map, add markers and show overlays
  */
-
 $(function() {
-
 	var lastLatitude = 0;
 	var lastLongitude = 0;
 	var latitude = 0;
@@ -13,7 +11,7 @@ $(function() {
 		enableHighAccuracy: true,
 		timeout: 5000
 	}
-
+	
 	// Checks if geolocation is enabled or disabled by browser
 	navigator.geolocation.getCurrentPosition(drawMap, noPosition);
 
@@ -28,7 +26,7 @@ $(function() {
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
 		
-		if (lastLatitude != latitude || lastLongitude != longitude)
+		//if (lastLatitude != latitude || lastLongitude != longitude)
 			sendPosition();
 		lastLatitude = latitude;
 		lastLongitude = longitude;
@@ -40,6 +38,8 @@ $(function() {
 	 */
 	function drawMap(position) {
 		if (controller == "geolocations") {
+			alert("Loading Map.");
+
 			initializeFrame();
 
 			var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

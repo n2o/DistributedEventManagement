@@ -65,15 +65,15 @@ Mit gewissen Einschränkungen kann die Meißner App auch dort verwendet werden, 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Analyse der Skalierbarkeit}
-An den Webserver auf Apache-Basis o.Ä. werden mit der Meißner-App keine hohen Anforderungen gestellt, da ressourcenschonend entwickelt wurde und nur wenige SQL-Querys nötig sind für die Anzeige der Views. Interessanter ist allerdings die Echtzeitaktualisierung, da diese mit steigender Anzahl von Endgeräten deutlich mehr Sockets verwalten und mit Updates beliefern muss.
+% \section{Analyse der Skalierbarkeit}
+% An den Webserver auf Apache-Basis o.Ä. werden mit der Meißner-App keine hohen Anforderungen gestellt, da ressourcenschonend entwickelt wurde und nur wenige SQL-Querys nötig sind für die Anzeige der Views. Interessanter ist allerdings die Echtzeitaktualisierung, da diese mit steigender Anzahl von Endgeräten deutlich mehr Sockets verwalten und mit Updates beliefern muss.
 
-\subsection{Zeitliches vs. konditionelles Update}
-Die \emph{navigator.geolocation} Klasse bietet mehrere Möglichkeiten seine Position zu aktualisieren. Jede Option wurde in Erwägung gezogen, die Zugriffe gemessen und schließlich in einer Tabelle ausgewertet. Die Auswertung ist daher interessant, weil die Skalierbarkeit dieser App noch nicht betrachtet wurde.\par
+% \subsection{Zeitliches vs. konditionelles Update}
+% Die \emph{navigator.geolocation} Klasse bietet mehrere Möglichkeiten seine Position zu aktualisieren. Jede Option wurde in Erwägung gezogen, die Zugriffe gemessen und schließlich in einer Tabelle ausgewertet. Die Auswertung ist daher interessant, weil die Skalierbarkeit dieser App noch nicht betrachtet wurde.\par
 
-Mit einbauen: http://hacks.mozilla.org/2009/06/geolocation/\par
+% Mit einbauen: http://hacks.mozilla.org/2009/06/geolocation/\par
 
-Die Statistiken hier baue ich noch ein...
+% Die Statistiken hier baue ich noch ein...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

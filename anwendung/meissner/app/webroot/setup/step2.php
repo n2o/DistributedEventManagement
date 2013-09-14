@@ -195,15 +195,19 @@ class DATABASE_CONFIG {
 						echo "There were errors while creating your config file. Can not proceed to the next steps...";
 					} else {
 						echo "<h4><font style='color:green;'>&nbsp;&nbsp;&nbsp;&nbsp;Config file successfully created &#10003;</font></h4><br><br><hr><br>";
-						echo "<strong>Now creating Administrator...<strong><br><br>";
+						echo "<strong>Creating Administrator...<strong><br><br>";
 
 						$createAdministrator = "REPLACE INTO  `meissner`.`users` (`id` , `username` , `password` , `has_login` , `pause` , `role` , `created` , `modified`) VALUES (NULL , 'Administrator', '6266bc341a9483fb5b04b06b782676d9f622d866', '1', '0', 'admin', NOW(), NOW());";
 						$writeToSql = mysql_query($createAdministrator);
 
 						if (!$writeToSql) {
-							echo "<h4><font style='color:red;'>&nbsp;&nbsp;&nbsp;&nbsp;Failed to create Administrator &#10005;</font></h4><br>";
+							echo "<h4><font style='color:red;'>&nbsp;&nbsp;&nbsp;&nbsp;Failed to create Administrator &#10005;</font></h4><br><br><hr><br>";
 						} else {
-							echo "<h4><font style='color:green;'>&nbsp;&nbsp;&nbsp;&nbsp;Created Administrator &#10003;</font></h4><br>";
+							echo "<h4><font style='color:green;'>&nbsp;&nbsp;&nbsp;&nbsp;Created Administrator &#10003;</font></h4><br><br><hr><br>";
+#							echo "<strong>Generating RSA keys for app internal encryption...<strong><br><br>";
+
+							
+							
 							echo "<br><br><p><a href='step3.php' class='button'>Next</a></p>";
 						}
 					}

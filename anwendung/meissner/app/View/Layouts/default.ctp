@@ -75,9 +75,9 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 		echo $this->Html->script($jsimport);
 
 		$cssimport = array(
-				'main',
-				'default'
-			);
+			'main',
+			'default'
+		);
 		echo $this->Html->css($cssimport);
 
 		echo $this->fetch('meta');

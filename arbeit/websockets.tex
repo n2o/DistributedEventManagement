@@ -68,7 +68,7 @@ Bei dem Webserver Apache und dem WebSocket Server socket.io handelt es sich um z
 Um die Berechtigungen des WebSockets Server möglichst gering zu halten und diesen nur für die Echtzeitaktualisierung zu nutzen, hat socket.io keinerlei Rechte, um auf die Datenbank oder andere Elemente der Webanwendung zugreifen zu können. Dadurch bleibt die Kapselung beider Anwendungen erhalten, aber ein weiterer Schritt zur Authentifizierung eines Benutzers ist erforderlich.
 
 \paragraph{WebSockets über PHP mit ElephantIO}
-Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht (auch nicht über \emph{curl}) ohne Weiteres möglich ist. So gibt es die Funktion, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
+Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht ohne Weiteres möglich ist. So gibt es die Funktion, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
 Die Kommunikation in die andere Richtung ist nicht notwendig, da die Web-App keine Informationen benötigt welche Endgeräte sich über WebSockets angemeldet haben.
 
 \section{Authentifizierung eines Clients beim WebSocket Server}

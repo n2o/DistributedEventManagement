@@ -54,21 +54,6 @@ class AppController extends Controller {
 		$this->_jsVars[$name] = $value;
 	}
 
-	# Create new public / private key pair if not available on server
-	private function createKeyValuePair() {
-		if (!file_exists("private.key") || !file_exists("public.key")) {
-			$privateKey = openssl_pkey_new(array(
-				'digest_alg' => 'sha512',
-			    'private_key_bits' => 2048,
-			    'private_key_type' => OPENSSL_KEYTYPE_RSA,
-			));
-			openssl_pkey_export_to_file($privateKey, 'private.key');
-			$a_key = openssl_pkey_get_details($privateKey);
-			file_put_contents('public.key', $a_key['key']);
-			openssl_free_key($privateKey);
-		}
-	}
-
 	# Check the role of the clients
 	public function isAuthorized($user) {
 		# Admin can access every action
@@ -86,9 +71,6 @@ class AppController extends Controller {
 		# Guest can login and logout
 		$this->Auth->allow('login', 'logout');
 
-		# Check if key value pair is accessible on webserver
-		$this->createKeyValuePair();
-
 		# Make current username accessible for JavaScript
 		$username = $this->Session->read('Auth.User.username');
 		$this->setJsVar('username', $username);
@@ -100,8 +82,8 @@ class AppController extends Controller {
 		# Prepare Publish/Subscribe for WebSocket server
 		if (isset($id)) {
 		# Create signature for syn message for websocket server
-			require('lib/ElephantIO/Client.php'); # includes library for socket.io
-			$fileContents = file_get_contents('private.key');
+			require_once getcwd() . '/lib/ElephantIO/Client.php'; # includes library for socket.io
+			$fileContents = file_get_contents(getcwd() . '/private.key');
 			$privateKey = openssl_pkey_get_private($fileContents);
 
 			$signature = "";

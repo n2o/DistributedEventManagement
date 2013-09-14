@@ -204,10 +204,22 @@ class DATABASE_CONFIG {
 							echo "<h4><font style='color:red;'>&nbsp;&nbsp;&nbsp;&nbsp;Failed to create Administrator &#10005;</font></h4><br><br><hr><br>";
 						} else {
 							echo "<h4><font style='color:green;'>&nbsp;&nbsp;&nbsp;&nbsp;Created Administrator &#10003;</font></h4><br><br><hr><br>";
-#							echo "<strong>Generating RSA keys for app internal encryption...<strong><br><br>";
+							echo "<strong>Generating 2048 Bit RSA keys for app internal encryption...<strong><br><br>";
 
-							
-							
+							# Create new public / private key pair if not available on server
+							if (!file_exists("private.key") || !file_exists("public.key")) {
+								$privateKey = openssl_pkey_new(array(
+									'digest_alg' => 'sha512',
+									'private_key_bits' => 2048,
+									'private_key_type' => OPENSSL_KEYTYPE_RSA,
+								));
+								openssl_pkey_export_to_file($privateKey, 'private.key');
+								$a_key = openssl_pkey_get_details($privateKey);
+								file_put_contents('public.key', $a_key['key']);
+								openssl_free_key($privateKey);
+							}
+
+							echo "<h4><font style='color:green;'>&nbsp;&nbsp;&nbsp;&nbsp;Created RSA Keys &#10003;</font></h4><br>";
 							echo "<br><br><p><a href='step3.php' class='button'>Next</a></p>";
 						}
 					}

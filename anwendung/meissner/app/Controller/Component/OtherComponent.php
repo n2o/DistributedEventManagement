@@ -15,7 +15,7 @@ class OtherComponent extends Component {
 			// do not forget to set this in AppController.php
 			$elephant = new ElephantIO\Client('http://'.$_SERVER['HTTP_HOST'].':9999', 'socket.io', 1, false, true, true);
 			// $elephant = new ElephantIO\Client('https://'.$_SERVER['HTTP_HOST'].':9999', 'socket.io', 1, false, true, true);
-			$elephant->init();
+			$elephant->init(); 
 			$elephant->send(
 				ElephantIO\Client::TYPE_EVENT,
 				null,

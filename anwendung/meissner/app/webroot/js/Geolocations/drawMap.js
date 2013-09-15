@@ -1,7 +1,9 @@
 /**
  * Initialize frame for Google Map, draw map, add markers and show overlays
  */
+
 $(function() {
+
 	var lastLatitude = 0;
 	var lastLongitude = 0;
 	var latitude = 0;
@@ -11,22 +13,23 @@ $(function() {
 		enableHighAccuracy: true,
 		timeout: 5000
 	}
-	
+
 	// Checks if geolocation is enabled or disabled by browser
-	navigator.geolocation.getCurrentPosition(drawMap, noPosition);
+	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
 
 	// Start watching on new updates of the clients location
-	navigator.geolocation.watchPosition(checkDiff, null, geo_options);
+	navigator.geolocation.watchPosition(checkDiff, noPosition, geo_options);
 
 	/**
 	 * Function to reduce unnecessary traffic by websockets
 	 * Specifies when an update should be promoted
 	 */
 	function checkDiff(position) {
+		var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
 		
-		//if (lastLatitude != latitude || lastLongitude != longitude)
+		if (lastLatitude != latitude || lastLongitude != longitude)
 			sendPosition();
 		lastLatitude = latitude;
 		lastLongitude = longitude;
@@ -37,9 +40,7 @@ $(function() {
 	 * Marks own position on map with a green marker
 	 */
 	function drawMap(position) {
-		if (controller == "geolocations") {
-			alert("Loading Map.");
-
+		//if (controller == "geolocations") {
 			initializeFrame();
 
 			var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -64,16 +65,16 @@ $(function() {
 			});
 
 			showOverlays();
-		}
+		//}
 	}
 
 	/**
 	 * If the browser does not support geolocations, set the center of the map to Remscheid
 	 */
 	function noPosition() {
-		// if ("geolocation" in navigator) {
- 	// 		// ignore this, just needed to avoid a Firefox bug
-		// } else {
+		if ("geolocation" in navigator) {
+ 			// ignore this, just needed to avoid a Firefox bug
+		} else {
   			// Geolocation IS NOT available. Focus on Remscheid
 			initializeFrame();
 			var coords = new google.maps.LatLng(51.1793042, 7.193936);
@@ -89,7 +90,7 @@ $(function() {
 			map = new google.maps.Map($('#map')[0], options);
 
 			showOverlays();
-		// }
+		}
 	}
 
 	/**

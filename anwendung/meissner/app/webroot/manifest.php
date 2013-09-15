@@ -21,8 +21,8 @@ $lastFileWasDynamic = FALSE;
  
 $dir = new RecursiveDirectoryIterator(".");
 foreach(new RecursiveIteratorIterator($dir) as $file) {
-	if ($file->IsFile() && $file != "./manifest.php" && substr($file->getFilename(), 0, 1) != "." && $dir != "websocket" && !preg_match('/.key$/', $file) && !preg_match('/.psd$/', $file)) {
-		if (preg_match('/.php$/', $file) || preg_match('/.ctp$/', $file)) {
+	if ($file->IsFile() && $file != "./manifest.php" && substr($file->getFilename(), 0, 1) != "." && $dir != "websocket" && $dir != "setup" && !preg_match('/.key$/', $file) && !preg_match('/.psd$/', $file)) {
+		if (preg_match('/.php$/', $file)) {
 			if (!$lastFileWasDynamic) {
 				echo "\n\nNETWORK:\n";
 			}

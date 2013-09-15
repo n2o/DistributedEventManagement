@@ -35,7 +35,7 @@ server.listen(port);
 
 var io = require('socket.io').listen(server);
 
-io.set('log level', 3);	// Normal: 2, Debug Mode: 3
+io.set('log level', 2);	// Normal: 2, Debug Mode: 3
 io.set('transports', [	// set fallbacks for unsupported browsers
 	'websocket',
 	'flashsocket',
@@ -79,7 +79,6 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'subscribe':
-					console.log("Subscription: "+message);
 						if (clients[data.name] !== undefined) {
 							clients[data.name].subscriptions = data.events;
 						} else {

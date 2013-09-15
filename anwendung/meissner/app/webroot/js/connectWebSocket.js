@@ -82,7 +82,7 @@ $(function () {
 		switch(data.type) {
 			case 'location':
 				//noty({text: 'Incoming: New coordinates for geolocations.'});
-				if (controller == "geolocations")
+				if (controller == "Geolocations")
 					updateMarkers(data);
 				break;
 			

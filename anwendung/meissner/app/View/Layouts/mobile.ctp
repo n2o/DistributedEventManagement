@@ -54,21 +54,21 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(
-			'jquery.min.js',
-			'jquery.mobile-1.3.2.min.js',
+			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+			'//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js',
 			'config.js',
 			'noty/jquery.noty.js',
 			'noty/layouts/bottom.js',
 			'noty/themes/default.js',
 			'connectWebSocket.js',
 			'Geolocations/geoFunctions.js',
-			'https://maps.googleapis.com/maps/api/js?sensor=true',
+			'//maps.googleapis.com/maps/api/js?sensor=true',
 			'Geolocations/drawMap.js'
 		);
 		echo $this->Html->script($jsimport);
 
 		$cssimport = array(
-			'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css',
+			'//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css',
 			'main',
 			'mobile'
 		);

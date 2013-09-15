@@ -7,9 +7,15 @@
 			echo $this->Form->input('role', array('options' => array('user' => 'User', 'member' => 'Member', 'admin' => 'Admin')));
 			echo $this->Form->input('has_login', array('label' => 'Allowed to login', 'type' => 'checkbox'));
 			$elements = $this->User->getAllEvents($events);
-			echo $this->Form->input('selected_events', array('label' => 'Selected events', 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements, 'selected' => $selectedEventIDs));
+			if (sizeof($elements) > 0)
+				echo $this->Form->input('selected_events', array('label' => 'Selected events', 'type' => 'select', 'multiple' => 'checkbox', 'options' => $elements, 'selected' => $selectedEventIDs));
 			unset($elements);
 			echo $this->Form->end(__('Save User'));
 		?>
+		<div style="float:right;">
+			<?php 
+				echo $this->Html->link('Edit Password', array('controller' => 'users', 'action' => 'editPassword'), array('class' => 'button'));
+			?>
+		</div>
 	</p>
 </article>

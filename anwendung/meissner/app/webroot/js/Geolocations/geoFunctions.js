@@ -91,7 +91,7 @@ function updateMarkers(locations) {
 	}
 
 	// Autozoom to the center compared to all logged in clients
-	if (autoZoomCenter && controller == "geolocations") {
+	if (autoZoomCenter && controller == "Geolocations") {
 		map.fitBounds(bounds);
 		map.panToBounds(bounds); // Smoothly set center of map to bounds
 	}

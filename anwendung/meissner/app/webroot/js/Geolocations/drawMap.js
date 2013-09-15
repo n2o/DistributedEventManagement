@@ -40,7 +40,7 @@ $(function() {
 	 * Marks own position on map with a green marker
 	 */
 	function drawMap(position) {
-		//if (controller == "geolocations") {
+		if (controller == "Geolocations") {
 			initializeFrame();
 
 			var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -65,7 +65,7 @@ $(function() {
 			});
 
 			showOverlays();
-		//}
+		}
 	}
 
 	/**

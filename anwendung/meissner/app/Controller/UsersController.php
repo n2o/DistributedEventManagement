@@ -103,6 +103,7 @@ class UsersController extends AppController {
 		}
 
 		$this->User->id = $id;
+		$this->set('id', $id);
 
 		# Get all marked entries from events_users, where the user is assigned to
 		$selectedFromSQL = $this->User->query("SELECT event_id FROM events_users WHERE user_id=$id");
@@ -147,6 +148,34 @@ class UsersController extends AppController {
 			unset($this->request->data['User']['password']);
 		}
 	}
+
+	/**
+	 * Edit password for a user
+	 */
+	public function editPassword($id = null) {
+		if (!$id)
+			throw new NotFoundException(__('Invalid id.'));
+		$id = Sanitize::paranoid($id);
+
+		$this->User->id = $id;
+
+		if (!$this->User->exists())
+			throw new NotFoundException(__('Invalid user'));
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved'));
+				$this->Other->incrementManifestVersion();
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		} else {
+			$this->request->data = $this->User->read(null, $id);
+			unset($this->request->data['User']['password']);
+		}
+	}
+
 
 	# Delete an user
 	public function delete($id = null) {

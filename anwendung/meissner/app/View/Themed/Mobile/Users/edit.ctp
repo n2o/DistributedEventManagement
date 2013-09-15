@@ -8,6 +8,7 @@
 			<?php 
 				echo $this->Form->create('User');
 				echo $this->Form->input('username');
+				echo $this->Html->link('Edit Password', array('controller' => 'users', 'action' => 'editPassword', $id), array('data-role' => 'button'));
 				echo $this->Form->input('role', array('options' => array('user' => 'User', 'member' => 'Member', 'admin' => 'Admin')));
 				echo $this->Form->input('has_login', array('label' => 'Allowed to login', 'type' => 'checkbox'));
 				$elements = $this->User->getAllEvents($events);

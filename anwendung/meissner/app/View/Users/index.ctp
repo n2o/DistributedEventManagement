@@ -20,7 +20,7 @@
 					<?php echo $user['User']['id']; ?>
 				</td> 
 				<td>
-					<?php echo $this->Html->link($user['User']['username'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?>
+					<?php echo $this->Html->link($user['User']['username'], array('controller' => 'users', 'action' => 'edit', $user['User']['id'])); ?>
 				</td>
 				<td>
 					<?php echo $user['User']['role']; ?>

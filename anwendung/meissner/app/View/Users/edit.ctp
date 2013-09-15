@@ -4,6 +4,7 @@
 		<?php 
 			echo $this->Form->create('User');
 			echo $this->Form->input('username');
+			echo $this->Html->link('Edit Password', array('controller' => 'users', 'action' => 'editPassword', $id), array('class' => 'button'));
 			echo $this->Form->input('role', array('options' => array('user' => 'User', 'member' => 'Member', 'admin' => 'Admin')));
 			echo $this->Form->input('has_login', array('label' => 'Allowed to login', 'type' => 'checkbox'));
 			$elements = $this->User->getAllEvents($events);
@@ -12,10 +13,5 @@
 			unset($elements);
 			echo $this->Form->end(__('Save User'));
 		?>
-		<div style="float:right;">
-			<?php 
-				echo $this->Html->link('Edit Password', array('controller' => 'users', 'action' => 'editPassword'), array('class' => 'button'));
-			?>
-		</div>
 	</p>
 </article>

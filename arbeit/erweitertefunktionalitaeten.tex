@@ -65,6 +65,20 @@ Mit gewissen Einschränkungen kann die Meißner App auch dort verwendet werden, 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Installation auf einem Debian-basiertem  System}
+Um diese Webanwendung mit sämtlichen Funktionen benutzen zu können, wurde eine einfache Installationsdatei in Form eines Shell-Scripts entwickelt. Dieses Skript downloadet und installiert als Webserver Apache2, MySQL und PHP5, danach wird die aktuellste Version von node.js gedownloadet und compiliert. Zuletzt wird die Meißner App in das Verzeichnis \emph{/var/www/meissner} verschoben, damit Apache2 darauf zugreifen kann.\par
+
+Diese Installation wurde für ein unverändertes Debian 7 entwickelt und alle Abhängigkeiten, die für die Installation eines Webservers und WebSocket Servers notwendig sind, werden beachtet. Unter anderen debianbasierten Distributionen, wie Linux Mint, Ubuntu, etc., wurde das Skript auch erfolgreich getestet. Notwendig ist lediglich eine funktionierende Internetverbindung, da das Betriebssystem gleichzeitig noch aktualisiert und die aktuellste Version von node.js gedownloadet wird.\par
+
+Abschließend erfolgt die Einrichtung der MySQL Datenbank über das Webinterface und kann unter \emph{http://localhost/meissner/setup} erreicht werden. Die Zugangsdaten zur gewünschten Datenbank müssen dort eingegeben werden und daraus fertig die Anwendung eine Konfigurationsdatei an, die sämtliche Informationen zur Verbindung mit der Datenbank enthält.\par
+
+Alle Änderungen an der \emph{apache2.conf} und \emph{php.ini} werden automatisch eingefügt, sollten sie nicht schon standardmäßig installiert sein. Dabei handelt es sich in erster Linie um das Modul \emph{rewrite}, welches in den genannten Dateien geladen werden muss. Dieses Modul ermöglicht die Verwendung von kurzen URIs, die in dieser Anwendung verwendet werden. Das heißt der Benutzer kann in der Adressleiste des Browsers Links eingeben wie \emph{http://localhost/meissner/events} und wird sofort in die richtige Sektion weitergeleitet. Kryptische URIs werden so verhindert.
+
+\paragraph{ReadMe}
+Eine Installationsanleitung liegt separat zu der Meißner App bei. Da während der Installation der notwendigen Pakete einige Benutzereingaben notwendig sind, werden diese in Form von Bildschirmfotos erklärt. So ist eine verständliche Einrichtung der Anwendung möglich.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % \section{Analyse der Skalierbarkeit}
 % An den Webserver auf Apache-Basis o.Ä. werden mit der Meißner-App keine hohen Anforderungen gestellt, da ressourcenschonend entwickelt wurde und nur wenige SQL-Querys nötig sind für die Anzeige der Views. Interessanter ist allerdings die Echtzeitaktualisierung, da diese mit steigender Anzahl von Endgeräten deutlich mehr Sockets verwalten und mit Updates beliefern muss.
 
@@ -87,7 +101,7 @@ So können Änderungen an der Meißner App vorgenommen werden ohne, dass man kom
 \subsection{Add to Homescreen}
 Bei Geräten mit dem Betriebssystem iOS ist die Funktion \emph{Add to Homescreen} verfügbar, welche eine Verknüpfung zur Webanwendung auf dem Homescreen erstellt. So kann die Anwendung wie eine normale App gestartet werden.\\
 Durch eine einfache Ergänzung im Header der mobilen HTML Seite wird so eine appähnliche Installation ermöglicht.
-\\
+\newpage
 \begin{lstlisting}[captionpos=b, caption=Ergänzung im Header der mobilen Seite]
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style"

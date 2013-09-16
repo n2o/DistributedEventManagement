@@ -1,14 +1,14 @@
 \chapter{Implementierung}
-Die grundlegenden Funktionen dieser Arbeit sollen das Erstellen von Veranstaltungen und Benutzern, die Zuweisung untereinander und die Kompatibilität mit mobilen Endgeräten umfassen. Wie diese Funktionen mit Hilfe von modernen Webtechniken implementiert wurden, wird hier beschrieben.
+% Die grundlegenden Funktionen dieser Arbeit sollen das Erstellen von Veranstaltungen und Benutzern, die Zuweisung untereinander und die Kompatibilität mit mobilen Endgeräten umfassen. Wie diese Funktionen mit Hilfe von modernen Webtechniken implementiert wurden, wird hier beschrieben.
 
-\section{Problembeschreibung}
-Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
+% \section{Problembeschreibung}
+% Zur Idee dieser Bachelorarbeit liegt folgende Frage zugrunde:
 
-\begin{quote}
-	Kann man eine App entwickeln, in der man zu einer bestimmten Veranstaltung beliebig viele Teilnehmer hinzufügen, deren spezifischen Anmeldedaten hinterlegen und später schließlich verteilt mit beliebig vielen Helfern (mobil) daran arbeiten? 
-\end{quote}
+% \begin{quote}
+% 	Kann man eine App entwickeln, in der man zu einer bestimmten Veranstaltung beliebig viele Teilnehmer hinzufügen, deren spezifischen Anmeldedaten hinterlegen und später schließlich verteilt mit beliebig vielen Helfern (mobil) daran arbeiten? 
+% \end{quote}
 
-Diese Fragestellung ist deshalb interessant, weil die App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, der Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen werden. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
+% Diese Fragestellung ist deshalb interessant, weil die App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, der Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen werden. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
 
 \subsection{Identifizierung des Problems}
 Bei dem Gedanken eine App zu entwickeln, steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS etc. Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen. Für eine Veranstaltung, wie das Meißnerlager, eine sehr schlechte Annahme. Die ehrenamtlichen Helfer müssen mit ihren eigenen / privaten Smartphones und Tablets arbeiten. Es ist davon auszugehen, dass es sich dabei um unterschiedliche Geräte mit verschiedenen Betriebssystemen handelt.\par
@@ -24,8 +24,10 @@ Damit wäre ein wichtiges Kriterium für die Nutzung beim Meißner erfüllt: die
 \paragraph{Auszeichnungssprache HTML5}
 \emph{HTML5} ist der angehende Nachfolger des aktuell verwendeten HTML 4.0.1. Es ist immer noch im experimentellen Entwicklungsstand, wird aber durch große Unternehmen wie Google gefördert und erreichte damit auch eine große Beliebtheit. Alle Browser verstehen daher die gängigsten HTML5 Befehle, allerdings werden nie alle Funktionen unterstützt. Der Grundbefehlssatz ist in allen Browsern enthalten, weshalb es schon seit einiger Zeit möglich ist, mit dem neuen angehenden Webstandard seine Webanwendung zu gestalten.
 
-\paragraph{Frameworks}
-Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XMPP} gegeben.
+\paragraph{Framework}
+Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auch serverseitig \emph{PHP5} und clientseitig \emph{JavaScript} als weitere Sprachen fest. Als Datenbank wird \emph{MySQL} gewählt und für den Webserver kommt \emph{Apache} zum Einsatz, beides ist durch das Entwicklerpaket \emph{XAMPP} gegeben.\par
+
+Außerdem  wurde das Framework \emph{socket.io} \cite{socket.io} gewählt, da es mit wenig Aufwand einen stabilen WebSocket Server bereitstellt. Dieser beinhaltet wichtige Funktionen, wie Broadcast, Fallbacks und Socketverwaltung, welche von dieser Arbeit verwendet werden.
 
 \subsection{Beschreibung der Umgebung}
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Die Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung auf dem Gelände zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
@@ -57,13 +59,11 @@ Die Vorteile bei diesem Entwurfsmuster liegen auf der Hand: Es muss nur einmal e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Datenbanken}
-Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, weil diese in der Regel zum Komplettpaket eines Webservers gehört.\par
-
-Als einfachste Möglichkeit wird hier eine MySQL Datenbank verwendet, da sich diese Open-Source-Datenbank in der Praxis durchgesetzt hat. Außerdem ist ein relationales Datenbanksystem die richtige Wahl für diesen Verwendungszweck, da mit einem einheitlichen Schema in die Datenbank geschrieben und auch daraus gelesen werden soll.\\
-Folgende Tabellen wurden daher angelegt:\par
+Um alle Daten schnell und einfach verarbeiten zu können, ist eine Datenbank nötig. Da es sich hier um eine Webanwendung handelt, bietet sich eine SQL Datenbank an, weil diese in der Regel zum Komplettpaket eines Webservers gehört.\\
+Folgende Tabellen wurden angelegt:
 
 \paragraph{users:}
-Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, einem Passwort und einer zugewiesenen Rolle (z.B. Administrator, Benutzer usw.). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztem Änderungsdatum sowie einem Feld hinzugefügt, welches prüft, ob der Benutzer sich im System der Webanwendung einloggen kann und damit Daten einsehen kann.
+Ein Benutzer besteht aus einer eindeutigen Identifizierungsnummer (\emph{ID}), einem Benutzernamen, einem Passwort und einer zugewiesenen Rolle (z.B. Administrator, Benutzer usw.). Dazu werden von der App automatisch zwei Zeitstempel mit Erstellungs- und letztem Änderungsdatum sowie einem Boolean hinzugefügt, welcher angibt, ob der Benutzer sich im System der Webanwendung einloggen kann und damit Daten einsehen kann.
 
 \paragraph{events:}
 Jede erzeugte Veranstaltung wird hier hinein gespeichert. Verpflichtende Felder sind ein Titel und eine Beschreibung. Dazu wird von der App eine eindeutige ID zugewiesen und die Benutzer-ID des Benutzers hinzugefügt, welcher diese Veranstaltung erstellt. Dazu noch zwei Zeitstempel: Erstellungsdatum und Zeitpunkt der letzten Änderung.\par
@@ -84,9 +84,10 @@ Diese \emph{Many-to-many}-Verknüpfung (in cakePHP auch \emph{hasAndBelongsToMan
 \subsection{Veranstaltungsspezifische Eigenschaften}
 Die ersten Schritte zu einer Webanwendung, die Veranstaltungen und Benutzer verwalten kann, sind nun erledigt. Bisher ist es allerdings nicht möglich in Veranstaltungen Felder zu definieren, die für eben jene Veranstaltung von Bedeutung sind. Das können im konkreten Fall Felder sein wie \glqq Art des Transportmittels\grqq{}, \glqq Wird ein Parkplatz benötigt?\grqq{}, \glqq Welcher Holzstangenbedarf besteht?\grqq{} oder Ähnliches.
 
-\paragraph{Key-Value-Store} In einem Key-Value-Store wird die Datenbank mit den Werten (\emph{values}) über die Schlüssel (\emph{keys}) indexiert. Der Vorteil ist, dass vorher nicht bekannt sein muss, welche Werte in die Datenbank eingetragen werden sollen. In der Meißner App wurde diese Methode implementiert, um eventspezifisch ein beliebiges Feld zu definieren, welches Werte als Strings annimmt.\\
-So ist gewährleistet, dass die Benutzer dieser Anwendung die größtmögliche Freiheit besitzen, was die Inhalte der Veranstaltungen angeht. Jede kann individuell angelegt und personalisiert werden, sodass sie den gewünschten Anforderungen genügt.\\
-Als Format für die Values wurden hier ausschließlich Strings gewählt, um den gesamten Vorgang zur Erstellung von speziellen Feldern möglichst gering zu halten. In der späteren statistischen Auswertung ist die Beschränkung des Feldes auf Strings irrelelevant, da sich diese sehr einfach beispielsweise mit PHP verwerten lassen.
+\paragraph{Key-Value-Store} In einem Key-Value-Store wird die Datenbank mit den Werten (\emph{values}) über die Schlüssel (\emph{keys}) indexiert. Der Vorteil ist, dass vorher nicht bekannt sein muss, welche Werte in die Datenbank eingetragen werden sollen.\\
+In der Meißner App wurde diese Methode implementiert, um eventspezifisch ein beliebiges Feld zu definieren, welches Werte als Strings annimmt. So ist gewährleistet, dass die Benutzer dieser Anwendung die größtmögliche Freiheit besitzen, was die Inhalte der Veranstaltungen angeht. Jede kann individuell angelegt und personalisiert werden, sodass sie den gewünschten Anforderungen genügt.\\
+Um die häufigsten Nutzungsszenarien abzudecken, wurden Strings als Hauptformat für die Values gewählt. Diese lassen sich einfach auswerten und erhalten die einfache Bedienung der Formulare.\\
+Für die automatischen Statistiken ist das Format irrelevant, da nur auf Gleichheit der Strings geprüft wird und anhand dessen die Grafiken erstellt werden. 
 
 \paragraph{Implementierung}
 Für die Implementierung sind zwei weitere Tabellen notwendig: 
@@ -96,7 +97,9 @@ Für die Implementierung sind zwei weitere Tabellen notwendig:
 	\item \emph{event\_properties}: Nachdem vom Controller die Feldnamen des Events abgefragt wurden, werden diese in einer Variable gespeichert und dem View übergeben. Im View wird dann ein Formular generiert, welches die Feldnamen aus \emph{event\_columns} anzeigt und die Möglichkeit gibt, Werte einzutragen. Diese Werte werden dann über den Controller in \emph{event\_properties} gespeichert.
 \end{enumerate}
 
-Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Felder mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.
+Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Felder mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.\par
+
+Als primäre Schlüssel werden
 
 \begin{figure}[!ht]
 	\centering
@@ -106,7 +109,8 @@ Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht 
 
 Obige Abbildung zeigt kurz das Zusammenspiel von Controller und View: Datenbankzugriffe werden über den View an den Controller gerichtet und dort ausgeführt. So können Daten abgefragt oder neue Daten geschrieben werden.
 
-\paragraph{Verhinderung von SQL-Injection}
+\section{Verhinderung von Angriffen}
+\subsection{SQL-Injection}
 Bei der \emph{SQL-Injection} versucht ein Angreifer durch geschicktes Manipulieren von Eingabefeldern eines Formulars, einen String zu erzeugen, mit dem er einen ungewollten Zugang zur Datenbank erhält. Schafft er das, so kann er Datensätze aus der SQL Tabelle ausgeben lassen, verändern oder sogar komplett löschen.\par
 
 Um diese Art der Angriffe zu verhindern, setzt cakePHP selbst die gängigen Industriestandards ein \cite[S. 427f]{cakephp:injection}. Zusätzlich gibt es das Modul \emph{Sanitize}, welches die Eingabestrings des Benutzers überprüft und alle Sonderzeichen, wie Hochkommata und Semikolons, aus dem String entfernt. Damit lässt sich keine zusätzliche Anweisung in den SQL-Query mit einbauen und die Anwendung ist somit weitgehend vor diesen Angriffen geschützt.
@@ -119,7 +123,7 @@ Eine spannende Herausforderung ist es nun mit modernen Webtechnologien und mögl
 Dabei gibt es mehrere Ansätze, wobei für diese Arbeit das sogenannte \emph{Responsive Webdesign} (deutsch: bedarfsgesteuertes Webdesign) für die mobile Version der Anwendung benutzt wird.
 
 \subsection{Responsive Webdesign mit jQuery Mobile}
-Hauptaugenmerk wird hier meistens auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
+Hauptaugenmerk wird hier auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
 Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmte Objekte im Sichtbereich des Geräts sein können, sodass der Benutzer nicht von der schlechten Bedienung genervt ist, sondern weiterhin die Informationen aus der App holen möchte. Beim Responsive Webdesign werden über \emph{Media Queries} (Abfrage der Eigenschaften des Geräts, Beispiel: Auflösung, Orientierung des Endgeräts usw.) Informationen des Endgeräts eingeholt und darauf abgestimmte Stylesheets geladen.\par
 
 Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.\par

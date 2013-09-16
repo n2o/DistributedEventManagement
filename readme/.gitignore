@@ -2,6 +2,7 @@
 *.log
 *.fdb_latexmk
 *.fls
+unilogo.pdf
 master.aux
 master.bbl
 master.blg

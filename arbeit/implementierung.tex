@@ -97,9 +97,7 @@ Für die Implementierung sind zwei weitere Tabellen notwendig:
 	\item \emph{event\_properties}: Nachdem vom Controller die Feldnamen des Events abgefragt wurden, werden diese in einer Variable gespeichert und dem View übergeben. Im View wird dann ein Formular generiert, welches die Feldnamen aus \emph{event\_columns} anzeigt und die Möglichkeit gibt, Werte einzutragen. Diese Werte werden dann über den Controller in \emph{event\_properties} gespeichert.
 \end{enumerate}
 
-Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Felder mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.\par
-
-Als primäre Schlüssel werden
+Mit den Tabellen steht nun die Datenstruktur zur Verfügung, die es ermöglicht verantstaltungsspezifische Eigenschaften zu erstellen und die so erzeugten Felder mit den entsprechenden Werten der Teilnehmer dieser Veranstaltung zu befüllen.
 
 \begin{figure}[!ht]
 	\centering
@@ -107,20 +105,30 @@ Als primäre Schlüssel werden
 	\caption[Speichern von spez. Feldern in die Datenbank]{Controller erfragt Felder aus event\_columns, stellt sie dem View zur Verfügung, speichert danach die Werte in event\_properties}
 \end{figure}
 
-Obige Abbildung zeigt kurz das Zusammenspiel von Controller und View: Datenbankzugriffe werden über den View an den Controller gerichtet und dort ausgeführt. So können Daten abgefragt oder neue Daten geschrieben werden.
+Obige Abbildung zeigt kurz das Zusammenspiel von Controller und View: Datenbankzugriffe werden über den View an den Controller gerichtet und dort ausgeführt. So können Daten abgefragt oder neue Daten geschrieben werden.\par
+
+Als einzigartige primäre Schlüssel werden \emph{user\_id} und \emph{key} gewählt, womit automatisch Duplikate ausgeschlossen werden. Somit kann immer nur genau ein Wert in einem benutzerspezifischen Feld stehen.\\
+Beispiel: In der Abbildung existiert die Zeile \emph{Benutzer: 42, Event: 3, Key: gender, Value: male}. Wenn der Benutzer nun das Geschlecht in dem Formular ändert und das abschickt, dann sieht die Nachricht so aus: \emph{Benutzer: 42, Event: 3, Key: gender, Value: female}. Weil das Feld \emph{key} als Primärschlüssel definiert wurde, wird dieser Eintrag überschrieben und kein neuer Eintrag in der Datenbank angelegt.
 
 \section{Verhinderung von Angriffen}
+Gängige Angriffsmethoden, wie Cross-Site-Scripting oder SQL-Injection, werden in dieser Arbeit verhindert.
+
 \subsection{SQL-Injection}
 Bei der \emph{SQL-Injection} versucht ein Angreifer durch geschicktes Manipulieren von Eingabefeldern eines Formulars, einen String zu erzeugen, mit dem er einen ungewollten Zugang zur Datenbank erhält. Schafft er das, so kann er Datensätze aus der SQL Tabelle ausgeben lassen, verändern oder sogar komplett löschen.\par
 
-Um diese Art der Angriffe zu verhindern, setzt cakePHP selbst die gängigen Industriestandards ein \cite[S. 427f]{cakephp:injection}. Zusätzlich gibt es das Modul \emph{Sanitize}, welches die Eingabestrings des Benutzers überprüft und alle Sonderzeichen, wie Hochkommata und Semikolons, aus dem String entfernt. Damit lässt sich keine zusätzliche Anweisung in den SQL-Query mit einbauen und die Anwendung ist somit weitgehend vor diesen Angriffen geschützt.
+Um diese Art der Angriffe zu verhindern, haben die Entwickler von cakePHP einige Sicherheitsvorkehrungen implementiert. Zusätzlich gibt es das Modul \emph{Sanitize}, welches die Eingabestrings des Benutzers überprüft und alle Sonderzeichen, wie Hochkommata und Semikolons, aus dem String entfernt. Damit lässt sich keine zusätzliche Anweisung in den SQL-Query mit einbauen und die Anwendung ist somit weitgehend vor diesen Angriffen geschützt.
+
+\subsection{Cross-Site-Scripting XSS}
+Mit \emph{XSS} beschreibt man eine Angriffsmethode, die Webseitenübergreifend Schadcode über normale Hyperlinks ausführt. Dabei können bei Clients, die JavaScript unterstützen, Cookies an den Angreifer übertragen werden.\par
+
+Auch hier übernimmt cakePHP das Abwehren dieser Angriffe. Damit diese Mechanismen auch greifen, werden in dieser Webanwendung die von den Entwicklern vorgeschlagenen Paradigmen beachtet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Views entwickeln}
-Eine spannende Herausforderung ist es nun mit modernen Webtechnologien und möglichst geringem Aufwand direkt eine mobile Seite der Anwendung zu erstellen, welche für Smartphone und Tablets optimiert ist. Schließlich soll und muss diese Web-App auch auf dem Gelände mobil genutzt werden können.\par
+Nun wurde mit modernen Webtechnologien und möglichst geringem Aufwand direkt eine mobile Seite der Anwendung erstellt, welche für Smartphone und Tablets optimiert ist. Schließlich soll und muss diese Web-App auch auf dem Gelände mobil genutzt werden können.\par
 
-Dabei gibt es mehrere Ansätze, wobei für diese Arbeit das sogenannte \emph{Responsive Webdesign} (deutsch: bedarfsgesteuertes Webdesign) für die mobile Version der Anwendung benutzt wird.
+Dabei gibt es mehrere Ansätze, wobei in dieser Arbeit das sogenannte \emph{Responsive Webdesign} (deutsch: bedarfsgesteuertes Webdesign) für die mobile Version der Anwendung benutzt wird.
 
 \subsection{Responsive Webdesign mit jQuery Mobile}
 Hauptaugenmerk wird hier auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
@@ -128,4 +136,12 @@ Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmt
 
 Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.\par
 
-So sind lediglich wenige Änderungen am normalen View nötig, um daraus eine mobile Version zu entwickeln, die für die Bedienung mit dem Finger optimiert ist.
+\paragraph{Mobile View}
+Damit jQuery Mobile aus normalen Verlinken touchoptimierte Bedienelemente erzeugt, konnte nahezu der komplette Code von der Desktop-Version genommen werden. Lediglich kleine Ergänzungen um das \emph{data-role} Attribut sind notwendig, damit jQuery Mobile diese anpassen kann, das bedeutet ein normaler Hyperlink wird um \emph{data-role="button"} erweitert.
+\\
+\begin{lstlisting}[captionpos=b, caption=Eine kleine Ergänzung erzeugt aus einem Link einen touchfreundlichen Button]
+<a href="#">normal link</a>
+<a href="#" data-role="button">touchoptimized link</a>
+\end{lstlisting}
+
+Auf ähnliche Art und Weise können auch viele andere Elemente umgewandelt werden, damit diese für Smartphones optimiert sind. Oft erfolgt dies automatisch, da jQuery Mobile Bedienelemente erkennt und diese dann sofort anpasst.

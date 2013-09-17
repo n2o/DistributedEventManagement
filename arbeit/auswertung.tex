@@ -19,4 +19,10 @@ Da watchPosition() nur auf Änderung des Standortes reagiert, können Zugriffe a
 \section{WebSockets mit node.js}
 Bei den WebSockets wird analysiert, wie groß die Pakete, die verschickt werden, tatsächlich sind und wie viel Arbeitsspeicher dafür von node benötigt wird.
 
+\paragraph{Komplexität}
+Mit jeder Nachricht, die an den WebSocket Server geschickt wird, gibt es eine Antwort, die fast immer eine Broadcast-Nachricht darstellt. Das hat zur Folge, dass auf eine einzige Nachricht $n$ Nachrichten an verbundene Clients folgen. Wenn man nun alle $n$ Clients eine Nachricht verschicken, werden $n \times n = n^2$ Antworten vom WS Server verschickt. Dadurch ergibt sich eine quadratische Komplexität für diese Implementierung
+
+\subsection{Optimierungsmöglichkeiten}
+Eine erhöhte Anzahl von Benutzern 
+
 \section{Webserver mit Apache2}

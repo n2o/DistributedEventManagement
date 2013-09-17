@@ -1,0 +1,22 @@
+\chapter{Analyse und Auswertung}
+Um zu analysieren, wie sich die Webanwendung unter Last verhält, werden verschiedene Aspekte betrachtet.
+
+\section{Geolocations: Zeitliches vs. konditionelles Update}
+Bei der Aktualisierung der eigenen Position gibt es zwei Möglichkeiten diese abzufragen:
+
+\begin{enumerate}
+	\item Zeitliches Intervall definieren, in dem die Position aktualisiert wird
+	\item Überwachung des Standortes über HTML5-eigene Module
+\end{enumerate}
+
+\paragraph{Intervall}
+Zuerst wurde ein Intervall von 10 Sekunden benutzt, um die Positionsinformationen zu erfragen, verarbeiten und an den Server zu schicken. Das ist eine einfache Lösung, die zum gewünschten Ergebnis führt, allerdings nicht wirklich in Echtzeit abläuft. Mit den WebSockets gibt es aber die Möglichkeit die Daten in Echtzeit zu verschicken und darum sollte das auch genutzt werden.
+
+\paragraph{watchPosition()}
+Die zweite Methode ist der Abruf einer Funktion, die von der navigator-Klasse bereitgestellt wird. Mit \emph{watchPosition()} wird die Position des Gerätes überwacht und bei Veränderung eine \emph{successCallback}-Funktion aufgerufen \cite{geolocationapi}. Diese Callback-Funktion verarbeitet die aktuelle Position in einem JSON-Objekt, wandelt es in einen String um und schickt anschließend das Update an den WS Server.\\
+Da watchPosition() nur auf Änderung des Standortes reagiert, können Zugriffe auf das GPS Modul des Endgeräts und damit auch der Stromverbrauch verringert werden. Daher ist diese Methode vorzuziehen und wird in der Meißner App verwendet.
+
+\section{WebSockets mit node.js}
+Bei den WebSockets wird analysiert, wie groß die Pakete, die verschickt werden, tatsächlich sind und wie viel Arbeitsspeicher dafür von node benötigt wird.
+
+\section{Webserver mit Apache2}

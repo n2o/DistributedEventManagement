@@ -19,7 +19,6 @@ liststotoc,idxtotoc,bibtotoc]{scrbook}
 \usepackage{amstext}
 \usepackage{subfigure}
 \usepackage{color}
-\usepackage{wrapfig}	% let text float around pictures
 \usepackage{graphicx}
 \usepackage{ifpdf}
 \usepackage{makeidx}
@@ -38,10 +37,10 @@ liststotoc,idxtotoc,bibtotoc]{scrbook}
 \ifpdf
     \definecolor{brown}{cmyk}{0, 0.81, 1, 0.60}
     \hypersetup{%
-      pdftitle={Installationsanleitung für die Meißner App}, %%%% HIER AENDERN!!!
+      pdftitle={Installationsanleitung für die Meißner Webanwendung}, %%%% HIER AENDERN!!!
       pdfsubject={},
       pdfauthor={Christian Meter},           %%%% HIER AENDERN!!!
-      pdfkeywords={KEYWORDS},      %%%% HIER AENDERN!!!
+      pdfkeywords={readme, instructions, meissner, app, linux, debian},      %%%% HIER AENDERN!!!
       colorlinks=false, urlcolor=blue, citecolor=brown,
       bookmarksnumbered=true,
     }
@@ -91,9 +90,9 @@ liststotoc,idxtotoc,bibtotoc]{scrbook}
 
 \backmatter
 
-\bibliographystyle{alphadin} %% german output
+%\bibliographystyle{alphadin} %% german output
 
-\bibliography{bachelor}
+%\bibliography{bachelor}
 
 \printindex
 

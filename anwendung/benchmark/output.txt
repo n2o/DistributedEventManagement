@@ -1,0 +1,45 @@
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.4.4
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /anwendung/meissner/events/edit/52/
+Document Length:        8264 bytes
+
+Concurrency Level:      20
+Time taken for tests:   81.906 seconds
+Complete requests:      304
+Failed requests:        0
+Write errors:           0
+Total transferred:      2756160 bytes
+HTML transferred:       2644480 bytes
+Requests per second:    3.71 [#/sec] (mean)
+Time per request:       5388.530 [ms] (mean)
+Time per request:       269.427 [ms] (mean, across all concurrent requests)
+Transfer rate:          32.86 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.4      0       2
+Processing:  5073 5195 148.4   5153    6679
+Waiting:       68  186 147.3    142    1674
+Total:       5073 5196 148.7   5153    6681
+ERROR: The median and mean for the initial connection time are more than twice the standard
+       deviation apart. These results are NOT reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%   5153
+  66%   5233
+  75%   5280
+  80%   5290
+  90%   5358
+  95%   5441
+  98%   5531
+  99%   5546
+ 100%   6681 (longest request)

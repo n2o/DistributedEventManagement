@@ -1,4 +1,4 @@
-\chapter{Erweiterte Funktionen}
+\chapter{Erweiterte Funktionalitäten}
 In diesem Kapitel werden nun weitere Funktionen beschrieben, die über die Grundausstattung der Web-App und die WebSockets hinausgehen, um die Arbeit zu erweitern und produktiver zu gestalten. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,11 +37,17 @@ Das ist für die Lokalisierung problematisch, da so die Position des Clients nic
 \section{Offline-Funktionalität}
 Mit der HTML5-Spezifikation wurde die \emph{Application Cache API} eingeführt, welche es ermöglicht, bestimmte Dateien einer Webanwendung in einen lokalen Cache zu speichern \cite[S. 189f]{friberg2013web}. Dafür ist eine \emph{Manifest}-Datei notwendig, die eine Liste mit den zu cachenden Dateien erstellt. Findet ein Browser ein Manifest, so lädt er initial die Webseite und speichert dabei alle Dateien in seinem Cache. Dieser ist bei normalen Anwendungen auf 5 MB beschränkt. Das reicht aber in der Regel vollkommen aus.\par
 
+\paragraph{Dynamische Erstellung}
 Die Meißner App generiert dynamisch mit jedem Aufruf der Anwendung ein Manifest, in der alle relevanten JavaScript Files, Bilder oder PHP-Seiten aufgeführt sind \cite{dynamic:manifest}. Das Manifest geht dabei in jedem View davon aus im gleichen Verzeichnis zu sein, weshalb es stets das gleiche Manifest generiert, sofern sich keine Datei verändert hat. Jedes Verzeichnis, welches nicht ausgeschlossen wurde, wird dabei kurz besucht und die entsprechenden Dateien aufgelistet.\\
 Dadurch kann die App erweitert werden, ohne die Offlinefunktion überarbeiten zu müssen.
 
 \paragraph{Update des Caches}
-Wurde die Anwendung einmal geladen und gecacht, so zeigt sie immer diesen Stand der Seite an. Damit der Browser aber angeregt wird die Seite neu zu cachen, muss eine Änderung am Manifest vorliegen. Das geschieht über eine Versionsnummer innerhalb dieser Datei: werden Änderungen an der Datenbank vorgenommen, dann inkrementiert die Webanwendung diese Nummer. Erreicht sie die Zahl 1000, so beginnt die Versionsnummer wieder bei 0. So wird ein möglicher Überlauf verhindert und eine potentielle Sicherheitslücke nicht ermöglicht.\par
+Wurde die Anwendung einmal geladen und gecacht, so zeigt sie immer diesen Stand der Seite an. Damit der Browser aber angeregt wird die Seite neu zu cachen, muss eine Änderung am Manifest vorliegen. Das geschieht über eine Versionsnummer innerhalb dieser Datei: werden Änderungen an der Datenbank vorgenommen, dann inkrementiert die Webanwendung diese Nummer. Erreicht sie die Zahl 1000, so beginnt die Versionsnummer wieder bei 0. So wird ein möglicher Überlauf verhindert und eine potentielle Sicherheitslücke nicht ermöglicht.\\
+Beim Update des Caches durchläuft der Browser alle zu cachenden Dateien und prüft diese auf Änderungen. Gibt es keine, so wird der letzte Stand aus dem Cache beibehalten. Das gilt auch für einzelne Dateien, weshalb bei einer Modifikation einer Datei nicht der gesamte Cache neu geladen werden muss. Wurden allerdings Dateien verändert, so werden diese nachgeladen und die Seite anschließend bei erfolgreichem Update über ein JavaScript neugeladen. Danach ist der aktuelle Stand der Seite zu sehen.\\
+Das geschieht in der Regel so schnell, dass der Benutzer es kaum merkt. Den Prozess des Updates kann man in der JavaScript Konsole des Browsers nachverfolgen.
+
+\paragraph{Mögliche Konflikte}
+Sollten bei aktiver Benutzung der App zwei Helfer gleichzeitig einen Eintrag ändern und die Webanwendung dadurch anregen die Versionsnummer zu erhöhen, so wäre es möglich, dass beide zweimal die gleiche Zahl inkrementieren und von der Änderung des jeweils anderen nichts erfahren. Das ist allerdings nicht relevant, da die Versionsnummer nur angibt, \emph{dass} sich etwas geändert hat und nicht \emph{was} sich geändert hat. Letztlich soll damit nur bewirkt werden, dass die Endgeräte ihren Cache aktualisieren. Durch welchen Benutzer das Update ausgelöst wurde oder wie viele Änderungen es gab, ist von keiner Bedeutung.
 
 Dadurch ist die Anwendung nun großteils offline verfügbar. Funktionen wie die Geolocations oder der Chat, können allerdings nicht einwandfrei genutzt werden ohne Internetanbindung. Das liegt zum einen daran, dass Google das Cachen von Google Maps im Allgemeinen für Webanwendungen verbietet \cite{google:mapsforbidden} und daher die Offlineverwendung der Karte nicht möglich ist. Zum anderen ist für den Chat und Publish / Subscribe eine WebSocket-Verbindung notwendig, da sonst keine Nachrichten ausgetauscht werden können.\\
 Mit gewissen Einschränkungen kann die Meißner App auch dort verwendet werden, wo nur eine schlechte Verbindung zur Verfügung steht. In jedem Fall lädt die App aber nun schneller, da sie nicht mehr alle Daten vom Webserver beziehen muss.
@@ -59,18 +65,6 @@ Alle Änderungen an der \emph{apache2.conf} und \emph{php.ini} werden automatisc
 
 \paragraph{ReadMe}
 Eine Installationsanleitung liegt separat zu der Meißner App bei. Da während der Installation der notwendigen Pakete einige Benutzereingaben notwendig sind, werden diese in Form von Bildschirmfotos erklärt. So ist eine verständliche Einrichtung der Anwendung möglich.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \section{Analyse der Skalierbarkeit}
-% An den Webserver auf Apache-Basis o.Ä. werden mit der Meißner-App keine hohen Anforderungen gestellt, da ressourcenschonend entwickelt wurde und nur wenige SQL-Querys nötig sind für die Anzeige der Views. Interessanter ist allerdings die Echtzeitaktualisierung, da diese mit steigender Anzahl von Endgeräten deutlich mehr Sockets verwalten und mit Updates beliefern muss.
-
-% \subsection{Zeitliches vs. konditionelles Update}
-% Die \emph{navigator.geolocation} Klasse bietet mehrere Möglichkeiten seine Position zu aktualisieren. Jede Option wurde in Erwägung gezogen, die Zugriffe gemessen und schließlich in einer Tabelle ausgewertet. Die Auswertung ist daher interessant, weil die Skalierbarkeit dieser App noch nicht betrachtet wurde.\par
-
-% Mit einbauen: http://hacks.mozilla.org/2009/06/geolocation/\par
-
-% Die Statistiken hier baue ich noch ein...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

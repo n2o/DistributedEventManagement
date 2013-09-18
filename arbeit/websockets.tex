@@ -105,12 +105,12 @@ Mit Publish / Subscribe (deutsch: veröffentlichen / abonnieren) wird ein Muster
 
 Konkret können in dieser Anwendung Veranstaltungen abonniert werden. Das geschieht automatisch über die Webanwendung selbst, welche dem WebSocket Server mit Einloggen des Benutzers eine subscribe Nachricht schickt. Ausgewählt werden die Events, die der Benutzer selbst erstellt hat. 
 
-Gab es eine Änderung an einer Veranstaltung, so meldet sich die Web-App beim WebSocket Server mit einer \emph{publish}-Nachricht. Dieser schaut dann in seiner Liste der authentifizierten Clients nach, welcher die Veranstaltung abonniert hat und schickt an alle verbundenen Endgeräte eine Mitteilung, dass die Veranstaltung bearbeitet wurde.\par
+Gab es eine Änderung an einer Veranstaltung, so meldet sich die Web-App beim WebSocket Server mit einer \emph{publish}-Nachricht. Dieser schaut dann in seiner Liste der authentifizierten Clients nach, welcher die Veranstaltung abonniert hat und schickt an alle verbundenen Endgeräte eine Mitteilung, dass die Veranstaltung bearbeitet wurde.
 
 \paragraph{Implementierung}
 Im ersten Entwurf der Technik in dieser Arbeit wurden alle Nachrichten, die über WebSockets verschickt wurden, über die Clients selbst versendet, da die Kommunikation nur über JavaScript nativ unterstützt wird. Daher wurden auf Basis von Elephant.io Methoden entwickelt, die die publish-Funktion der Webanwendung übernehmen.\\
 Der EventsController hat nun noch die zusätzliche Aufgabe bei jedem Datenbankzugriff eine Verbindung zum WS Server zu öffnen, eine publish-Nachricht abzuschicken, und dann die Verbindung wieder zu schließen.\\
-Dadurch funktioniert Publish/Subscribe auch mit Endgeräten, die JavaScript verbieten. Die Clients, die Nachrichten erhalten möchten, bekommen diese nun ungehindert zugestellt.\par
+Dadurch funktioniert Publish/Subscribe auch mit Endgeräten, die JavaScript verbieten. Die Clients, die Nachrichten erhalten möchten, bekommen diese nun ungehindert zugestellt.
 
 \begin{figure}[!ht]
 	\centering
@@ -123,7 +123,7 @@ So ist es nun möglich über WebSockets eine Benachrichtigung an die Abonnenten 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Vor HTML5: Benutzung von Polling}
-Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}. Das hat wiederum zur Folge, dass es relativ ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.\par
+Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}. Das hat wiederum zur Folge, dass es relativ ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.
 
 \begin{figure}[!ht]
 	\centering

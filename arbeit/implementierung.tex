@@ -10,7 +10,7 @@
 
 % Diese Fragestellung ist deshalb interessant, weil die App in erster Linie im Oktober am freideutschen Jugendtag verwendet werden soll. Dort werden über 4000 Pfadfinder erwartet, die aus Deutschland, der Schweiz und Österreich stammen und zu verschiedenen Zeiten an- und abreisen werden. Außerdem benötigen einige Gruppen besondere Materialien (vorwiegend verschieden lange Holzstangen für den Bau diverser Zelte), die vorher von den Helfern organisiert werden müssen.
 
-\subsection{Identifizierung des Problems}
+\paragraph{Identifizierung des Problems}
 Bei dem Gedanken eine App zu entwickeln, steht man oft vor der Entscheidung für welche Plattform man denn entwickeln möchte: Linux, Windows, OS X, iOS, Android, Windows Phone, Blackberry OS etc. Doch das würde voraussetzen, dass alle Benutzer dieser App das gleiche Betriebssystem benutzen. Für eine Veranstaltung, wie das Meißnerlager, eine sehr schlechte Annahme. Die ehrenamtlichen Helfer müssen mit ihren eigenen / privaten Smartphones und Tablets arbeiten. Es ist davon auszugehen, dass es sich dabei um unterschiedliche Geräte mit verschiedenen Betriebssystemen handelt.\par
 
 Wieso also nicht für alle Plattformen gleichermaßen entwickeln? Dank dem Google Projekt \glqq HTML5 Rocks\grqq{}\cite{html5rocksmain} und vielen interessierten Entwicklern ist \emph{HTML5} in aller Munde. Somit gibt es tatsächlich die Möglichkeit, jedes Betriebssystem mit einer einzigen Web-App abzudecken.
@@ -29,7 +29,7 @@ Mit der Wahl des Open Source Frameworks \emph{cakePHP} \cite{cakePHP} stehen auc
 
 Außerdem  wurde das Framework \emph{socket.io} \cite{socket.io} gewählt, da es mit wenig Aufwand einen stabilen WebSocket Server bereitstellt. Dieser beinhaltet wichtige Funktionen, wie Broadcast, Fallbacks und Socketverwaltung, welche von dieser Arbeit verwendet werden.
 
-\subsection{Beschreibung der Umgebung}
+\paragraph{Beschreibung der Umgebung}
 Da eine Web-App eine Internetverbindung (mindestens zum initialen Laden) benötigt, muss gesichert sein, dass diese auch zur Verfügung steht. Die Webanwendung soll zuerst am Meißnerlager 2013 am Hohen Meißner verwendet werden, wo im Allgemeinen eine schlechte Internetanbindung auf dem Gelände zu erwarten ist, allerdings hat ein großes Telekommunikationsunternehmen die Versorgung zugesichert. Somit ist garantiert, dass die App dort verwendet werden kann.
 
 \section{Struktur der Webanwendung}
@@ -134,7 +134,7 @@ Dabei gibt es mehrere Ansätze, wobei in dieser Arbeit das sogenannte \emph{Resp
 Hauptaugenmerk wird hier auf die Auflösung des Endgeräts gelegt: Handelt es sich hierbei um ein günstiges Smartphone mit schlechtem Display, um ein Google Nexus 10 mit 2560x1600 Pixeln oder um einen SmartTV mit FullHD?\\
 Diese Frage ist entscheidend, denn sie bestimmt wie viele und wie groß bestimmte Objekte im Sichtbereich des Geräts sein können, sodass der Benutzer nicht von der schlechten Bedienung genervt ist, sondern weiterhin die Informationen aus der App holen möchte. Beim Responsive Webdesign werden über \emph{Media Queries} (Abfrage der Eigenschaften des Geräts, Beispiel: Auflösung, Orientierung des Endgeräts usw.) Informationen des Endgeräts eingeholt und darauf abgestimmte Stylesheets geladen.\par
 
-Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.\par
+Um aber eine Webanwendung zu entwickeln, die aussieht und sich \glqq anfühlt\grqq{} wie eine echte App wurde in dieser Arbeit das Framework \emph{jQuery Mobile} verwendet, welches auch auf Responsive Webdesign setzt und dabei viele Steuerelemente zur Verfügung stellt, die dem Benutzer schon von nativen Apps her bekannt sind, wie typische Slider, Buttons, Dropdown-Menüs und vielem mehr.
 
 \paragraph{Mobile View}
 Damit jQuery Mobile aus normalen Verlinken touchoptimierte Bedienelemente erzeugt, konnte nahezu der komplette Code von der Desktop-Version genommen werden. Lediglich kleine Ergänzungen um das \emph{data-role} Attribut sind notwendig, damit jQuery Mobile diese anpassen kann, das bedeutet ein normaler Hyperlink wird um \emph{data-role="button"} erweitert.

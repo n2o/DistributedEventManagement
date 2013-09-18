@@ -69,7 +69,7 @@ class AppController extends Controller {
 		parent::beforeFilter();
 
 		# Guest can login and logout
-		$this->Auth->allow('login', 'logout', 'edit');
+		$this->Auth->allow('login', 'logout');
 
 		# Make current username accessible for JavaScript
 		$username = $this->Session->read('Auth.User.username');

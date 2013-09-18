@@ -9,37 +9,36 @@ Server Software:        Apache/2.4.4
 Server Hostname:        localhost
 Server Port:            80
 
-Document Path:          /anwendung/meissner/events/edit/52/
-Document Length:        8264 bytes
+Document Path:          /anwendung/meissner/
+Document Length:        4344 bytes
 
-Concurrency Level:      20
-Time taken for tests:   81.906 seconds
-Complete requests:      304
+Concurrency Level:      10
+Time taken for tests:   26.352 seconds
+Complete requests:      1000
 Failed requests:        0
 Write errors:           0
-Total transferred:      2756160 bytes
-HTML transferred:       2644480 bytes
-Requests per second:    3.71 [#/sec] (mean)
-Time per request:       5388.530 [ms] (mean)
-Time per request:       269.427 [ms] (mean, across all concurrent requests)
-Transfer rate:          32.86 [Kbytes/sec] received
+Keep-Alive requests:    998
+Total transferred:      4747850 bytes
+HTML transferred:       4344000 bytes
+Requests per second:    37.95 [#/sec] (mean)
+Time per request:       263.522 [ms] (mean)
+Time per request:       26.352 [ms] (mean, across all concurrent requests)
+Transfer rate:          175.95 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    1   0.4      0       2
-Processing:  5073 5195 148.4   5153    6679
-Waiting:       68  186 147.3    142    1674
-Total:       5073 5196 148.7   5153    6681
-ERROR: The median and mean for the initial connection time are more than twice the standard
-       deviation apart. These results are NOT reliable.
+Connect:        0    0   0.1      0       1
+Processing:   101  263  48.6    255     525
+Waiting:      101  262  48.6    255     525
+Total:        101  263  48.6    255     526
 
 Percentage of the requests served within a certain time (ms)
-  50%   5153
-  66%   5233
-  75%   5280
-  80%   5290
-  90%   5358
-  95%   5441
-  98%   5531
-  99%   5546
- 100%   6681 (longest request)
+  50%    255
+  66%    263
+  75%    271
+  80%    279
+  90%    311
+  95%    358
+  98%    409
+  99%    470
+ 100%    526 (longest request)

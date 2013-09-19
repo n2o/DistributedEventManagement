@@ -90,7 +90,7 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 		<section id="page">
 			<header>
 				<?php 
-					echo $this->Html->image("logo/logo.png", array('fullBase' => true, 'width' => '100px'));
+					echo $this->Html->image("icon.png", array('fullBase' => true, 'width' => '100px'));
 					include ('nav.ctp'); 
 				?>
 			</header>

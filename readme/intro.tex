@@ -7,42 +7,147 @@ Auf dem Testsystem war ein Kern einer Intel i5 2450M, 1 GB DDR3 Arbeitsspeicher 
 
 Für die Installation werden ca. 320 MB heruntergeladen. Darin enthalten sind allerdings alle notwendigen Pakete für einen Webserver und WebSocket Server sowie \emph{gcc, g++, make und configure}, um node\emph{node.js} aus den Quellen zu kompilieren.\par
 
-Mit dieser Konfiguration wurden für die Installation 15 Minuten benötigt.
+Mit dieser Konfiguration wurden für die Installation 20 Minuten benötigt.
 
 \section{Beschreibung}
-Die Installation beginnt mit einem Update der Distribution auf die aktuellste Version. Danach wird ein LAMP-Server installiert und konfiguriert, gefolgt von der Installation der aktuellsten node.js Version. Letzteres muss vom Server kompiliert werden und nimmt daher einige Zeit in Anspruch.
+Die Installation beginnt mit einem Update der Distribution auf die aktuellste Version. Danach wird ein LAMP-Server (Linux-Apache-MySQL-PHP) installiert und konfiguriert, gefolgt von der Installation der aktuellsten node.js Version. Letzteres muss vom Server kompiliert werden und nimmt daher einige Zeit in Anspruch.
 
 \section{Installation von LAMP}
 Zu Beginn der Installation ist es notwendig sich im gleichen Verzeichnis zu befinden, wie das Shell Script. Von dort aus führt man folgenden Befehl aus:
 
 \begin{lstlisting}
-	sudo sh install.sh
+  sudo sh install.sh
 \end{lstlisting}
 
-\subsection{MySQL}
-Danach folgen einige Benutzereingaben, die auf den folgenden Screenshots zu sehen sind:
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=15cm]{fig/configuring_mysql}
-	\caption{Eingabe des root Passworts für die MySQL Datenbank}
-\end{figure}
-\par
+\subsection{MySQL und phpmyadmin}
+\paragraph{MySQL}
+Während der Installation muss nur das Passwort für den \emph{root} Benutzer von MySQL gesetzt werden.
 
-Dieses Passwort muss nach der Eingabe noch einmal bestätigt werden.\par
-\newpage
-\subsection{phpmyadmin}
-Bei der Installation von phpmyadmin erscheint folgender Dialog:
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=15cm]{fig/configure_phpmyadmin}
-	\caption{Eingabe des root Passworts für phpmyadmin}
-\end{figure}
+\paragraph{phpmyadmin}
+Auch hier müssen nur ein Passwort für phpmyadmin und anschließend das root-Passwort für die MySQL Datenbank eingegeben werden.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
 \section{Installation von node.js}
-Da es keine vorgefertigten Pakete von node.js gibt, muss das Skript sich die aktuellste Version von dem Server des Entwicklers herunterladen und anschließend selbst compilieren. Dafür werden Pakete wie \emph{make, configure, gcc, g++} benötigt, die schon im ersten Schritt dieser Installation installiert wurden. 
+Da es keine vorgefertigten Pakete von node.js gibt, muss das Skript sich die aktuellste Version von dem Server des Entwicklers herunterladen und anschließend selbst compilieren. Dafür werden Pakete wie \emph{make, configure, gcc, g++} benötigt, die schon im ersten Schritt dieser Installation installiert wurden.\par
+
+Das Installationsskript startet automatisch den Download von node in das Verzeichnis \emph{/tmp} und führt dort alle nötigen Schritte aus, um node zu installieren. Hierbei ist keine Anpassung durch den Benutzer notwendig.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{WebSocket Server}
+\subsection{Ausführung}
+Die Startdatei für den WebSocket Server \emph{socket-server.js} befindet sich in \emph{meissner/app/webroot/websocket/}. Mit folgendem Befehl wird der WebSocket Server gestartet:\\
+\begin{lstlisting}
+  node socket-server.js
+\end{lstlisting}
+
+\subsection{Bearbeitung}
+Die oben genannte Startdatei ist auch die Datei, in der der komplette WebSocket Server eingestellt werden kann. Dafür muss nur diese Datei bearbeitet und anschließend der WS Server neugestartet werden.
+
+\subsection{Port}
+Der Port des WebSocket Server ist: 9999\par
+
+Wenn der Port geändert werden soll, so müssen die Änderungen sowohl im AppController als auch in OtherComponent angepasst werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einrichtung der MySQL Datenbank}
+Zur Einrichtung der MySQL Datenbank muss folgende URL aufgerufen werden:\\
+\emph{http://localhost/meissner/setup}\par
+
+Das Webinterface leitet durch die 3-Schritte-Einrichtung, in der die Adresse des Servers, der Benutzername und das Passwort der Datenbank eingegeben werden müssen.\par
+
+In der Regel sind es folgende Einstellungen:
+
+\begin{itemize}
+	\item[Host:] localhost
+	\item[User:] root
+	\item[Pass:] <your password>
+\end{itemize}
+
+Danach kann die Anwendung mit \emph{http://localhost/meissner} aufgerufen werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Verwendung der Anwendung}
+\section{Veranstaltungen}
+Unter \emph{Events} können können Veranstaltungen angelegt oder verwaltet werden. Sind Veranstaltungen verfügbar, so werden sie in einer Liste untereinander angezeigt.
+
+\subsection{Hinzufügen}
+Mit \emph{Add Event} kann eine Veranstaltung erstellt werden. Dafür sind nur der Titel und eine Beschreibung nötig.
+
+\subsection{Bearbeiten}
+Titel und Beschreibung können hier bearbeitet werden. Danach folgen die eventspezifischen Felder, welche mit \emph{Add Column} angelegt werden können.\\
+Zuletzt erscheint eine Liste von Benutzern, die dem Event zugeordnet sind. Dabei gibt es zwei Optionen:
+
+\paragraph{Edit}
+Hinter diesem Link erscheinen alle eventspezifischen Felder, die unter \emph{Add Column} definiert wurden. Hier können die Daten des Benutzers in die speziellen Felder der Veranstaltung eingetragen werden.
+
+\paragraph{Delete}
+Entfernt den Benutzer aus dieser Veranstaltung.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Benutzer}
+Die Erstellung und Zuweisung eines Benutzers zu einer Veranstaltung erfolgt an dieser Stelle.
+
+\subsection{Hinzufügen}
+Unter \emph{Add User} kann ein neuer Benutzer hinzugefügt werden. Benutzername und Passwort müssen hierbei definiert werden. Danach folgt die Berechtigung des Benutzers.\par
+
+\paragraph{Allowed to login}
+Der Boolean \emph{Allowed to login} gibt an, ob der Benutzer nur zur Verwaltung in die Anwendung integriert werden soll oder auch selbst Daten einsehen kann.
+
+\paragraph{Select events}
+Wenn Veranstaltungen verfügbar sind, können hier mehrere Events ausgewählt werden, zu denen der Benutzer zugeordnet werden soll. Das schaltet dann die Bearbeitungsmöglichkeit innerhalb der Veranstaltung frei, in der die eventspezifischen Felder definiert werden.
+
+\subsection{Bearbeiten}
+Mit Klick auf \emph{Edit} können alle Eigenschaften, die unter \emph{Add User} schon erschienen, erneut bearbeitet werden.
+
+\subsection{Entfernen}
+\emph{Delete} entfernt den Benutzer und alle seine Daten aus der Datenbank.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Geopositionierung}
+Eine Google Map markiert die Positionen aller eingeloggten Benutzer. Diese automatisiert sich selbstständig und passt den Kartenausschnitt entsprechend der Positionen der Benutzer an.
+
+\subsection{Bedienelemente}
+\paragraph{Refresh Page}
+Aktualisiert die Seite. Dieser Button ist notwendig, weil die Meißner Anwendung als Web-App installierte Webanwendung unter iOS keine Möglichkeit bietet die Seite zu aktualisieren, falls die Verbindung zum WebSocket Server unterbrochen wurde oder die Seite einfach neu geladen werden muss.
+
+\paragraph{Clear Overlays}
+Diese Option entfernt alle von der Anwendung hinzugefügten Marker und Infoboxen und zeigt nur noch die normale Google Map an.
+
+\paragraph{Show Overlays}
+Hierdurch werden wieder alle Marker und Infoboxen angezeigt.
+
+\paragraph{Autozoom}
+Hier hat der Benutzer die Möglichkeit die automatische Zoomfunktion der Map zu deaktivieren. Die Karte wird bei jedem Update neu ausgerichtet und das kann zu einem unangenehmen \glqq Springen \grqq{} kommen, weshalb diese Funktion sinnvoll ist.
+
+\subsection{Markierungen}
+Eine Markierung auf der Karte kann angeklickt werden. So wird in einer Infobox der Benutzername angezeigt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Statistiken}
+Die Statistiken werden vollständig automatisch generiert.
+
+\subsection{Allgemeine Informationen}
+Unter \emph{Overview} erscheint die Gesamtzahl der Benutzer und Veranstaltungen. Mit einem Klick auf \emph{Show / Hide Chart} wird mit einem Google Chart angezeigt, wie viele Benutzer den einzelnen Veranstaltungen zugeordnet sind.
+
+\subsection{Eventspezifische Statistiken}
+Zu jeder Veranstaltung werden alle Daten in einer Tabelle übersichtlich dargestellt. Wenn es mehr als einen spezifischen Wert zu einem Feld gibt, wird unterhalb der Tabelle eine Grafik generiert, welche diese Werte anschaulich darstellt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Chat}
+Hier können alle Benutzer in einem globalen Channel miteinander chatten. Die Nachrichten werden in Echtzeit an alle verbundenen Clients verschickt.\par
+
+Für die Verwendung von Chats muss eine WebSocket Verbindung bestehen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,14 +201,8 @@ Standardmäßig laden die Desktop- und Mobilversion der Anwendung zuerst die \em
 Wie schon beschrieben, werden Skripte auch in \emph{webroot/js} gespeichert. Dann können Sie im Layout oder in den Views der App einfach mit folgendem Befehl geladen werden:
 
 \begin{lstlisting}
-  <script type="text/javascript" scr="js/javascript.js">
+  <script type="text/javascript" src="js/javascript.js">
   </script>
 \end{lstlisting}
 
 Unabhängig des Pfades, in dem sich der View oder das Layout befindet, wird mit diesem Befehl immer im webroot-Verzeichnis nach der angegebenen Datei gesucht. Das erleichtert das Entwickeln neuer Views, da der Entwickler nicht mehr nachdenken muss, in welchem Ordner er sich gerade befindet.
-
-
-
-
-
-

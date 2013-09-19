@@ -5,28 +5,28 @@
 
 
 clear
-echo "########################################################"
-echo "#                                                      #"
-echo "# Installation of LAMP for the Meissner Webapplication #"
-echo "#                                                      #"
-echo "########################################################"
-echo " "
+echo "###########################################"
+echo "#                                         #"
+echo "# Installation of Meissner Webapplication #"
+echo "#                                         #"
+echo "###########################################"
+echo ""
 echo "# Checking for latest version of your distribution..."
-echo " "
+echo ""
 
 aptitude update && aptitude upgrade
 
-echo " "
+echo ""
 echo "# Done."
-echo " "
+echo ""
 echo "# Now downloading and installing Apache2, PHP5, MySQL, phpmyadmin, openssl and current version of JavaScript..."
-echo " "
+echo ""
 
 apt-get install apache2 mysql-server mysql-client php5 libapache2-mod-php5 php-pear php5-mysql php5-curl php5-common php5-cli php5-gd phpmyadmin javascript-common make python gcc g++
 
-echo " "
+echo ""
 echo "# Done."
-echo " "
+echo ""
 echo "# Enabling cURL and mod_rewrite..."
 
 # Enabling curl in php.ini
@@ -40,30 +40,30 @@ grep -q -e '<Directory "/var/www/meissner2">' /etc/apache2/apache2.conf || sed -
 
 a2enmod rewrite
 
-echo " "
+echo ""
 echo "# Done."
-echo " "
+echo ""
 echo "# Now moving the Meissner webpage to /var/www and changing user privilegs for www-data..."
 
-mv meissner/ /var/www/
+cp -R meissner/ /var/www/
 chown -R www-data:www-data /var/www/meissner
 chmod -R 755 /var/www/meissner
 chmod -R 777 /var/www/meissner/app/tmp
 
-echo " "
+echo ""
 echo "# Done."
-echo " "
+echo ""
 echo "# Restarting apache..."
-echo " "
+echo ""
 
 /etc/init.d/apache2 stop
 /etc/init.d/apache2 start
 
-echo " "
+echo ""
 echo "# Done."
-echo " "
+echo ""
 echo "# Finally installing node.js as WebSocket Server..."
-echo " "
+echo ""
 
 cd /tmp/
 wget http://nodejs.org/dist/node-latest.tar.gz
@@ -74,12 +74,16 @@ cd node-*
 make
 make install
 
-echo " "
-echo "# Completed!"
-echo " "
-echo "# To setup the MySQL connection, just type localhost/meissner/setup in your webbrowser."
-echo " "
+echo ""
+echo "# Done."
+echo ""
 echo "# At last starting WebSocket Server in /var/www/meissner/app/webroot/websocket/socket-server.js..."
-echo " "
+echo ""
 
-node /var/www/meissner/app/webroot/websocket/socket-server.js
+node /var/www/meissner/app/webroot/websocket/socket-server.js &
+
+echo ""
+echo "# Completed!"
+echo ""
+echo "# To setup the MySQL connection, just type localhost/meissner/setup in your webbrowser."
+echo ""

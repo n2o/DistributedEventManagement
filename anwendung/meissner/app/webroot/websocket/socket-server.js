@@ -64,7 +64,6 @@ io.sockets.on('connection', function (socket) {
 
 					case 'syn':
 						if (validSignature(data)) {
-							console.log("Jooo "+message);
 							// Initialize a client and identify him by name
 							if (clients[data.name] === undefined) {
 								clients[data.name] = {};
@@ -106,16 +105,6 @@ io.sockets.on('connection', function (socket) {
 						} else {
 							socket.disconnect('unauthorized');
 						}
-						break;
-
-					case 'history':
-						// if (clients[data.name] !== undefined) {
-							// if (history.length > 0) {
-								socket.send(JSON.stringify({type: 'history', data: history}));
-							// }
-						// } else {
-						// 	socket.disconnect('unauthorized');
-						// }
 						break;					
 						
 					default:

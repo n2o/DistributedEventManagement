@@ -112,7 +112,7 @@ class EventsController extends AppController {
 		$this->set('users', $this->Event->query('SELECT users.* FROM events_users LEFT JOIN users ON users.id = events_users.user_id WHERE event_id ='.$id));
 
 		# Save all columns for user in an array
-		$this->set('columns_user', null);
+		$this->loadModel('User');
 		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
 
 		# Update event

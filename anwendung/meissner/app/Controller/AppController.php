@@ -107,6 +107,7 @@ class AppController extends Controller {
 			# Set subscriptions
 			$this->loadModel('User');
 			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
+
 			$i = 0;
 			foreach ($query as $key => $value) {
 				$subscriptions[$i++] = $value['events']['id'];

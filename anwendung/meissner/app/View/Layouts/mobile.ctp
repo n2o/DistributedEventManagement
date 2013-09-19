@@ -34,9 +34,7 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 					// Browser downloaded a new app cache.
 					// Swap it in and reload the page to get the new hotness.
 					window.applicationCache.swapCache();
-					//if (confirm('A new version of this site is available. Load it?')) {
-						window.location.reload();
-					//}
+					window.location.reload();
 				} else {
 					// Manifest didn't changed. Nothing new to server.
 				}
@@ -87,9 +85,6 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 		<?php echo $this->Session->flash(); ?>
 	</div><!-- /Page -->
 
-    <script type="text/javascript">
-        window.scrollTo(0,1); // Older versions: Scroll 1 pixel down to let the status bar fade out
-    </script>
     <?php echo $this->Js->writeBuffer(); // Write cached scripts ?>
 </body>
 </html>

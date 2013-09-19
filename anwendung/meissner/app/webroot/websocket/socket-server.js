@@ -64,6 +64,7 @@ io.sockets.on('connection', function (socket) {
 
 					case 'syn':
 						if (validSignature(data)) {
+							console.log("Jooo "+message);
 							// Initialize a client and identify him by name
 							if (clients[data.name] === undefined) {
 								clients[data.name] = {};
@@ -73,7 +74,7 @@ io.sockets.on('connection', function (socket) {
 							clients[data.name].sockets.push(socket);
 							socket.send(JSON.stringify({type: 'history', data: history}));
 						} else {
-							console.log("Invalid Signature");
+							console.log("Invalid Signature: "+message);
 							socket.disconnect('unauthorized'); // close socket if wrong signature was sent
 						}
 						break;
@@ -140,10 +141,13 @@ io.sockets.on('connection', function (socket) {
  * Remove current socket from client on disconnect
  */
 function removeSocketFromList(closeSocket) {
-	for (var client in clients)
-		for (var socket in clients[client].sockets)
-			if (clients[client].sockets[socket] == closeSocket)
+	for (var client in clients) {
+		for (var socket in clients[client].sockets) {
+			if (clients[client].sockets[socket] == closeSocket) {
 				clients[client].sockets.splice(socket, 1);
+			}
+		}
+	}
 }
 
 /**
@@ -172,8 +176,9 @@ function lookForSubscriber(data, type) {
 						id: id
 					}
 					msg = JSON.stringify(msg);
-					for (var chooseSocket in clients[client].sockets)
+					for (var chooseSocket in clients[client].sockets) {
 						clients[client].sockets[chooseSocket].send(msg);
+					}
 				}
 			}
 		}
@@ -204,8 +209,9 @@ function killIdle() {
 	for (var key in locations) {
 		if (key != "type") {
 			diff = timeDiff(locations[key].lastsync, serverTime);
-			if (diff > idleTime)
+			if (diff > idleTime) {
 				delete locations[key];
+			}
 		}
 	}
 }

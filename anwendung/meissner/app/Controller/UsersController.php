@@ -65,7 +65,6 @@ class UsersController extends AppController {
 		$this->loadModel('Event');
 		$this->set('events', $this->Event->find('all'));
 
-
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {

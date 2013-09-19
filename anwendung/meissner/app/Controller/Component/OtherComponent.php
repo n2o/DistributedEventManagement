@@ -33,20 +33,21 @@ class OtherComponent extends Component {
 	 * Needed for a proper use of Application Cache
 	 */
 	function incrementManifestVersion() {
-		$reading = fopen('manifest.version', 'r');
-		$writing = fopen('manifest.version.tmp', 'w');
+		$version = file_get_contents("manifest.version");
+		$version = (int) $version + 1;
+		file_put_contents("manifest.version", $version);
+	}
 
-		while (!feof($reading)) {
-			$line = fgets($reading);
-			$line = (int) $line + 1; 
-			
-			if ($line > 1000)
-				$line = 0;
-
-			fputs($writing, $line);
-		}
-		fclose($reading); fclose($writing);
-		// might as well not overwrite the file if we didn't replace anything
-		rename('manifest.version.tmp', 'manifest.version');
+	/**
+	 * Method to prepare properties with multiple values. 
+	 *
+	 * This method gets all entries from event_columns and the data from event_properties from the Controller
+	 * and prepares the data provided by these tables to be easier accessed in the Views. It only sorts the
+	 * data new for better usability
+	 */
+	public function prepareCharts($stats) {
+		return array_filter($stats, function($v) {
+			return count($v) > 1;
+		});
 	}
 }

@@ -7,15 +7,16 @@
 App::uses('Sanitize', 'Utility');
 class StatsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
-	public $components = array('Stats', 'Session');
+	public $components = array('Other', 'Session');
 
 	# Main page, which displays all events and make them clickable
 	public function index() {
 		$this->loadModel('User');
 		$getEventTitles = $this->User->query("SELECT id, title FROM events");
 		$eventTitlesWithUsers = array();
-		foreach ($getEventTitles as $key => $value)
+		foreach ($getEventTitles as $key => $value) {
 			$eventTitlesWithUsers[$value['events']['title']] = $value['events']['id'];
+		}
 
 		$this->set('eventTitlesWithUsers', $eventTitlesWithUsers);
 	}
@@ -35,24 +36,27 @@ class StatsController extends AppController {
 		$eventsUsers = array();
 		foreach ($query as $key => $value) {
 			$event = $value['events_users']['event_id'];
-			if (!isset($eventsUsers[$event])) 
+			if (!isset($eventsUsers[$event])) {
 				$eventsUsers[$event] = 0;
+			}
 			$eventsUsers[$event]++;
 		}
 		
 		# Create new array which replaces the event ids with the correct titles
 		$getEventTitles = $this->User->query("SELECT id, title FROM events");
 		$eventTitlesWithUsers = array();
-		foreach ($getEventTitles as $key => $value)
+		foreach ($getEventTitles as $key => $value) {
 			$eventTitlesWithUsers[$value['events']['title']] = $eventsUsers[$value['events']['id']];
+		}
 
 		$this->set('eventsUsers', $eventTitlesWithUsers);
 		$this->set('stats', $stats);
 	}
 
 	public function specEvent($id = null) {
-		if (!$id)
+		if (!$id) {
 			throw new NotFoundException(__('Invalid id.'));
+		}
 		$id = Sanitize::paranoid($id);
 		
 		$this->loadModel('User');
@@ -64,8 +68,9 @@ class StatsController extends AppController {
 
 		# Query all specific columns and initialize array
 		$columnNames = $this->User->query("SELECT name FROM event_columns WHERE event_id = '$id'");
-		foreach ($columnNames as $key => $value)
+		foreach ($columnNames as $key => $value) {
 			$stats[$value['event_columns']['name']] = array();
+		}
 
 		# Now query all properties of the users for the columns above...
 		$query = $this->User->query("SELECT name, value FROM event_properties WHERE event_id = '$id'");
@@ -82,7 +87,7 @@ class StatsController extends AppController {
 			$stats[$name][$value]++;
 		}
 
-		$this->set('dataCharts', $this->Stats->prepareCharts($stats));
+		$this->set('dataCharts', $this->Other->prepareCharts($stats));
 		$this->set('stats', $stats);
 	}
 }

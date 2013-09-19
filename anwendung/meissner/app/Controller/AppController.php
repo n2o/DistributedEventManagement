@@ -57,9 +57,9 @@ class AppController extends Controller {
 	# Check the role of the clients
 	public function isAuthorized($user) {
 		# Admin can access every action
-		if (isset($user['role']) && $user['role'] === 'admin')
+		if (isset($user['role']) && $user['role'] === 'admin') {
 			return true;
-
+		}
 		# Default deny
 		return false;
 	}
@@ -73,6 +73,7 @@ class AppController extends Controller {
 
 		# Make current username accessible for JavaScript
 		$username = $this->Session->read('Auth.User.username');
+		$username = Sanitize::paranoid($username, array(' '));
 		$this->setJsVar('username', $username);
 		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
 		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
@@ -88,8 +89,9 @@ class AppController extends Controller {
 			$privateKey = openssl_pkey_get_private($fileContents);
 
 			$signature = "";
-			if (!openssl_sign($username, $signature, $privateKey))
+			if (!openssl_sign($username, $signature, $privateKey)) {
     			die('Failed to encrypt data');
+			}
     		
     		# Remove $privateKey from RAM
     		openssl_free_key($privateKey);
@@ -100,15 +102,15 @@ class AppController extends Controller {
 			$this->setJsVar('synMessage', $synMessage);
 
 			$id = $this->Session->read('Auth.User.id');
-			$username = $this->Session->read('Auth.User.username');
 
 			$subscriptions = array();
 			# Set subscriptions
 			$this->loadModel('User');
 			$query = $this->User->query('SELECT id FROM events WHERE user_id = '.$id);
 			$i = 0;
-			foreach ($query as $key => $value)
+			foreach ($query as $key => $value) {
 				$subscriptions[$i++] = $value['events']['id'];
+			}
 
 			# WebSocket: Save which events the user has subscribed
 			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).''));
@@ -147,8 +149,9 @@ class AppController extends Controller {
 		if (isset($this->is_mobile) && $this->is_mobile) {
 			$view_file = file_exists( 'Views' . $this->name . DS . 'mobile/' . $this->action . '.ctp' );
 			$layout_file = file_exists( 'Layouts' . 'mobile/' . $this->layout . '.ctp' );
-			if($view_file || $layout_file)
+			if($view_file || $layout_file) {
 				$this->render($this->action, ($layout_file?'mobile/':'').$this->layout, ($view_file?'mobile/':'').$this->action);
+			}
 		}
 	}
 }

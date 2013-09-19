@@ -17,13 +17,15 @@ class EventsController extends AppController {
 
 	# View one specific element by id
 	public function view($id = null) {
-		if (!$id)
+		if (!$id) {
 			throw new NotFoundException(__('Invalid event.'));
+		}
 		$id = Sanitize::paranoid($id);
 
 		$event = $this->Event->findById($id);
-		if (!$event)
+		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
+		}
 
 		# Make current event available for the View
 		$this->set('event', $event);
@@ -61,8 +63,9 @@ class EventsController extends AppController {
 
 	# Add specific column for event via key-value-store
 	public function addColumn($id = null) {
-		if (!$id)
+		if (!$id) {
 			throw new NotFoundException(__('Invalid id.'));
+		}
 		$id = Sanitize::paranoid($id);
 
 		if ($this->request->is('post')||$this->request->is('put')) {
@@ -87,14 +90,16 @@ class EventsController extends AppController {
 	}
 
 	public function edit($id = null) {
-		if (!$id)
+		if (!$id) {
 			throw new NotFoundException(__('Invalid id.'));
+		}
 		$id = Sanitize::paranoid($id);
 
 		$event = $this->Event->findById($id);
 
-		if (!$event)
+		if (!$event) {
 			throw new NotFoundException(__('Invalid event.'));
+		}
 
 		$this->set('id', $id); # Make $id accessible for View
 		$title = $event['Event']['title'];
@@ -132,8 +137,9 @@ class EventsController extends AppController {
 
 	# Edit event specific users and their properties
 	public function editUser($user_id = null, $event_id = null) {
-		if (!$user_id)
+		if (!$user_id) {
 			throw new NotFoundException(__('Invalid user id.'));
+		}
 		$user_id = Sanitize::paranoid($user_id);
 		$event_id = Sanitize::paranoid($event_id);
 
@@ -143,8 +149,9 @@ class EventsController extends AppController {
 		$alreadTypedIn = $this->Event->query("SELECT * FROM event_properties WHERE user_id = $user_id AND event_id = $event_id");
 
 		$posted = array();
-		foreach ($alreadTypedIn as $entry => $value)
+		foreach ($alreadTypedIn as $entry => $value) {
 			$posted[$value['event_properties']['name']] = $value['event_properties']['value'];
+		}
 
 		$this->set("alreadyTypedIn", $posted);
 
@@ -173,15 +180,16 @@ class EventsController extends AppController {
 
 	# Delete whole event
 	public function delete($id) {
-		if ($this->request->is('get'))
+		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
+		}
 		$id = Sanitize::paranoid($id);
 
 		if ($this->Event->delete($id)) {
 			$this->Event->query("DELETE FROM events_users WHERE event_id = $id");
 			$this->Event->query("DELETE FROM event_columns WHERE event_id = $id");
 			$this->Event->query("DELETE FROM event_properties WHERE event_id = $id");
-			$this->Session->setFlash('The event with id: $id has been deleted.');
+			$this->Session->setFlash('The event with id: '.$id.' has been deleted.');
 
 			# WebSocket: Save which event has been updated to send the user a notification
 			$this->Other->sendElephantWebSocket(array('type' => 'publishEvent', 'id' => ''.$id.''));
@@ -192,8 +200,9 @@ class EventsController extends AppController {
 	}
 
 	public function deleteColumn($id, $name) {
-		if ($this->request->is('get'))
+		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
+		}
 		$id = Sanitize::paranoid($id);
 
 		$this->Event->query("DELETE FROM event_columns WHERE event_id = $id AND name = '$name'");
@@ -208,8 +217,9 @@ class EventsController extends AppController {
 	}
 
 	public function deleteUser($user_id, $user_name, $event_id) {
-		if ($this->request->is('get'))
+		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
+		}
 		$user_id = Sanitize::paranoid($user_id);
 		$event_id = Sanitize::paranoid($event_id);
 

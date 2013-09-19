@@ -13,15 +13,17 @@ Mit dieser Konfiguration wurden für die Installation 20 Minuten benötigt.
 Die Installation beginnt mit einem Update der Distribution auf die aktuellste Version. Danach wird ein LAMP-Server (Linux-Apache-MySQL-PHP) installiert und konfiguriert, gefolgt von der Installation der aktuellsten node.js Version. Letzteres muss vom Server kompiliert werden und nimmt daher einige Zeit in Anspruch.
 
 \section{Installation von LAMP}
-Zu Beginn der Installation ist es notwendig sich im gleichen Verzeichnis zu befinden, wie das Shell Script. Von dort aus führt man folgenden Befehl aus:
+Zu Beginn der Installation ist es notwendig sich im \textbf{gleichen Verzeichnis} zu befinden, wie das Shell Script und der Ordner \emph{meissner}. Von dort aus führt man folgenden Befehl mit root-Rechten aus:
 
 \begin{lstlisting}
   sudo sh install.sh
 \end{lstlisting}
 
+\emph{sudo} ist hier notwendig, da einige Pakete installiert und kompiliert werden müssen.
+
 \subsection{MySQL und phpmyadmin}
 \paragraph{MySQL}
-Während der Installation muss nur das Passwort für den \emph{root} Benutzer von MySQL gesetzt werden.
+Während der Installation muss nur das Passwort für den \emph{root} Benutzer der MySQL Datenbank gesetzt werden.
 
 \paragraph{phpmyadmin}
 Auch hier müssen nur ein Passwort für phpmyadmin und anschließend das root-Passwort für die MySQL Datenbank eingegeben werden.

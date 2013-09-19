@@ -113,7 +113,7 @@ class EventsController extends AppController {
 
 		# Save all columns for user in an array
 		$this->set('columns_user', null);
-#		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
+		$this->set('columns_user', array_keys($this->User->getColumnTypes()));
 
 		# Update event
 		if ($this->request->is('post')||$this->request->is('put')) {
@@ -131,8 +131,9 @@ class EventsController extends AppController {
 			}
 		}
 
-		if (!$this->request->data)	# If no new data has been entered, use the old one
+		if (!$this->request->data) { # If no new data has been entered, use the old one
 			$this->request->data = $event;
+		}
 	}
 
 	# Edit event specific users and their properties
@@ -162,8 +163,10 @@ class EventsController extends AppController {
 				for ($i = 0; $i < count($fields); $i++) {
 					$postName = $fields[$i]['event_columns']['name'];
 					$postValue = $this->request->data['inputColumn']['post'.$i];
-					if ($postValue != "")
+					$postValue = Sanitize::paranoid($postValue, array(' ', ':', ',', '.', ';'));
+					if ($postValue != "") {
 						$this->Event->query("REPLACE INTO event_properties (`user_id`, `event_id`, `name`, `value`) VALUES ('$user_id', '$event_id', '$postName', '$postValue')");
+					}
 				}
 				$this->Session->setFlash('Added specific user value to Event.');
 

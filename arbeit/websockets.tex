@@ -35,8 +35,10 @@ Der kryptische Schlüssel \emph{Sec-WebSocket-Accept} muss vom Server berechnet 
 	\caption[Aufbau einer WebSocket Verbindung]{Aufbau einer WebSocket Verbindung. Danach können beliebig Nachrichten in beide Richtungen (gleichzeitig) übermittelt werden {\cite[S. 7]{ws}}}
 \end{figure}
 
-Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. So kann ein fast volles TCP innerhalb einer Webanwendung verwendet werden.\\
-Es verringern sich außerdem die Latenzzeiten, der Traffic und die CPU-Leistung der Server. Das liegt daran, dass die Pakete direkt zugestellt werden können, der Overhead dank einmaligem Handshake deutlich geringer ist und der Austausch der Daten sehr einfach gestaltet ist. 
+Nun kommen die Vorteile von WebSockets zur Geltung: nach erstmaligem Aufbau der Verbindung bleibt diese geöffnet und zu jedem Zeitpunkt können Client und Server die Vollduplex Verbindung nutzen, um Daten miteinander auszutauschen. So kann ein fast volles TCP innerhalb einer Webanwendung verwendet werden.
+
+\newpage
+Es verringern sich außerdem die Latenzzeiten, der Traffic und die CPU-Leistung der Server. Das liegt daran, dass die Pakete direkt zugestellt werden können, der Overhead dank einmaligem Handshake nur 2 Byte beträgt und der Austausch der Daten sehr einfach gestaltet ist.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -44,9 +46,10 @@ Es verringern sich außerdem die Latenzzeiten, der Traffic und die CPU-Leistung 
 Im ersten Ansatz dieser Arbeit wurde der WebSocket-Server auf Basis von \emph{node.js} \cite{node.js}, einem serverseitigem JavaScript Framework für Server, implementiert. Das verlief aufgrund der einfachen Handhabung von WebSockets und der guten Unterstützung von HTML5 problemlos. Jedoch wurden zu diesem Zeitpunkt weder verschlüsselte Verbindungen noch Broadcasting unterstützt. Daher war dies ungeeignet, weil sensible Daten, wie die Standorte der Clients, nicht im Klartext verschickt werden sollten.\\
 Außerdem ist eine Broadcast-Funktion notwendig, die den bestehenden Sockets bei Aktualisierung einer Position sofort die neuen Koordinaten übermittelt.\par
 
+\newpage
 Die Implementierung beider Funktionen hätte den Rahmen dieser Arbeit überschritten, weshalb serverseitig das Open Source Framework \emph{socket.io} für node.js verwendet wird. Es stellt sämtliche benötigten Dienste sowie einen Fallback bereit, wodurch auch älteren Browsern ohne HTML5 Unterstützung eine websocketähnliche Verbindung ermöglicht wird.\par
 
-Clientseitig wurde ein Skript in JavaScript entwickelt, welche im Hintergrund der Web-App ausgeführt wird. Es verbindet sich mit dem WebSocket Server, schickt initial die aktuellen Koordinaten unabhängig davon, welcher View gerade angezeigt wird und wartet auf eingehende Nachrichten oder auf eine Änderung der eigenen Position. Bewegt sich der Client, werden automatisch die Koordinaten GoogleMaps-kompatibel in Form von Latitude und Longitude an den WebSocket Server übermittelt.\\
+Clientseitig wurde ein Skript in JavaScript entwickelt, welche im Hintergrund der Web-App ausgeführt wird. Es verbindet sich mit dem WebSocket Server, schickt initial die aktuellen Koordinaten unabhängig davon, welcher View gerade angezeigt wird und wartet auf eingehende Nachrichten oder auf eine Änderung der eigenen Position. Bewegt sich der Client, werden automatisch die Koordinaten GoogleMaps-kompatibel in Form von Längen- und Breitengrad an den WebSocket Server übermittelt.\\
 Erhält der Server so eine Nachricht, aktualisiert er seine Datenbank von Standorten der Clients und schickt per Broadcast eine Nachricht an alle verbundenen Clients. So erhalten die Endgeräte in Echtzeit eine Aktualisierung aller Positionen.
 
 \paragraph{Fallback}
@@ -55,6 +58,7 @@ Nicht jedes Endgerät unterstützt die Verwendung von WebSockets. Zwar gab es ke
 \paragraph{Entwicklung eines eigenen Protokolls zur Kommunikation über WebSockets}
 Um bestimmte Funktionen auf dem Server anzusprechen, wurde ein einfaches Protokoll entwickelt, welches angibt, um welchen Inhalt es sich bei der Nachricht handelt. Alle Nachrichten, die zwischen Client und Server ausgetauscht werden, werden vorher intern als JSON Objekte benutzt und für die Übertragung über die WebSockets in Strings konvertiert. Dabei enthalten alle Nachrichten ein Feld \emph{type}, welches folgende Werte annehmen kann:
 
+\newpage
 \begin{itemize}
 	\item[] \emph{location:} enthält Latitude und Longitude des Clients
 	\item[] \emph{syn:} enthält eine Signatur für die Authentifizierung
@@ -73,7 +77,7 @@ Bei dem Webserver Apache und dem WebSocket Server mit dem Framework socket.io ha
 Um die Berechtigungen des WebSocket Servers möglichst gering zu halten und diesen nur für die Echtzeitaktualisierung zu nutzen, hat socket.io keinerlei Rechte, um auf die Datenbank oder andere Elemente der Webanwendung zugreifen zu können. Dadurch bleibt die Kapselung beider Anwendungen erhalten, aber ein weiterer Schritt zur Authentifizierung eines Benutzers ist erforderlich.
 
 \paragraph{WebSockets über PHP mit ElephantIO}
-Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \emph{ElephantIO} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht ohne Weiteres möglich ist. So gibt es die Funktion, dass die Webanwendung selbst Nachrichten an den WS Server schicken kann.\\
+Damit die Meißner App selbst eine Verbindung zum WebSocket Server aufbauen kann, ist die Open Source Bibliothek \mbox{\emph{ElephantIO}} \cite{elephant.io} erforderlich. Sie ermöglicht die Kommunikation mit Apache und socket.io, da diese sonst nicht ohne Weiteres möglich ist. Dadurch ist die Anwendung in der Lage selbst Nachrichten über WebSockets zu verschicken.\\
 Die Kommunikation in die andere Richtung ist nicht notwendig, da die Web-App keine Informationen benötigt welche Endgeräte sich über WebSockets angemeldet haben.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,7 +107,7 @@ Dieser Weg der Authentifizierung wurde gewählt, da zum Zeitpunkt des Logins der
 \section{Entwurfsmuster: Publish / Subscribe}
 Mit Publish / Subscribe (deutsch: veröffentlichen / abonnieren) wird ein Muster beschrieben, mit dem ein Client eine Benachrichtigung erhält, sofern ein Ereignis verändert wurde, welches von ihm abonniert wurde. Bei diesem Entwurfsmuster wissen weder Publisher noch Subscriber voneinander und es läuft vollkommen unabhängig, asynchron miteinander. Sie müssen auch nichts voneinander wissen, da sämtlicher Datenaustausch über den socket.io Server läuft \cite{autobahn.js:pubsub}.\par
 
-Konkret können in dieser Anwendung Veranstaltungen abonniert werden. Das geschieht automatisch über die Webanwendung selbst, welche dem WebSocket Server mit Einloggen des Benutzers eine subscribe Nachricht schickt. Ausgewählt werden die Events, die der Benutzer selbst erstellt hat. 
+Konkret können in dieser Anwendung Veranstaltungen abonniert werden. Das geschieht automatisch über die Webanwendung selbst, welche dem WebSocket Server mit Einloggen des Benutzers eine \emph{subscribe}-Nachricht schickt. Ausgewählt werden die Events, die der Benutzer selbst erstellt hat. 
 
 Gab es eine Änderung an einer Veranstaltung, so meldet sich die Web-App beim WebSocket Server mit einer \emph{publish}-Nachricht. Dieser schaut dann in seiner Liste der authentifizierten Clients nach, welcher die Veranstaltung abonniert hat und schickt an alle verbundenen Endgeräte eine Mitteilung, dass die Veranstaltung bearbeitet wurde.
 
@@ -123,7 +127,7 @@ So ist es nun möglich über WebSockets eine Benachrichtigung an die Abonnenten 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Vor HTML5: Benutzung von Polling}
-Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}. Das hat wiederum zur Folge, dass es relativ ineffizient ist, da man mit jeder Anfrage stets die Antwort des Servers abwarten muss.
+Für den Datenverkehr von Internetseiten wird bekanntlich HTTP benutzt, welches die wechselseitige Datenübermittlung \emph{Halbduplex} verwendet. So erfolgt der Datenverkehr nur in eine Richtung zur gleichen Zeit: der Client schickt eine Anfrage an den Server und dieser übermittelt danach die Antwort \cite[S. 5]{ws}.
 
 \begin{figure}[!ht]
 	\centering

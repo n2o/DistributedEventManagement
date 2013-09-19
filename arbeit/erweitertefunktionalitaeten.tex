@@ -4,7 +4,7 @@ In diesem Kapitel werden nun weitere Funktionen beschrieben, die über die Grund
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Lokalisierung von Clients}
-Mit HTML5 wurde die \emph{navigator.geolocation} Klasse in die JavaScript API eingebaut. Diese Klasse ermöglicht es einer Webanwendung die Position des Anwenders zu erhalten sofern dieser es erlaubt. Das geschieht bei aktuellen Smartphones unter Anderem mit in der Umgebung befindlichen WLAN Netzwerken, deren Standorte in einer Datenbank gespeichert sind. Verfügt das Gerät über GPS, so werden diese Daten auch berücksichtigt und ermöglichen eine genauere Ortung \cite[1. Absatz]{html5:geolocations}.
+Mit HTML5 wurde die \emph{navigator.geolocation} Klasse in die JavaScript API eingebaut. Diese Klasse ermöglicht es einer Webanwendung die Position des Anwenders zu erhalten sofern dieser es erlaubt. Das geschieht bei aktuellen Endgeräten unter Anderem mit in der Umgebung befindlichen WLAN Netzwerken, deren Standorte in einer Datenbank gespeichert sind. Verfügt das Gerät über GPS, so werden diese Daten auch berücksichtigt und ermöglichen eine genauere Ortung \cite[1. Absatz]{html5:geolocations}.
 
 \paragraph{Koordinieren von Helfern}
 Um die eingetragenen Helfer in dieser Webanwendung besser koordinieren zu können, wurde daher ein Skript implementiert, welches im Hintergrund der Web-App läuft und die aktuelle Position des Endgeräts über eine SSL verschlüsselte Verbindung an den Server übermittelt. Unter der Voraussetzung, dass der Client diesem Vorgang zustimmt sind dem Server damit die Positionen der eingeloggten Benutzer bekannt. Diese Positionsdaten können dann von der Anwendung ausgewertet und in einer Karte von \emph{Google Maps} \cite{google:maps} visualisiert werden.
@@ -53,11 +53,11 @@ Dadurch ist die Anwendung nun großteils offline verfügbar. Funktionen wie die 
 Mit gewissen Einschränkungen kann die Meißner App auch dort verwendet werden, wo nur eine schlechte Verbindung zur Verfügung steht. In jedem Fall lädt die App aber nun schneller, da sie nicht mehr alle Daten vom Webserver beziehen muss.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \section{Installation auf einem Debian-basiertem System}
-Um diese Webanwendung mit sämtlichen Funktionen benutzen zu können, wurde eine einfache Installationsdatei in Form eines Shell-Scripts entwickelt. Dieses Skript installiert und lädt als Webserver Apache2, MySQL und PHP5 herunter, danach wird die aktuellste Version von node.js heruntergeladen und kompiliert. Zuletzt wird die Meißner App in das Verzeichnis \emph{/var/www/meissner} verschoben, damit Apache2 darauf zugreifen kann.\par
+Um diese Webanwendung mit sämtlichen Funktionen benutzen zu können, wurde eine einfache Installationsdatei in Form eines Shell-Scripts entwickelt. Dieses Skript installiert und lädt als Webserver Apache2, MySQL und PHP5 herunter, danach wird die aktuellste Version von node.js heruntergeladen und kompiliert. Zuletzt wird die Meißner App in das Verzeichnis \emph{/var/www/meissner} verschoben und die entsprechenden Rechte gesetzt, damit Apache2 darauf zugreifen kann.\par
 
-Diese Installation wurde für ein unverändertes Debian 7 entwickelt und alle Abhängigkeiten, die für die Installation eines Webservers und WebSocket Servers notwendig sind, werden beachtet. Unter anderen debianbasierten Distributionen, wie Linux Mint, Ubuntu, etc., wurde das Skript auch erfolgreich getestet. Notwendig ist lediglich eine funktionierende Internetverbindung, da das Betriebssystem gleichzeitig noch aktualisiert und die aktuellste Version von node.js heruntergeladen wird.\par
+Diese Installation wurde für ein unverändertes Debian 7 entwickelt und alle Abhängigkeiten, die für die Installation eines Webservers und WebSocket Servers notwendig sind, werden beachtet. Unter anderen debianbasierten Distributionen, wie Linux Mint, Ubuntu, etc., wurde das Skript auch erfolgreich getestet. Notwendig ist lediglich eine funktionierende Internetverbindung, da sich das Betriebssystem vorher aktualisiert und die aktuellste Version von node.js heruntergeladen wird.\par
 
 Abschließend erfolgt die Einrichtung der MySQL Datenbank über das Webinterface und kann unter \emph{http://localhost/meissner/setup} erreicht werden. Die Zugangsdaten zur gewünschten Datenbank müssen dort eingegeben werden und daraus fertigt die Anwendung eine Konfigurationsdatei an, die sämtliche Informationen zur Verbindung mit der Datenbank enthält.\par
 
@@ -76,18 +76,14 @@ Für diese Arbeit wurde bewusst nicht darauf eingegangen und auch keine Paketier
 So können Änderungen an der Meißner App vorgenommen werden ohne, dass man kompliziert über die Stores die App neu verteilen muss. Außerdem ist absolut keine Installation notwendig, da sie wie eine normale Homepage geladen wird. Der Benutzer ist zwar nicht zwangsläufig gewohnt Apps über einen anderen Weg als den bekannten Store zu beziehen, aber da die Web-App genau so einfach geöffnet wird wie der Aufruf einer Homepage, kann man davon absehen.
 
 \subsection{Add to Homescreen}
-Bei Geräten mit dem Betriebssystem iOS ist die Funktion \emph{Add to Homescreen} verfügbar, welche eine Verknüpfung zur Webanwendung auf dem Homescreen erstellt. So kann die Anwendung wie eine normale App gestartet werden.\\
-Durch eine einfache Ergänzung im Header der mobilen HTML Seite wird so eine appähnliche Installation ermöglicht.
-
+Bei Geräten mit dem Betriebssystem iOS ist die Funktion \emph{Add to Homescreen} verfügbar, welche eine Verknüpfung zur Webanwendung auf dem Homescreen erstellt. So kann die Anwendung wie eine normale App gestartet werden. Durch eine einfache Ergänzung im Header der mobilen HTML Seite wird so eine appähnliche Installation ermöglicht.
+\\
 \begin{lstlisting}[captionpos=b, caption=Ergänzung im Header der mobilen Seite]
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style"
-  	content="black">
   <link rel="apple-touch-icon" href="img/icon.png">
 \end{lstlisting}
-Mit diesen drei Zeilen wird zuerst die Option \emph{Add to Homescreen} erlaubt, dann die Statusleiste schwarz gefärbt und der Pfad zum Icon angegeben, welches dann auf dem Homescreen erscheinen soll.\par
 
-Das stellt eine einfache Möglichkeit dar eine Web-App zu installieren, allerdings gibt es keine ähnliche Funktion unter anderen Betriebssystemen wie Android o.Ä..
+Mit diesen zwei Zeilen wird die Option \emph{Add to Homescreen} erlaubt und der Pfad zu einem Icon angegeben, welches dann auf dem Homescreen erscheinen soll.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

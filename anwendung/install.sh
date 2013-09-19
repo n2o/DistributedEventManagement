@@ -87,3 +87,5 @@ echo "# Completed!"
 echo ""
 echo "# To setup the MySQL connection, just type localhost/meissner/setup in your webbrowser."
 echo ""
+
+xdg-open http://localhost/meissner/setup

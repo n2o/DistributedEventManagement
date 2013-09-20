@@ -6,8 +6,9 @@ var autoZoomCenter = true;
  * Adds custom marker on the google map
  */
 function addMarker(coords, title, icon, animation) {
-	if (title == name)
+	if (title == name) {
 		title = "You are here!";
+	}
 	marker = new google.maps.Marker({
 		position: coords,
 		map: map,
@@ -71,20 +72,23 @@ function deleteOverlays() {
 function updateMarkers(locations) {
 	var coords;
 	var icon;
-	if (autoZoomCenter)
+	if (autoZoomCenter) {
 		var bounds = new google.maps.LatLngBounds();
+	}
 
 	delete locations.type;
 	deleteOverlays();
 	
 	for (entry in locations) {
-		if (entry == name) // mark own position with green marker
+		if (entry == name) { // mark own position with green marker
 			icon = "//maps.gstatic.com/mapfiles/ms2/micons/green-dot.png";
+		}
 
 		coords = new google.maps.LatLng(locations[entry].latitude, locations[entry].longitude);
 
-		if (autoZoomCenter)
+		if (autoZoomCenter) {
 			bounds.extend(coords);
+		}
 		
 		addMarker(coords, entry, icon, "");
 		icon = "";

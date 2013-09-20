@@ -2,14 +2,16 @@
 /**
  * Controller for stastics
  *
- * Querying SQL Database to provide all necessary information for stistical evaluation
+ * Querying SQL Database to provide all necessary information for statistical evaluation
  */
 App::uses('Sanitize', 'Utility');
 class StatsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session', 'Event', 'User');
 	public $components = array('Other', 'Session');
 
-	# Main page, which displays all events and make them clickable
+	/**
+	 * Main page, which displays all events
+	 */ 
 	public function index() {
 		$this->loadModel('User');
 		$getEventTitles = $this->User->query("SELECT id, title FROM events");
@@ -21,7 +23,9 @@ class StatsController extends AppController {
 		$this->set('eventTitlesWithUsers', $eventTitlesWithUsers);
 	}
 
-	# Prepare total users, events and how many users are assigned to each event
+	/**
+	 * Prepare total users, events and how many users are assigned to each event
+	 */
 	public function overview() {
 		$stats = array();
 		$this->loadModel('User');
@@ -53,6 +57,9 @@ class StatsController extends AppController {
 		$this->set('stats', $stats);
 	}
 
+	/**
+	 * Prepare statistics for specific event
+	 */
 	public function specEvent($id = null) {
 		if (!$id) {
 			throw new NotFoundException(__('Invalid id.'));
@@ -81,8 +88,9 @@ class StatsController extends AppController {
 			$value = $entry['event_properties']['value'];
 			
 			# Initialize possible values
-			if (!isset($stats[$name][$value]))
+			if (!isset($stats[$name][$value])) {
 				$stats[$name][$value] = 0;
+			}
 
 			$stats[$name][$value]++;
 		}

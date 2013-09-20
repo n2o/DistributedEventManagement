@@ -44,7 +44,6 @@ class AppController extends Controller {
 		'Auth' => array(
 			'loginRedirect' => array('controller' => 'events', 'action' => 'index'),
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
-			#'authorize' => array('Controller')
 		),
 		'Other'
 	);
@@ -81,7 +80,7 @@ class AppController extends Controller {
 
 		$id = $this->Session->read('Auth.User.id');
 
-		# Prepare Publish/Subscribe for WebSocket server
+		# Prepare subscribe and syn for WebSocket server
 		if (isset($id)) {
 		# Create signature for syn message for websocket server
 			require_once getcwd() . '/lib/ElephantIO/Client.php'; # includes library for socket.io

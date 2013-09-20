@@ -27,20 +27,21 @@ $(function () {
 	 * Connect to websocket server
 	 */
 	function doConnect() {
-		if (typeof(name) != null) {
-			try {
-				socket = io.connect('ws://'+host+':'+port+'/');
-				synSocketID();
-				socket.on('connect', function (evt) { 
-					onOpen(evt);
-					socket.on('disconnect', function (evt) { onDisconnect(evt) });
-					socket.on('message', function (evt) { onMessage(evt) });
-					socket.on('error', function (evt) { onError(evt) });
-				});
-			} catch (e) {
-				$('.connectionState').text("Not connected");
-				$('.connectionState').removeClass('connected');
-			}
+		if (typeof(name) == null) {
+			return;
+		}
+		try {
+			socket = io.connect('ws://'+host+':'+port+'/');
+			synSocketID();
+			socket.on('connect', function (evt) { 
+				onOpen(evt);
+				socket.on('disconnect', function (evt) { onDisconnect(evt) });
+				socket.on('message', function (evt) { onMessage(evt) });
+				socket.on('error', function (evt) { onError(evt) });
+			});
+		} catch (e) {
+			$('.connectionState').text("Not connected");
+			$('.connectionState').removeClass('connected');
 		}
 	}
 
@@ -82,13 +83,15 @@ $(function () {
 		switch(data.type) {
 			case 'location':
 				//noty({text: 'Incoming: New coordinates for geolocations.'});
-				if (controller == "Geolocations")
+				if (controller == "Geolocations") {
 					updateMarkers(data);
+				}
 				break;
 			
 			case 'update':
-				if (data.section == "events")
+				if (data.section == "events") {
 					noty({text: 'Your event '+data.title+" has been updated!", type: 'information'});
+				}
 				break;
 
 			case 'history':
@@ -175,5 +178,4 @@ $(function () {
 			+ (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
 			+ ': ' + message + '</p>');
 	}
-
 });

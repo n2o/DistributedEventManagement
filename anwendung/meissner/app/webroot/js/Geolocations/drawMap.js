@@ -3,7 +3,6 @@
  */
 
 $(function() {
-
 	var lastLatitude = 0;
 	var lastLongitude = 0;
 	var latitude = 0;
@@ -15,7 +14,7 @@ $(function() {
 	}
 
 	// Checks if geolocation is enabled or disabled by browser
-	navigator.geolocation.getCurrentPosition(drawMap, noPosition, {enableHighAccuracy:false});
+	navigator.geolocation.getCurrentPosition(drawMap, noPosition, geo_options);
 
 	// Start watching on new updates of the clients location
 	navigator.geolocation.watchPosition(checkDiff, noPosition, geo_options);
@@ -29,8 +28,8 @@ $(function() {
 		latitude = position.coords.latitude;
 		longitude = position.coords.longitude;
 		
-		if (lastLatitude != latitude || lastLongitude != longitude)
-			sendPosition();
+		sendPosition();
+		
 		lastLatitude = latitude;
 		lastLongitude = longitude;
 	}
@@ -118,13 +117,13 @@ $(function() {
 		lastLatitude = myLat;
 		lastLongitude = myLong;
 
-		// convert all latitudes and longitudes to degrees
+		// Convert all latitudes and longitudes to degrees
 		myLat = myLat * (Math.PI/180);
 		myLong = myLong * (Math.PI/180);
 		otherLat = otherLat * (Math.PI/180);
 		otherLong = otherLong * (Math.PI/180);
 
-		// convert latitude and longitude to x,y coords
+		// Convert latitude and longitude to x,y coords
 		x0 = myLat * radius * Math.cos(myLat);
 		y0 = myLong * radius;
 		x1 = otherLat * radius * Math.cos(otherLat);
@@ -133,13 +132,14 @@ $(function() {
 		dx = x0 - x1;
 		dy = y0 - y1;
 
-		// pythagorean theorem for the distance d between two points
+		// Pythagorean theorem for the distance d between two points
 		d = Math.sqrt((dx*dx) + (dy*dy));
 
-		if (d < 1)
+		if (d < 1) {
 			return Math.round(d*1000)+" m";
-		else
+		} else {
 			return Math.round(d*10)/10+" km";
+		}
 	}
 
 	/**

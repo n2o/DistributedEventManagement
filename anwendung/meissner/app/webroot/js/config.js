@@ -13,8 +13,9 @@ var controller = jsVars.controller;
 // Subscribe: Adding all events to the user who created it to get status updates
 var subEventsArray = [];
 var allSubs = jsVars.subscriptions;
-for (var sub in allSubs)
+for (var sub in allSubs) {
 	subEventsArray.push(allSubs[sub].event);
+}
 
 // Synchronize current socket with name and signed message
 var synMessage = jsVars.synMessage;
@@ -24,6 +25,9 @@ includeSocketIO(); // load socket.io.js from websocket server
 
 /************************************************************************************/
 
+/**
+ * Load socket.io.js from server
+ */
 function includeSocketIO() {
 	try {
 		var head= document.getElementsByTagName('head')[0];

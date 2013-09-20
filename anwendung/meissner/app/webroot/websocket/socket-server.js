@@ -21,14 +21,11 @@ var history = []
 var clients = {};
 
 // Open module for session based authentication
-var express = require('express'), http = require('http'), https = require('https'), crypto = require("crypto");
+var express = require('express'), http = require('http'), https = require('https'), crypto = require("crypto"), fs = require('fs');
 var app = express();
 app.configure(function() {
 	app.use(express.static('/'));
 });
-
-// Define path to certificates for secure connection
-var fs = require('fs');
 
 var server = http.createServer(app)
 server.listen(port);
@@ -98,7 +95,7 @@ io.sockets.on('connection', function (socket) {
 								name: data.name
 							}
 							history.push(obj);
-							history = history.slice(-100);
+							history = history.slice(-100); // keep only 100 lines of history
 							
 							socket.send(JSON.stringify({type: 'message', data: obj}));
 							socket.broadcast.send(JSON.stringify({type: 'message', data: obj}));
@@ -165,6 +162,7 @@ function lookForSubscriber(data, type) {
 						id: id
 					}
 					msg = JSON.stringify(msg);
+					// send publish message to all open sockets of the client
 					for (var chooseSocket in clients[client].sockets) {
 						clients[client].sockets[chooseSocket].send(msg);
 					}
@@ -194,6 +192,12 @@ function killIdle() {
 	var currentDate = new Date();
 	var serverTime = currentDate.getHours() + ":" + currentDate.getMinutes();
 	var diff;
+
+	// Remove all locatsions at 0 o'clock 
+	if (serverTime == "0:0") {
+		locations.length = 0;
+		return;
+	}
 
 	for (var key in locations) {
 		if (key != "type") {

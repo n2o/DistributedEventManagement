@@ -12562,3 +12562,12 @@ Stack Trace:
 #3 /Applications/XAMPP/xamppfiles/htdocs/anwendung/meissner/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(EventsController), Object(CakeRequest), Object(CakeResponse))
 #4 /Applications/XAMPP/xamppfiles/htdocs/anwendung/meissner/app/webroot/index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 {main}
+2013-09-27 12:06:01 Error: [MissingControllerException] Controller class TestController could not be found.
+Exception Attributes: array (
+  'class' => 'TestController',
+  'plugin' => NULL,
+)
+Request URL: /anwendung/meissner/test
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/anwendung/meissner/app/webroot/index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

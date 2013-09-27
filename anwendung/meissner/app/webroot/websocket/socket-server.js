@@ -27,7 +27,7 @@ app.configure(function() {
 	app.use(express.static('/'));
 });
 
-var server = http.createServer(app)
+var server = http.createServer(app);
 server.listen(port);
 
 var io = require('socket.io').listen(server);

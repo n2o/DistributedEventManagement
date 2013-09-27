@@ -207,7 +207,7 @@ class DATABASE_CONFIG {
 							echo "<strong>Generating 2048 Bit RSA keys for app internal encryption...<strong><br><br>";
 
 							# Create new public / private key pair if not available on server
-							if (!file_exists("private.key") || !file_exists("public.key")) {
+							if (!file_exists("../private.key") || !file_exists("../public.key")) {
 								$privateKey = openssl_pkey_new(array(
 									'digest_alg' => 'sha512',
 									'private_key_bits' => 2048,

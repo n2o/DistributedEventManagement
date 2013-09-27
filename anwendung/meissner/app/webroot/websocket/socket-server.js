@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
 			if (typeof(data.name) !== "null" && data.name !== "false") {
 				switch(data.type) {
 					case 'location':
-						if (clients[data.name] !== undefined) {
+						if (validSocket(data.name, socket)) {
 							saveToLocations(data);
 							socket.broadcast.send(JSON.stringify(locations));
 							socket.send(JSON.stringify(locations)); // Send current location back to sender
@@ -88,7 +88,7 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'message':
-						if (clients[data.name] !== undefined) {
+						if (validSocket(data.name, socket)) {
 							var obj = {
 								time: (new Date()).getTime(),
 								text: htmlEntities(data.text),
@@ -181,8 +181,24 @@ function validSignature(data) {
 	var publicKey = fs.readFileSync(__dirname+"/../public.key");
 	var verifier = crypto.createVerify('SHA1');
 	verifier.update(checkUsername);
-	var success = verifier.verify(publicKey, signature, 'base64');
-	return success;
+	return verifier.verify(publicKey, signature, 'base64');
+}
+
+/**
+ * Look up all sockets for the specified client name and check if 
+ * the socket has correct signed up to WS Server
+ *
+ * If socket is in clients[name].sockets, the user is verified and the message
+ * can be transmitted
+ */
+function validSocket(name, incSocket) {
+	for (var socket in clients[name].sockets) {
+		if (incSocket == clients[name].sockets[socket]) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 /**

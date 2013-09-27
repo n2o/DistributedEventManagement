@@ -13,8 +13,6 @@ Thumbs.db
 ##############################
 # Some other stuff to ignore #
 ##############################
-favicon.ico
-index.php
 webalizer/
 xampp/
 temp/

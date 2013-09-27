@@ -5,11 +5,6 @@
 /app/webroot/nogit
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
-/plugins
-/vendors
-/build
-/dist
-/tags
 /app/webroot/logs
 .idea
 .metadata

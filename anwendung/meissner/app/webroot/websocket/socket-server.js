@@ -76,7 +76,7 @@ io.sockets.on('connection', function (socket) {
 						break;
 
 					case 'subscribe':
-						if (clients[data.name] !== undefined) {
+						if (validSignature(data) && clients[data.name] !== undefined) {
 							clients[data.name].subscriptions = data.events;
 						} else {
 							socket.disconnect('unauthorized');

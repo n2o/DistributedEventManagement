@@ -113,7 +113,7 @@ class AppController extends Controller {
 			}
 
 			# WebSocket: Save which events the user has subscribed
-			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).''));
+			$this->Other->sendElephantWebSocket(array('name'=>''.$username.'', 'type' => 'subscribe', 'events' => ''.json_encode($subscriptions).'', 'sig' => ''.$signature.''));
 		}
 
 		# if device is mobile, change layout to mobile

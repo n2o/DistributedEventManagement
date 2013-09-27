@@ -3,7 +3,6 @@
 /app/Config/database.php
 /app/webroot/logs
 /app/webroot/nogit
-/app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /app/webroot/logs
 .idea

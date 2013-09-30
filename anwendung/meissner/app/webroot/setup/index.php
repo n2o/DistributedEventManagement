@@ -18,6 +18,12 @@
 			</header>
 
 			<div id="content">
+
+			<?php 
+				$pathToConfigFile = "../../Config/database.php";
+				if (!file_exists($pathToConfigFile)) {
+			?>
+
 				<article>
 					<h1>Installing the Mei&szlig;ner Application</h1>
 					<h4>Welcome to the installation of the fabulous Mei&szlig;ner Application.</h4>
@@ -34,6 +40,17 @@
 					<p><a href="step1.php" class="button">Next</a></p>
 
 				</article>
+
+			<?php 
+			} else {
+				echo "<article><h1>Installing the Mei&szlig;ner Application</h1>
+					<h4>Welcome to the installation of the fabulous Mei&szlig;ner Application.</h4>
+					<br>
+					<p>
+						The installation could not be started: A database.php file has been found. 
+					</p></article>";
+			}
+			?>
 			</div>
 			<footer>
 			</footer>

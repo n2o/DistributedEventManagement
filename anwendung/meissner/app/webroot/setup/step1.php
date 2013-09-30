@@ -18,6 +18,10 @@
 			</header>
 
 			<div id="content">
+			<?php 
+				$pathToConfigFile = "../../Config/database.php";
+				if (!file_exists($pathToConfigFile)) {
+			?>
 				<article>
 					<h1>Installing the Mei&szlig;ner Application</h1>
 					<h4>Connecting to MySQL Database</h4>
@@ -32,8 +36,12 @@
 						<input style="width:300px;" type="password" name="password" placeholder="password" required><br><br>
 						<input type="submit" value="Submit">
 					</form>
-
 				</article>
+				
+				<?php 
+				} else {
+					echo "<article><h1>Already found a database configuration!</h1></article>";
+				} ?>
 			</div>
 			<footer>
 			</footer>

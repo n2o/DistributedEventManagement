@@ -31,14 +31,16 @@ $(function () {
 			return;
 		}
 		try {
-			socket = io.connect('ws://'+host+':'+port+'/');
-			synSocketID();
-			socket.on('connect', function (evt) { 
-				onOpen(evt);
-				socket.on('disconnect', function (evt) { onDisconnect(evt) });
-				socket.on('message', function (evt) { onMessage(evt) });
-				socket.on('error', function (evt) { onError(evt) });
-			});
+			if (io !== undefined) {
+				socket = io.connect('ws://'+host+':'+port+'/');
+				synSocketID();
+				socket.on('connect', function (evt) { 
+					onOpen(evt);
+					socket.on('disconnect', function (evt) { onDisconnect(evt) });
+					socket.on('message', function (evt) { onMessage(evt) });
+					socket.on('error', function (evt) { onError(evt) });
+				});
+			}
 		} catch (e) {
 			$('.connectionState').text("Not connected");
 			$('.connectionState').removeClass('connected');

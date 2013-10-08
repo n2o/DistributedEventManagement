@@ -46,6 +46,8 @@ $(function() {
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;
 
+			sendPosition();
+
 			var options = {
 				zoom: 15,
 				center: coords,
@@ -146,15 +148,17 @@ $(function() {
 	 * Send current location to websocket server
 	 */
 	function sendPosition() {
-		var msg = {
-			name: name,
-			type: 'location',
-			latitude: latitude,
-			longitude: longitude
-		}
-		msg = JSON.stringify(msg);
-		if (typeof(socket) !== "undefined" && name !== "null") {
-			socket.send(msg);
+		if (lastLatitude !== latitude && lastLongitude !== longitude) {
+			var msg = {
+				name: name,
+				type: 'location',
+				latitude: latitude,
+				longitude: longitude
+			}
+			msg = JSON.stringify(msg);
+			if (typeof(socket) !== "undefined" && name !== "null") {
+				socket.send(msg);
+			}
 		}
 	}
 });

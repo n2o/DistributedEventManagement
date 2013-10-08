@@ -79,7 +79,7 @@ io.sockets.on('connection', function (socket) {
 						if (validSignature(data) && clients[data.name] !== undefined) {
 							clients[data.name].subscriptions = data.events;
 						} else {
-							socket.disconnect('unauthorized');
+						 	socket.disconnect('unauthorized');
 						}
 						break;
 
@@ -109,7 +109,7 @@ io.sockets.on('connection', function (socket) {
 				}
 			}
 		} catch (e) {
-			console.log("Invalid message received");
+			console.log("Invalid message received: "+message);
 			socket.disconnect('invalid');
 		}
 	});

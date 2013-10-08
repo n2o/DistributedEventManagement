@@ -7,8 +7,8 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 
 <!DOCTYPE HTML>
 <!-- Including manifest.php to cache page for offline application -->
-<?php echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
-<!-- <html> -->
+<?php #echo "<html manifest='".$this->webroot."manifest.php'>"; ?>
+<html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -48,7 +48,8 @@ $cakeDescription = __d('cake_dev', 'Mei&szlig;ner');
 			var mobile = true;
 			var socket = undefined;
 		');
-
+		
+		echo "<script type='text/javascript' src='//".$hostname.":".$port."/socket.io/socket.io.js'></script>";
 		echo $this->Html->meta('icon');
 
 		$jsimport = array(

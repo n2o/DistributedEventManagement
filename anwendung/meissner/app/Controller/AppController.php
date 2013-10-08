@@ -73,10 +73,15 @@ class AppController extends Controller {
 		# Make current username accessible for JavaScript
 		$username = $this->Session->read('Auth.User.username');
 		$username = Sanitize::paranoid($username, array(' '));
+		$hostname = $_SERVER['HTTP_HOST'];
+		$port = 9999;
 		$this->setJsVar('username', $username);
-		$this->setJsVar('hostname', $_SERVER['HTTP_HOST']);
-		$this->setJsVar('port', 9999); // do not forget to set this in OtherComponent.php
+		$this->setJsVar('hostname', $hostname);
+		$this->setJsVar('port', $port); // do not forget to set this in OtherComponent.php
 		$this->setJsVar('controller', $this->name);
+
+		$this->set('hostname', $hostname);
+		$this->set('port', $port);
 
 		$id = $this->Session->read('Auth.User.id');
 

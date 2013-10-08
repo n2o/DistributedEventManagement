@@ -9,7 +9,7 @@ $(function () {
 
 	// Initial call
 	doConnect();
-
+	
 	/**
 	 * Reconnect on disconnect, called by window eventlistener
 	 */
@@ -19,7 +19,7 @@ $(function () {
 				doConnect();
 			}
 		} catch (e) {
-			// If socket.io could not be received, do nothing
+			console.log("Socket.IO is not loaded properly.");
 		}
 	}
 
@@ -35,6 +35,7 @@ $(function () {
 				socket = io.connect('ws://'+host+':'+port+'/');
 				synSocketID();
 				socket.on('connect', function (evt) { 
+					console.log("Connection opened");
 					onOpen(evt);
 					socket.on('disconnect', function (evt) { onDisconnect(evt) });
 					socket.on('message', function (evt) { onMessage(evt) });

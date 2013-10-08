@@ -20,25 +20,7 @@ for (var sub in allSubs) {
 // Synchronize current socket with name and signed message
 var synMessage = jsVars.synMessage;
 
-// Other stuff
-includeSocketIO(); // load socket.io.js from websocket server
-
 /************************************************************************************/
-
-/**
- * Load socket.io.js from server
- */
-function includeSocketIO() {
-	try {
-		var head= document.getElementsByTagName('head')[0];
-		var script= document.createElement('script');
-		script.type= 'text/javascript';
-		script.src= 'http://'+host+':'+port+'/socket.io/socket.io.js';
-		head.appendChild(script);
-	} catch (e) {
-		// Could not connect to websocket server
-	}
-}
 
 // short version to make an app notification
 function notification(text, type) {

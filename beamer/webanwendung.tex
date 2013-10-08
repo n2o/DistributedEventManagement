@@ -9,12 +9,63 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Die Meißner App}{Grundfunktionen}
-    \begin{itemize}
-    	\item Veranstaltungen
-    	\item Benutzerverwaltung
-    	\item Statistiken
-    	\item Geolocations
-    	\item Chats
-    \end{itemize}
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	Statistiken
+	\begin{itemize}
+		\item Selbstständige Visualisierung
+		\item Vergleicht Werte miteinander, wenn mindestens zwei verschiedene Werte eingetragen wurden
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	WebSockets
+	\begin{itemize}
+		\item Was sind WebSockets?
+		\item Hier die Statistik reinpacken, die zeigt, warum WebSockets toll sind (aus Bachelorarbeit)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	Publish / Subscribe
+	\begin{itemize}
+		\item Wie funktioniert das?
+		\item Wofür wurde das eingebaut?
+		\item Übergang zur Authentifizierung
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	Authentifizierung beim WebSocket Server
+	\begin{itemize}
+		\item Wie funktioniert das?
+		\item Public Key Verfahren
+		\item Damit kommen wir zu Chats und Geolocations
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	Chats
+	\begin{itemize}
+		\item History wird auf dem Server gespeichert
+		\item Jeder eingeloggte Benutzer kann die letzten 100 Nachrichten lesen und schreiben
+		\item Ein großer Channel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Die Meißner App}{Erweiterungen}
+	Geolocations
+	\begin{itemize}
+		\item Jeder eingeloggte Benutzer schickt seine Position an den Server
+		\item Über WebSockets findet der Austausch statt
+		\item Jede Aktualisierung wird per WebSockets an die anderen per Broadcast verschickt
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Besonderheit der Webanwendung}
+	\begin{itemize}
+		\item Was macht sie besonders?
+		\item Alleinstellung durch eigenständig lauffähige Webanwendung
+		\item OpenSource
+		\item Konkurrenzprodukte kosten mehrere Hundert Dollar
+	\end{itemize}
 \end{frame}

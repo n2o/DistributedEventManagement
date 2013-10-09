@@ -22,9 +22,24 @@
 
 \begin{frame}{Die Meißner App}{Erweiterung: Publish / Subscribe}
 	\begin{itemize}
-		\item Wie funktioniert das?
-		\item Wofür wurde das eingebaut?
-		\item Übergang zur Authentifizierung
+		\item<1-> Client abonniert eine Veranstaltung oder eine Seite
+		\begin{itemize}
+			\item[$\Rightarrow$]<2-> Ermöglicht automatische Updatebenachrichtigung, Chats, usw. 
+		\end{itemize}
+		\item<3-> Client und Server müssen nichts voneinander wissen
+		\item<4-> Ohne JavaScript!
+		\begin{itemize}
+			\item<5-> Direkte Kommunikation zwischen Apache und WebSocket Server
+		\end{itemize}
+	\end{itemize}
+
+	\begin{itemize}
+		\item<6-> Wird hier genutzt für:
+		\begin{enumerate}
+			\item<6-> Chats
+			\item<6-> Geolokalisierung
+			\item<6-> Benachrichtigung bei Änderung einer Veranstaltung
+		\end{enumerate}
 	\end{itemize}
 \end{frame}
 
@@ -38,18 +53,23 @@
 \end{frame}
 
 \begin{frame}{Die Meißner App}{Erweiterung: Geolocations}
-	\begin{itemize}
-		\item Jeder eingeloggte Benutzer schickt seine Position an den Server
-		\item Über WebSockets findet der Austausch statt
-		\item Jede Aktualisierung wird per WebSockets an die anderen per Broadcast verschickt
-	\end{itemize}
+	\begin{figure}
+		\includegraphics<1>[width=0.7\textwidth]{fig/geolocations_beamer_1.pdf}
+		\includegraphics<2>[width=0.7\textwidth]{fig/geolocations_beamer_2.pdf}
+		\includegraphics<3>[width=0.7\textwidth]{fig/geolocations_beamer_3.pdf}
+		\includegraphics<4>[width=0.7\textwidth]{fig/geolocations_beamer_4.pdf}
+	\end{figure}
 \end{frame}
 
 \begin{frame}{Besonderheit der Webanwendung}
 	\begin{itemize}
-		\item Was macht sie besonders?
-		\item Alleinstellung durch eigenständig lauffähige Webanwendung
-		\item OpenSource
-		\item Konkurrenzprodukte kosten mehrere Hundert Dollar
+		\item<2-> Alleinstellung durch eigenständig lauffähige Webanwendung
+		\item<3-> Automatisches Installationsskript für debianbasierte Systeme
+		\item<4-> Gratis!
+		\begin{itemize}
+			\item <4->Konkurrenzprodukte kosten mehrere Hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
+		\end{itemize}
+		\item<5-> Frei gestaltbar
+		\item<6-> Modular aufgebaut
 	\end{itemize}
 \end{frame}

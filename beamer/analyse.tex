@@ -12,24 +12,44 @@
 
 \begin{frame}{WebSocket Server}{Netzwerkauslastung}
 	\begin{itemize}
-		\item Nur 2 Bytes Overhead!
-		\item Normale HTTP Anfragen (Polling o.Ä.): 700-800 Bytes Overhead
+		\item WebSockets: nur 2 Bytes Overhead!\pause
+		\item Normale HTTP Anfragen (Polling o.Ä.): 700-800 Bytes Overhead\pause
+		\item Besonders relevant bei hoher Anzahl von Clients, bspw. 1.000 Clients:
+		\item[] \pause
 	\end{itemize}
-\end{frame}
+
+	\renewcommand{\arraystretch}{1.4}
+	\centering
+	\begin{tabular}{c|c|c}
+		\textbf{Polling} & \textbf{WebSockets} & Einheit\\
+		\hline
+		800.000 &  2.000 & $\frac{Bytes}{Sekunde}$\\
+		\hline
+		6.400.000 &  16.000 & $\frac{Bits}{Sekunde}$\\
+		\hline
+		{\color{red}\textbf{6,104} :-(} & {\color{green}\textbf{0,015} :-)} & $\frac{MBit}{Sekunde}$\\
+	\end{tabular}\pause
+
+	\begin{itemize}
+		\item[]
+		\item[$\Rightarrow$] {\color{red}\textbf{Ersparnis von 400\% Traffic}}
+	\end{itemize}
+
+	\end{frame}
 
 \begin{frame}{Besonderheiten der Webanwendung}
 	\begin{itemize}
-		\item<2-> Alleinstellung durch eigenständig lauffähige Webanwendung
-		\item<3-> Unterstützung von mobilen Geräten
+		\item<1-> Alleinstellung durch eigenständig lauffähige Webanwendung
+		\item<2-> Unterstützung von mobilen Geräten
 		\begin{itemize}
-			\item <3->Offline Cache!
+			\item <2->Offline Cache!
 		\end{itemize}
-		\item<4-> Automatisches Installationsskript für debianbasierte Systeme
-		\item<5-> Für die Nutzung im Freien ausgelegt
-		\item<6-> Modular aufgebaut
-		\item<7-> Gratis!
+		\item<3-> Automatisches Installationsskript für debianbasierte Systeme
+		\item<4-> Für die Nutzung im Freien ausgelegt
+		\item<5-> Modular aufgebaut
+		\item<6-> Gratis!
 		\begin{itemize}
-			\item <7->Konkurrenzprodukte kosten mehrere hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
+			\item <6->Konkurrenzprodukte kosten mehrere hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
 		\end{itemize}
 	\end{itemize}
 \end{frame}

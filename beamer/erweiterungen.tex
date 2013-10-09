@@ -1,6 +1,6 @@
 \section{Erweiterungen}
 
-\begin{frame}{Die Meißner App}{Erweiterung: WebSockets}
+\begin{frame}{WebSockets}
 	\begin{figure}
 		\includegraphics<1>[width=0.9\textwidth]{fig/websockets_beamer_3.pdf}
 		\includegraphics<2>[width=0.9\textwidth]{fig/websockets_beamer_4.pdf}
@@ -9,7 +9,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Die Meißner App}{Erweiterung: Authentifizierung beim WebSocket Server}
+\begin{frame}{Authentifizierung beim WebSocket Server}
 	\begin{figure}
 		\includegraphics<1>[width=0.9\textwidth]{fig/websockets_auth_1.pdf}
 		\includegraphics<2>[width=0.9\textwidth]{fig/websockets_auth_3.pdf}
@@ -20,14 +20,14 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Die Meißner App}{Erweiterung: Publish / Subscribe}
+\begin{frame}{Publish / Subscribe}
 	\begin{itemize}
 		\item<1-> Client abonniert eine Veranstaltung oder eine Seite
 		\begin{itemize}
 			\item[$\Rightarrow$]<2-> Ermöglicht automatische Updatebenachrichtigung, Chats, usw. 
 		\end{itemize}
 		\item<3-> Client und Server müssen nichts voneinander wissen
-		\item<4-> Ohne JavaScript!
+		\item<4-> Publish funktioniert ohne JavaScript!
 		\begin{itemize}
 			\item<5-> Direkte Kommunikation zwischen Apache und WebSocket Server
 		\end{itemize}
@@ -43,7 +43,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Die Meißner App}{Erweiterung: Chats}
+\begin{frame}{Chats}
 	\begin{figure}
 		\includegraphics<1>[width=0.9\textwidth]{fig/chat_3.pdf}
 		\includegraphics<2>[width=0.9\textwidth]{fig/chat_4.pdf}
@@ -52,7 +52,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Die Meißner App}{Erweiterung: Geolocations}
+\begin{frame}{Geolocations}
 	\begin{figure}
 		\includegraphics<1>[width=0.7\textwidth]{fig/geolocations_beamer_1.pdf}
 		\includegraphics<2>[width=0.7\textwidth]{fig/geolocations_beamer_2.pdf}
@@ -61,15 +61,13 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Besonderheit der Webanwendung}
+\begin{frame}{Offline Cache}
 	\begin{itemize}
-		\item<2-> Alleinstellung durch eigenständig lauffähige Webanwendung
-		\item<3-> Automatisches Installationsskript für debianbasierte Systeme
-		\item<4-> Gratis!
-		\begin{itemize}
-			\item <4->Konkurrenzprodukte kosten mehrere Hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
-		\end{itemize}
-		\item<5-> Frei gestaltbar
-		\item<6-> Modular aufgebaut
+		\item<1-> Automatisches Cachen von Bildern, Skripten, Seiten, \dots
+		\item<2-> Bei Änderung der Datenbank: Update des Caches notwendig
+	\end{itemize}
+	\begin{itemize}
+		\item<3->[$\Rightarrow$] Deutlich schnellere Bedienung
+		\item<4->[$\Rightarrow$] Unempfindlicher für Funknetzabbrüche
 	\end{itemize}
 \end{frame}

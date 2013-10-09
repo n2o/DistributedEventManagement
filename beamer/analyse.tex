@@ -1,16 +1,35 @@
 \section{Analyse und Auswertung}
 
 \begin{frame}{Benchmark WebServer}
-	Apache knechten
+	\begin{figure}
+		\includegraphics<1->[width=0.7\textwidth]{fig/statistiken_ab.pdf}
+	\end{figure}
 	\begin{itemize}
-		\item Hier Grafik aus Bachelorarbeit, vereinfacht auf Standard App und 100 Eigenschaften
-		\item Einbruch der Zugriffszeiten erst bei 100 Eigenschaften von einem Event
+		\item<2-> Apache Bench: 1000 Verbindungen, immer 10 gleichzeitig
+		\item<3-> Praxis: Weniger Anfragen nötig durch Offline Cache
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{WebSocket Server}{Netzwerkauslastung}
 	\begin{itemize}
-		\item Vergleich mit Polling
-		\item Rechnung einbauen die zeigt, dass WebSockets um ein Vielfaches kleiner sind
+		\item Nur 2 Bytes Overhead!
+		\item Normale HTTP Anfragen (Polling o.Ä.): 700-800 Bytes Overhead
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Besonderheiten der Webanwendung}
+	\begin{itemize}
+		\item<2-> Alleinstellung durch eigenständig lauffähige Webanwendung
+		\item<3-> Unterstützung von mobilen Geräten
+		\begin{itemize}
+			\item <3->Offline Cache!
+		\end{itemize}
+		\item<4-> Automatisches Installationsskript für debianbasierte Systeme
+		\item<5-> Für die Nutzung im Freien ausgelegt
+		\item<6-> Modular aufgebaut
+		\item<7-> Gratis!
+		\begin{itemize}
+			\item <7->Konkurrenzprodukte kosten mehrere hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
+		\end{itemize}
 	\end{itemize}
 \end{frame}

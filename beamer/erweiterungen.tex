@@ -7,9 +7,13 @@
 		\includegraphics<3>[width=0.9\textwidth]{fig/websockets_beamer_5.pdf}
 		\includegraphics<4>[width=0.9\textwidth]{fig/websockets_beamer.pdf}
 	\end{figure}
+	\begin{itemize}
+		\item<1-> TCP-basiertes Netzwerkprotokoll
+		\item<1-> bidirektionale Verbindung zwischen Client und Webserver
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Authentifizierung beim WebSocket Server}
+\begin{frame}{Authentifizierung beim WebSocket Server}{Public Key Kryptographie}
 	\begin{figure}
 		\includegraphics<1>[width=0.9\textwidth]{fig/websockets_auth_1.pdf}
 		\includegraphics<2>[width=0.9\textwidth]{fig/websockets_auth_3.pdf}
@@ -22,23 +26,23 @@
 
 \begin{frame}{Publish / Subscribe}
 	\begin{itemize}
-		\item<1-> Client abonniert eine Veranstaltung oder eine Seite
+		\item Client abonniert eine Veranstaltung oder eine Seite
 		\begin{itemize}
-			\item[$\Rightarrow$]<2-> Ermöglicht automatische Updatebenachrichtigung, Chats, usw. 
+			\item[$\Rightarrow$] Ermöglicht automatische Updatebenachrichtigung, Chats, usw. 
 		\end{itemize}
-		\item<3-> Client und Server müssen nichts voneinander wissen
-		\item<4-> Publish funktioniert ohne JavaScript!
+		\item Client und Server müssen nichts voneinander wissen
+		\item Publish funktioniert ohne JavaScript!
 		\begin{itemize}
-			\item<5-> Direkte Kommunikation zwischen Apache und WebSocket Server
+			\item Direkte Kommunikation zwischen Apache und WebSocket Server
 		\end{itemize}
 	\end{itemize}
 
 	\begin{itemize}
-		\item[]<6-> Wird hier genutzt für:
+		\item[]<2-> Wird hier genutzt für:
 		\begin{enumerate}
-			\item<6-> Chats
-			\item<6-> Geolokalisierung
-			\item<6-> Benachrichtigung bei Änderung einer Veranstaltung
+			\item<2-> Benachrichtigung bei Änderung einer Veranstaltung
+			\item<2-> Chats
+			\item<2-> Geolokalisierung
 		\end{enumerate}
 	\end{itemize}
 \end{frame}
@@ -63,11 +67,29 @@
 
 \begin{frame}{Offline Cache}
 	\begin{itemize}
-		\item<1-> Automatisches Cachen von Bildern, Skripten, Seiten, \dots
-		\item<2-> Bei Änderung der Datenbank: Update des Caches notwendig
+		\item Automatisches Cachen von Bildern, Skripten, Seiten, \dots
+		\item Bei Änderung der Datenbank: Update des Caches notwendig
 	\end{itemize}
 	\begin{itemize}
-		\item<3->[$\Rightarrow$] Deutlich schnellere Bedienung
-		\item<4->[$\Rightarrow$] Unempfindlicher für Funknetzabbrüche
+		\item[$\Rightarrow$] Deutlich schnellere Bedienung
+		\item[$\Rightarrow$] Unempfindlicher für Funknetzabbrüche
 	\end{itemize}
 \end{frame}
+
+% \begin{frame}[fragile]{Offline Cache: Manifest}
+% 	\begin{verbatim}
+% 		CACHE MANIFEST
+		
+% 		CACHE:
+% 		/favicon.ico
+% 		stylesheet.css
+% 		images/logo.png
+% 		scripts/main.js
+
+% 		# Resources that require the user to be online.
+% 		NETWORK:
+% 		login.php
+		
+% 		# Version: 42
+% 	\end{verbatim}
+% \end{frame}

@@ -1,2 +1,16 @@
-\frametitle{Schadcode in setup.py}
-\lstinputlisting[language=Python,basicstyle=\footnotesize]{listings/pynation.py}
+\frametitle{Offline Cache: Manifest}
+\begin{verbatim}
+CACHE MANIFEST
+
+CACHE:
+/favicon.ico
+stylesheet.css
+images/logo.png
+scripts/main.js
+
+# Resources that require the user to be online.
+NETWORK:
+login.php
+
+# Version: 42
+\end{verbatim}

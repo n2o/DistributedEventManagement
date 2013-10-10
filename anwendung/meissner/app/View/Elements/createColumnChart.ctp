@@ -29,7 +29,8 @@
 			title: title,
 			height: 400,
 			width: window.innerWidth-200,
-			colors: ['#9D0D16']
+			colors: ['#9D0D16'],
+			vAxis: {minValue: 0, maxValue: 4, gridline:{count: 6}}
 		};
 
 		var chart = new google.visualization.ColumnChart(document.getElementById(<?php echo "'".$column."Chart'"; ?>));

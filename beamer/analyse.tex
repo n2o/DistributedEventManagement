@@ -2,20 +2,20 @@
 
 \begin{frame}{Benchmark WebServer}
 	\begin{figure}
-		\includegraphics<1->[width=0.7\textwidth]{fig/statistiken_ab.pdf}
+		\includegraphics[width=0.7\textwidth]{fig/statistiken_ab.pdf}
 	\end{figure}
 	\begin{itemize}
-		\item<2-> Apache Bench: 1000 Verbindungen, immer 10 gleichzeitig
-		\item<3-> Praxis: Weniger Anfragen nötig durch Offline Cache
+		\item Apache Bench: 1000 Verbindungen, immer 10 gleichzeitig
+		\item Praxis: Weniger Anfragen nötig durch Offline Cache
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{WebSocket Server}{Netzwerkauslastung}
 	\begin{itemize}
-		\item WebSockets: nur 2 Bytes Overhead!\pause
-		\item Normale HTTP Anfragen (Polling o.Ä.): 700-800 Bytes Overhead\pause
-		\item Besonders relevant bei hoher Anzahl von Clients, bspw. 1.000 Clients:
-		\item[] \pause
+		\item WebSockets: nur 2 Bytes Overhead!
+		\item Normale HTTP Anfragen (Polling o.Ä.): 700-800 Bytes Overhead
+		\item Besonders relevant bei hoher Anzahl von Clients\pause, bspw. 1.000 Clients:
+		\item[]
 	\end{itemize}
 
 	\renewcommand{\arraystretch}{1.4}
@@ -25,35 +25,26 @@
 		\hline
 		800.000 &  2.000 & $\frac{Bytes}{Sekunde}$\\
 		6.400.000 &  16.000 & $\frac{Bits}{Sekunde}$\\
-		{\color{red}\textbf{6,104} :-(} & {\color{green}\textbf{0,015} :-)} & $\frac{MBit}{Sekunde}$\\
-	\end{tabular}\pause
+		{\color{red}\textbf{6,104} :-(} & {\color{blue}\textbf{0,015} :-)} & $\frac{MBit}{Sekunde}$\\
+	\end{tabular}
 
 	\begin{itemize}
 		\item[]
 		\item[$\Rightarrow$] {\color{red}\textbf{Ersparnis von 400\% Traffic}}
 	\end{itemize}
-
-	\end{frame}
+\end{frame}
 
 \begin{frame}{Besonderheiten der Webanwendung}
 	\begin{itemize}
-		\item<1-> Alleinstellung durch eigenständig lauffähige Webanwendung
-		\item<2-> Unterstützung von mobilen Geräten
+		\item Eigenständig lauffähige Webanwendung
+		\item Echtzeitaktualisierung
+		\item Unterstützung von mobilen Geräten
 		\begin{itemize}
-			\item <2->Offline Cache!
+			\item Offline Cache!
 		\end{itemize}
-		\item<3-> Automatisches Installationsskript für debianbasierte Systeme
-		\item<4-> Für die Nutzung im Freien ausgelegt
-		\item<5-> Modular aufgebaut
-		\item<6-> Gratis!
-		\begin{itemize}
-			\item <6->Konkurrenzprodukte kosten mehrere hundert Dollar und sind nur als Erweiterung für WordPress verfügbar
-		\end{itemize}
+		\item Automatisches Installationsskript für debianbasierte Systeme
+		\item Für die Nutzung im Freien ausgelegt
+		\item Modular aufgebaut
+		\item Ähnliche Produkte kosten mehrere hundert Dollar und sind meistens nur als Erweiterung für WordPress verfügbar
 	\end{itemize}
-\end{frame}
-
-\begin{frame}{Das Meißnerlager 2013}
-	\begin{figure}
-		\includegraphics<1->[width=0.97\textwidth]{fig/meissner_luftbild_1.jpg}
-	\end{figure}
 \end{frame}

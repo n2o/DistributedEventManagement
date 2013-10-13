@@ -1,4 +1,14 @@
-######################
+# User specific & automatically generated files #
+#################################################
+/app/Config/database.php
+/app/tmp
+/lib/Cake/Console/Templates/skel/tmp/
+/plugins
+/vendors
+/build
+/dist
+/tags
+
 # OS generated files #
 ######################
 .DS_Store
@@ -9,12 +19,3 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-
-##############################
-# Some other stuff to ignore #
-##############################
-webalizer/
-xampp/
-_archiv/
-anwendung/test/
-renate-horsch/

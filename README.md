@@ -10,12 +10,12 @@ Erweiterungen befassen sich mit der Koordination der einzelnen Helfer und bietet
 
 ### Installationsanleitung
 
-[Eine PDF zur Installationsanleitung kann hier gefunden werden.](../blob/master/readme/master.pdf)
+[Eine PDF zur Installationsanleitung kann hier gefunden werden.](readme/master.pdf)
 
 ### Bachelorthesis
 
-[Die Bachelorthesis findet sich auch hier.](../blob/master/arbeit/master.pdf)
+[Die Bachelorthesis findet sich auch hier.](arbeit/master.pdf)
 
 ### Präsentation der Bachelorarbeit
 
-[Den Foliensatz zur Präsentation der Bachelorarbeit, gibt es ebenfalls hier.](../blob/master/beamer/master.pdf)
+[Den Foliensatz zur Präsentation der Bachelorarbeit, gibt es ebenfalls hier.](beamer/master.pdf)

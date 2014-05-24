@@ -1,6 +1,5 @@
 # Verteiltes Veranstaltungsmanagement mit einer mobilen Webanwendung
 
-Distributed Event Management with a mobile Webapplication
 Bachelorthesis about Distributed Eventmanagement with a mobile Webapplication.
 
 ## Beschreibung
